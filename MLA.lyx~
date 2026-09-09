@@ -1,0 +1,421 @@
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children no
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification default
+\crossref_package refstyle
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
+\index Index
+\shortcut idx
+\color #008080
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Section*
+Concentration of measure inequalities
+\end_layout
+
+\begin_layout Subsection
+Markow's inequality
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Statement
+\series default
+:
+ For any non-negative stochastic variable 
+\begin_inset Formula $X$
+\end_inset
+
+ and with 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\[
+P(X\geq\epsilon)\leq\frac{E[X]}{\epsilon}
+\]
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Proof
+\series default
+:
+ Define 
+\begin_inset Formula $Y:=1(X\geq\epsilon)$
+\end_inset
+
+ then 
+\begin_inset Formula $Y\leq\frac{X}{\epsilon}$
+\end_inset
+
+ (if 
+\begin_inset Formula $0\leq X<\epsilon$
+\end_inset
+
+ then 
+\begin_inset Formula $Y=0\leq\frac{X}{\epsilon}$
+\end_inset
+
+ and if 
+\begin_inset Formula $X\geq\epsilon\iff\frac{X}{\epsilon}\geq1$
+\end_inset
+
+ then 
+\begin_inset Formula $Y=1\leq\frac{X}{\epsilon}$
+\end_inset
+
+) therefore 
+\begin_inset Formula $P(X\geq\epsilon)=P(Y=1)=E[Y]\leq E[\frac{X}{\epsilon}]=\frac{E[X]}{\epsilon}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This can be rewritten by defining 
+\begin_inset Formula $a=\frac{\epsilon}{E[X]}$
+\end_inset
+
+ (
+\begin_inset Formula $E[X]\neq0$
+\end_inset
+
+) and we have 
+\begin_inset Formula 
+\[
+P(X\geq aE[X])\leq\frac{1}{a}
+\]
+
+\end_inset
+
+.
+ That is,
+ the probability of an event 
+\begin_inset Formula $a$
+\end_inset
+
+ times away from the stochastic variables mean value is decaying with 
+\begin_inset Formula $1/a$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Chebychew's inequality
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Statement
+\series default
+:
+ 
+\begin_inset Formula 
+\[
+P(|X-E[X]|\geq\epsilon)\leq\frac{V(X)}{\epsilon^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Proof
+\series default
+:
+ For any 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ we have (by Markow's inequality) 
+\begin_inset Formula $P((X-E[X])^{2}\geq\epsilon^{2})\leq\frac{E[(X-E[X])^{2}]}{\epsilon^{2}}=\frac{V(X)}{\epsilon^{2}}$
+\end_inset
+
+.
+ Finally we note that 
+\series bold
+
+\begin_inset Formula $|X-E[X]|\geq\epsilon\iff(X-E[X])^{2}\geq\epsilon^{2}$
+\end_inset
+
+ 
+\series default
+and thus
+\series bold
+ 
+\series default
+
+\begin_inset Formula $P(|X-E[X]|\geq\epsilon)\leq\frac{V(X)}{\epsilon^{2}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Hoeffding's inequality
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Statement
+\series default
+:
+ Given the independent stochastic variables 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ where there exists 
+\begin_inset Formula $a_{i,}b_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $i\in\{1,\dots,n\}$
+\end_inset
+
+ such that 
+\begin_inset Formula $X_{i}\in[a_{i},b_{i}]$
+\end_inset
+
+.
+ For all 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+P\left(\sum^{n}_{i=1}X_{i}-E\left(\sum^{n}_{i=1}X_{i}\right)\geq\epsilon\right)\leq e^{-\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Proof
+\series default
+:
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+P\left(\sum^{n}_{i=1}X_{i}-E\left(\sum^{n}_{i=1}X_{i}\right)\geq\epsilon\right) & =P\left(e^{\lambda\left(\sum^{n}_{i=1}X_{i}-E\left(\sum^{n}_{i=1}X_{i}\right)\right)}\geq e^{\lambda\epsilon}\right)\\
+ & \leq\frac{E\left[e^{\lambda\left(\sum^{n}_{i=1}X_{i}-E\left(\sum^{n}_{i=1}X_{i}\right)\right)}\right]}{e^{\lambda\epsilon}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The nominator can be reduced.
+ Firstly we use that the expectation operator is linear so that 
+\begin_inset Formula $E\left(\sum^{n}_{i=1}X_{i}\right)=\sum^{n}_{i=1}E[X_{i}]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E\left[e^{\lambda\left(\sum^{n}_{i=1}X_{i}-E\left(\sum^{n}_{i=1}X_{i}\right)\right)}\right]=E\left[e^{\lambda\left(\sum^{n}_{i=1}X_{i}-\sum^{n}_{i=1}E[X_{i}]\right)}\right]=E\left[e^{\lambda\sum^{n}_{i=1}(X_{i}-E[X_{i}])}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now using the properties of the exponential function and Hoeffdings lemma (proof will follow)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+E\left[e^{\lambda\sum^{n}_{i=1}X_{i}-E[X_{i}]}\right] & =E\left[\prod^{n}_{i=1}e^{\lambda(X_{i}-E[X_{i}])}\right]\\
+ & =\prod^{n}_{i=1}E\left[e^{\lambda(X_{i}-E[X_{i}])}\right]\\
+ & \leq\prod^{n}_{i=1}e^{\lambda^{2}(b_{i}-a_{i})^{2}/8}\\
+ & =e^{\lambda^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Taking stock:
+ so far we have
+\begin_inset Formula 
+\[
+P\left(\sum^{n}_{i=1}X_{i}-E\left(\sum^{n}_{i=1}X_{i}\right)\geq\epsilon\right)\leq e^{\lambda^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\lambda\epsilon}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However we want the tightest probability bound,
+ and therefore we minimize the right hand side expression wrt.
+ 
+\begin_inset Formula $\lambda>0.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\lambda^{*}=\text{arg }\min_{\lambda}\enspace e^{\lambda^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\lambda\epsilon}=\text{arg }\min_{\lambda}\,\left\{ \frac{\lambda^{2}}{8}\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\lambda\epsilon\right\} ,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with necessary first order condition
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+0=\frac{\lambda^{*}}{4}\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\epsilon\iff\lambda^{*}=\frac{4\epsilon}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Substituting this into the stock-taking expression yields the theorem statement
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+e^{(\lambda^{*})^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\lambda^{*}\epsilon} & =e^{\left(\frac{4\epsilon}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}.\right)^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\frac{4\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}}\\
+ & =e^{\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}-\frac{4\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}}\\
+ & =e^{-\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

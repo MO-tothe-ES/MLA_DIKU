@@ -1,0 +1,1452 @@
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+
+
+\usepackage{a4wide}
+\usepackage{amsfonts}
+\usepackage{lipsum}
+\usepackage{booktabs}
+\usepackage{caption}
+\captionsetup[figure]{justification=centering,singlelinecheck=false}
+
+% For including images
+
+\usepackage{xcolor}% For a colorfull presentation
+\usepackage{listings}% For presenting code 
+
+
+
+% Definition of a style for code, matter of taste
+\lstdefinestyle{mystyle}{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color[HTML]{F7F7F7},
+  rulecolor=\color[HTML]{EEEEEE},
+  identifierstyle=\color[HTML]{24292E},
+  emphstyle=\color[HTML]{005CC5},
+  keywordstyle=\color[HTML]{D73A49},
+  commentstyle=\color[HTML]{6A737D},
+  stringstyle=\color[HTML]{032F62},
+  emph={@property,self,range,True,False},
+  morekeywords={super,with,as,lambda},
+  literate=%
+    {+}{{{\color[HTML]{D73A49}+}}}1
+    {-}{{{\color[HTML]{D73A49}-}}}1
+    {*}{{{\color[HTML]{D73A49}*}}}1
+    {/}{{{\color[HTML]{D73A49}/}}}1
+    {=}{{{\color[HTML]{D73A49}=}}}1
+    {/=}{{{\color[HTML]{D73A49}=}}}1,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=4,
+  frame=single,
+}
+\lstset{style=mystyle}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children no
+\language english
+\language_package none
+\inputencoding utf8
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_bookmarks false
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle false
+\papersize a4
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\crossref_package prettyref
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Machine Learning A (2026)
+\begin_inset Newline newline
+\end_inset
+
+Home Assignment 1
+\end_layout
+
+\begin_layout Author
+Casper Moes,
+ hwd362
+\end_layout
+
+\begin_layout Standard
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Make Your Own (10 points)
+\end_layout
+
+\begin_layout Enumerate
+Apart from the dimensions named in the assignment description the sample space 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ could also contain time spend studying during the course and number of lectures attended.
+\end_layout
+
+\begin_layout Enumerate
+The label space contains the possible grades:
+ 
+\begin_inset Formula $\mathcal{Y}\in\{-3,00,02,4,7,10,12\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+One possible loss function could be the squared error loss defined by 
+\begin_inset Formula $\ell(y,\hat{y})=(y-\hat{y})^{2}$
+\end_inset
+
+,
+ which penalizes large mistakes harshly reflecting that very unfair / wrong grades should be avoided.
+\end_layout
+
+\begin_layout Enumerate
+One could use the following metric where 
+\begin_inset Formula $x,x'\in\mathcal{X}$
+\end_inset
+
+ are unlabeled samples:
+ 
+\begin_inset Formula $d(x,x')=\|x-x'\|$
+\end_inset
+
+.
+ This fulfills 
+\begin_inset Formula $d(a,a)=0$
+\end_inset
+
+,
+ 
+\begin_inset Formula $d(a,b)=d(b,a)$
+\end_inset
+
+ and the triangle inequality.
+\end_layout
+
+\begin_layout Enumerate
+To evaluate the performance of the hypothesis / algorithm 
+\begin_inset Formula $h$
+\end_inset
+
+ i would set aside a test set 
+\begin_inset Formula $T\subseteq S$
+\end_inset
+
+ with 
+\begin_inset Formula $n<N$
+\end_inset
+
+ elements,
+ where 
+\begin_inset Formula $S=\{(X_{1},Y_{1}),\dots,(X_{N},Y_{N})\}$
+\end_inset
+
+ contains all samples / data.
+ I would then calculate the empirical risk of the model:
+\begin_inset Formula 
+\begin{equation}
+\mathcal{R}_{T}(h)=\frac{1}{n}\sum^{n}_{i=1}\ell\left(Y_{i},h(X_{i})\right),\quad(X_{i},Y_{i})\in T.
+\end{equation}
+
+\end_inset
+
+This is an unbiased estimate of the true risk 
+\begin_inset Formula $\mathcal{R}_{p}(h)$
+\end_inset
+
+ when 
+\begin_inset Formula $h\perp\!\!\!\perp T$
+\end_inset
+
+ holds (i.e.
+ that the hypothesis is independent of the test data) and all data points in 
+\begin_inset Formula $S$
+\end_inset
+
+ are drawn from the same distribution 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ This is quick to show:
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}\left[\mathcal{R}_{T}(h)\right] & =\mathbb{E}\left[\frac{1}{n}\sum^{n}_{i=1}\ell\left(Y_{i},h(X_{i})\right)\right]\\
+ & =\frac{1}{n}\sum^{n}_{i=1}\mathbb{E}\left[\ell\left(Y_{i},h(X_{i})\right)\right]\\
+ & =\frac{1}{n}\sum^{n}_{i=1}\mathbb{E}\left[\mathbb{E}\left[\ell\left(Y_{i},h(X_{i})\right)\mid h\right]\right]\\
+ & \overset{h\perp\!\!\!\perp T}{=}\frac{1}{n}\sum^{n}_{i=1}\mathbb{E}\left[\mathbb{E}_{(X,Y)\sim p}\left[\ell\left(Y,h(X)\right)\mid h\right]\right]\\
+ & =\frac{1}{n}\sum^{n}_{i=1}\mathbb{E}_{(X,Y)\sim p}\left[\ell\left(Y,h(X)\right)\right]\\
+ & =\mathbb{E}_{(X,Y)\sim p}\left[\ell\left(Y,h(X)\right)\right]\\
+ & =\mathcal{R}_{p}(h).
+\end{align*}
+
+\end_inset
+
+The crucial point is that independence of the hypothesis and the training data implies that the distribution of 
+\begin_inset Formula $(X_{i},Y_{i}),$
+\end_inset
+
+ 
+\begin_inset Formula $i\in T$
+\end_inset
+
+ given 
+\begin_inset Formula $h$
+\end_inset
+
+ is still just 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The students might learn about the models inner workings and start to trick it.
+ For example by studying for long hours,
+ but with very low intensity.
+ Goodhart's law sums it up:
+ 
+\emph on
+When a measure becomes a target,
+ it ceases to be a good measure.
+\end_layout
+
+\begin_layout Section
+Digits Classification with 
+\begin_inset Formula $K$
+\end_inset
+
+ Nearest Neighbors (40 points)
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "fig:digits_visualized"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+ visualizes the first 50 digits of the data and confirms the encoding of 
+\begin_inset Formula $\{5,6\}$
+\end_inset
+
+ to 
+\begin_inset Formula $\{-1,1\}$
+\end_inset
+
+ was successful.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/caspe/OneDrive - University of Copenhagen/Kandidat/7_semester/MLA/excercises/ch2_KNN/digits_visualized.png
+	scale 75
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Training data visualised
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+hspace{10pt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Note:
+ The figure plots the first 
+\begin_inset Formula $m=50$
+\end_inset
+
+ digits of MNIST-5-6-Subset.txt.
+ The number above each digit corresponds to the encoded label from MNIST-5-6-Subset-Labels.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:digits_visualized"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The vectorized 
+\begin_inset Formula $K$
+\end_inset
+
+-NN function implemented in python is shown verbatim here (where np refers to numpy)
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+# knn function
+\end_layout
+
+\begin_layout Plain Layout
+def knn(training_points,
+ training_labels,
+ test_points,
+ test_labels,
+ seed=56):
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    rng = np.random.default_rng(seed)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    ones = lambda q:
+ np.ones(q).reshape(q,1)
+\end_layout
+
+\begin_layout Plain Layout
+    
+\end_layout
+
+\begin_layout Plain Layout
+    m = len(training_labels) # number of train datapoints
+\end_layout
+
+\begin_layout Plain Layout
+    n = len(test_labels) # number of test datapoints
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    # distance matrix
+\end_layout
+
+\begin_layout Plain Layout
+    train_sqn  = np.diag(training_points.T @ training_points).reshape(m,1)
+\end_layout
+
+\begin_layout Plain Layout
+    test_sqn   = np.diag(test_points.T @ test_points).reshape(n,1)
+\end_layout
+
+\begin_layout Plain Layout
+    trainTtest = training_points.T @ test_points
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    D = (
+\end_layout
+
+\begin_layout Plain Layout
+        train_sqn @ ones(n).T 
+\end_layout
+
+\begin_layout Plain Layout
+        - 2*trainTtest 
+\end_layout
+
+\begin_layout Plain Layout
+        + ones(m) @ test_sqn.T
+\end_layout
+
+\begin_layout Plain Layout
+    )
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    # distance sorting
+\end_layout
+
+\begin_layout Plain Layout
+    D_sort_index  = np.argsort(D,axis=0)
+\end_layout
+
+\begin_layout Plain Layout
+    sorted_labels = training_labels[D_sort_index]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    # predictions
+\end_layout
+
+\begin_layout Plain Layout
+    sorted_labels_cumsum= sorted_labels.cumsum(axis=0)
+\end_layout
+
+\begin_layout Plain Layout
+    pred = np.sign(sorted_labels_cumsum)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    # randomly assign -1 or 1 wherever there is a tie
+\end_layout
+
+\begin_layout Plain Layout
+    ties = pred == 0
+\end_layout
+
+\begin_layout Plain Layout
+    pred[ties] = rng.choice([-1,
+ 1],
+ size=ties.sum())
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    # predictions errors and average errors
+\end_layout
+
+\begin_layout Plain Layout
+    error     = pred != test_labels
+\end_layout
+
+\begin_layout Plain Layout
+    avg_error = np.mean(error,axis=1)
+\end_layout
+
+\begin_layout Plain Layout
+    
+\end_layout
+
+\begin_layout Plain Layout
+    return avg_error
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/caspe/OneDrive - University of Copenhagen/Kandidat/7_semester/MLA/excercises/ch2_KNN/knn_validation_errors.png
+	scale 76
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Average validation error for different sizes of validation sets
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+hspace{10pt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Note:
+ The lines display the average validation error as a function of 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ They are colored based on the validation set which are defined as in the description of the assignment.
+ 
+\begin_inset Formula $n$
+\end_inset
+
+ defines the size of each of the corresponding plots validation sets.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:AVE"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement htbp
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename C:/Users/caspe/OneDrive - University of Copenhagen/Kandidat/7_semester/MLA/excercises/ch2_KNN/Variance_errors.png
+	width 50line%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+Variance of validation error
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+hspace{10pt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Note:
+ The lines plot the empirical variance of the AVE over the 5 validation sets for different 
+\begin_inset Formula $K$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:varAVE"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The resulting average validation error (AVE) for the different models and validation sets are shown in figure 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "fig:AVE"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+From this figure we see that larger 
+\begin_inset Formula $K$
+\end_inset
+
+ are associated with larger AVE and that larger validation sets (i.e.
+ larger 
+\begin_inset Formula $m$
+\end_inset
+
+) results in more granular AVE-curves.
+ In addition to this figure 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "fig:varAVE"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+ shows how fluctuations of the AVE tends to decrease as a function of 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\align left
+Note that the prediction of 
+\begin_inset Formula $K$
+\end_inset
+
+-NN trained on these data (i.e.
+ the first 
+\begin_inset Formula $m=50$
+\end_inset
+
+ digits of the provided data) will always predict 
+\begin_inset Formula $h_{K}(\boldsymbol{x}_{i})=1$
+\end_inset
+
+ (i.e.
+ the digit 6) for 
+\begin_inset Formula $K\geq45$
+\end_inset
+
+.
+ This is simply because 22 out of the 50 digits have 
+\begin_inset Formula $5$
+\end_inset
+
+ as their label so that
+\begin_inset Formula 
+\[
+\sum^{K}_{k=1}S^{*}_{k}>0,\quad K\geq45,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $S^{*}$
+\end_inset
+
+contains the 
+\begin_inset Formula $K$
+\end_inset
+
+ nearest neighbors to the input 
+\begin_inset Formula $\boldsymbol{x}_{i}$
+\end_inset
+
+.
+ And therefore
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+begin{align*}
+\end_layout
+
+\begin_layout Plain Layout
+	h_K(
+\backslash
+textbf{x}_i) &= 
+\end_layout
+
+\begin_layout Plain Layout
+		
+\backslash
+begin{cases}
+\end_layout
+
+\begin_layout Plain Layout
+			-1,
+ &
+\backslash
+text{ if }
+\backslash
+sum_{k=1}^K S^*_k <0
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+			
+\backslash
+;
+\backslash
+;
+\backslash
+,1,
+ &
+\backslash
+text{ if }
+\backslash
+sum_{k=1}^K S^*_k >0
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+			
+\backslash
+text{chosen uniformly at random from } 
+\backslash
+{-1,1
+\backslash
+},
+\end_layout
+
+\begin_layout Plain Layout
+& 
+\backslash
+text{ if } 
+\backslash
+sum_{k=1}^K S_k^* = 0.
+\end_layout
+
+\begin_layout Plain Layout
+		
+\backslash
+end{cases}
+\backslash
+
+\backslash
+[5pt]
+\end_layout
+
+\begin_layout Plain Layout
+&= 1,
+ 
+\backslash
+text{ for } K
+\backslash
+geq 45
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{align*}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Regression (50 points)
+\end_layout
+
+\begin_layout Subsection
+Task 1 (5 points)
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+# Example code
+\end_layout
+
+\begin_layout Plain Layout
+# Creating an example array
+\end_layout
+
+\begin_layout Plain Layout
+data = np.array([5,
+ 2,
+ 8,
+ 1,
+ 6])
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+# Calculating cumulative sum using cumsum
+\end_layout
+
+\begin_layout Plain Layout
+cumulative_sum = np.cumsum(data)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Task 2 (10 points)
+\end_layout
+
+\begin_layout Standard
+I estimate model 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:regmodel"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+ using OLS
+\begin_inset Formula 
+\begin{equation}
+\ln(y_{i})=b+ax_{i}+u_{i},\quad i\in\{1,2,\dots,n\},\label{eq:regmodel}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ is the error term for observation 
+\begin_inset Formula $i$
+\end_inset
+
+ in the dataset 
+\begin_inset Formula $S=\{(x_{1},y_{1}),(x_{2},y_{2}),\dots,(x_{n},y_{n})\}$
+\end_inset
+
+.
+ The results are summarized in table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{tab:estimates}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+begin{table}[ht]
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{tabular}{lccc}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+toprule
+\end_layout
+
+\begin_layout Plain Layout
+ & $
+\backslash
+hat{a}$ & $
+\backslash
+hat{b}$ & MSE 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+midrule
+\end_layout
+
+\begin_layout Plain Layout
+Estimate & 0.0000 & 0.0000 & 0.0000 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+bottomrule
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{tabular}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+caption{Regression estimates and mean squared error}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+label{tab:estimates}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Task 3 (10 points)
+\end_layout
+
+\begin_layout Standard
+Let the two point be 
+\begin_inset Formula $\{(x_{1},y_{1}),(x_{2},y_{2})\}=\{(0,2),(0,1)\}$
+\end_inset
+
+ then the first problem is
+\begin_inset Formula 
+\[
+b^{*}=\arg\min_{a,b}\sum^{2}_{i=1}\left(y_{i}-h(x_{i})\right)^{2}=\arg\min_{b}\left\{ \left(2-\exp(b)\right)^{2}+\left(1-\exp(b)\right)^{2}\right\} ,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with the first order condition (FOC) yielding 
+\begin_inset Formula $b^{*}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+-2\left(2-\exp(b^{*})\right)\exp(b^{*})-2\left(1-\exp(b^{*})\right)\exp(b^{*}) & =-2\exp(b^{*})\left(3-2\exp(b^{*})\right)=0\iff\\
+b^{*} & =\ln\frac{3}{2}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The second problem is
+\begin_inset Formula 
+\[
+\beta^{*}=\arg\min_{\alpha,\beta}\sum^{2}_{i=1}\left(\ln y_{i}-(\alpha x_{i}+\beta)\right)^{2}=\arg\min_{\beta}\left\{ \left(\ln2-\beta\right)^{2}+\left(\ln1-\beta\right)^{2}\right\} ,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with the FOC yielding 
+\begin_inset Formula $\beta^{*}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+-2\left(\ln2-\beta^{*}\right)-2\left(\ln1-\beta^{*}\right) & =-2\left(\ln2-2\beta^{*}\right)=0\iff\\
+\beta^{*} & =\frac{\ln2}{2}=\ln\sqrt{2}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $\sqrt{2}$
+\end_inset
+
+ is an irrational number,
+ and thus not equal to 
+\begin_inset Formula $3/2$
+\end_inset
+
+,
+ and 
+\begin_inset Formula $\ln(\cdot)$
+\end_inset
+
+ is a strictly increasing function,
+ and thus one-to-one,
+ we can safely state that 
+\begin_inset Formula $b^{*}\neq\beta^{*}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Task 4 (5 points)
+\end_layout
+
+\begin_layout Subsection
+Task 5 (10 points)
+\end_layout
+
+\begin_layout Standard
+The quantity 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ measure how well the estimated hypothesis 
+\begin_inset Formula $h$
+\end_inset
+
+ predicts the labels 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+.
+ We see that for larger 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ the loss 
+\begin_inset Formula $\ell\left(y_{i},h(x_{i})\right)=\left(y_{i}-h(x_{i})\right)^{2}$
+\end_inset
+
+ is generally smaller.
+ In other words the empirical risk is smaller.
+ For 
+\begin_inset Formula $R^{2}=1$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\[
+R^{2}=1-\frac{\sum^{N}_{i=1}\left(y_{i}-h(x_{i})\right)^{2}}{\sum^{N}_{i=1}\left(y_{i}-\bar{y}\right)^{2}}=1\iff0=\sum^{N}_{i=1}\left(y_{i}-h(x_{i})\right)^{2}\iff h(x_{i})=y_{i},\;(x_{i},y_{i})\in S.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That is,
+ the hypothesis perfectly predicts the label value for all observations in 
+\begin_inset Formula $S$
+\end_inset
+
+,
+ which for example could be the training data.
+ Reversely lower values of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ indicates larger empirical risk with
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R^{2}=1-\frac{\sum^{N}_{i=1}\left(y_{i}-h(x_{i})\right)^{2}}{\sum^{N}_{i=1}\left(y_{i}-\bar{y}\right)^{2}}=0\iff\sum^{N}_{i=1}(y_{i}-\overline{y})^{2}=\sum^{N}_{i=1}\left(y_{i}-h(x_{i})\right)^{2},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $h$
+\end_inset
+
+ has the same empirical risk as the hypothetical model 
+\begin_inset Formula $h^{2}(x_{i})=\bar{y}$
+\end_inset
+
+ that always predicts the average output value of the data.
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ can be negative,
+ which would indicate a hypothesis / model that performs worse than a simple average under the chosen squared difference loss function.
+\end_layout
+
+\begin_layout Subsection
+Task 6 (10 points)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+begin{table}[ht]
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{tabular}{lccc}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+toprule
+\end_layout
+
+\begin_layout Plain Layout
+ & $
+\backslash
+hat{a}$ & $
+\backslash
+hat{b}$ & MSE 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+midrule
+\end_layout
+
+\begin_layout Plain Layout
+Estimate & 0.0000 & 0.0000 & 0.0000 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+bottomrule
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{tabular}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+caption{Regression estimates and mean squared error}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+label{tab:estimates2}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_body
+\end_document
