@@ -258,10 +258,23 @@ To evaluate the performance of the hypothesis / algorithm
 \end_inset
 
  contains all samples / data.
- I would then calculate the empirical risk of the model:
+ I would then calculate 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{eq:empirical_risk}
+\end_layout
+
+\end_inset
+
+,
+ the empirical risk of the model
 \begin_inset Formula 
 \begin{equation}
-\mathcal{R}_{T}(h)=\frac{1}{n}\sum^{n}_{i=1}\ell\left(Y_{i},h(X_{i})\right),\quad(X_{i},Y_{i})\in T.
+\mathcal{R}_{T}(h)=\frac{1}{n}\sum^{n}_{i=1}\ell\left(Y_{i},h(X_{i})\right),\quad(X_{i},Y_{i})\in T.\label{eq:empirical_risk}
 \end{equation}
 
 \end_inset
@@ -290,10 +303,9 @@ This is an unbiased estimate of the true risk
 \mathbb{E}\left[\mathcal{R}_{T}(h)\right] & =\mathbb{E}\left[\frac{1}{n}\sum^{n}_{i=1}\ell\left(Y_{i},h(X_{i})\right)\right]\\
  & =\frac{1}{n}\sum^{n}_{i=1}\mathbb{E}\left[\ell\left(Y_{i},h(X_{i})\right)\right]\\
  & =\frac{1}{n}\sum^{n}_{i=1}\mathbb{E}\left[\mathbb{E}\left[\ell\left(Y_{i},h(X_{i})\right)\mid h\right]\right]\\
- & \overset{h\perp\!\!\!\perp T}{=}\frac{1}{n}\sum^{n}_{i=1}\mathbb{E}\left[\mathbb{E}_{(X,Y)\sim p}\left[\ell\left(Y,h(X)\right)\mid h\right]\right]\\
+ & \overset{h\perp\!\!\!\perp T}{=}\frac{1}{n}\sum^{n}_{i=1}\mathbb{E}_{(X,Y)\sim p}\left[\ell\left(Y,h(X)\right)\right]\\
  & =\frac{1}{n}\sum^{n}_{i=1}\mathbb{E}_{(X,Y)\sim p}\left[\ell\left(Y,h(X)\right)\right]\\
- & =\mathbb{E}_{(X,Y)\sim p}\left[\ell\left(Y,h(X)\right)\right]\\
- & =\mathcal{R}_{p}(h).
+ & =\mathbb{E}_{(X,Y)\sim p}\left[\ell\left(Y,h(X)\right)\right]=\mathcal{R}_{p}(h).
 \end{align*}
 
 \end_inset
@@ -338,101 +350,6 @@ Digits Classification with
 \end_layout
 
 \begin_layout Standard
-Figure 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "fig:digits_visualized"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-tuple "list"
-
-\end_inset
-
- visualizes the first 50 digits of the data and confirms the encoding of 
-\begin_inset Formula $\{5,6\}$
-\end_inset
-
- to 
-\begin_inset Formula $\{-1,1\}$
-\end_inset
-
- was successful.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement document
-alignment document
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename output/digits_visualized.png
-	scale 75
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Training data visualised
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\backslash
-hspace{10pt}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Note:
- The figure plots the first 
-\begin_inset Formula $m=50$
-\end_inset
-
- digits of MNIST-5-6-Subset.txt.
- The number above each digit corresponds to the encoded label from MNIST-5-6-Subset-Labels.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:digits_visualized"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 The vectorized 
 \begin_inset Formula $K$
 \end_inset
@@ -450,8 +367,8 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-def knn(training_points,
- training_labels,
+def knn(train_points,
+ train_labels,
  test_points,
  test_labels,
  seed=56):
@@ -466,20 +383,11 @@ def knn(training_points,
 \end_layout
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-    ones = lambda q:
- np.ones(q).reshape(q,1)
-\end_layout
-
-\begin_layout Plain Layout
     
 \end_layout
 
 \begin_layout Plain Layout
-    m = len(training_labels) # number of train datapoints
+    m = len(train_labels) # number of training datapoints
 \end_layout
 
 \begin_layout Plain Layout
@@ -495,7 +403,7 @@ def knn(training_points,
 \end_layout
 
 \begin_layout Plain Layout
-    train_sqn  = np.diag(training_points.T @ training_points).reshape(m,1)
+    train_sqn  = np.diag(train_points.T @ train_points).reshape(m,1)
 \end_layout
 
 \begin_layout Plain Layout
@@ -504,6 +412,11 @@ def knn(training_points,
 
 \begin_layout Plain Layout
     trainTtest = training_points.T @ test_points
+\end_layout
+
+\begin_layout Plain Layout
+	ones = lambda q:
+ np.ones(q).reshape(q,1)
 \end_layout
 
 \begin_layout Plain Layout
@@ -961,7 +874,7 @@ end{cases}
 \backslash
 text{ for } K
 \backslash
-geq 45
+geq 45.
 \end_layout
 
 \begin_layout Plain Layout
@@ -1041,19 +954,11 @@ def reg(X,y):
 \end_layout
 
 \begin_layout Plain Layout
-    # calculating MSE
+    # calculating MSE and R^2
 \end_layout
 
 \begin_layout Plain Layout
     MSE = np.mean((y_raw-y_pred)**2)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-    # calculating R^2
 \end_layout
 
 \begin_layout Plain Layout
@@ -1105,10 +1010,10 @@ tuple "list"
 
 \begin_layout Standard
 where 
-\begin_inset Formula $u_{i}$
+\begin_inset Formula $u_{i}\equiv\ln(y_{i})-\left(b+ax_{i}\right)$
 \end_inset
 
- is the error term for observation 
+ defines the error term for observation 
 \begin_inset Formula $i$
 \end_inset
 
@@ -1201,7 +1106,9 @@ end{tabular}
 \begin_layout Plain Layout
 
 \backslash
-caption{Regression estimates and mean squared error}
+caption{OLS estimatation results for model 
+\backslash
+eqref{eq:regmodel}}
 \end_layout
 
 \begin_layout Plain Layout
@@ -1316,6 +1223,22 @@ Task 4 (5 points)
 \end_layout
 
 \begin_layout Standard
+The resulting plot is shown in figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:reg1}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \align left
 \begin_inset Float figure
 placement document
@@ -1328,7 +1251,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename output/PCB_regression.png
-	scale 60
+	scale 85
 
 \end_inset
 
@@ -1339,7 +1262,19 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Estimated model predictions
+Visualizing the fitted model 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:regmodel}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1364,7 +1299,7 @@ hspace{10pt}
 
 \begin_layout Plain Layout
 Note:
- 
+ The figure plots the transformed PCB datapoints along with the model predictions estimated using OLS.
 \end_layout
 
 \begin_layout Plain Layout
@@ -1483,6 +1418,61 @@ Task 6 (10 points)
 \end_layout
 
 \begin_layout Standard
+Now we turn to model 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{eq:regmodel2}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\ln(y_{i})=b+a\sqrt{x_{i}}+u_{i},\quad i\in\{1,2,\dots,n\}.\label{eq:regmodel2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The estimation results are shown in tabel 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{tab:estimates2}
+\end_layout
+
+\end_inset
+
+ and figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:reg2}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -1551,7 +1541,9 @@ end{tabular}
 \begin_layout Plain Layout
 
 \backslash
-caption{Regression estimates and mean squared error}
+caption{OLS estimatation results for model 
+\backslash
+eqref{eq:regmodel2}}
 \end_layout
 
 \begin_layout Plain Layout
@@ -1584,7 +1576,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename output/PCB_regression_sqrtx.png
-	scale 60
+	scale 85
 
 \end_inset
 
@@ -1595,7 +1587,19 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Estimated model (2) predictions 
+Visualizing the fitted model 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:regmodel2}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1620,6 +1624,7 @@ hspace{10pt}
 
 \begin_layout Plain Layout
 Note:
+ The figure plots the transformed data along with the model predictions estimated using OLS.
 \end_layout
 
 \begin_layout Plain Layout
