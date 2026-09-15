@@ -162,7 +162,7 @@ Home Assignment 2
 
 \begin_layout Author
 Casper Moes,
- hwd363
+ hwd362
 \end_layout
 
 \begin_layout Standard
@@ -256,7 +256,6 @@ Applying matrix product rules yields:
 \begin{align*}
 \gamma\boldsymbol{X} & =\left(\boldsymbol{I}-\frac{1}{N}\boldsymbol{11}^{\top}\right)\boldsymbol{X}\\
  & =\boldsymbol{X}-\frac{1}{N}\boldsymbol{11}^{\top}\boldsymbol{X}\\
- & =\boldsymbol{X}-\boldsymbol{1}\frac{1}{N}\boldsymbol{1}^{\top}\boldsymbol{X}\\
  & =\boldsymbol{X}-\boldsymbol{1}\left(\frac{1}{N}\boldsymbol{X}^{\top}\boldsymbol{1}\right)^{\top}\\
  & =\boldsymbol{X}-\boldsymbol{1}\bar{\boldsymbol{x}}^{\top}\\
  & =\boldsymbol{Z}
@@ -280,7 +279,7 @@ The last equality is seen by looking at an arbitrary row
  
 \begin_inset Formula 
 \[
-\begin{bmatrix}x_{i1}-\frac{1}{N}\sum^{N}_{n=1}x_{n1} & \cdots & x_{id}-\frac{1}{N}\sum^{N}_{n=1}x_{nd}\end{bmatrix}=\left[\boldsymbol{x}_{n}-\bar{\boldsymbol{x}}\right]^{\top}=\boldsymbol{z}^{\top}_{n},
+\begin{bmatrix}x_{i1}-\frac{1}{N}\sum^{N}_{n=1}x_{n1} & \cdots & x_{id}-\frac{1}{N}\sum^{N}_{n=1}x_{nd}\end{bmatrix}=\left[\boldsymbol{x}_{i}-\bar{\boldsymbol{x}}\right]^{\top}=\boldsymbol{z}^{\top}_{i},
 \]
 
 \end_inset
@@ -504,19 +503,15 @@ Input Whitening (18 points)
 \end_layout
 
 \begin_layout Standard
-Calculating we get
-\begin_inset Formula 
-\[
-Var(x_{1})=Var(\hat{x_{1}})=1,
-\]
-
+Calculating we get 
+\begin_inset Formula $Var(x_{1})=Var(\hat{x_{1}})=1$
 \end_inset
 
-
+ and
 \begin_inset Formula 
 \begin{align*}
 Var(x_{2}) & =Var\left(\sqrt{1-\epsilon^{2}}\hat{x_{1}}+\epsilon\hat{x}_{2}\right)\\
- & =(1-\epsilon^{2})Var(\hat{x_{1}})+\epsilon^{2}Var(\hat{x_{2}})+\left(\sqrt{1-\epsilon^{2}}\epsilon\right)Cov\left(\hat{x}_{1},\hat{x}_{2}\right)\\
+ & =(1-\epsilon^{2})Var(\hat{x_{1}})+\epsilon^{2}Var(\hat{x_{2}})+2\left(\sqrt{1-\epsilon^{2}}\epsilon\right)Cov\left(\hat{x}_{1},\hat{x}_{2}\right)\\
  & =1-\epsilon^{2}+\epsilon^{2}\\
  & =1,
 \end{align*}
@@ -584,7 +579,7 @@ Using that
 \begin{align*}
 f(\boldsymbol{\hat{x}}) & =\hat{w}_{1}\hat{x}_{1}+\hat{w}_{2}\hat{x}_{2}\\
  & =\hat{w}_{1}x_{1}+\hat{w}_{2}\left(\frac{x_{2}}{\epsilon}-\frac{\sqrt{1-\epsilon^{2}}}{\epsilon}\hat{x}_{1}\right)\\
- & =\underbrace{\left(\hat{w}_{1}-\frac{\sqrt{1-\epsilon^{2}}}{\epsilon}\right)}_{w_{1}}x_{1}+\underbrace{\frac{\hat{w}_{2}}{\epsilon}}_{w_{2}}x_{2}.
+ & =\underbrace{\left(\hat{w}_{1}-\hat{w}_{2}\frac{\sqrt{1-\epsilon^{2}}}{\epsilon}\right)}_{w_{1}}x_{1}+\underbrace{\frac{\hat{w}_{2}}{\epsilon}}_{w_{2}}x_{2}.
 \end{align*}
 
 \end_inset
@@ -597,9 +592,14 @@ f(\boldsymbol{\hat{x}}) & =\hat{w}_{1}\hat{x}_{1}+\hat{w}_{2}\hat{x}_{2}\\
 \end_layout
 
 \begin_layout Standard
+Applying the formula derived above setting 
+\begin_inset Formula $\hat{w}_{1}=\hat{w}_{2}=1$
+\end_inset
+
+ yields
 \begin_inset Formula 
 \[
-f(\boldsymbol{\hat{x}})=1\cdot\hat{x}_{1}+1\cdot\hat{x}_{2}=\left(1-\frac{\sqrt{1-\epsilon^{2}}}{\epsilon}\right)x_{1}+\frac{1}{\epsilon}x_{2}
+f(\boldsymbol{\hat{x}})=1\cdot\hat{x}_{1}+1\cdot\hat{x}_{2}=\left(1-\frac{\sqrt{1-\epsilon^{2}}}{\epsilon}\right)x_{1}+\frac{1}{\epsilon}x_{2}.
 \]
 
 \end_inset
@@ -608,9 +608,17 @@ f(\boldsymbol{\hat{x}})=1\cdot\hat{x}_{1}+1\cdot\hat{x}_{2}=\left(1-\frac{\sqrt{
 \end_layout
 
 \begin_layout Standard
+Therefore this target function is available whenever 
+\begin_inset Formula $C\geq\left(1-\frac{\sqrt{1-\epsilon^{2}}}{\epsilon}\right)^{2}+\left(\frac{1}{\epsilon}\right)^{2}$
+\end_inset
+
+ implying that the maximum amount of regularization is obtained at
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
-C_{min}=\left(1-\frac{\sqrt{1-\epsilon^{2}}}{\epsilon}\right)^{2}+\left(\frac{1}{\epsilon}\right)^{2},\quad\epsilon\neq0
+C_{min}=\left(1-\frac{\sqrt{1-\epsilon^{2}}}{\epsilon}\right)^{2}+\left(\frac{1}{\epsilon}\right)^{2},\quad\epsilon\neq0.
 \]
 
 \end_inset
@@ -710,7 +718,7 @@ where
 
 \begin_layout Standard
 That is 
-\begin_inset Formula $\epsilon=22-\left(-\frac{100}{15}\right)=\frac{22\cdot15+100}{15}\geq\epsilon$
+\begin_inset Formula $\epsilon=22-\left(-\frac{100}{15}\right)=\frac{22\cdot15+100}{15}$
 \end_inset
 
 .
@@ -756,17 +764,17 @@ Illustration of Markov's,
 \end_layout
 
 \begin_layout Standard
-Using the following code i draw the 1,000,000 repetitions of the stochastic variable 
+Using numpy i sample 1,000,000 repetitions of the stochastic variable 
 \begin_inset Formula $M_{20}=\frac{1}{20}\sum^{20}_{i=1}X_{i}$
 \end_inset
 
  and evaluate the empirical frequency given by the assignment for the different alphas.
- The results are plottet as the indigo line in figure 
+ The results are plotted as the indigo line in figure 
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-%
+
 \backslash
 ref{fig:figma}
 \end_layout
@@ -793,10 +801,31 @@ The intervals of 0.05 is sufficient because
 \end_layout
 
 \begin_layout Standard
+Applying Markow's inequality yields
 \begin_inset Formula 
 \[
-\mathbb{P}\left(M_{20}\geq\alpha\right)\leq\frac{\mathbb{E}\left[M_{20}\right]}{\alpha}=\frac{0.35}{\alpha}
+\mathbb{P}\left(M_{20}\geq\alpha\right)\leq\frac{\mathbb{E}\left[M_{20}\right]}{\alpha}=\frac{0.35}{\alpha}.
 \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The bound for the 
+\begin_inset Formula $\alpha$
+\end_inset
+
+'s is plotted with an orange line in figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:figma}
+\end_layout
 
 \end_inset
 
@@ -808,14 +837,34 @@ The intervals of 0.05 is sufficient because
 \end_layout
 
 \begin_layout Standard
+The condition 
+\begin_inset Formula $M_{20}\geq\alpha$
+\end_inset
+
+ does not permit the direct application of Chebyshew's inequality.
+ Therefore we manipulate the condition a bit (conserving the measure / probability of the event) and then apply the inequality
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \mathbb{P}\left(M_{20}\geq\alpha\right) & =\mathbb{P}\left(M_{20}-\mathbb{E}\left[M_{20}\right]\geq\alpha-\mathbb{E}\left[M_{20}\right]\right)\\
- & \mathbb{P}\left(\sum^{20}_{i=1}X_{i}-\mathbb{E}\left[\sum^{20}_{i=1}X_{i}\right]\geq20\left(\alpha-\mathbb{E}\left[M_{20}\right]\right)\right)\\
- & \leq\mathbb{P}\left(|M_{20}-\mathbb{E}\left[M_{20}\right]|\geq20\left(\alpha-\mathbb{E}\left[M_{20}\right]\right)\right)\\
- & \leq\frac{\mathbb{V}\left(M_{20}\right)}{\left(20\left(\alpha-\mathbb{E}\left[M_{20}\right]\right)\right)^{2}}\\
- & =\frac{0.35(1-0.35)}{\left(20(\alpha-0.35)\right)^{2}}
+ & \leq\mathbb{P}\left(|M_{20}-\mathbb{E}\left[M_{20}\right]|\geq\alpha-\mathbb{E}\left[M_{20}\right]\right)\\
+ & \leq\frac{\mathbb{V}\left(M_{20}\right)}{\left(\alpha-\mathbb{E}\left[M_{20}\right]\right)^{2}}\\
+ & =\frac{0.35(1-0.35)}{20(\alpha-0.35)^{2}},
 \end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the last equality used the i.i.d property and the well known formula for the variance of a Bernoulli distributed variable
+\begin_inset Formula 
+\[
+\mathbb{V}\left(M_{20}\right)=\mathbb{V}\left(\frac{1}{20}\sum^{20}_{i=1}X_{i}\right)=\frac{1}{(20)^{2}}\sum^{20}_{i=1}\left(\mathbb{V}\left(X_{i}\right)\right)=\frac{1}{20}\mathbb{V}(X_{1})=\frac{0.35(1-0.35)}{20}.
+\]
 
 \end_inset
 
@@ -827,12 +876,14 @@ The intervals of 0.05 is sufficient because
 \end_layout
 
 \begin_layout Standard
+Like with Chebyshew's inequality we can not directly apply Hoeffding's inequality to the condition.
+ Therefore we again manipulate the condition and then apply the inequality
 \begin_inset Formula 
 \begin{align*}
 \mathbb{P}\left(M_{20}\geq\alpha\right) & =\mathbb{P}\left(M_{20}-\mathbb{E}\left[M_{20}\right]\geq\alpha-\mathbb{E}\left[M_{20}\right]\right)\\
  & =\mathbb{P}\left(\sum^{20}_{i=1}X_{i}-\mathbb{E}\left[\sum^{20}_{i=1}X_{i}\right]\geq20\left(\alpha-\mathbb{E}\left[M_{20}\right]\right)\right)\\
  & \leq\exp\left\{ -\frac{2\left(20\left(\alpha-\mathbb{E}\left[M_{20}\right]\right)\right)^{2}}{\sum^{20}_{i=1}\left(1-0\right)^{2}}\right\} \\
- & =\exp\left\{ -40\left(\alpha-\mathbb{E}\left[M_{20}\right]\right)^{2}\right\} 
+ & =\exp\left\{ -40\left(\alpha-\mathbb{E}\left[M_{20}\right]\right)^{2}\right\} .
 \end{align*}
 
 \end_inset
@@ -840,12 +891,302 @@ The intervals of 0.05 is sufficient because
 
 \end_layout
 
+\begin_layout Standard
+The resulting bounds are again graphed in figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:figma}
+\end_layout
+
+\end_inset
+
+ now with a purple line.
+\end_layout
+
 \begin_layout Paragraph
 6.
 \end_layout
 
+\begin_layout Standard
+Comparing the graphs in figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:figma}
+\end_layout
+
+\end_inset
+
+ we firstly note that the calculated frequency based on simulated data stays below the bounds.
+ 
+\end_layout
+
+\begin_layout Standard
+We also clearly observe the superiority of Chebyshew's and Hoeffding's inequality to Markow's inequality in bounding the probability of the event 
+\begin_inset Formula $M_{20}\geq\alpha$
+\end_inset
+
+.
+ In addition we observe how the bound Hoeffding's inequality provides shrinks faster (exponentially) compared to the bound found by applying Chebyshew's inequality.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+begin{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename output/bound_plot.png
+	scale 120
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Frequency and Different bound on event
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+label{fig:figma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Note:
+ The dotted lines represent probability bounds on the event 
+\begin_inset Formula $\mathbb{P}\left(M_{20}\geq\alpha\right)$
+\end_inset
+
+ and the indigo filled in line graphs the empirical frequency of the event for 
+\begin_inset Formula $N=1,000,000$
+\end_inset
+
+ experiments.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Paragraph
 7.
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $\alpha=1$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\[
+\mathbb{P}(M_{20}\geq1)=\mathbb{P}\left(\sum^{20}_{i=1}X_{i}=20\right)=0.35^{20}\approx7.61\cdot10^{-10}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+using the binomial coefficient 
+\begin_inset Formula $\binom{n}{k}=\frac{n!}{(n-k)!k!}$
+\end_inset
+
+ we calculate the probability for 
+\begin_inset Formula $\alpha=0.95$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbb{P}(M_{20}
+\backslash
+geq 0.95)
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbb{P}
+\backslash
+left(
+\backslash
+sum_{i=1}^{20}X_i
+\backslash
+geq 19
+\backslash
+right)
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbb{P}
+\backslash
+left(
+\backslash
+sum_{i=1}^{20}X_i=19
+\backslash
+right)
+\end_layout
+
+\begin_layout Plain Layout
++
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbb{P}
+\backslash
+left(
+\backslash
+sum_{i=1}^{20}X_i=20
+\backslash
+right)
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+binom{20}{19}(0.35)^{19}(0.65)
+\end_layout
+
+\begin_layout Plain Layout
++
+\end_layout
+
+\begin_layout Plain Layout
+0.35^{20}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+approx 2.90
+\backslash
+cdot 10^{-8}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
