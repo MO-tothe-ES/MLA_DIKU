@@ -1,0 +1,1859 @@
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+
+
+\usepackage{a4wide}
+\usepackage{amsfonts}
+\usepackage{graphicx}% For including images
+\usepackage{xcolor}% For a colorful presentation
+\usepackage{listings}% For presenting code
+\usepackage{booktabs}
+
+
+% Definition of a style for code, matter of taste
+\lstdefinestyle{mystyle}{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color[HTML]{F7F7F7},
+  rulecolor=\color[HTML]{EEEEEE},
+  identifierstyle=\color[HTML]{24292E},
+  emphstyle=\color[HTML]{005CC5},
+  keywordstyle=\color[HTML]{D73A49},
+  commentstyle=\color[HTML]{6A737D},
+  stringstyle=\color[HTML]{032F62},
+  emph={@property,self,range,True,False},
+  morekeywords={super,with,as,lambda},
+  literate=%
+    {+}{{{\color[HTML]{D73A49}+}}}1
+    {-}{{{\color[HTML]{D73A49}-}}}1
+    {*}{{{\color[HTML]{D73A49}*}}}1
+    {/}{{{\color[HTML]{D73A49}/}}}1
+    {=}{{{\color[HTML]{D73A49}=}}}1
+    {/=}{{{\color[HTML]{D73A49}=}}}1,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=4,
+  frame=single,
+}
+\lstset{style=mystyle}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children no
+\language english
+\language_package none
+\inputencoding utf8
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_bookmarks false
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle false
+\papersize a4
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\crossref_package prettyref
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Machine Learning A (2026–2027)
+\begin_inset Newline newline
+\end_inset
+
+Home Assignment 3
+\end_layout
+
+\begin_layout Author
+Casper Moes,
+ hwd362
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Optimal Classification (16 points)
+\end_layout
+
+\begin_layout Subsection*
+Question 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+addcontentsline{toc}{subsection}{Question 1}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+% Write your answer here.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Define the set of possible y-classes
+\begin_inset Formula $\mathcal{C}_{k}\in\{0,1\}$
+\end_inset
+
+.
+ The optimal deterministic classification strategy is the one that maximizes the probability of succes given 
+\begin_inset Formula $x$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+h(x)=\arg\max_{\mathcal{C}_{k}}\mathbb{P}\left(Y=\mathcal{C}_{k}\mid X=x\right)=\begin{cases}
+0 & \text{, if }x=0\\
+0 & \text{, if }x=1
+\end{cases}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The risk is calculated where we use the law of total probability and zero-one loss
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}\left[\ell\left(y,h(x)\right)\right] & =\sum_{x\in\{0,1\}}\sum_{y\in\{0,1\}}\mathbb{P}\left(Y=y,X=x\right)\ell\left(y,h(x)\right)\\
+ & =\sum_{x\in\{0,1\}}\sum_{y\in\{0,1\}}\mathbb{P}(X=x)\mathbb{P}\left(Y=y\mid X=x\right)\ell\left(y,h(x)\right)\\
+\\ & =\mathbb{P}(X=0)\mathbb{P}\left(Y=0\mid X=0\right)\ell\left(0,h(0)\right)\\
+ & \,+\mathbb{P}(X=0)\mathbb{P}\left(Y=1\mid X=0\right)\ell\left(1,h(0)\right)\\
+ & \,+\mathbb{P}(X=1)\mathbb{P}\left(Y=0\mid X=1\right)\ell\left(0,h(1)\right)\\
+ & \,+\mathbb{P}(X=1)\mathbb{P}\left(Y=1\mid X=1\right)\ell\left(1,h(1)\right)\\
+\\ & =\frac{1}{2}\cdot1\cdot0+\frac{1}{2}\cdot0\cdot1+\frac{1}{2}\cdot0.8\cdot0+\frac{1}{2}\cdot0.2\cdot1\\
+ & =\frac{1}{10}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Question 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+addcontentsline{toc}{subsection}{Question 2}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% Write your answer here.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using the fact that 
+\begin_inset Formula $Y$
+\end_inset
+
+ is conditionally independent of our hypothesis 
+\begin_inset Formula $h'$
+\end_inset
+
+ and that 
+\begin_inset Formula $h'(x)\equiv\mathbb{P}\left(h'(x)=\hat{y}\mid X=x\right)=\mathbb{P}\left(Y=\hat{y}\mid X=x\right)$
+\end_inset
+
+ we calculate the risk of the hypothesis
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}\left[\ell\left(y,h'(x)\right)\right] & =\sum_{\hat{y}\in\{0,1\}}\sum_{x\in\{0,1\}}\sum_{y\in\{0,1\}}\mathbb{P}\left(Y=y,X=x,h'(x)=\hat{y}\right)\ell\left(y,\hat{y}\right)\\
+ & =\sum_{\hat{y}\in\{0,1\}}\sum_{x\in\{0,1\}}\sum_{y\in\{0,1\}}\mathbb{P}\left(Y=y,h'(x)=\hat{y}\mid X=x\right)\mathbb{P}\left(X=x\right)\ell\left(y,\hat{y}\right)\\
+ & =\sum_{\hat{y}\in\{0,1\}}\sum_{x\in\{0,1\}}\sum_{y\in\{0,1\}}\mathbb{P}\left(Y=y\mid X=x\right)\mathbb{P}\left(h'(x)=\hat{y}\mid X=x\right)\mathbb{P}\left(X=x\right)\ell\left(y,\hat{y}\right)\\
+ & =\sum_{\hat{y}\in\{0,1\}}\sum_{x\in\{0,1\}}\sum_{y\in\{0,1\}}\mathbb{P}\left(Y=y\mid X=x\right)\mathbb{P}\left(Y=\hat{y}\mid X=x\right)\mathbb{P}\left(X=x\right)\ell\left(y,\hat{y}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+begin{align*}
+\end_layout
+
+\begin_layout Plain Layout
+&= 
+\backslash
+mathbb{P}(Y=1
+\backslash
+mid X=1)
+\backslash
+mathbb{P}(Y=1
+\backslash
+mid X=1)
+\backslash
+mathbb{P}(X=1)
+\backslash
+ell(1,1) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+quad + 
+\backslash
+mathbb{P}(Y=1
+\backslash
+mid X=1)
+\backslash
+mathbb{P}(Y=0
+\backslash
+mid X=1)
+\backslash
+mathbb{P}(X=1)
+\backslash
+ell(1,0) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+quad + 
+\backslash
+mathbb{P}(Y=1
+\backslash
+mid X=0)
+\backslash
+mathbb{P}(Y=1
+\backslash
+mid X=0)
+\backslash
+mathbb{P}(X=0)
+\backslash
+ell(1,1) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+quad + 
+\backslash
+mathbb{P}(Y=1
+\backslash
+mid X=0)
+\backslash
+mathbb{P}(Y=0
+\backslash
+mid X=0)
+\backslash
+mathbb{P}(X=0)
+\backslash
+ell(1,0) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+quad + 
+\backslash
+mathbb{P}(Y=0
+\backslash
+mid X=1)
+\backslash
+mathbb{P}(Y=1
+\backslash
+mid X=1)
+\backslash
+mathbb{P}(X=1)
+\backslash
+ell(0,1) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+quad + 
+\backslash
+mathbb{P}(Y=0
+\backslash
+mid X=1)
+\backslash
+mathbb{P}(Y=0
+\backslash
+mid X=1)
+\backslash
+mathbb{P}(X=1)
+\backslash
+ell(0,0) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+quad + 
+\backslash
+mathbb{P}(Y=0
+\backslash
+mid X=0)
+\backslash
+mathbb{P}(Y=1
+\backslash
+mid X=0)
+\backslash
+mathbb{P}(X=0)
+\backslash
+ell(0,1) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+quad + 
+\backslash
+mathbb{P}(Y=0
+\backslash
+mid X=0)
+\backslash
+mathbb{P}(Y=0
+\backslash
+mid X=0)
+\backslash
+mathbb{P}(X=0)
+\backslash
+ell(0,0) 
+\backslash
+
+\backslash
+[0.5em]
+\end_layout
+
+\begin_layout Plain Layout
+&= 
+\backslash
+mathbb{P}(Y=1
+\backslash
+mid X=1)
+\backslash
+mathbb{P}(Y=0
+\backslash
+mid X=1)
+\backslash
+mathbb{P}(X=1) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+quad + 
+\backslash
+mathbb{P}(Y=1
+\backslash
+mid X=0)
+\backslash
+mathbb{P}(Y=0
+\backslash
+mid X=0)
+\backslash
+mathbb{P}(X=0) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+quad + 
+\backslash
+mathbb{P}(Y=0
+\backslash
+mid X=1)
+\backslash
+mathbb{P}(Y=1
+\backslash
+mid X=1)
+\backslash
+mathbb{P}(X=1) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+quad + 
+\backslash
+mathbb{P}(Y=0
+\backslash
+mid X=0)
+\backslash
+mathbb{P}(Y=1
+\backslash
+mid X=0)
+\backslash
+mathbb{P}(X=0) 
+\backslash
+
+\backslash
+[0.5em]
+\end_layout
+
+\begin_layout Plain Layout
+&= 
+\backslash
+frac{1}{5}
+\backslash
+frac{4}{5}
+\backslash
+frac{1}{2}
+\end_layout
+
+\begin_layout Plain Layout
++ 0
+\backslash
+cdot 1
+\backslash
+cdot
+\backslash
+frac{1}{2}
+\end_layout
+
+\begin_layout Plain Layout
++ 
+\backslash
+frac{4}{5}
+\backslash
+frac{1}{5}
+\backslash
+frac{1}{2}
+\end_layout
+
+\begin_layout Plain Layout
++ 1
+\backslash
+cdot 0
+\backslash
+cdot
+\backslash
+frac{1}{2} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&= 
+\backslash
+frac{4}{25}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{align*}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So in this case the first hypothesis
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+h(x)=\arg\max_{\mathcal{C}_{k}}\mathbb{P}\left(Y=\mathcal{C}_{k}\mid X=x\right)=\begin{cases}
+0 & \text{, if }x=0\\
+0 & \text{, if }x=1
+\end{cases},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+is the optimal.
+\end_layout
+
+\begin_layout Subsection*
+Question 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+addcontentsline{toc}{subsection}{Question 3}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% Write your answer/proof here.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let the observed input be 
+\begin_inset Formula $X=x$
+\end_inset
+
+.
+ Then say 
+\begin_inset Formula $\mathbb{P}\left(h(x)=1\mid X=x\right)=\gamma_{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{P}\left(h(x)=0\mid X=x\right)=1-\gamma_{x}$
+\end_inset
+
+ then the expected loss is
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}\left[\ell(y,h(x))\mid X=x\right] & =\sum_{\hat{y}\in\{0,1\}}\sum_{y\in\{0,1\}}\mathbb{P}\left(Y=y,h(x)=\hat{y}\mid X=x\right)\ell(y,\hat{y})\\
+ & =\sum_{\hat{y}\in\{0,1\}}\sum_{y\in\{0,1\}}\mathbb{P}\left(Y=y\mid X=x\right)\mathbb{P}\left(h(x)=\hat{y}\mid X=x\right)\ell(y,\hat{y})\\
+\\ & =\mathbb{P}\left(Y=1\mid X=x\right)\mathbb{P}\left(h(0)=1\mid X=x\right)\ell(1,1)\\
+ & \,+\mathbb{P}\left(Y=1\mid X=x\right)\mathbb{P}\left(h(0)=0\mid X=x\right)\ell(1,0)\\
+ & \,+\mathbb{P}\left(Y=0\mid X=x\right)\mathbb{P}\left(h(0)=1\mid X=x\right)\ell(0,1)\\
+ & \,+\mathbb{P}\left(Y=0\mid X=x\right)\mathbb{P}\left(h(0)=0\mid X=x\right)\ell(0,0)\\
+\\ & =\mathbb{P}\left(Y=1\mid X=x\right)\mathbb{P}\left(h(0)=0\mid X=x\right)\\
+ & \,+\mathbb{P}\left(Y=0\mid X=x\right)\mathbb{P}\left(h(0)=1\mid X=x\right)\\
+\\ & =\gamma_{x}\mathbb{P}\left(Y=1\mid X=x\right)+(1-\gamma_{x})\mathbb{P}\left(Y=0\mid X=x\right),
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the first equal sign uses the fact that 
+\begin_inset Formula $Y$
+\end_inset
+
+ is independent of our hypothesis 
+\begin_inset Formula $h$
+\end_inset
+
+.
+ Using the above we calculate the risk
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}\left[\ell(y,h(x))\right] & =\mathbb{E}\left[\mathbb{E}\left[\ell(y,h(x))\mid X=x\right]\right]\\
+ & =\sum_{x\in\{0,1\}}\mathbb{P}\left(X=x\right)\mathbb{E}\left[\ell(y,h(x))\mid X=x\right]\\
+ & =\frac{1}{2}\left(\mathbb{E}\left[\ell(y,h(x))\mid X=0\right]\right)+\frac{1}{2}\left(\mathbb{E}\left[\ell(y,h(x))\mid X=1\right]\right)\\
+\\ & =\frac{1}{2}\left(\gamma_{0}\mathbb{P}\left(Y=1\mid X=0\right)+(1-\gamma_{0})\mathbb{P}\left(Y=0\mid X=0\right)\right)\\
+ & \,+\frac{1}{2}\left(\gamma_{1}\mathbb{P}\left(Y=1\mid X=1\right)+(1-\gamma_{1})\mathbb{P}\left(Y=0\mid X=1\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Because this is linear in the probabilities the answer is immediately apparent.
+ When minimizing w.r.t.
+ 
+\begin_inset Formula $\gamma_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{1}$
+\end_inset
+
+ the optimal strategy will deterministically choose the output that is most likely given 
+\series bold
+
+\begin_inset Formula $X=x$
+\end_inset
+
+
+\series default
+,
+ in most cases.
+ If the probabilities of 
+\begin_inset Formula $Y=0$
+\end_inset
+
+ and 
+\begin_inset Formula $Y=1$
+\end_inset
+
+ are equal then the weights 
+\begin_inset Formula $\gamma_{x}$
+\end_inset
+
+ does not matter.
+ Formally:
+\begin_inset Formula 
+\[
+\gamma^{*}_{x}=\mathbb{P}\left(h(x)=1\mid X=x\right)=\begin{cases}
+1 & \text{, if }\mathbb{P}\left(Y=1\mid X=x\right)>\mathbb{P}\left(Y=0\mid X=x\right)\\
+0 & \text{, if }\mathbb{P}\left(Y=1\mid X=x\right)<\mathbb{P}\left(Y=0\mid X=x\right)\\{}
+[0,1] & \text{, if }\mathbb{P}\left(Y=1\mid X=x\right)=\mathbb{P}\left(Y=0\mid X=x\right)
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Logistic Regression (50 points)
+\end_layout
+
+\begin_layout Subsection
+Cross-entropy error measure (16 points)
+\end_layout
+
+\begin_layout Subsubsection
+Rewriting negative logarithmic likelihood as cross-entropy
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+% Write your derivation here.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Firstly I rewrite 
+\begin_inset Formula $-\ln\left[\mathbb{P}\left(Y=y_{n}\mid X=\boldsymbol{x}_{n};\boldsymbol{w}\right)\right]$
+\end_inset
+
+ where I use the fact that the sample space of the outcome variable is 
+\begin_inset Formula $Y\in\{-1,1\}.$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+-\ln\left[\mathbb{P}\left(Y=y_{n}\mid X=\boldsymbol{x}_{n};\boldsymbol{w}\right)\right] & =\mathbb{I}_{(y_{n}=1)}\left\{ -\ln\left[\mathbb{P}\left(Y=1\mid X=\boldsymbol{x}_{n};\boldsymbol{w}\right)\right]\right\} \\
+ & \qquad\qquad\qquad+\mathbb{I}_{(y_{n}=-1)}\left\{ -\ln\left[\mathbb{P}\left(Y=-1\mid X=\boldsymbol{x}_{n};\boldsymbol{w}\right)\right]\right\} \\
+ & =\mathbb{I}_{(y_{n}=1)}\left\{ -\ln\left[\mathbb{P}\left(Y=1\mid X=\boldsymbol{x}_{n};\boldsymbol{w}\right)\right]\right\} \\
+ & \qquad\qquad\qquad+\mathbb{I}_{(y_{n}=-1)}\left\{ -\ln\left[1-\mathbb{P}\left(Y=1\mid X=\boldsymbol{x}_{n};\boldsymbol{w}\right)\right]\right\} \\
+ & =\mathbb{I}_{(y_{n}=1)}\left\{ -\ln\left[h(\boldsymbol{x}_{n})\right]\right\} +\mathbb{I}_{(y_{n}=-1)}\left\{ -\ln\left[1-h(\boldsymbol{x}_{n})\right]\right\} \\
+ & =\mathbb{I}_{(y_{n}=1)}\ln\left[\frac{1}{h(\boldsymbol{x}_{n})}\right]+\mathbb{I}_{(y_{n}=-1)}\ln\left[\frac{1}{1-h(\boldsymbol{x}_{n})}\right]
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbb{I}_{(\cdot)}$
+\end_inset
+
+ is the indicator function.
+ Inserting this into the general negative logarithmic likelihood function yields the wanted result:
+\family typewriter
+
+\begin_inset Formula 
+\begin{align*}
+\mathcal{L}(\boldsymbol{w}) & =-\frac{1}{N}\sum^{N}_{n=1}\ln\left[\mathbb{P}\left(Y=y_{n}\mid X=\boldsymbol{x}_{n};\boldsymbol{w}\right)\right]\\
+ & =\frac{1}{N}\sum^{N}_{n=1}-\ln\left[\mathbb{P}\left(Y=y_{n}\mid X=\boldsymbol{x}_{n};\boldsymbol{w}\right)\right]\\
+ & =\frac{1}{N}\sum^{N}_{n=1}\left[\mathbb{I}_{(y_{n}=1)}\ln\left[\frac{1}{h(\boldsymbol{x}_{n})}\right]+\mathbb{I}_{(y_{n}=-1)}\ln\left[\frac{1}{1-h(\boldsymbol{x}_{n})}\right]\right].
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Cross-entropy and logistic regression
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% Write your argument here.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+First we note the following property of the sigmoid function:
+\family typewriter
+
+\begin_inset Formula 
+\begin{align*}
+\theta(s) & =\frac{1}{1+\exp\left\{ -s\right\} }\implies\\
+1-\theta(s) & =\frac{\exp\left\{ -s\right\} }{1+\exp\left\{ -s\right\} }=\frac{1}{1+\exp\left\{ s\right\} }=\theta(-s).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using this and 
+\begin_inset Formula $y_{n}\in\{-1,1\}$
+\end_inset
+
+ we simply rewrite eq.
+ (1) from the assignment:
+\begin_inset Formula 
+\begin{align*}
+\mathcal{L}(\boldsymbol{w}) & =\frac{1}{N}\sum^{N}_{n=1}\ln\left[1+\exp\left\{ -y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}\right\} \right]\\
+ & =-\frac{1}{N}\sum^{N}_{n=1}\left[\mathbb{I}_{(y_{n}=1)}\left(1+\exp\left\{ -\boldsymbol{w}^{\top}\boldsymbol{x}\right\} \right)+\mathbb{I}_{(y_{n}=-1)}\left(1+\exp\left\{ \boldsymbol{w}^{\top}\boldsymbol{x}\right\} \right)\right]\\
+ & =\frac{1}{N}\sum^{N}_{n=1}\left[\mathbb{I}_{(y_{n}=1)}\ln\left[\frac{1}{h(\boldsymbol{x}_{n})}\right]+\mathbb{I}_{(y_{n}=-1)}\ln\left[\frac{1}{1-h(\boldsymbol{x}_{n})}\right]\right].
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Yielding the wanted result.
+\end_layout
+
+\begin_layout Subsection
+Logistic regression loss gradient (24 points)
+\end_layout
+
+\begin_layout Subsubsection
+Gradient for 
+\begin_inset Formula $-1$
+\end_inset
+
+ and 
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% Write your derivation here.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Firstly we define a useful function 
+\begin_inset Formula $l_{n}(\cdot)\equiv\ln\left(1+\exp\left\{ -y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n}\right\} \right)$
+\end_inset
+
+ as the likelihood contribution of observation 
+\begin_inset Formula $n$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\begin{align*}
+\mathcal{L}(\boldsymbol{w}) & =\frac{1}{N}\sum^{N}_{n=1}\ln\left(1+\exp\left\{ -y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n}\right\} \right)\\
+ & =\frac{1}{N}\sum^{N}_{n=1}l_{n}\left(\boldsymbol{w}\right),
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By the summation rule of differentiation we have
+\begin_inset Formula 
+\begin{equation}
+\nabla\mathcal{L}(\boldsymbol{w})=\frac{1}{N}\sum^{N}_{n=1}\nabla l_{n}(\boldsymbol{w}),\label{eq:gg}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and by calculating an arbitrary of these 
+\begin_inset Formula $N$
+\end_inset
+
+ terms yields
+\begin_inset Formula 
+\begin{align*}
+\nabla l_{n}(\boldsymbol{w}) & =\begin{bmatrix}\frac{\partial\mathcal{L}}{\partial w_{1}} & \frac{\partial\mathcal{L}}{\partial w_{2}} & \cdots & \frac{\partial\mathcal{L}}{\partial w_{d}}\end{bmatrix}^{\top}\\
+ & =\begin{bmatrix}\frac{1}{1+\exp\left\{ -y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n}\right\} }\exp\left\{ -y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n}\right\} (-y_{n}x_{n1})\\
+\frac{1}{1+\exp\left\{ -y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n}\right\} }\exp\left\{ -y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n}\right\} (-y_{n}x_{n2})\\
+\vdots\\
+\frac{1}{1+\exp\left\{ -y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n}\right\} }\exp\left\{ -y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n}\right\} (-y_{n}x_{nd})
+\end{bmatrix}\\
+ & =-y_{n}\frac{\exp\left\{ -y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n}\right\} }{1+\exp\left\{ -y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n}\right\} }\begin{bmatrix}x_{n1} & x_{n2} & \cdots & x_{nd}\end{bmatrix}^{\top}\\
+ & =-\frac{y_{n}\boldsymbol{x}_{n}}{1+\exp\left\{ y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n}\right\} },
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+which we insert into 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:gg}
+\end_layout
+
+\end_inset
+
+ to obtain the wanted result
+\begin_inset Formula 
+\begin{align*}
+\mathcal{L}(\boldsymbol{w}) & =-\frac{1}{N}\sum^{N}_{n=1}\frac{y_{n}\boldsymbol{x}_{n}}{1+\exp\left\{ y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n}\right\} }\\
+ & =\frac{1}{N}\sum^{N}_{n=1}-y_{n}\boldsymbol{x}_{n}\frac{1}{1+\exp\left\{ -(-y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n})\right\} }\\
+ & =\frac{1}{N}\sum^{N}_{n=1}-y_{n}\boldsymbol{x}_{n}\theta\left(-y_{n}\boldsymbol{w}^{\top}\boldsymbol{x}_{n}\right).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Gradient for 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% Write your derivation here.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The exact same procedure is completed for the new encoding of the probability function:
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left(Y=y_{n}\mid X=\boldsymbol{x}_{n}\right) & =\begin{cases}
+\theta(\boldsymbol{w}^{\top}\boldsymbol{x}) & \text{, if }y=1\\
+\theta(-\boldsymbol{w}^{\top}\boldsymbol{x}) & \text{, if }y=0
+\end{cases}\\
+ & =\left[\theta(\boldsymbol{w}^{\top}\boldsymbol{x})\right]^{y_{n}}\left[\theta(-\boldsymbol{w}^{\top}\boldsymbol{x})\right]^{1-y_{n}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That is,
+ we again setup the corresponding negative logarithmic likelihood function
+\begin_inset Formula 
+\begin{align*}
+\mathcal{L}(\boldsymbol{w}) & =-\frac{1}{N}\sum^{N}_{n=1}\ln\left[\mathbb{P}\left(Y=y_{n}\mid X=\boldsymbol{x}_{n};\boldsymbol{w}\right)\right]\\
+ & =-\frac{1}{N}\sum^{N}_{n=1}\left\{ \ln\left[\theta(\boldsymbol{w}^{\top}\boldsymbol{x})^{y_{n}}\theta(-\boldsymbol{w}^{\top}\boldsymbol{x})^{1-y_{n}}\right]\right\} \\
+ & =-\frac{1}{N}\sum^{N}_{n=1}\left\{ y_{n}\ln\left[\theta(\boldsymbol{w}^{\top}\boldsymbol{x})\right]+(1-y_{n})\ln\left[\theta(-\boldsymbol{w}^{\top}\boldsymbol{x})\right]\right\} ,
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and calculate the gradient
+\begin_inset Formula 
+\begin{align*}
+\nabla\mathcal{L}(\boldsymbol{w}) & =-\frac{1}{N}\sum^{N}_{n=1}\begin{bmatrix}y_{n}\frac{1}{1+\exp\left\{ -\boldsymbol{w}^{\top}\boldsymbol{x}\right\} }\exp\{-\boldsymbol{w}^{\top}\boldsymbol{x}\}(-x_{n1})+(1-y_{n})\frac{1}{1+\exp\left\{ \boldsymbol{w}^{\top}\boldsymbol{x}\right\} }\exp\{\boldsymbol{w}^{\top}\boldsymbol{x}\}x_{n1}\\
+y_{n}\frac{1}{1+\exp\left\{ -\boldsymbol{w}^{\top}\boldsymbol{x}\right\} }\exp\{-\boldsymbol{w}^{\top}\boldsymbol{x}\}(-x_{n2})+(1-y_{n})\frac{1}{1+\exp\left\{ \boldsymbol{w}^{\top}\boldsymbol{x}\right\} }\exp\{\boldsymbol{w}^{\top}\boldsymbol{x}\}x_{n2}\\
+\vdots\\
+y_{n}\frac{1}{1+\exp\left\{ -\boldsymbol{w}^{\top}\boldsymbol{x}\right\} }\exp\{-\boldsymbol{w}^{\top}\boldsymbol{x}\}(-x_{nd})+(1-y_{n})\frac{1}{1+\exp\left\{ \boldsymbol{w}^{\top}\boldsymbol{x}\right\} }\exp\{\boldsymbol{w}^{\top}\boldsymbol{x}\}x_{nd}
+\end{bmatrix}\\
+ & =-\frac{1}{N}\sum^{N}_{n=1}\left[\frac{1}{1+\exp\left\{ -\boldsymbol{w}^{\top}\boldsymbol{x}\right\} }\right]\begin{bmatrix}\left(-\exp\{-\boldsymbol{w}^{\top}\boldsymbol{x}\}y_{n}+(1-y_{n})\right)x_{n1}\\
+\left(-\exp\{-\boldsymbol{w}^{\top}\boldsymbol{x}\}y_{n}+(1-y_{n})\right)x_{n2}\\
+\vdots\\
+\left(-\exp\{-\boldsymbol{w}^{\top}\boldsymbol{x}\}y_{n}+(1-y_{n})\right)x_{nd}
+\end{bmatrix}\\
+ & =-\frac{1}{N}\sum^{N}_{n=1}\left[\frac{1}{1+\exp\left\{ -\boldsymbol{w}^{\top}\boldsymbol{x}\right\} }\right]\left(y_{n}(1-\exp\{-\boldsymbol{w}^{\top}\boldsymbol{x}\})+1\right)\boldsymbol{x}_{n}\\
+ & =-\frac{1}{N}\sum^{N}_{n=1}\left[y_{n}+\frac{1}{1+\exp\left\{ -\boldsymbol{w}^{\top}\boldsymbol{x}\right\} }\right]\boldsymbol{x}_{n}\\
+ & =-\frac{1}{N}\sum^{N}_{n=1}\left[y_{n}+\theta(\boldsymbol{w}^{\top}\boldsymbol{x})\right]\boldsymbol{x}_{n}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Done!
+\end_layout
+
+\begin_layout Subsubsection
+Influence of misclassified examples
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% Write your argument here.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Log-odds (10 points)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% Write your proof here.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By direct calculation we get
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{w}^{\top}\boldsymbol{x}+b & =\ln\left[\frac{\mathbb{P}\left(Y=1\mid X=x\right)}{\mathbb{P}\left(Y=0\mid X=x\right)}\right]\iff\\
+-(\boldsymbol{w}^{\top}\boldsymbol{x}+b) & =\ln\left[\frac{\mathbb{P}\left(Y=0\mid X=x\right)}{\mathbb{P}\left(Y=1\mid X=x\right)}\right]\iff\\
+\mathbb{P}\left(Y=1\mid X=x\right)\exp\left\{ -(\boldsymbol{w}^{\top}\boldsymbol{x}+b)\right\}  & =\mathbb{P}\left(Y=0\mid X=x\right)=\left(1-\mathbb{P}\left(Y=1\mid X=x\right)\right)\iff\\
+1 & =\mathbb{P}\left(Y=1\mid X=x\right)\left(1+\exp\left\{ -(\boldsymbol{w}^{\top}\boldsymbol{x}+b)\right\} \right)\iff\\
+\mathbb{P}\left(Y=1\mid X=x\right) & =\frac{1}{1+\exp\left\{ -(\boldsymbol{w}^{\top}\boldsymbol{x}+b)\right\} }=\sigma(\boldsymbol{w}^{\top}\boldsymbol{x}+b).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That is if 
+\begin_inset Formula $\boldsymbol{w}^{\top}\boldsymbol{x}+b$
+\end_inset
+
+ encodes the relative probability on log scale of observing 
+\begin_inset Formula $Y=1$
+\end_inset
+
+ relative to 
+\begin_inset Formula $Y=0$
+\end_inset
+
+ given 
+\begin_inset Formula $X=x$
+\end_inset
+
+,
+ then the sigmoid function describes the probability of observing 
+\begin_inset Formula $Y=1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Sleep Well (34 points)
+\end_layout
+
+\begin_layout Subsection
+Data understanding and preprocessing (4 points)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+% Deliverables:
+ description of software used;
+ frequency of classes.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I am using python 3 and the numpy package to calculate the shares of observations in each of the five labeling categories.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+For the rest of part 3 i will use sci-kit learn package for the implementation of the machine learning algorithms.
+\end_layout
+
+\end_inset
+
+ The result is displayed in tabel 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{tab:shares}
+\end_layout
+
+\end_inset
+
+.
+ Notably the labels 0 and 2 are much more prevalent in the data and we therefore need to admit for sufficiently complex classification models to partition the data appropriately.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+begin{table}[ht]
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+begin{tabular}{lc}
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+toprule
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+textbf{Category} & 
+\backslash
+textbf{Share} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+midrule
+\end_layout
+
+\begin_layout Plain Layout
+        0 & 0.521 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        1 & 0.096 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        2 & 0.253 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        3 & 0.047 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        4 & 0.084 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+bottomrule
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+end{tabular}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+caption{Category shares}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+label{tab:shares}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{flushleft}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+small
+\end_layout
+
+\begin_layout Plain Layout
+Note:
+ The table displays the shares of observations labeled as each category in the training data.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{flushleft}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Classification (30 points)
+\end_layout
+
+\begin_layout Subsubsection
+Logistic regression
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% Deliverables:
+ description of software used;
+ training and test errors;
+\end_layout
+
+\begin_layout Plain Layout
+% description of regularization and model selection process,
+ if used.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+from sklearn.linear_model import LogisticRegression
+\end_layout
+
+\begin_layout Standard
+from sklearn.model_selection import GridSearchCV
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+begin{table}[ht]
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+begin{tabular}{lc}
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+toprule
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+textbf{Sample type} & 
+\backslash
+textbf{Risk} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+midrule
+\end_layout
+
+\begin_layout Plain Layout
+        In Sample & 0.149 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        Out of Sample & 0.099 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+bottomrule
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+end{tabular}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+caption{Logistic regression empirical risk}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+label{tab:shares}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{flushleft}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+small
+\end_layout
+
+\begin_layout Plain Layout
+Note:
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{flushleft}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Random forest
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% Deliverables:
+ description of software used;
+ training and test errors;
+\end_layout
+
+\begin_layout Plain Layout
+% out-of-bag error;
+ description of regularization and model selection process,
+ if used.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+from sklearn.ensemble import RandomForestClassifier
+\end_layout
+
+\begin_layout Standard
+from sklearn.model_selection import GridSearchCV
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+begin{table}[ht]
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+begin{tabular}{lccc}
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+toprule
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+textbf{Sample type} & 
+\backslash
+textbf{Risk (50 trees)} & 
+\backslash
+textbf{Risk (100 trees)} & 
+\backslash
+textbf{Risk (200 trees)}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+midrule
+\end_layout
+
+\begin_layout Plain Layout
+        In Sample & 0.155 & 0.156 & 0.155
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+		OOB error & 0.157 & 0.158 & 0.157
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        Out of Sample & 0.097 & 0.097 & 0.098
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+bottomrule
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+end{tabular}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+caption{Random forest empirical risk}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+label{tab:shares}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{flushleft}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+small
+\end_layout
+
+\begin_layout Plain Layout
+Note:
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{flushleft}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Nearest neighbor
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% Deliverables:
+ description of software used;
+ training and test errors;
+\end_layout
+
+\begin_layout Plain Layout
+% description of regularization and model selection process,
+ if used.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+from sklearn.neighbors import KNeighborsClassifier
+\end_layout
+
+\begin_layout Standard
+from sklearn.model_selection import GridSearchCV
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+begin{table}[ht]
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+begin{tabular}{lc}
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+toprule
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+textbf{Sample type} & 
+\backslash
+textbf{Risk} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+midrule
+\end_layout
+
+\begin_layout Plain Layout
+        In Sample & 0.150 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        Out of Sample & 0.096 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+        
+\backslash
+bottomrule
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+end{tabular}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+caption{$K$-NN empirical risk}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+label{tab:shares}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{flushleft}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+small
+\end_layout
+
+\begin_layout Plain Layout
+Note:
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{flushleft}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
