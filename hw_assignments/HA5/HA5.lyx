@@ -305,15 +305,15 @@ Firstly we remember the definition of a confidence interval for
 \begin_inset Formula $\theta$
 \end_inset
 
- as the interval stochastic interval 
-\begin_inset Formula $CI$
+ as the function of the datapoints 
+\begin_inset Formula $CI(X_{1},X_{2},\cdots X_{n})$
 \end_inset
 
  fulfilling
 \begin_inset Formula 
-\[
-\mathbb{P}\left(\theta\in CI\right)\geq1-\alpha,
-\]
+\begin{equation}
+\mathbb{P}\left(\theta\in CI(X_{1},X_{2},\cdots X_{n})\right)\geq1-\alpha,\label{eq:confidence_definitions}
+\end{equation}
 
 \end_inset
 
@@ -361,7 +361,12 @@ False
 \end_layout
 
 \begin_layout Enumerate
-f
+
+\series bold
+False
+\series default
+:
+ 
 \end_layout
 
 \begin_layout Enumerate
@@ -369,10 +374,10 @@ f
 \series bold
 True
 \series default
-:
- 
+ (in the case of CI based on Hoeffding bound)
 \begin_inset Formula 
 \[
+P(X>a)<g\iff-P(X>a)>-g\iff1-
 \]
 
 \end_inset
@@ -380,40 +385,83 @@ True
 
 \begin_inset Formula 
 \[
-\mathbb{P}\left(\left|\sum^{n}_{i=1}X_{i}-\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\right|\geq\epsilon\right)\leq\exp\left\{ -\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}\right\} 
+\mathbb{P}\left(\left|\sum^{n}_{i=1}X_{i}-\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\right|\leq\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\left(\frac{\delta}{2}\right)}\right)\geq1-\delta.
 \]
 
 \end_inset
 
+Rewriting the event (by scaling with 
+\begin_inset Formula $1/n$
+\end_inset
 
+) we obtain the following
 \begin_inset Formula 
 \begin{align*}
-\delta=\exp\left\{ -\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}\right\} \\
-\epsilon=\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\delta}
+\left|\frac{1}{n}\sum^{n}_{i=1}X_{i}-\frac{1}{n}\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\right|=\left|\hat{\mu}_{n}-\mu\right| & \leq\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)}\iff\\
+-\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)}\leq & \hat{\mu}_{n}-\mu\leq\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)}\iff
 \end{align*}
 
 \end_inset
 
 
+\begin_inset Formula 
+\begin{equation}
+\hat{\mu}_{n}+\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)}\geq\mu\geq\hat{\mu}_{n}-\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)}\label{eq:CI_interval_hoeffding}
+\end{equation}
+
+\end_inset
+
+That is with at least 
+\begin_inset Formula $1-\delta$
+\end_inset
+
+ probability the 
+\emph on
+true
+\emph default
+ / 
+\emph on
+population
+\emph default
+ expected value 
+\begin_inset Formula $\mu$
+\end_inset
+
+ will fulfill 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:CI_interval_hoeffding}
 \end_layout
 
-\begin_layout Enumerate
-fff
-\end_layout
+\end_inset
 
-\begin_layout Enumerate
-
-\end_layout
-
-\begin_layout Standard
+,
+ which formally mean
 \begin_inset Formula 
 \[
-\left[\sum^{n}_{i=1}X_{i}-\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\delta},\;\sum^{n}_{i=1}X_{i}+\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\delta}\right]
+\mathbb{P}\left(\mu\in\left[\hat{\mu}_{n}-\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)},\quad\hat{\mu}_{n}+\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)}\right]\right)\geq1-\delta,
 \]
 
 \end_inset
 
+which is the definition of the confidence interval (see 
+\begin_inset ERT
+status open
 
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:confidence_definitions}
+\end_layout
+
+\end_inset
+
+).
+ From 
 \end_layout
 
 \begin_layout Subsection
