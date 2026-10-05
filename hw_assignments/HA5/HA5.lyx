@@ -1,0 +1,903 @@
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+
+
+\usepackage{a4wide}
+\usepackage{amsfonts}
+\usepackage{lipsum}
+
+
+% For including images
+\usepackage{xcolor}% For a colorfull presentation
+\usepackage{listings}% For presenting code 
+% To make subfirgures
+\usepackage{caption}
+\usepackage{subcaption}\usepackage{bbm}% for \mathbbm{}
+\newcommand{\1}{\mathbbm{1}} % to write the indicator function as \1
+% New command for author names
+\newcommand{\authorpoints}[2]{{\large \texttt{(#2 points)} \texttt{[#1]}}}
+
+% Definition of a style for code, matter of taste
+\lstdefinestyle{mystyle}{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color[HTML]{F7F7F7},
+  rulecolor=\color[HTML]{EEEEEE},
+  identifierstyle=\color[HTML]{24292E},
+  emphstyle=\color[HTML]{005CC5},
+  keywordstyle=\color[HTML]{D73A49},
+  commentstyle=\color[HTML]{6A737D},
+  stringstyle=\color[HTML]{032F62},
+  emph={@property,self,range,True,False},
+  morekeywords={super,with,as,lambda},
+  literate=%
+    {+}{{{\color[HTML]{D73A49}+}}}1
+    {-}{{{\color[HTML]{D73A49}-}}}1
+    {*}{{{\color[HTML]{D73A49}*}}}1
+    {/}{{{\color[HTML]{D73A49}/}}}1
+    {=}{{{\color[HTML]{D73A49}=}}}1
+    {/=}{{{\color[HTML]{D73A49}=}}}1,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=4,
+  frame=single,
+}
+\lstset{style=mystyle}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children no
+\language english
+\language_package none
+\inputencoding utf8
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_bookmarks false
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle false
+\papersize a4
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\crossref_package prettyref
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Machine Learning A (2026)
+\begin_inset Newline newline
+\end_inset
+
+Home Assignment 5
+\end_layout
+
+\begin_layout Author
+Casper Moes (hwd362)
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+On the Role of Dependence 
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $X_{i}\in\{0,1\}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $i\in\{1,2,\dots,n\}$
+\end_inset
+
+ be 
+\emph on
+completely 
+\emph default
+dependent stochastic variables,
+ by which i mean 
+\begin_inset Formula 
+\[
+\mathbb{P}\left(X_{1}=X_{2}=\cdots=X_{n}\right)=1,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+which implies that 
+\begin_inset Formula 
+\[
+\frac{1}{n}\sum^{n}_{i=1}X_{i}=\frac{1}{n}\sum^{n}_{i=1}X_{1}=X_{1}\in\{0,1\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let the 
+\emph on
+bias
+\emph default
+ or 
+\emph on
+succes probability
+\emph default
+ of the all the bernoulli random variables be 
+\begin_inset Formula $p=\frac{1}{2}$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $\mathbb{P}\left(X_{i}=1\right)=\mathbb{P}\left(X_{i}=0\right)=\frac{1}{2}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+).
+ Then calculating the expected value of 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ (or any 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+) yields 
+\begin_inset Formula 
+\[
+\mu\equiv\mathbb{E}\left[X_{1}\right]=\mathbb{P}\left(X_{1}=1\right)=\frac{1}{2},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and thus we know that 
+\begin_inset Formula $\left|\mu-\frac{1}{n}\sum^{n}_{i=1}X_{i}\right|\mid\in\left\{ \frac{1}{2},\frac{1}{2}\right\} $
+\end_inset
+
+ and can complete the argument:
+ 
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\left|\mu-\frac{1}{n}\sum^{n}_{i=1}X_{i}\right|\right)=\mathbb{P}\left(\left|\frac{1}{2}-X_{1}\right|\right)=\frac{1}{2}\geq\frac{1}{2}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+On Confidence Intervals
+\end_layout
+
+\begin_layout Subsection
+Part 1
+\end_layout
+
+\begin_layout Standard
+Firstly we remember the definition of a confidence interval for 
+\begin_inset Formula $\theta$
+\end_inset
+
+ as the interval stochastic interval 
+\begin_inset Formula $CI$
+\end_inset
+
+ fulfilling
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\theta\in CI\right)\geq1-\alpha,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is the significance level.
+ With 
+\begin_inset Formula $\alpha=0.02$
+\end_inset
+
+ we get the 
+\begin_inset Formula $98\%-CI$
+\end_inset
+
+ that the assignment revolves around.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+False
+\series default
+:
+ The confidence does not generally try to encompass the observed variables by some margin (this is also the explanation for question 2).
+ It rather uses some bound (for example Hoeffdings bound) to say that with some probability 
+\begin_inset Formula $\delta=1-\alpha$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+False
+\series default
+:
+ See 1.
+\end_layout
+
+\begin_layout Enumerate
+f
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+True
+\series default
+:
+ 
+\begin_inset Formula 
+\[
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\left|\sum^{n}_{i=1}X_{i}-\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\right|\geq\epsilon\right)\leq\exp\left\{ -\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}\right\} 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\delta=\exp\left\{ -\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}\right\} \\
+\epsilon=\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\delta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+fff
+\end_layout
+
+\begin_layout Enumerate
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[\sum^{n}_{i=1}X_{i}-\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\delta},\;\sum^{n}_{i=1}X_{i}+\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\delta}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Part 2
+\end_layout
+
+\begin_layout Section
+Loss Range Correction in Generalization Bounds
+\end_layout
+
+\begin_layout Subsection
+(i)
+\end_layout
+
+\begin_layout Subsection
+(ii)
+\end_layout
+
+\begin_layout Section
+Convolutional Neural Networks
+\end_layout
+
+\begin_layout Subsection
+Sobel filter
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+label{sec:sobel_filter}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Firstly we note that the Sobel filter / kernel is 
+\begin_inset Formula $3\times3$
+\end_inset
+
+.
+ Therefore,
+ to preserve the dimensions of the input space through to the feature space,
+ we pad the entire picture so that the padded input is an array with dimension 
+\begin_inset Formula $(480+2\times640+2)$
+\end_inset
+
+ where the original input has dimension 
+\begin_inset Formula $480\times640$
+\end_inset
+
+.
+ Here 0-padding is used.
+\end_layout
+
+\begin_layout Standard
+The Sobel filter contains two steps.
+ Firstly the following two convolutions are applied with stride 
+\begin_inset Formula $1$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{G}_{x}=\begin{bmatrix}1 & 0 & -1\\
+2 & 0 & -2\\
+1 & 0 & -1
+\end{bmatrix}*\mathbf{I}\qquad\mathcal{G}_{y}=\begin{bmatrix}1 & 2 & 1\\
+0 & 0 & 0\\
+-1 & -2 & -1
+\end{bmatrix}*\mathbf{I},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{I}$
+\end_inset
+
+ is the input image.
+ I implement this in python using PyTorch as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+# 
+\begin_inset Quotes eld
+\end_inset
+
+vertical
+\begin_inset Quotes erd
+\end_inset
+
+ kernel
+\end_layout
+
+\begin_layout Plain Layout
+v = torch.tensor([[[[1.,
+ 0.,
+ -1.],
+\end_layout
+
+\begin_layout Plain Layout
+                    [2.,
+ 0.,
+ -2.],
+\end_layout
+
+\begin_layout Plain Layout
+                    [1.,
+ 0.,
+ -1.]]]])
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+# 
+\begin_inset Quotes eld
+\end_inset
+
+horizontal
+\begin_inset Quotes erd
+\end_inset
+
+ kernel
+\end_layout
+
+\begin_layout Plain Layout
+h = torch.tensor([[[[ 1.,
+  2.,
+  1.],
+\end_layout
+
+\begin_layout Plain Layout
+                    [ 0.,
+  0.,
+  0.],
+\end_layout
+
+\begin_layout Plain Layout
+                    [-1.,
+ -2.,
+ -1.]]]])
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+# compute the first convolution step of the Sobel filter
+\end_layout
+
+\begin_layout Plain Layout
+conv_v        = nn.Conv2d(1,
+ 1,
+ kernel_size=3,
+ padding=(1,1),
+ bias=False)
+\end_layout
+
+\begin_layout Plain Layout
+conv_v.weight = nn.Parameter(v,
+ requires_grad=False)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+conv_h        = nn.Conv2d(1,
+ 1,
+ kernel_size=3,
+ padding=(1,1),
+ bias=False)
+\end_layout
+
+\begin_layout Plain Layout
+conv_h.weight = nn.Parameter(h,
+ requires_grad=False)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+G_x = conv_v(x)
+\end_layout
+
+\begin_layout Plain Layout
+G_y = conv_h(x)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The stored intermediary feature maps are shown in figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:feature_maps}
+\end_layout
+
+\end_inset
+
+ where their purpose it clearly visible.
+ 
+\begin_inset Formula $\mathcal{G}_{x}$
+\end_inset
+
+ highlights the horizontal edges in 
+\begin_inset Formula $\mathbf{I}$
+\end_inset
+
+and 
+\begin_inset Formula $\mathcal{G}_{y}$
+\end_inset
+
+ the vertical.
+ We combine the two mappings into the Sobel filter
+\begin_inset Formula 
+\[
+\mathcal{G}=\begin{bmatrix}\sqrt{\left[\mathcal{G}_{y}\right]^{2}_{1\,1}+\left[\mathcal{G}_{y}\right]^{2}_{1\,1}} & \sqrt{\left[\mathcal{G}_{y}\right]^{2}_{1\,2}+\left[\mathcal{G}_{y}\right]^{2}_{1\,2}} & \cdots & \sqrt{\left[\mathcal{G}_{y}\right]^{2}_{1\,642}+\left[\mathcal{G}_{y}\right]^{2}_{1\,642}}\\
+\sqrt{\left[\mathcal{G}_{y}\right]^{2}_{2\,1}+\left[\mathcal{G}_{y}\right]^{2}_{2\,1}} & \sqrt{\left[\mathcal{G}_{y}\right]^{2}_{2\,2}+\left[\mathcal{G}_{y}\right]^{2}_{2\,2}} & \cdots & \sqrt{\left[\mathcal{G}_{y}\right]^{2}_{2\,642}+\left[\mathcal{G}_{y}\right]^{2}_{2\,642}}\\
+\vdots & \vdots & \ddots & \vdots\\
+\sqrt{\left[\mathcal{G}_{y}\right]^{2}_{482\,1}+\left[\mathcal{G}_{y}\right]^{2}_{482\,1}} & \sqrt{\left[\mathcal{G}_{y}\right]^{2}_{482\,2}+\left[\mathcal{G}_{y}\right]^{2}_{482\,2}} & \cdots & \sqrt{\left[\mathcal{G}_{y}\right]^{2}_{482\,642}+\left[\mathcal{G}_{y}\right]^{2}_{482\,642}}
+\end{bmatrix},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+which i implement i Python like this
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+# calculate the Sobel filter
+\end_layout
+
+\begin_layout Plain Layout
+G   = torch.sqrt(G_x**2 + G_y**2)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The resulting feature map is the right most plot in figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:feature_maps}
+\end_layout
+
+\end_inset
+
+ and is very intuitive:
+ It is simply the combined horizontal and vertical filters with positive output-values due to squaring.
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename output/sobelfilter.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Sobel filter with intermediary steps
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+hspace{10pt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Note:
+ The figure plots the Sobel filter and the intermediary steps as explained in section 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{sec:sobel_filter}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:feature_maps"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Convolutional neural networks 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+class Net(nn.Module):
+\end_layout
+
+\begin_layout Plain Layout
+    def __init__(self):
+\end_layout
+
+\begin_layout Plain Layout
+        super().__init__()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+        self.conv1 = nn.Conv2d(3,
+ 64,
+ kernel_size=5)
+\end_layout
+
+\begin_layout Plain Layout
+        self.pool1 = nn.MaxPool2d(2)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+        self.conv2 = nn.Conv2d(64,
+ 64,
+ kernel_size=5)
+\end_layout
+
+\begin_layout Plain Layout
+        self.pool2 = nn.MaxPool2d(2)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+        self.fc2 = nn.Linear(1024,
+ 43)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    def forward(self,
+ x):
+\end_layout
+
+\begin_layout Plain Layout
+        x = self.pool1(F.elu(self.conv1(x)))
+\end_layout
+
+\begin_layout Plain Layout
+        x = self.pool2(F.elu(self.conv2(x)))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+        x = x.flatten(1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+        x = self.fc2(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+        return x
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Augmentation
+\end_layout
+
+\end_body
+\end_document
