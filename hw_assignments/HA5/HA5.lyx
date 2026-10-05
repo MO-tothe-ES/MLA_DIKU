@@ -284,7 +284,7 @@ and thus we know that
  
 \begin_inset Formula 
 \[
-\mathbb{P}\left(\left|\mu-\frac{1}{n}\sum^{n}_{i=1}X_{i}\right|\right)=\mathbb{P}\left(\left|\frac{1}{2}-X_{1}\right|\right)=\frac{1}{2}\geq\frac{1}{2}.
+\left|\mu-\frac{1}{n}\sum^{n}_{i=1}X_{i}\right|=\left|\frac{1}{2}-X_{1}\right|=\frac{1}{2}\geq\frac{1}{2}\implies\mathbb{P}\left(\left|\mu-\frac{1}{n}\sum^{n}_{i=1}X_{i}\right|\geq\frac{1}{2}\right)=1
 \]
 
 \end_inset
@@ -352,11 +352,8 @@ False
 \series default
 :
  The confidence does not generally try to encompass the observed variables by some margin (this is also the explanation for question 2).
- It rather uses some bound (for example Hoeffdings bound) to say that with some probability 
-\begin_inset Formula $\delta=1-\alpha$
-\end_inset
-
- 
+ The confidence interval here concerns coverage of the population mean across repeated samples;
+ it does not specify the fraction of observations inside the interval.
 \end_layout
 
 \begin_layout Standard
@@ -445,7 +442,7 @@ This is shown by choosing rewriting the parameters and taking the complement of 
 \begin_inset Formula 
 \begin{align*}
 \left|\frac{1}{n}\sum^{n}_{i=1}X_{i}-\frac{1}{n}\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\right|=\left|\hat{\mu}_{n}-\mu\right| & \leq\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)}\iff\\
--\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\left(\frac{2}{\delta}\right)}\leq & \hat{\mu}_{n}-\mu\leq\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\left(\frac{2}{\delta}\right)}\iff
+-\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{2}{\delta}\right)}\leq & \hat{\mu}_{n}-\mu\leq\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{2}{\delta}\right)}\iff
 \end{align*}
 
 \end_inset
@@ -453,7 +450,7 @@ This is shown by choosing rewriting the parameters and taking the complement of 
 
 \begin_inset Formula 
 \begin{equation}
-\hat{\mu}_{n}+\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\left(\frac{2}{\delta}\right)}\geq\mu\geq\hat{\mu}_{n}-\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\left(\frac{2}{\delta}\right)}\label{eq:CI_interval_hoeffding}
+\hat{\mu}_{n}+\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{2}{\delta}\right)}\geq\mu\geq\hat{\mu}_{n}-\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{2}{\delta}\right)}\label{eq:CI_interval_hoeffding}
 \end{equation}
 
 \end_inset
@@ -598,7 +595,7 @@ Part 2
 
 \begin_layout Standard
 The requested interval is 
-\begin_inset Formula $[0.24,0.44]$
+\begin_inset Formula $[0.23,0.44]$
 \end_inset
 
  since 
@@ -1175,15 +1172,30 @@ h = torch.tensor([[[[ 1.,
 \end_layout
 
 \begin_layout Plain Layout
-conv_v        = nn.Conv2d(1,
- 1,
+kernels = torch.cat([v,
+ h],
+ dim=0)
+\end_layout
+
+\begin_layout Plain Layout
+kernels = kernels.flip(dims=(-2,
+ -1))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+conv = nn.Conv2d(1,
+ 2,
  kernel_size=3,
- padding=(1,1),
+ padding=1,
  bias=False)
 \end_layout
 
 \begin_layout Plain Layout
-conv_v.weight = nn.Parameter(v,
+conv.weight = nn.Parameter(kernels,
  requires_grad=False)
 \end_layout
 
@@ -1192,28 +1204,17 @@ conv_v.weight = nn.Parameter(v,
 \end_layout
 
 \begin_layout Plain Layout
-conv_h        = nn.Conv2d(1,
- 1,
- kernel_size=3,
- padding=(1,1),
- bias=False)
+maps = conv(x)
 \end_layout
 
 \begin_layout Plain Layout
-conv_h.weight = nn.Parameter(h,
- requires_grad=False)
+G_x = maps[:,
+ 0:1]
 \end_layout
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-G_x = conv_v(x)
-\end_layout
-
-\begin_layout Plain Layout
-G_y = conv_h(x)
+G_y = maps[:,
+ 1:2]
 \end_layout
 
 \end_inset
@@ -1251,10 +1252,10 @@ and
  We combine the two mappings into the Sobel filter
 \begin_inset Formula 
 \[
-\mathcal{G}=\begin{bmatrix}\sqrt{\left[\mathcal{G}_{y}\right]^{2}_{1\,1}+\left[\mathcal{G}_{y}\right]^{2}_{1\,1}} & \sqrt{\left[\mathcal{G}_{y}\right]^{2}_{1\,2}+\left[\mathcal{G}_{y}\right]^{2}_{1\,2}} & \cdots & \sqrt{\left[\mathcal{G}_{y}\right]^{2}_{1\,642}+\left[\mathcal{G}_{y}\right]^{2}_{1\,642}}\\
-\sqrt{\left[\mathcal{G}_{y}\right]^{2}_{2\,1}+\left[\mathcal{G}_{y}\right]^{2}_{2\,1}} & \sqrt{\left[\mathcal{G}_{y}\right]^{2}_{2\,2}+\left[\mathcal{G}_{y}\right]^{2}_{2\,2}} & \cdots & \sqrt{\left[\mathcal{G}_{y}\right]^{2}_{2\,642}+\left[\mathcal{G}_{y}\right]^{2}_{2\,642}}\\
+\mathcal{G}=\begin{bmatrix}\sqrt{\left[\mathcal{G}_{x}\right]^{2}_{1\,1}+\left[\mathcal{G}_{y}\right]^{2}_{1\,1}} & \sqrt{\left[\mathcal{G}_{x}\right]^{2}_{1\,2}+\left[\mathcal{G}_{y}\right]^{2}_{1\,2}} & \cdots & \sqrt{\left[\mathcal{G}_{x}\right]^{2}_{1\,640}+\left[\mathcal{G}_{y}\right]^{2}_{1\,640}}\\
+\sqrt{\left[\mathcal{G}_{x}\right]^{2}_{2\,1}+\left[\mathcal{G}_{y}\right]^{2}_{2\,1}} & \sqrt{\left[\mathcal{G}_{x}\right]^{2}_{2\,2}+\left[\mathcal{G}_{y}\right]^{2}_{2\,2}} & \cdots & \sqrt{\left[\mathcal{G}_{x}\right]^{2}_{2\,640}+\left[\mathcal{G}_{y}\right]^{2}_{2\,640}}\\
 \vdots & \vdots & \ddots & \vdots\\
-\sqrt{\left[\mathcal{G}_{y}\right]^{2}_{482\,1}+\left[\mathcal{G}_{y}\right]^{2}_{482\,1}} & \sqrt{\left[\mathcal{G}_{y}\right]^{2}_{482\,2}+\left[\mathcal{G}_{y}\right]^{2}_{482\,2}} & \cdots & \sqrt{\left[\mathcal{G}_{y}\right]^{2}_{482\,642}+\left[\mathcal{G}_{y}\right]^{2}_{482\,642}}
+\sqrt{\left[\mathcal{G}_{x}\right]^{2}_{480\,1}+\left[\mathcal{G}_{y}\right]^{2}_{480\,1}} & \sqrt{\left[\mathcal{G}_{x}\right]^{2}_{480\,2}+\left[\mathcal{G}_{y}\right]^{2}_{480\,2}} & \cdots & \sqrt{\left[\mathcal{G}_{x}\right]^{2}_{480\,640}+\left[\mathcal{G}_{y}\right]^{2}_{480\,640}}
 \end{bmatrix},
 \]
 
@@ -1315,7 +1316,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename output/sobelfilter.png
-	scale 50
+	scale 52
 
 \end_inset
 
@@ -1381,6 +1382,47 @@ name "fig:feature_maps"
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+PyTorch's 
+\backslash
+texttt{nn.Conv2d} computes cross-correlation,
+ whereas convolution rotates the kernel by 
+\backslash
+(180^
+\backslash
+circ
+\backslash
+).
+ I use the Sobel kernels without rotating them,
+ which reverses the signs of 
+\backslash
+(G_x
+\backslash
+) and 
+\backslash
+(G_y
+\backslash
+) compared with convolution.
+ However,
+ this does not affect the final result 
+\backslash
+(G=
+\backslash
+sqrt{G_x^2+G_y^2}
+\backslash
+),
+ since both feature maps are squared.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Convolutional neural networks 
 \end_layout
@@ -1434,7 +1476,7 @@ texttt{foward}
 
 \end_inset
 
- method of the class defines this flow:
+ method of the class defines the sequence of operations:
 \end_layout
 
 \begin_layout Standard
@@ -1535,6 +1577,45 @@ class Net(nn.Module):
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The parameters of the network are estimated by minimizing the cross-entropy loss on the training data.
+ For each image,
+ the network produces 43 output scores,
+ or logits,
+ (
+\begin_inset Formula $s_{1},\ldots,s_{43}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+I train the network for 200 epochs using mini-batches of 128 observations.
+ The training observations are shuffled at the beginning of each epoch.
+ For each mini-batch,
+ I first perform a forward pass through the network and compute the cross-entropy loss.
+ PyTorch then uses backpropagation to calculate the gradient of the loss with respect to every trainable parameter in the network,
+ including the convolutional kernels,
+ convolutional biases,
+ and parameters of the fully connected layer.
+ These parameters are subsequently updated using the Adam optimizer with a learning rate of (0.001).
+ This procedure is repeated for every mini-batch and for all 200 epochs.
+\end_layout
+
+\begin_layout Standard
+After training,
+ I evaluate the network on the separate test set containing 12,630 images.
+ For each test image,
+ the predicted class is the class corresponding to the largest of the 43 output scores.
+ The network correctly classifies 11,905 of the 12,630 test images,
+ giving a test accuracy of 
+\begin_inset Formula $94.26\%$
+\end_inset
+
+ Since the test observations are not used to train the network parameters,
+ this accuracy is an unbiased estimate of how well the fitted model generalizes.
 \end_layout
 
 \begin_layout Subsection
