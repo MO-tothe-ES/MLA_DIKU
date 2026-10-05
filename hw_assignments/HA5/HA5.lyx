@@ -337,8 +337,16 @@ where
  that the assignment revolves around.
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
+\begin_inset Formula $\;$
+\end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+1.
+ 
 \series bold
 False
 \series default
@@ -351,8 +359,16 @@ False
  
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
+\begin_inset Formula $\;$
+\end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+2.
+ 
 \series bold
 False
 \series default
@@ -360,37 +376,68 @@ False
  See 1.
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
+\begin_inset Formula $\;$
+\end_inset
 
-\series bold
-False
-\series default
-:
- 
+
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
+3.
 
 \series bold
-True
+ False
 \series default
- (in the case of CI based on Hoeffding bound)
+:
+ By the definition of a confidence interval (i.e.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:confidence_definitions}
+\end_layout
+
+\end_inset
+
+) 
+\begin_inset Formula $CI$
+\end_inset
+
+ is a stochastic variable that depending on the realisation of 
+\begin_inset Formula $X_{1},X_{2},\dots,X_{n}$
+\end_inset
+
+ and thus is generally not the same between two different draws of data.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\;$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+
+\series bold
+ True
+\series default
+ (in the case of CI based on Hoeffding bound):
+ By the double sided Hoeffding bound we have
 \begin_inset Formula 
 \[
-P(X>a)<g\iff-P(X>a)>-g\iff1-
+\mathbb{P}\left(\left|\sum^{n}_{i=1}X_{i}-\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\right|\leq\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\left(\frac{2}{\delta}\right)}\right)\geq1-\delta.
 \]
 
 \end_inset
 
-
-\begin_inset Formula 
-\[
-\mathbb{P}\left(\left|\sum^{n}_{i=1}X_{i}-\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\right|\leq\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\left(\frac{\delta}{2}\right)}\right)\geq1-\delta.
-\]
-
-\end_inset
-
-Rewriting the event (by scaling with 
+This is shown by choosing rewriting the parameters and taking the complement of the original event.
+ Rewriting the event (by scaling with 
 \begin_inset Formula $1/n$
 \end_inset
 
@@ -398,7 +445,7 @@ Rewriting the event (by scaling with
 \begin_inset Formula 
 \begin{align*}
 \left|\frac{1}{n}\sum^{n}_{i=1}X_{i}-\frac{1}{n}\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\right|=\left|\hat{\mu}_{n}-\mu\right| & \leq\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)}\iff\\
--\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)}\leq & \hat{\mu}_{n}-\mu\leq\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)}\iff
+-\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\left(\frac{2}{\delta}\right)}\leq & \hat{\mu}_{n}-\mu\leq\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\left(\frac{2}{\delta}\right)}\iff
 \end{align*}
 
 \end_inset
@@ -406,7 +453,7 @@ Rewriting the event (by scaling with
 
 \begin_inset Formula 
 \begin{equation}
-\hat{\mu}_{n}+\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)}\geq\mu\geq\hat{\mu}_{n}-\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)}\label{eq:CI_interval_hoeffding}
+\hat{\mu}_{n}+\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\left(\frac{2}{\delta}\right)}\geq\mu\geq\hat{\mu}_{n}-\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2}\ln\left(\frac{2}{\delta}\right)}\label{eq:CI_interval_hoeffding}
 \end{equation}
 
 \end_inset
@@ -442,9 +489,9 @@ eqref{eq:CI_interval_hoeffding}
 ,
  which formally mean
 \begin_inset Formula 
-\[
-\mathbb{P}\left(\mu\in\left[\hat{\mu}_{n}-\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)},\quad\hat{\mu}_{n}+\sqrt{-\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{\delta}{2}\right)}\right]\right)\geq1-\delta,
-\]
+\begin{equation}
+\mathbb{P}\left(\mu\in\left[\hat{\mu}_{n}-\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{2}{\delta}\right)},\quad\hat{\mu}_{n}+\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{2}{\delta}\right)}\right]\right)\geq1-\delta,\label{eq:hoeff_CI}
+\end{equation}
 
 \end_inset
 
@@ -462,10 +509,331 @@ eqref{eq:confidence_definitions}
 
 ).
  From 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:hoeff_CI}
+\end_layout
+
+\end_inset
+
+ we see that decreasing 
+\begin_inset Formula $\delta\in[0,1]$
+\end_inset
+
+ (for example from 
+\begin_inset Formula $0.02$
+\end_inset
+
+ to 
+\begin_inset Formula $0.01$
+\end_inset
+
+) implies a larger confidence interval,
+ since 
+\begin_inset Formula 
+\[
+\frac{d}{d\delta}\left(\ln\left(\frac{1}{\delta}\right)\right)=\frac{d}{d\delta}\left(-\ln\delta\right)=-\frac{1}{\delta}<0,
+\]
+
+\end_inset
+
+and thus decreasing 
+\begin_inset Formula $\delta$
+\end_inset
+
+ has a positive effect on 
+\begin_inset Formula $\ln\left(2/\delta\right)$
+\end_inset
+
+ and thus 
+\begin_inset Formula $\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{2}{\delta}\right)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+However in general we could define some weird confidence interval procedure that fulfills 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:confidence_definitions}
+\end_layout
+
+\end_inset
+
+ by setting 
+\begin_inset Formula $I=(-\infty,\infty)$
+\end_inset
+
+ for 
+\begin_inset Formula $\delta>0.01$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+and 
+\begin_inset Formula $I=\left[\hat{\mu}_{n}-\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{2}{\delta}\right)},\quad\hat{\mu}_{n}+\sqrt{\frac{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}{2n^{2}}\ln\left(\frac{2}{\delta}\right)}\right]$
+\end_inset
+
+ for 
+\begin_inset Formula $\delta\in[0,0.01]$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
 Part 2
+\end_layout
+
+\begin_layout Standard
+The requested interval is 
+\begin_inset Formula $[0.24,0.44]$
+\end_inset
+
+ since 
+\begin_inset Formula $[0.237,0.439]\subseteq[0.23,0.44]$
+\end_inset
+
+ and therefore we have 
+\begin_inset Formula 
+\[
+\{\mu\in[0.237,0.439]\}\subseteq\{\mu\in[0.23,0.44]\}\implies\mathbb{P}\left(\mu\in[0.23,0.44]\right)\geq\mathbb{P}\left(\mu\in[0.237,0.439]\right),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+so the original confidence guarantee is preserved.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+In contrast,
+ ordinary rounding would give
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+(
+\end_layout
+
+\begin_layout Plain Layout
+[0.24,
+\backslash
+,0.44].
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+)
+\end_layout
+
+\begin_layout Plain Layout
+However,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+(
+\end_layout
+
+\begin_layout Plain Layout
+[0.237,
+\backslash
+,0.439]
+\backslash
+nsubseteq[0.24,
+\backslash
+,0.44],
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+)
+\end_layout
+
+\begin_layout Plain Layout
+since the values in
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+(
+\end_layout
+
+\begin_layout Plain Layout
+[0.237,
+\backslash
+,0.24)
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+)
+\end_layout
+
+\begin_layout Plain Layout
+are excluded.
+ Hence,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+(
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+{
+\backslash
+mu
+\backslash
+in[0.237,
+\backslash
+,0.439]
+\backslash
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+nsubseteq
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+{
+\backslash
+mu
+\backslash
+in[0.24,
+\backslash
+,0.44]
+\backslash
+},
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+)
+\end_layout
+
+\begin_layout Plain Layout
+and we therefore cannot guarantee that
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbb{P}
+\backslash
+!
+\backslash
+left(
+\backslash
+mu
+\backslash
+in[0.24,
+\backslash
+,0.44]
+\backslash
+right)
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+geq
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbb{P}
+\backslash
+!
+\backslash
+left(
+\backslash
+mu
+\backslash
+in[0.237,
+\backslash
+,0.439]
+\backslash
+right).
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Thus,
+ 
+\backslash
+([0.23,
+\backslash
+,0.44]
+\backslash
+) is the tightest interval with endpoints reported
+\end_layout
+
+\begin_layout Plain Layout
+to two decimal places for which the original confidence guarantee is
+\end_layout
+
+\begin_layout Plain Layout
+certainly preserved.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -476,8 +844,182 @@ Loss Range Correction in Generalization Bounds
 (i)
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+No.
+ The reported bound is based on the assumption that the loss is bounded in $[0,1]$.
+ Hoeffding's inequality depends on the width of the range,
+ $b-a$.
+ The assumed width was therefore $1$,
+ whereas the correct width is
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+1.44-0.18=1.26.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Since the true range is wider,
+ the Hoeffding bound used to obtain $L(h)
+\backslash
+leq0.38$ does not provide the claimed $95
+\backslash
+%$ guarantee.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 (ii)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+Yes.
+ For losses bounded in $[a,b]$,
+ the one-sided Hoeffding bound gives,
+ with probability at least $1-
+\backslash
+delta$,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+L(h)
+\backslash
+leq
+\backslash
+widehat{L}_{S}(h)+(b-a)
+\backslash
+sqrt{
+\backslash
+frac{
+\backslash
+ln(1/
+\backslash
+delta)}{2n}}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+The original bound used $b-a=1$,
+ $n=1000$ and $
+\backslash
+delta=0.05$,
+ so
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+0.38=
+\backslash
+widehat{L}_{S}(h)+
+\backslash
+sqrt{
+\backslash
+frac{
+\backslash
+ln(20)}{2000}}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Hence we can correct the bound without observing $S$ again.
+ Using the correct range width $1.26$ gives
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+L(h)
+\backslash
+leq
+\backslash
+widehat{L}_{S}(h)+1.26
+\backslash
+sqrt{
+\backslash
+frac{
+\backslash
+ln(20)}{2000}}
+\end_layout
+
+\begin_layout Plain Layout
+=0.38+0.26
+\backslash
+sqrt{
+\backslash
+frac{
+\backslash
+ln(20)}{2000}}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+approx0.390.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Thus the corrected generalization bound is $L(h)
+\backslash
+leq0.390$ with probability at least $0.95$.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -844,6 +1386,58 @@ Convolutional neural networks
 \end_layout
 
 \begin_layout Standard
+I define the model class as using PyTorch as the assignemnt reccomends.
+ I define the two convolutional layers:
+ the first takes 3 inputlayers (i.e.
+ the RBG values of the pictures) and outputs 64 feature maps.
+ The kernel is 
+\begin_inset Formula $5\times5$
+\end_inset
+
+ so the feature map is now a square with sidelengths both equal to 
+\begin_inset Formula $28-5+1=24$
+\end_inset
+
+,
+ and we apply the ELU activation function.
+ This is pooled using a 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ maxpool layer and the dimension is now 
+\begin_inset Formula $12\times12$
+\end_inset
+
+.
+ The second Convolutional layer takes 64 inputs (i.e.
+ the maxpooled feature maps of the first block) and outputs 64 feature maps.
+ Dimension of each feature map is thus 
+\begin_inset Formula $12-5+1=8$
+\end_inset
+
+.
+ The same pooling is then applied.
+ Finally the 
+\begin_inset Formula $4\times4\times64=1024$
+\end_inset
+
+ values are flattened into a layer fully connected to 43 output neurons.
+ The 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+texttt{foward}
+\end_layout
+
+\end_inset
+
+ method of the class defines this flow:
+\end_layout
+
+\begin_layout Standard
 \begin_inset listings
 inline false
 status open
@@ -945,6 +1539,85 @@ class Net(nn.Module):
 
 \begin_layout Subsection
 Augmentation
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+The training data are first resized to $32
+\backslash
+times32$.
+ Four augmentations are then applied:
+ a random rotation between $-5^
+\backslash
+circ$ and $5^
+\backslash
+circ$,
+ a random $28
+\backslash
+times28$ crop,
+ random brightness and contrast changes,
+ and a horizontal flip with probability $0.5$.
+ The horizontal flip is conditioned on the label and is only applied to labels $11,12,13,17,18,26,30,$ and $35$.
+ These are all signs that are horizontally symetrical (i.e.
+ their meaning is preserved under horizontal flipping).
+ For the test data,
+ only a deterministic center crop is used.
+ Finally,
+ all images are converted to tensors.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+As an additional augmentation I use a small random perspective transformation:
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+image = transforms.RandomPerspective(
+\end_layout
+
+\begin_layout Plain Layout
+    distortion_scale=0.15,
+ p=0.3
+\end_layout
+
+\begin_layout Plain Layout
+)(image)
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+This is reasonable for traffic-sign recognition since signs are often photographed from a slight angle rather than perfectly front-on.
+ A small perspective distortion can therefore approximate realistic variation in the viewing angle while preserving the class of the sign.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
