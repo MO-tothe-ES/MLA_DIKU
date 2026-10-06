@@ -1244,7 +1244,7 @@ ref{fig:feature_maps}
 \begin_inset Formula $\mathbf{I}$
 \end_inset
 
- and 
+and 
 \begin_inset Formula $\mathcal{G}_{y}$
 \end_inset
 
@@ -1617,7 +1617,7 @@ After training,
 \end_layout
 
 \begin_layout Subsection
-Augmentation 
+Augmentation
 \end_layout
 
 \begin_layout Standard
