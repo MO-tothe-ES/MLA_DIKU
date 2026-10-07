@@ -637,9 +637,7 @@ In contrast,
 \end_layout
 
 \begin_layout Plain Layout
-[0.24,
-\backslash
-,0.44].
+[0.24,0.44].
 \end_layout
 
 \begin_layout Plain Layout
@@ -659,13 +657,9 @@ However,
 \end_layout
 
 \begin_layout Plain Layout
-[0.237,
+[0.237,0.439]
 \backslash
-,0.439]
-\backslash
-nsubseteq[0.24,
-\backslash
-,0.44],
+nsubseteq[0.24,0.44],
 \end_layout
 
 \begin_layout Plain Layout
@@ -685,9 +679,7 @@ since the values in
 \end_layout
 
 \begin_layout Plain Layout
-[0.237,
-\backslash
-,0.24)
+[0.237,0.24)
 \end_layout
 
 \begin_layout Plain Layout
@@ -714,9 +706,7 @@ are excluded.
 \backslash
 mu
 \backslash
-in[0.237,
-\backslash
-,0.439]
+in[0.237,0.439]
 \backslash
 }
 \end_layout
@@ -734,9 +724,7 @@ nsubseteq
 \backslash
 mu
 \backslash
-in[0.24,
-\backslash
-,0.44]
+in[0.24,0.44]
 \backslash
 },
 \end_layout
@@ -768,9 +756,7 @@ left(
 \backslash
 mu
 \backslash
-in[0.24,
-\backslash
-,0.44]
+in[0.24,0.44]
 \backslash
 right)
 \end_layout
@@ -792,9 +778,7 @@ left(
 \backslash
 mu
 \backslash
-in[0.237,
-\backslash
-,0.439]
+in[0.237,0.439]
 \backslash
 right).
 \end_layout
@@ -805,32 +789,23 @@ right).
 ]
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-Thus,
- 
-\backslash
-([0.23,
-\backslash
-,0.44]
-\backslash
-) is the tightest interval with endpoints reported
-\end_layout
-
-\begin_layout Plain Layout
-to two decimal places for which the original confidence guarantee is
-\end_layout
-
-\begin_layout Plain Layout
-certainly preserved.
-\end_layout
-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Thus,
+ 
+\begin_inset Formula $[0.23,0.44]$
+\end_inset
+
+ is the tightest interval with endpoints reported to two decimal places for which the original confidence guarantee is certainly preserved.
+ I would report the CI as 
+\begin_inset Formula $[0.237,0.439]$
+\end_inset
+
+ to hand over as much information as possible - the rounding can always be done later if needed.
 \end_layout
 
 \begin_layout Section
