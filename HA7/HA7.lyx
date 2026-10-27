@@ -209,7 +209,7 @@ False
 \end_inset
 
 -means++,
- the corresponding cost function satifies
+ the corresponding cost function satisfies
 \begin_inset Foot
 status collapsed
 
@@ -226,9 +226,9 @@ Sadegh Talebi,
 
 
 \begin_inset Formula 
-\[
-\mathbb{E}\left[\phi\right]\leq8(\log k+2)\phi^{\star},
-\]
+\begin{equation}
+\mathbb{E}\left[\phi\right]\leq8(\log k+2)\phi^{\star},\label{eq:kmeanpp_thm}
+\end{equation}
 
 \end_inset
 
@@ -241,6 +241,27 @@ where
 \end_inset
 
 -means cluster cost.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:kmeanpp_thm}
+\end_layout
+
+\end_inset
+
+ does not guarantee that any particular initialization resulting in 
+\begin_inset Formula $\phi_{0}$
+\end_inset
+
+ will fulfill 
+\begin_inset Formula $\phi_{0}\leq8(\log k+2)\phi^{\star}$
+\end_inset
+
+ only in expectation.
 \end_layout
 
 \begin_layout Enumerate
@@ -251,18 +272,21 @@ where
 
 -means clustering and PCA are both 
 \emph on
-unsupervised
-\emph default
-
-\begin_inset space ~
-\end_inset
-
-
-\emph on
-learning 
+unsupervised learning 
 \emph default
 methods and thus somehow try to extract patterns for understanding and or visualisation of the data.
  Typically in a data-exploratory state.
+ One way they differ is in their concrete goal.
+ The goal of PCA is to linearly reduce the dimensions needed to represent the information / variation in the data (or as much as possible).
+ The goal of 
+\begin_inset Formula $k$
+\end_inset
+
+-means clustering is to identify datapoints 
+\begin_inset Formula $x\in\mathbb{R}^{m}$
+\end_inset
+
+ that are share some similarities.
 \end_layout
 
 \begin_layout Section
