@@ -371,8 +371,20 @@ D\left(B,\{A,D\}\right) & =D\left((0,4),\{(-2,2),(7,-5)\}\right)\\
 \\D\left(C,\{A,D\}\right) & =D\left((6,3),\{(-2,2),(7,-5)\}\right)\\
  & =\min\left\{ ||(6,3)-(-2,2)||_{2},||(6,3)-(7,-5)||_{2}\right\} \\
  & =\min\left\{ \sqrt{65},\sqrt{65}\right\} \\
- & =\sqrt{65}\\
-\\D\left(E,\{A,D\}\right) & =D\left((4,-6),\{(-2,2),(7,-5)\}\right)\\
+ & =\sqrt{65}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset Formula 
+\begin{align*}
+D\left(E,\{A,D\}\right) & =D\left((4,-6),\{(-2,2),(7,-5)\}\right)\\
  & =||(4,-6)-(7,-5)||_{2}\\
  & =\sqrt{10}\\
 \\D\left(F,\{A,D\}\right) & =D\left((0,-4),\{(-2,2),(7,-5)\}\right)\\
@@ -451,62 +463,7 @@ placement document
 alignment document
 wide false
 sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename output/dataviz.png
-	scale 70
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Visualization of 
-\begin_inset Quotes eld
-\end_inset
-
-big-dataset
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:dataviz"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\align left
-\begin_inset Float figure
-placement document
-alignment document
-wide false
-sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -523,15 +480,15 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Visualization of 
-\begin_inset Quotes eld
+Cluster centers found by 
+\begin_inset Formula $k$
 \end_inset
 
-big-dataset
-\begin_inset Quotes erd
+-means clustering (
+\begin_inset Formula $k=3$
 \end_inset
 
-
+)
 \end_layout
 
 \end_inset
@@ -542,7 +499,7 @@ big-dataset
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:dataviz-1"
+name "fig:datavizgaba"
 
 \end_inset
 
@@ -556,18 +513,118 @@ name "fig:dataviz-1"
 
 \begin_layout Standard
 \align left
+Using the assignments initialization of 
+\begin_inset Formula $(0,4),(1,5)$
+\end_inset
+
+ and 
+\begin_inset Formula $(-1,5.5)$
+\end_inset
+
+ and sklearn's implementation of 
+\begin_inset Formula $k$
+\end_inset
+
+-means clustering i obtain the following final cluster centers 
+\begin_inset Formula $(3.3,-5.24),(6,3)$
+\end_inset
+
+ and 
+\begin_inset Formula $(-0.85,3.73)$
+\end_inset
+
+ also displayed in figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:datavizgaba}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To examine the effects of the initial cluster i first sample 40 random initializations.
+ Then i record the lowest empirical 
+\begin_inset Formula $k$
+\end_inset
+
+-means cost obtained and count how many obtains this score (to computer precision).
+ 
+\end_layout
+
+\begin_layout Standard
+As a reminder the 
+\begin_inset Formula $k$
+\end_inset
+
+-means cost is computed as 
+\begin_inset Formula 
+\[
+\phi(\mathcal{X},\{c_{1},c_{2},c_{3}\})\equiv\sum_{x\in\mathcal{X}}\min_{c\in\{c_{1},c_{2},c_{3}\}}||x-c||^{2}_{2}.
+\]
+
+\end_inset
+
+I find the optimal cluster centers to be 
+\begin_inset Formula $(-0.01,3.64),(5.24,-6.03)$
+\end_inset
+
+ and 
+\begin_inset Formula $(0.2,-3.98)$
+\end_inset
+
+ (see figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:dataviz-2bad}
+\end_layout
+
+\end_inset
+
+) with a 
+\begin_inset Formula $k$
+\end_inset
+
+-means cost of 
+\begin_inset Formula $93.67$
+\end_inset
+
+ which was reached 15 out of 40 times.
+ 
+\end_layout
+
+\begin_layout Standard
+Using in stead 
+\begin_inset Formula $k$
+\end_inset
+
+-means++ for initialization and running this 40 times i obtain the same optimal clustering center new 31 out of 40 times.
+\end_layout
+
+\begin_layout Standard
+\align left
 \begin_inset Float figure
 placement document
 alignment document
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
 	filename output/cluster_kmeanspp_minimizing_kmeansloss.png
-	scale 70
+	scale 74
 
 \end_inset
 
@@ -578,15 +635,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Visualization of 
-\begin_inset Quotes eld
+Lowest 
+\begin_inset Formula $k$
 \end_inset
 
-big-dataset
-\begin_inset Quotes erd
+-means cost clustering centers found (
+\begin_inset Formula $k=3$
 \end_inset
 
-
+)
 \end_layout
 
 \end_inset
@@ -597,7 +654,7 @@ big-dataset
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:dataviz-2"
+name "fig:dataviz-2bad"
 
 \end_inset
 
@@ -613,8 +670,341 @@ name "fig:dataviz-2"
 Visualization
 \end_layout
 
+\begin_layout Subsection
+Plotting
+\end_layout
+
+\begin_layout Standard
+The dataset is plottet in figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:fig31}
+\end_layout
+
+\end_inset
+
+ as described in the assignemnt i color the dots based on what half of the dataset they reside.
+ 
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename output/3dviz.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Visualization of 
+\begin_inset Quotes eld
+\end_inset
+
+vis-dataset
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fig31"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+PCA
+\end_layout
+
+\begin_layout Standard
+I use the sklearn implementation of PCA and their scaler to standardise the data (i.e.
+ mean zero and unit variance of each dimension).
+ Figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:PCA}
+\end_layout
+
+\end_inset
+
+ displays the recreated data from the resulting first two principal components.
+ Panel (a) shows the results for the raw data and panel (b) for standardized.
+\end_layout
+
+\begin_layout Standard
+This highlights the potential effects of prepossessing on PCA.
+ PCA is sensitive to variance of each dimension in the data and because its based on the squared error between recreated / embedded datapoints and original points in 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ the results are sentitive to scaling.
+ 
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename output/PCA.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Data recreation from first two PC
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:PCA"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+t-SNE
+\end_layout
+
+\begin_layout Standard
+Again,
+ I use the implementation in sklearn to fit t-SNE.
+ I use a random initialization with a fixed seed and gradient descent to find a local minimum of the non-convex KL-divergence loss.
+ Figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:dataviz-2-1-1-1}
+\end_layout
+
+\end_inset
+
+ presents the results for both raw and standardized data,
+ using perplexities of 30,
+ 100,
+ and 300.
+ 
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename output/tSNE.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t-SNE results for different choices of perplexity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dataviz-2-1-1-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For the raw data,
+ t-SNE reveals several distinct circular structures.
+ These correspond to different loop-shaped regions of the two intertwined point clouds in the original three-dimensional data,
+ rather than necessarily representing separate clusters.
+ At perplexity 30,
+ some loops are distorted or broken,
+ while perplexity 300 compresses the structures and brings them closer together.
+ I would therefore choose perplexity 100,
+ which produces the clearest separation while preserving the approximately circular shapes.
+\end_layout
+
+\begin_layout Standard
+For the standardized data,
+ the structures become less clearly separated,
+ particularly at perplexity 300,
+ where several loops overlap.
+ This illustrates how standardization changes the neighborhood relationships that t-SNE attempts to preserve.
+\end_layout
+
+\begin_layout Standard
+Compared with PCA,
+ t-SNE better reveals the local nonlinear structure of the data.
+ However,
+ the relative positions and distances between the resulting loops cannot be interpreted as accurately reflecting their geometry in the original three-dimensional space.
+\end_layout
+
 \begin_layout Section
 Determining the Number of Clusters
+\end_layout
+
+\begin_layout Standard
+The relevant non-trivial choices of 
+\begin_inset Formula $k$
+\end_inset
+
+ are 
+\begin_inset Formula $k\in\{2,3,\dots,21\}$
+\end_inset
+
+ where 
+\begin_inset Formula $k=1$
+\end_inset
+
+ assigns all points to one cluster (thus 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ will be the centroid) and 
+\begin_inset Formula $k=22$
+\end_inset
+
+ assigns one 
+\begin_inset Formula $c_{i}$
+\end_inset
+
+ to each point 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ where 
+\begin_inset Formula $c_{i}=x_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To determine the appropriate number of clusters i use the heuristic method of finding the 
+\emph on
+elbow point
+\emph default
+.
+ This is the 
+\begin_inset Formula $k$
+\end_inset
+
+ whereafter the 
+\begin_inset Formula $k$
+\end_inset
+
+-means cost stops decreasing 
+\begin_inset Quotes eld
+\end_inset
+
+rapidly
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Therefore we strike a kind of balance between parameters and loss.
+ 
+\end_layout
+
+\begin_layout Standard
+Based on figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:elbow_plot}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $k=3$
+\end_inset
+
+ or 
+\begin_inset Formula $k=4$
+\end_inset
+
+ seem like reasonable choices.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -624,7 +1014,7 @@ placement document
 alignment document
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -641,12 +1031,11 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Visualization of 
-\begin_inset Quotes eld
+\begin_inset Formula $k$
 \end_inset
 
-big-dataset
-\begin_inset Quotes erd
+-means loss over 
+\begin_inset Formula $k$
 \end_inset
 
 
@@ -655,6 +1044,30 @@ big-dataset
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+footnotesize
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Note:
+ 
+\begin_inset Formula $k>10$
+\end_inset
+
+ is not plottet as they are not relevant for the elbow method in this case.
 \end_layout
 
 \begin_layout Plain Layout
