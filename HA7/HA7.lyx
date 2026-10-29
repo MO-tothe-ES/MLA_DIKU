@@ -1,0 +1,1089 @@
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage[american]{babel}
+\usepackage{a4wide}
+\usepackage{amsfonts}
+\usepackage{lipsum}
+
+
+% For including images
+\usepackage{xcolor}% For a colorfull presentation
+\usepackage{listings}% For presenting code 
+% To make subfirgures
+\usepackage{caption}
+\usepackage{subcaption}\usepackage{bbm}% for \mathbbm{}
+\newcommand{\1}{\mathbbm{1}} % to write the indicator function as \1
+% New command for author names
+\newcommand{\authorpoints}[2]{{\large \texttt{(#2 points)} \texttt{[#1]}}}
+
+% Definition of a style for code, matter of taste
+\lstdefinestyle{mystyle}{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color[HTML]{F7F7F7},
+  rulecolor=\color[HTML]{EEEEEE},
+  identifierstyle=\color[HTML]{24292E},
+  emphstyle=\color[HTML]{005CC5},
+  keywordstyle=\color[HTML]{D73A49},
+  commentstyle=\color[HTML]{6A737D},
+  stringstyle=\color[HTML]{032F62},
+  emph={@property,self,range,True,False},
+  morekeywords={super,with,as,lambda},
+  literate=%
+    {+}{{{\color[HTML]{D73A49}+}}}1
+    {-}{{{\color[HTML]{D73A49}-}}}1
+    {*}{{{\color[HTML]{D73A49}*}}}1
+    {/}{{{\color[HTML]{D73A49}/}}}1
+    {=}{{{\color[HTML]{D73A49}=}}}1
+    {/=}{{{\color[HTML]{D73A49}=}}}1,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=4,
+  frame=single,
+}
+\lstset{style=mystyle}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children no
+\language english
+\language_package none
+\inputencoding utf8
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_bookmarks false
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle false
+\papersize a4
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\crossref_package prettyref
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Machine Learning A (2026)
+\begin_inset Newline newline
+\end_inset
+
+Home Assignment 7
+\end_layout
+
+\begin_layout Author
+Casper Moes (hwd362)
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Conceptual Questions 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\lang american
+False
+\series default
+:
+ but in expectation it is true.
+ That is for the output constructed using 
+\begin_inset Formula $k$
+\end_inset
+
+-means++,
+ the corresponding cost function satisfies
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang american
+Sadegh Talebi,
+ Clustering:
+ k-means and Beyond,
+ slide 33
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\mathbb{E}\left[\phi\right]\leq8(\log k+2)\phi^{\star},\label{eq:kmeanpp_thm}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\phi^{\star}$
+\end_inset
+
+ is the lowest possible 
+\begin_inset Formula $k$
+\end_inset
+
+-means cluster cost.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:kmeanpp_thm}
+\end_layout
+
+\end_inset
+
+ does not guarantee that any particular initialization resulting in 
+\begin_inset Formula $\phi_{0}$
+\end_inset
+
+ will fulfill 
+\begin_inset Formula $\phi_{0}\leq8(\log k+2)\phi^{\star}$
+\end_inset
+
+ only in expectation.
+\end_layout
+
+\begin_layout Enumerate
+
+\lang american
+\begin_inset Formula $k$
+\end_inset
+
+-means clustering and PCA are both 
+\emph on
+unsupervised learning 
+\emph default
+methods and thus somehow try to extract patterns for understanding and or visualisation of the data.
+ Typically in a data-exploratory state.
+ One way they differ is in their concrete goal.
+ The goal of PCA is to linearly reduce the dimensions needed to represent the information / variation in the data (or as much as possible).
+ The goal of 
+\begin_inset Formula $k$
+\end_inset
+
+-means clustering is to identify datapoints 
+\begin_inset Formula $x\in\mathbb{R}^{m}$
+\end_inset
+
+ that are share some similarities.
+\end_layout
+
+\begin_layout Section
+k-means vs.
+ k-means++ 
+\end_layout
+
+\begin_layout Subsection
+Part 1:
+ k-means++ theory
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Generally for 
+\begin_inset Formula $k$
+\end_inset
+
+-means++ the probability that 
+\begin_inset Formula $x\in\mathcal{X}$
+\end_inset
+
+ is chosen as 
+\begin_inset Formula $c_{i}$
+\end_inset
+
+ (
+\begin_inset Formula $i<k$
+\end_inset
+
+) when initial clustering centers 
+\begin_inset Formula $S=\{c_{1,2,\dots,i-1}\}$
+\end_inset
+
+ are already chosen is 
+\begin_inset Formula 
+\begin{equation}
+\mathbb{P}\left(c_{i}=x\mid\{c_{1,2,\dots,i-1}\}\right)=\frac{D(x,\{c_{1,2,\dots,i-1}\})^{2}}{\sum_{u\in\mathcal{X}}D(u,\{c_{1,2,\dots,i-1}\})^{2}},\label{eq:prob_kmeanpp}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+where 
+\begin_inset Formula 
+\[
+D(x,\{c_{1,2,\dots,i-1}\})=\min_{z\in\{c_{1,2,\dots,i-1}\}}||x-z||_{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Therefore in the 
+\emph on
+small-dataset 
+\emph default
+with 
+\begin_inset Formula $c_{1}=A=(-2,2)$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{2}=D=(7,-5)$
+\end_inset
+
+ already we have (where i only calculate visually ambiguous distances)
+\begin_inset Formula 
+\begin{align*}
+D\left(B,\{A,D\}\right) & =D\left((0,4),\{(-2,2),(7,-5)\}\right)\\
+ & =||(0,4)-(-2,2)||\\
+ & =\sqrt{8}\\
+\\D\left(C,\{A,D\}\right) & =D\left((6,3),\{(-2,2),(7,-5)\}\right)\\
+ & =\min\left\{ ||(6,3)-(-2,2)||_{2},||(6,3)-(7,-5)||_{2}\right\} \\
+ & =\min\left\{ \sqrt{65},\sqrt{65}\right\} \\
+ & =\sqrt{65}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset Formula 
+\begin{align*}
+D\left(E,\{A,D\}\right) & =D\left((4,-6),\{(-2,2),(7,-5)\}\right)\\
+ & =||(4,-6)-(7,-5)||_{2}\\
+ & =\sqrt{10}\\
+\\D\left(F,\{A,D\}\right) & =D\left((0,-4),\{(-2,2),(7,-5)\}\right)\\
+ & =\min\left\{ ||(0,-4)-(-2,2)||_{2},||(0,-4)-(7,-5)||_{2}\right\} \\
+ & =\min\left\{ \sqrt{40},\sqrt{50}\right\} \\
+ & =\sqrt{40}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+From this we simply apply 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:prob_kmeanpp}
+\end_layout
+
+\end_inset
+
+ yielding the following probability distribution
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left(c_{3}=B\right) & =\frac{8}{123}\\
+\mathbb{P}\left(c_{3}=C\right) & =\frac{65}{123}\\
+\mathbb{P}\left(c_{3}=E\right) & =\frac{10}{123}\\
+\mathbb{P}\left(c_{3}=F\right) & =\frac{40}{123}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Note that strictly speaking 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:prob_kmeanpp}
+\end_layout
+
+\end_inset
+
+ also has 
+\begin_inset Formula $D\left(A,\{A,D\}\right)+D\left(D,\{A,D\}\right)=0$
+\end_inset
+
+ in the denominator.
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Part 2:
+ Comparing seeding methods for k-means clustering
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename output/cluster_handpicked_initialization.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Cluster centers found by 
+\begin_inset Formula $k$
+\end_inset
+
+-means clustering (
+\begin_inset Formula $k=3$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:datavizgaba"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+Using the assignments initialization of 
+\begin_inset Formula $(0,4),(1,5)$
+\end_inset
+
+ and 
+\begin_inset Formula $(-1,5.5)$
+\end_inset
+
+ and sklearn's implementation of 
+\begin_inset Formula $k$
+\end_inset
+
+-means clustering i obtain the following final cluster centers 
+\begin_inset Formula $(3.3,-5.24),(6,3)$
+\end_inset
+
+ and 
+\begin_inset Formula $(-0.85,3.73)$
+\end_inset
+
+ also displayed in figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:datavizgaba}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To examine the effects of the initial cluster i first sample 40 random initializations.
+ Then i record the lowest empirical 
+\begin_inset Formula $k$
+\end_inset
+
+-means cost obtained and count how many obtains this score (to computer precision).
+ 
+\end_layout
+
+\begin_layout Standard
+As a reminder the 
+\begin_inset Formula $k$
+\end_inset
+
+-means cost is computed as 
+\begin_inset Formula 
+\[
+\phi(\mathcal{X},\{c_{1},c_{2},c_{3}\})\equiv\sum_{x\in\mathcal{X}}\min_{c\in\{c_{1},c_{2},c_{3}\}}||x-c||^{2}_{2}.
+\]
+
+\end_inset
+
+I find the optimal cluster centers to be 
+\begin_inset Formula $(-0.01,3.64),(5.24,-6.03)$
+\end_inset
+
+ and 
+\begin_inset Formula $(0.2,-3.98)$
+\end_inset
+
+ (see figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:dataviz-2bad}
+\end_layout
+
+\end_inset
+
+) with a 
+\begin_inset Formula $k$
+\end_inset
+
+-means cost of 
+\begin_inset Formula $93.67$
+\end_inset
+
+ which was reached 15 out of 40 times.
+ 
+\end_layout
+
+\begin_layout Standard
+Using in stead 
+\begin_inset Formula $k$
+\end_inset
+
+-means++ for initialization and running this 40 times i obtain the same optimal clustering center new 31 out of 40 times.
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename output/cluster_kmeanspp_minimizing_kmeansloss.png
+	scale 74
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Lowest 
+\begin_inset Formula $k$
+\end_inset
+
+-means cost clustering centers found (
+\begin_inset Formula $k=3$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dataviz-2bad"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Visualization
+\end_layout
+
+\begin_layout Subsection
+Plotting
+\end_layout
+
+\begin_layout Standard
+The dataset is plottet in figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:fig31}
+\end_layout
+
+\end_inset
+
+ as described in the assignemnt i color the dots based on what half of the dataset they reside.
+ 
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename output/3dviz.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Visualization of 
+\begin_inset Quotes eld
+\end_inset
+
+vis-dataset
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fig31"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+PCA
+\end_layout
+
+\begin_layout Standard
+I use the sklearn implementation of PCA and their scaler to standardise the data (i.e.
+ mean zero and unit variance of each dimension).
+ Figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:PCA}
+\end_layout
+
+\end_inset
+
+ displays the recreated data from the resulting first two principal components.
+ Panel (a) shows the results for the raw data and panel (b) for standardized.
+\end_layout
+
+\begin_layout Standard
+This highlights the potential effects of prepossessing on PCA.
+ PCA is sensitive to variance of each dimension in the data and because its based on the squared error between recreated / embedded datapoints and original points in 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ the results are sentitive to scaling.
+ 
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename output/PCA.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Data recreation from first two PC
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:PCA"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+t-SNE
+\end_layout
+
+\begin_layout Standard
+Again,
+ I use the implementation in sklearn to fit t-SNE.
+ I use a random initialization with a fixed seed and gradient descent to find a local minimum of the non-convex KL-divergence loss.
+ Figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:dataviz-2-1-1-1}
+\end_layout
+
+\end_inset
+
+ presents the results for both raw and standardized data,
+ using perplexities of 30,
+ 100,
+ and 300.
+ 
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename output/tSNE.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+t-SNE results for different choices of perplexity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dataviz-2-1-1-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For the raw data,
+ t-SNE reveals several distinct circular structures.
+ These correspond to different loop-shaped regions of the two intertwined point clouds in the original three-dimensional data,
+ rather than necessarily representing separate clusters.
+ At perplexity 30,
+ some loops are distorted or broken,
+ while perplexity 300 compresses the structures and brings them closer together.
+ I would therefore choose perplexity 100,
+ which produces the clearest separation while preserving the approximately circular shapes.
+\end_layout
+
+\begin_layout Standard
+For the standardized data,
+ the structures become less clearly separated,
+ particularly at perplexity 300,
+ where several loops overlap.
+ This illustrates how standardization changes the neighborhood relationships that t-SNE attempts to preserve.
+\end_layout
+
+\begin_layout Standard
+Compared with PCA,
+ t-SNE better reveals the local nonlinear structure of the data.
+ However,
+ the relative positions and distances between the resulting loops cannot be interpreted as accurately reflecting their geometry in the original three-dimensional space.
+\end_layout
+
+\begin_layout Section
+Determining the Number of Clusters
+\end_layout
+
+\begin_layout Standard
+The relevant non-trivial choices of 
+\begin_inset Formula $k$
+\end_inset
+
+ are 
+\begin_inset Formula $k\in\{2,3,\dots,21\}$
+\end_inset
+
+ where 
+\begin_inset Formula $k=1$
+\end_inset
+
+ assigns all points to one cluster (thus 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ will be the centroid) and 
+\begin_inset Formula $k=22$
+\end_inset
+
+ assigns one 
+\begin_inset Formula $c_{i}$
+\end_inset
+
+ to each point 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ where 
+\begin_inset Formula $c_{i}=x_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To determine the appropriate number of clusters i use the heuristic method of finding the 
+\emph on
+elbow point
+\emph default
+.
+ This is the 
+\begin_inset Formula $k$
+\end_inset
+
+ whereafter the 
+\begin_inset Formula $k$
+\end_inset
+
+-means cost stops decreasing 
+\begin_inset Quotes eld
+\end_inset
+
+rapidly
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Therefore we strike a kind of balance between parameters and loss.
+ 
+\end_layout
+
+\begin_layout Standard
+Based on figure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{fig:elbow_plot}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $k=3$
+\end_inset
+
+ or 
+\begin_inset Formula $k=4$
+\end_inset
+
+ seem like reasonable choices.
+ 
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename output/elbow_plot.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $k$
+\end_inset
+
+-means loss over 
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+footnotesize
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Note:
+ 
+\begin_inset Formula $k>10$
+\end_inset
+
+ is not plottet as they are not relevant for the elbow method in this case.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:elbow_plot"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
