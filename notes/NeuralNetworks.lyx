@@ -223,11 +223,11 @@ and since each pre-activation is simply a affine linear function of the previous
 \begin{align*}
 h\left(a\left(\begin{bmatrix}z_{1} & z_{2} & \cdots & z_{K}\end{bmatrix}\right)\right) & =h\left(\sum^{K}_{k=1}w_{k}z_{k}+w_{0}\right)\\
  & =\sum^{K}_{k=1}\hat{w}_{k}z_{k}+\hat{w}_{0}\\
- & =\sum^{K}_{k=1}\hat{w}_{k}\left(\sum^{d}_{j=1}\tilde{w}_{kj}x_{j}+\tilde{w}_{j0}\right)+\hat{w}_{0}\\
- & =\sum^{K}_{k=1}\hat{w}_{k}\sum^{d}_{j=1}\tilde{w}_{kj}x_{j}+\underbrace{\sum^{K}_{k=1}\hat{w}_{k}\tilde{w}_{j0}+\hat{w}_{0}}_{\bar{w}_{0}}\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}\left(\sum^{d}_{j=1}\tilde{w}_{kj}x_{j}+\tilde{w}_{k0}\right)+\hat{w}_{0}\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}\sum^{d}_{j=1}\tilde{w}_{kj}x_{j}+\underbrace{\sum^{K}_{k=1}\hat{w}_{k}\tilde{w}_{k0}+\hat{w}_{0}}_{\bar{w}_{0}}\\
  & =\sum^{K}_{k=1}\sum^{d}_{j=1}\hat{w}_{k}\tilde{w}_{kj}x_{j}+\bar{w}_{0}\\
  & =\sum^{d}_{j=1}\sum^{K}_{k=1}\hat{w}_{k}\tilde{w}_{kj}x_{j}+\bar{w}_{0}\\
- & =\sum^{d}_{j=1}x_{j}\sum^{K}_{k=1}\underbrace{\hat{w}_{k}\tilde{w}_{kj}}_{\bar{w}_{j}}+\bar{w}_{0}\\
+ & =\sum^{d}_{j=1}x_{j}\underbrace{\sum^{K}_{k=1}\left(\hat{w}_{k}\tilde{w}_{kj}\right)}_{\bar{w}_{j}}+\bar{w}_{0}\\
  & =\sum^{d}_{j=1}\bar{w}_{j}x_{j}+\bar{w}_{0}.
 \end{align*}
 
@@ -381,8 +381,355 @@ with range
 .
 \end_layout
 
-\begin_layout Section
-Convolutional Neural Networks
+\begin_layout Subsection
+Gradient descent
+\end_layout
+
+\begin_layout Standard
+To optimize a neural network with error function 
+\begin_inset Formula $E=\sum^{N}_{n=1}E_{n}$
+\end_inset
+
+ (as with loglikelihood functions) we introduce gradient descent.
+ The bare form of this algorithm is simply
+\begin_inset Formula 
+\begin{align*}
+\mathbf{w}^{(t+1)} & =\mathbf{w}^{(t)}+\mathbf{\Delta_{w}}^{(t)}\\
+ & =\mathbf{w}^{(t)}-\eta\nabla E|_{\mathbf{w}^{(t)}},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with learning rate 
+\begin_inset Formula $\eta>0$
+\end_inset
+
+ determining how large steps are in proportion to the gradient.
+ 
+\end_layout
+
+\begin_layout Standard
+Often we add a 
+\emph on
+momentum term
+\emph default
+ (in an attempt to improve performance) which intuitively works like a heavy ball.
+ When a heavy ball has gained momentum from accelerating down a steep hill it will roll over local minimums and further down towards the global minimum (hopefully).
+ Formally we have
+\begin_inset Formula 
+\begin{align*}
+\mathbf{w}^{(t+1)} & =\mathbf{w}^{(t)}-\eta\nabla E|_{\mathbf{w}^{(t)}}+\mu\mathbf{\Delta_{w}}^{(t-1)}\\
+ & =\mathbf{w}^{(t)}-\eta\nabla E|_{\mathbf{w}^{(t)}}+\mu\left(\mathbf{w}^{(t)}-\mathbf{w}^{(t-1)}\right),
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with momentum parameter 
+\begin_inset Formula $\mu>0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The question now really is how to calculate the elements of 
+\begin_inset Formula $\nabla E|_{\mathbf{w}^{(t)}}$
+\end_inset
+
+ given by 
+\begin_inset Formula 
+\[
+\frac{\partial E}{\partial w_{ij}}=\sum^{N}_{n=1}\frac{\partial E_{n}}{\partial w_{ij}},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+.
+ Recall that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ contains all the edges connection the output of neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ to the input of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ which is scaled by 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+.
+ This is answered in the next section.
+\end_layout
+
+\begin_layout Subsection
+Backpropagation 
+\end_layout
+
+\begin_layout Standard
+The goal is to calculate 
+\begin_inset Formula $\frac{\partial E_{n}}{\partial w_{ij}}$
+\end_inset
+
+ for every 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Why not for 
+\begin_inset Formula $(j,i)\neq\mathcal{A}$
+\end_inset
+
+?
+ These weights simply do not exist.
+ The model only has weights symbolizing the strength of the connect from neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ to neuron 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ There is no connection from 
+\begin_inset Formula $i$
+\end_inset
+
+ back to 
+\begin_inset Formula $j$
+\end_inset
+
+ so this 
+\begin_inset Formula $w_{ji}$
+\end_inset
+
+ does not exist.
+\end_layout
+
+\end_inset
+
+ Applying the chain rule to every element of the error function 
+\begin_inset Formula $E=\sum^{N}_{n=1}E_{n}$
+\end_inset
+
+ yields the following.
+ Note that 
+\begin_inset Formula $E_{n}$
+\end_inset
+
+ is a function of 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+ in the network.
+ and that any 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ is a function of 
+\begin_inset Formula $z_{j}$
+\end_inset
+
+ where 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+.
+ Therefore the chain rule yields
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E_{n}}{\partial w_{ij}} & =\frac{\partial E_{n}}{\partial z_{i}}\frac{\partial z_{i}}{\partial a_{i}}\frac{\partial a_{i}}{\partial w_{ij}}\\
+ & =\frac{\partial E_{n}}{\partial z_{i}}h_{i}'(a_{i})\left[\mathbf{z}_{n}\right]_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the last step uses that 
+\begin_inset Formula 
+\[
+z_{i}(\mathbf{z})\equiv h_{i}(a_{i}(\mathbf{z}))\implies\frac{\partial z_{i}}{\partial a_{i}}=h'_{i}(a_{i}),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{z}\in\mathbb{R}^{M}$
+\end_inset
+
+ contains all the inputs from the previous layer to neuron 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ For the last factor we used that
+\begin_inset Formula 
+\[
+a_{i}(\mathbf{z}_{n})=w_{i0}+\sum^{M}_{m=1}w_{im}\left[\mathbf{z}_{n}\right]_{m}\implies\frac{\partial a_{i}}{\partial w_{ij}}=\left[\mathbf{z}_{n}\right]_{j}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore the missing factor to be calculated is 
+\begin_inset Formula $\frac{\partial E_{n}}{\partial z_{i}}$
+\end_inset
+
+ which we will now turn to.
+\end_layout
+
+\begin_layout Subsubsection
+The ouput layer
+\end_layout
+
+\begin_layout Standard
+For the output layer 
+\begin_inset Formula $\frac{\partial E_{n}}{\partial z_{i}}$
+\end_inset
+
+ can be directly calculated.
+ To see this let the loss function be the sum of squared errors 
+\begin_inset Formula 
+\begin{align*}
+E=\frac{1}{2}\sum^{N}_{n=1}||f(\mathbf{x}_{n};\mathbf{w})-\mathbf{y}_{n}||^{2} & =\frac{1}{2}\sum^{N}_{n=1}\left(\sqrt{\sum^{K}_{k=1}\left(\left[f(\mathbf{x}_{n};\mathbf{w})\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}}\right)^{2}\\
+ & =\frac{1}{2}\sum^{N}_{n=1}\sum^{K}_{k=1}\left(\left[f(\mathbf{x}_{n};\mathbf{w})\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}\\
+ & =\frac{1}{2}\sum^{N}_{n=1}\sum^{K}_{k=1}\left(\left[\mathbf{z}_{n}\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for 
+\begin_inset Formula $k\in V_{output}$
+\end_inset
+
+.
+ Therefore we have (for 
+\begin_inset Formula $i\in V_{output}$
+\end_inset
+
+ and 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+)
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E_{n}}{\partial z_{i}} & =\frac{\partial}{\partial z_{i}}\frac{1}{2}\sum^{K}_{k=1}\left(\left[\mathbf{z}_{n}\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}\\
+ & =\left[\mathbf{z}_{n}\right]_{i}-\left[\mathbf{y}_{n}\right]_{i}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $h_{i}(a_{i})=a_{i}\implies h_{i}'(a_{i})=1$
+\end_inset
+
+ where 
+\begin_inset Formula $i\in V_{output}$
+\end_inset
+
+ we thus have 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E}{\partial w_{ij}} & =\sum^{N}_{n=1}\frac{\partial E_{n}}{\partial z_{i}}h_{i}'(a_{i})z_{j}\\
+ & =\sum^{N}_{n=1}\frac{\partial E_{n}}{\partial z_{i}}\left[\mathbf{z}_{n}\right]_{j}\\
+ & =\sum^{N}_{n=1}\left(\left[\mathbf{z}_{n}\right]_{i}-\left[\mathbf{y}_{n}\right]_{i}\right)\left[\mathbf{z}_{n}\right]_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Hidden layers
+\end_layout
+
+\begin_layout Standard
+For hidden layers we apply the apply the chainrule to obtain
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E}{\partial z_{j}} & =\sum_{k\text{ in }(j,k)\in\mathcal{A}}\frac{\partial E}{\partial z_{k}}\frac{\partial z_{k}}{\partial z_{j}}\\
+ & =\sum_{k\text{ in }(j,k)\in\mathcal{A}}\frac{\partial E}{\partial z_{k}}\frac{\partial z_{k}}{\partial a_{k}}\frac{\partial a_{k}}{\partial z_{j}}\\
+ & =\sum_{k\text{ in }(j,k)\in\mathcal{A}}\frac{\partial E}{\partial z_{k}}h_{k}'(a_{k})w_{kj}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The partial derivatives of the layer just before 
+\begin_inset Formula $V_{ouput}$
+\end_inset
+
+ is then calculated by pluging in 
+\begin_inset Formula $\frac{\partial E}{\partial z_{k}}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $k\in V_{output}$
+\end_inset
+
+ and 
+\begin_inset Formula $(j,k)\in\mathcal{A}$
+\end_inset
+
+.
+ Then the third layers uses the second layers calculated 
+\begin_inset Formula $\frac{\partial E}{\partial z_{j}}$
+\end_inset
+
+ and so on.
+ This is sometimes referred to as the backwards pass.
 \end_layout
 
 \end_body

@@ -1,0 +1,1576 @@
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+% Assignment details
+\newcommand{\assignmenttitle}{Machine Learning A}
+\newcommand{\assignmentnumber}{version 0.1}
+\newcommand{\coursename}{Lecture Notes}
+\newcommand{\studentname}{Casper Moes}
+\newcommand{\studentid}{hwd362}
+\newcommand{\submissiondate}{31. October 2026}
+
+% Layout and typography
+\usepackage[left=4cm,right=4cm,top=3cm,bottom=3cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools,amssymb}
+\usepackage{amsthm}
+\usepackage{mathpazo} % Palatino text and matching mathematics
+\usepackage{microtype}
+\usepackage{booktabs}
+
+% Theorems and proofs
+\newtheorem{theorem}{Theorem}[section]
+\AddToHook{env/proof/begin}{\renewcommand{\proofname}{Proof}}
+
+% Paragraph spacing
+\usepackage{setspace}
+\onehalfspacing
+\raggedbottom
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\setlength{\emergencystretch}{2em}
+
+% Headings
+\usepackage{titlesec}
+\renewcommand{\thesubsection}{\alph{subsection}}
+
+\titleformat{\section}
+  {\large\bfseries}{\thesection}{0.6em}{}
+
+\titleformat{\subsection}
+  {\normalsize\bfseries}{\thesubsection)}{0.6em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\itshape}{\thesubsubsection}{0.6em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.4em}
+\titlespacing*{\subsection}{0pt}{1em}{0.25em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.2em}
+
+% Lists
+\usepackage{enumitem}
+\setlist{
+  leftmargin=*,
+  itemsep=0.15em,
+  topsep=0.3em,
+  parsep=0pt
+}
+
+% Equation numbering
+\numberwithin{equation}{section}
+
+% Table and figure numbering
+% Independent of sections and subsections
+\counterwithout{table}{subsection}
+\counterwithout{table}{section}
+\counterwithout{figure}{subsection}
+\counterwithout{figure}{section}
+
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+
+% Mathematical notation
+\newcommand{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\newcommand{\R}{\mathbb{R}}
+
+% Optional emphasis for main results
+\newenvironment{keyresult}
+  {\par\addvspace{0.5em}\noindent
+   \textbf{Key result.}\enspace\ignorespaces}
+  {\par\addvspace{0.5em}\ignorespacesafterend}
+
+% Page numbers and hyperlinks
+\pagestyle{plain}
+
+\usepackage{xcolor}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+
+\hypersetup{
+  pdftitle={\assignmenttitle},
+  pdfauthor={\studentname},
+  pdfsubject={\coursename\space--\space\assignmentnumber}
+}
+
+\urlstyle{same}
+
+% Compact automatic title
+\AtBeginDocument{%
+  \begingroup
+    \setstretch{1}
+    \setlength{\parskip}{0pt}
+    \raggedright
+    {\small\coursename\enspace/\enspace\assignmentnumber\par}
+    \vspace{0.6em}
+    {\LARGE\bfseries\assignmenttitle\par}
+    \vspace{0.6em}
+    {\small\studentname\enspace(\studentid)\hfill\submissiondate\par}
+    \vspace{1.5em}
+  \endgroup
+}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children no
+\language danish
+\language_package default
+\inputencoding utf8
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification default
+\crossref_package refstyle
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+tableofcontents
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\lang american
+Concentration of measure inequalities
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Markow's inequality
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Statement
+\series default
+:
+ For any non-negative stochastic variable 
+\begin_inset Formula $X$
+\end_inset
+
+ and with 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\[
+P(X\geq\epsilon)\leq\frac{E[X]}{\epsilon}
+\]
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Proof
+\series default
+:
+ Define 
+\begin_inset Formula $Y:=1(X\geq\epsilon)$
+\end_inset
+
+ then 
+\begin_inset Formula $Y\leq\frac{X}{\epsilon}$
+\end_inset
+
+ (if 
+\begin_inset Formula $0\leq X<\epsilon$
+\end_inset
+
+ then 
+\begin_inset Formula $Y=0\leq\frac{X}{\epsilon}$
+\end_inset
+
+ and if 
+\begin_inset Formula $X\geq\epsilon\iff\frac{X}{\epsilon}\geq1$
+\end_inset
+
+ then 
+\begin_inset Formula $Y=1\leq\frac{X}{\epsilon}$
+\end_inset
+
+) therefore 
+\begin_inset Formula $P(X\geq\epsilon)=P(Y=1)=E[Y]\leq E[\frac{X}{\epsilon}]=\frac{E[X]}{\epsilon}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+This can be rewritten by defining 
+\begin_inset Formula $a=\frac{\epsilon}{E[X]}$
+\end_inset
+
+ (
+\begin_inset Formula $E[X]\neq0$
+\end_inset
+
+) and we have 
+\begin_inset Formula 
+\[
+P(X\geq aE[X])\leq\frac{1}{a}
+\]
+
+\end_inset
+
+.
+ That is,
+ the probability of an event 
+\begin_inset Formula $a$
+\end_inset
+
+ times away from the stochastic variables mean value is decaying with 
+\begin_inset Formula $1/a$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Chebychew's inequality
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Statement
+\series default
+:
+ 
+\begin_inset Formula 
+\[
+P(|X-E[X]|\geq\epsilon)\leq\frac{V(X)}{\epsilon^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Proof
+\series default
+:
+ For any 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ we have (by Markow's inequality) 
+\begin_inset Formula $P((X-E[X])^{2}\geq\epsilon^{2})\leq\frac{E[(X-E[X])^{2}]}{\epsilon^{2}}=\frac{V(X)}{\epsilon^{2}}$
+\end_inset
+
+.
+ Finally we note that 
+\series bold
+
+\begin_inset Formula $|X-E[X]|\geq\epsilon\iff(X-E[X])^{2}\geq\epsilon^{2}$
+\end_inset
+
+ 
+\series default
+and thus
+\series bold
+ 
+\series default
+
+\begin_inset Formula $P(|X-E[X]|\geq\epsilon)\leq\frac{V(X)}{\epsilon^{2}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Hoeffding's inequality
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Statement
+\series default
+:
+ Given the independent stochastic variables 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ where there exists 
+\begin_inset Formula $a_{i,}b_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $i\in\{1,\dots,n\}$
+\end_inset
+
+ such that 
+\begin_inset Formula $X_{i}\in[a_{i},b_{i}]$
+\end_inset
+
+.
+ For all 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+P\left(\sum^{n}_{i=1}X_{i}-E\left(\sum^{n}_{i=1}X_{i}\right)\geq\epsilon\right)\leq e^{-\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Proof
+\series default
+:
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset Formula 
+\begin{align*}
+P\left(\sum^{n}_{i=1}X_{i}-E\left(\sum^{n}_{i=1}X_{i}\right)\geq\epsilon\right) & =P\left(e^{\lambda\left(\sum^{n}_{i=1}X_{i}-E\left(\sum^{n}_{i=1}X_{i}\right)\right)}\geq e^{\lambda\epsilon}\right)\\
+ & \leq\frac{E\left[e^{\lambda\left(\sum^{n}_{i=1}X_{i}-E\left(\sum^{n}_{i=1}X_{i}\right)\right)}\right]}{e^{\lambda\epsilon}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+The nominator can be reduced.
+ Firstly we use that the expectation operator is linear so that 
+\begin_inset Formula $E\left(\sum^{n}_{i=1}X_{i}\right)=\sum^{n}_{i=1}E[X_{i}]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset Formula 
+\[
+E\left[e^{\lambda\left(\sum^{n}_{i=1}X_{i}-E\left(\sum^{n}_{i=1}X_{i}\right)\right)}\right]=E\left[e^{\lambda\left(\sum^{n}_{i=1}X_{i}-\sum^{n}_{i=1}E[X_{i}]\right)}\right]=E\left[e^{\lambda\sum^{n}_{i=1}(X_{i}-E[X_{i}])}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Now using the properties of the exponential function and Hoeffdings lemma (proof will follow)
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset Formula 
+\begin{align*}
+E\left[e^{\lambda\sum^{n}_{i=1}X_{i}-E[X_{i}]}\right] & =E\left[\prod^{n}_{i=1}e^{\lambda(X_{i}-E[X_{i}])}\right]\\
+ & =\prod^{n}_{i=1}E\left[e^{\lambda(X_{i}-E[X_{i}])}\right]\\
+ & \leq\prod^{n}_{i=1}e^{\lambda^{2}(b_{i}-a_{i})^{2}/8}\\
+ & =e^{\lambda^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Taking stock:
+ so far we have
+\begin_inset Formula 
+\[
+P\left(\sum^{n}_{i=1}X_{i}-E\left(\sum^{n}_{i=1}X_{i}\right)\geq\epsilon\right)\leq e^{\lambda^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\lambda\epsilon}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+However we want the tightest probability bound,
+ and therefore we minimize the right hand side expression wrt.
+ 
+\begin_inset Formula $\lambda>0.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset Formula 
+\[
+\lambda^{*}=\text{arg }\min_{\lambda}\enspace e^{\lambda^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\lambda\epsilon}=\text{arg }\min_{\lambda}\,\left\{ \frac{\lambda^{2}}{8}\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\lambda\epsilon\right\} ,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+with necessary first order condition
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset Formula 
+\[
+0=\frac{\lambda^{*}}{4}\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\epsilon\iff\lambda^{*}=\frac{4\epsilon}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Substituting this into the stock-taking expression yields the theorem statement
+\begin_inset Formula 
+\begin{align*}
+e^{(\lambda^{*})^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\lambda^{*}\epsilon} & =e^{\left(\frac{4\epsilon}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}.\right)^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\frac{4\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}}\\
+ & =e^{\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}-\frac{4\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}}\\
+ & =e^{-\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}.}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Taken all together we have obtained Hoeffding Inequality:
+\begin_inset Formula 
+\[
+P\left(\sum^{n}_{i=1}X_{i}-E\left(\sum^{n}_{i=1}X_{i}\right)\geq\epsilon\right)\leq e^{-\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Neural Networks
+\end_layout
+
+\begin_layout Subsection
+The Neuron
+\end_layout
+
+\begin_layout Subsubsection
+Pre-Activation 
+\end_layout
+
+\begin_layout Standard
+The preactivation of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align*}
+a_{i}(\mathbf{x}) & =\sum^{d}_{j=1}w_{ij}x_{j}+w_{i0}\\
+ & =\mathbf{w}_{i}'\mathbf{x}_{+1},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{x}_{+1}\in\mathbb{R}^{d+1}$
+\end_inset
+
+ denotes the argmentet vector 
+\begin_inset Formula 
+\[
+\mathbf{x}_{+1}=\begin{bmatrix}1 & x_{1} & \cdots & x_{d}\end{bmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Activation and output 
+\end_layout
+
+\begin_layout Standard
+Applying a (non-linear) activation function 
+\begin_inset Formula $h_{i}:\mathbb{R}\rightarrow\mathbb{R}$
+\end_inset
+
+ yields the output of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z_{i}(\mathbf{x})=h_{i}(a_{i}(\mathbf{x}))=h_{i}\left(\sum^{d}_{j=1}w_{ij}x_{j}+w_{i0}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That is each neuron 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ has its own weights (and bias) 
+\begin_inset Formula $\mathbf{w}\in\mathbb{R}^{d+1}$
+\end_inset
+
+ and activation function 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+.
+ The latter is usually the same for all neurons except the output-neurons (in the top layer).
+\end_layout
+
+\begin_layout Subsubsection
+Activation functions
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Linear activation function:
+ 
+\series default
+For the network structure to have any reason to exist the activation functions 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+ must be non-linear.
+ If not the neural network 
+\begin_inset Formula $f:\mathbb{R}^{d}\rightarrow\mathbb{R}^{K}$
+\end_inset
+
+ will simply be a linear function of the inputs aswell.
+ 
+\end_layout
+
+\begin_layout Standard
+To see this note that each neuron in the inputlayer would output the following functional form
+\begin_inset Formula 
+\begin{align*}
+h\left(\sum^{d}_{j=1}w_{ij}x_{j}+w_{i0}\right) & =\sum^{d}_{j=1}\underbrace{aw_{ij}}_{\tilde{w}_{ij}}x_{j}+\underbrace{aw_{i0}+b}_{\tilde{w}_{i0}}\\
+ & =\sum^{d}_{j=1}\tilde{w}_{ij}x_{j}+\tilde{w}_{i0},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and since each pre-activation is simply a affine linear function of the previous affine linear functions all later neurons will output something of the form:
+\begin_inset Formula 
+\begin{align*}
+h\left(a\left(\begin{bmatrix}z_{1} & z_{2} & \cdots & z_{K}\end{bmatrix}\right)\right) & =h\left(\sum^{K}_{k=1}w_{k}z_{k}+w_{0}\right)\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}z_{k}+\hat{w}_{0}\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}\left(\sum^{d}_{j=1}\tilde{w}_{kj}x_{j}+\tilde{w}_{k0}\right)+\hat{w}_{0}\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}\sum^{d}_{j=1}\tilde{w}_{kj}x_{j}+\underbrace{\sum^{K}_{k=1}\hat{w}_{k}\tilde{w}_{k0}+\hat{w}_{0}}_{\bar{w}_{0}}\\
+ & =\sum^{K}_{k=1}\sum^{d}_{j=1}\hat{w}_{k}\tilde{w}_{kj}x_{j}+\bar{w}_{0}\\
+ & =\sum^{d}_{j=1}\sum^{K}_{k=1}\hat{w}_{k}\tilde{w}_{kj}x_{j}+\bar{w}_{0}\\
+ & =\sum^{d}_{j=1}x_{j}\underbrace{\sum^{K}_{k=1}\left(\hat{w}_{k}\tilde{w}_{kj}\right)}_{\bar{w}_{j}}+\bar{w}_{0}\\
+ & =\sum^{d}_{j=1}\bar{w}_{j}x_{j}+\bar{w}_{0}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This then also goes for all other layers recieving these outputs (by the exact same argument as above).
+ So in summary:
+ if 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+ is linear for all 
+\begin_inset Formula $i$
+\end_inset
+
+ then there is no purpose to the neural network structure and the simple affine linear model of linear regression fits the model just as well.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Well known activation functions (greatest hits).
+ 
+\series default
+Here i list some of the most common activation functions.
+ Some are more common for outputlayers for example logistic activation and are rarely used in hidden layers.
+\end_layout
+
+\begin_layout Itemize
+Step / Threshold
+\begin_inset Formula 
+\[
+h(a)=\mathbb{I}(a>0),
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in\{0,1\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Hyperbolic tangent
+\begin_inset Formula 
+\[
+h(a)=tanh(a),
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in(-1,1)$
+\end_inset
+
+ and with a visual form much like 
+\emph on
+alternative sigmoid.
+\end_layout
+
+\begin_layout Itemize
+Rectified linear unit (ReLU)
+\begin_inset Formula 
+\[
+h(a)=\max(0,a),
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}[0,\infty)$
+\end_inset
+
+.
+ Note that there the derivative of the loss function wrt.
+ pre-activation weights is uninformative in the regrion 
+\begin_inset Formula $a<0$
+\end_inset
+
+.
+ By that i mean 
+\begin_inset Formula $\partial h_{i}/\partial w_{ij}=0$
+\end_inset
+
+ if 
+\begin_inset Formula $a_{i}(\mathbf{x},\mathbf{w})<0$
+\end_inset
+
+ and so it does not help us adjust weights to decrease loss in these negative regions.
+\end_layout
+
+\begin_layout Itemize
+Fermi / logistic
+\begin_inset Formula 
+\[
+h(a)=\frac{1}{1+\exp\left\{ -a\right\} },
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in(0,1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Alternative sigmoid
+\begin_inset Formula 
+\[
+h(a)=\frac{a}{1+|a|},
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Exponential LU (ELU,
+ 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+)
+\begin_inset Formula 
+\[
+h(a)=\begin{cases}
+a & a\geq0\\
+\alpha(\exp\{a\}-1) & a<0
+\end{cases}
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in(-\alpha,\infty)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Gradient descent
+\end_layout
+
+\begin_layout Standard
+To optimize a neural network with error function 
+\begin_inset Formula $E=\sum^{N}_{n=1}E_{n}$
+\end_inset
+
+ (as with loglikelihood functions) we introduce gradient descent.
+ The bare form of this algorithm is simply
+\begin_inset Formula 
+\begin{align*}
+\mathbf{w}^{(t+1)} & =\mathbf{w}^{(t)}+\mathbf{\Delta_{w}}^{(t)}\\
+ & =\mathbf{w}^{(t)}-\eta\nabla E|_{\mathbf{w}^{(t)}},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with learning rate 
+\begin_inset Formula $\eta>0$
+\end_inset
+
+ determining how large steps are in proportion to the gradient.
+ 
+\end_layout
+
+\begin_layout Standard
+Often we add a 
+\emph on
+momentum term
+\emph default
+ (in an attempt to improve performance) which intuitively works like a heavy ball.
+ When a heavy ball has gained momentum from accelerating down a steep hill it will roll over local minimums and further down towards the global minimum (hopefully).
+ Formally we have
+\begin_inset Formula 
+\begin{align*}
+\mathbf{w}^{(t+1)} & =\mathbf{w}^{(t)}-\eta\nabla E|_{\mathbf{w}^{(t)}}+\mu\mathbf{\Delta_{w}}^{(t-1)}\\
+ & =\mathbf{w}^{(t)}-\eta\nabla E|_{\mathbf{w}^{(t)}}+\mu\left(\mathbf{w}^{(t)}-\mathbf{w}^{(t-1)}\right),
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with momentum parameter 
+\begin_inset Formula $\mu>0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The question now really is how to calculate the elements of 
+\begin_inset Formula $\nabla E|_{\mathbf{w}^{(t)}}$
+\end_inset
+
+ given by 
+\begin_inset Formula 
+\[
+\frac{\partial E}{\partial w_{ij}}=\sum^{N}_{n=1}\frac{\partial E_{n}}{\partial w_{ij}},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+.
+ Recall that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ contains all the edges connection the output of neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ to the input of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ which is scaled by 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+.
+ This is answered in the next section.
+\end_layout
+
+\begin_layout Subsection
+Backpropagation 
+\end_layout
+
+\begin_layout Standard
+The goal is to calculate 
+\begin_inset Formula $\frac{\partial E_{n}}{\partial w_{ij}}$
+\end_inset
+
+ for every 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Why not for 
+\begin_inset Formula $(j,i)\neq\mathcal{A}$
+\end_inset
+
+?
+ These weights simply do not exist.
+ The model only has weights symbolizing the strength of the connect from neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ to neuron 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ There is no connection from 
+\begin_inset Formula $i$
+\end_inset
+
+ back to 
+\begin_inset Formula $j$
+\end_inset
+
+ so this 
+\begin_inset Formula $w_{ji}$
+\end_inset
+
+ does not exist.
+\end_layout
+
+\end_inset
+
+ Applying the chain rule to every element of the error function 
+\begin_inset Formula $E=\sum^{N}_{n=1}E_{n}$
+\end_inset
+
+ yields the following.
+ Note that 
+\begin_inset Formula $E_{n}$
+\end_inset
+
+ is a function of 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+ in the network.
+ and that any 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ is a function of 
+\begin_inset Formula $z_{j}$
+\end_inset
+
+ where 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+.
+ Therefore the chain rule yields
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E_{n}}{\partial w_{ij}} & =\frac{\partial E_{n}}{\partial z_{i}}\frac{\partial z_{i}}{\partial a_{i}}\frac{\partial a_{i}}{\partial w_{ij}}\\
+ & =\frac{\partial E_{n}}{\partial z_{i}}h_{i}'(a_{i})\left[\mathbf{z}_{n}\right]_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the last step uses that 
+\begin_inset Formula 
+\[
+z_{i}(\mathbf{z})\equiv h_{i}(a_{i}(\mathbf{z}))\implies\frac{\partial z_{i}}{\partial a_{i}}=h'_{i}(a_{i}),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{z}\in\mathbb{R}^{M}$
+\end_inset
+
+ contains all the inputs from the previous layer to neuron 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ For the last factor we used that
+\begin_inset Formula 
+\[
+a_{i}(\mathbf{z}_{n})=w_{i0}+\sum^{M}_{m=1}w_{im}\left[\mathbf{z}_{n}\right]_{m}\implies\frac{\partial a_{i}}{\partial w_{ij}}=\left[\mathbf{z}_{n}\right]_{j}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore the missing factor to be calculated is 
+\begin_inset Formula $\frac{\partial E_{n}}{\partial z_{i}}$
+\end_inset
+
+ which we will now turn to.
+\end_layout
+
+\begin_layout Subsubsection
+The ouput layer
+\end_layout
+
+\begin_layout Standard
+For the output layer 
+\begin_inset Formula $\frac{\partial E_{n}}{\partial z_{i}}$
+\end_inset
+
+ can be directly calculated.
+ To see this let the loss function be the sum of squared errors 
+\begin_inset Formula 
+\begin{align*}
+E=\frac{1}{2}\sum^{N}_{n=1}||f(\mathbf{x}_{n};\mathbf{w})-\mathbf{y}_{n}||^{2} & =\frac{1}{2}\sum^{N}_{n=1}\left(\sqrt{\sum^{K}_{k=1}\left(\left[f(\mathbf{x}_{n};\mathbf{w})\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}}\right)^{2}\\
+ & =\frac{1}{2}\sum^{N}_{n=1}\sum^{K}_{k=1}\left(\left[f(\mathbf{x}_{n};\mathbf{w})\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}\\
+ & =\frac{1}{2}\sum^{N}_{n=1}\sum^{K}_{k=1}\left(\left[\mathbf{z}_{n}\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for 
+\begin_inset Formula $k\in V_{output}$
+\end_inset
+
+.
+ Therefore we have (for 
+\begin_inset Formula $i\in V_{output}$
+\end_inset
+
+ and 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+)
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E_{n}}{\partial z_{i}} & =\frac{\partial}{\partial z_{i}}\frac{1}{2}\sum^{K}_{k=1}\left(\left[\mathbf{z}_{n}\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}\\
+ & =\left[\mathbf{z}_{n}\right]_{i}-\left[\mathbf{y}_{n}\right]_{i}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $h_{i}(a_{i})=a_{i}\implies h_{i}'(a_{i})=1$
+\end_inset
+
+ where 
+\begin_inset Formula $i\in V_{output}$
+\end_inset
+
+ we thus have 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E}{\partial w_{ij}} & =\sum^{N}_{n=1}\frac{\partial E_{n}}{\partial z_{i}}h_{i}'(a_{i})z_{j}\\
+ & =\sum^{N}_{n=1}\frac{\partial E_{n}}{\partial z_{i}}\left[\mathbf{z}_{n}\right]_{j}\\
+ & =\sum^{N}_{n=1}\left(\left[\mathbf{z}_{n}\right]_{i}-\left[\mathbf{y}_{n}\right]_{i}\right)\left[\mathbf{z}_{n}\right]_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Hidden layers
+\end_layout
+
+\begin_layout Standard
+For hidden layers we apply the apply the chainrule to obtain
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E}{\partial z_{j}} & =\sum_{k\text{ in }(j,k)\in\mathcal{A}}\frac{\partial E}{\partial z_{k}}\frac{\partial z_{k}}{\partial z_{j}}\\
+ & =\sum_{k\text{ in }(j,k)\in\mathcal{A}}\frac{\partial E}{\partial z_{k}}\frac{\partial z_{k}}{\partial a_{k}}\frac{\partial a_{k}}{\partial z_{j}}\\
+ & =\sum_{k\text{ in }(j,k)\in\mathcal{A}}\frac{\partial E}{\partial z_{k}}h_{k}'(a_{k})w_{kj}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The partial derivatives of the layer just before 
+\begin_inset Formula $V_{ouput}$
+\end_inset
+
+ is then calculated by pluging in 
+\begin_inset Formula $\frac{\partial E}{\partial z_{k}}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $k\in V_{output}$
+\end_inset
+
+ and 
+\begin_inset Formula $(j,k)\in\mathcal{A}$
+\end_inset
+
+.
+ Then the third layers uses the second layers calculated 
+\begin_inset Formula $\frac{\partial E}{\partial z_{j}}$
+\end_inset
+
+ and so on.
+ This is sometimes referred to as the backwards pass.
+\end_layout
+
+\begin_layout Section
+Principal Component Analysis
+\end_layout
+
+\begin_layout Subsection
+Definitions
+\end_layout
+
+\begin_layout Subsubsection
+Dimensions
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $D$
+\end_inset
+
+ is the dimensionality of the original dataset 
+\begin_inset Formula $X$
+\end_inset
+
+ (sampled from 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+).
+ As an example consider the face database where each picture is 
+\begin_inset Formula $92×122$
+\end_inset
+
+ pixels.
+ Then the dimension 
+\begin_inset Formula $D$
+\end_inset
+
+ of the input space is 
+\begin_inset Formula $D=10304$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $d<D$
+\end_inset
+
+ is the dimensionality of the outputspace of PCA i.e.
+ the dimensionality we have reduced the dataset to using PCA.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $N$
+\end_inset
+
+ is the number of observations in 
+\begin_inset Formula $X$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $X$
+\end_inset
+
+ can then be defined by stacking all 
+\begin_inset Formula $N$
+\end_inset
+
+ observations 
+\begin_inset Formula $\mathbf{x}_{i}'\in\mathbb{R}^{D}$
+\end_inset
+
+ as the rows to obtain 
+\begin_inset Formula $X\in\mathbb{R}^{N\times D}$
+\end_inset
+
+.
+ This is very much like the design matrix in linear regression).
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $U_{d}\in\mathbb{R}^{D\times d}$
+\end_inset
+
+ takes in 
+\begin_inset Formula $d$
+\end_inset
+
+ dimensional enocded data and outputs 
+\begin_inset Formula $D$
+\end_inset
+
+ dimensional reconstructed data (where we add 
+\begin_inset Formula $\mathbf{b}\in\mathbb{R}^{D}$
+\end_inset
+
+ for the final output 
+\begin_inset Formula $f_{dec}(\mathbf{z}_{i})=\mathbf{b}+U_{d}\mathbf{z}_{i}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Subsection
+The objective of PCA
+\end_layout
+
+\begin_layout Standard
+The goal of PCA is to take a dataset 
+\begin_inset Formula $X$
+\end_inset
+
+ sampled from
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ with datapoints 
+\begin_inset Formula $\mathbf{x}_{i}\in\mathbb{R}^{D},$
+\end_inset
+
+ 
+\begin_inset Formula $i=1,\dots,$
+\end_inset
+
+ and linearly map them into 
+\begin_inset Formula $\mathbf{z}_{i}\in\mathbb{R}^{d}$
+\end_inset
+
+ where 
+\begin_inset Formula $d<D$
+\end_inset
+
+ while minimizing the reconstruction error
+\begin_inset Formula 
+\[
+J=\frac{1}{N}\sum^{N}_{n=1}||\mathbf{x}_{n}-f_{dec}(\mathbf{z}_{n})||^{2}_{2},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where
+\begin_inset Formula 
+\[
+f_{dec}(\mathbf{z}_{n})=\mathbf{b}+U_{m}\mathbf{z}_{n},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{z}_{i}\in\mathbb{R}^{d}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\mathbf{b}\in\mathbb{R}^{D}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{d}\in\mathbb{R}^{D\times d}$
+\end_inset
+
+ is the 
+\emph on
+decoding
+\emph default
+ function.
+\end_layout
+
+\begin_layout Standard
+In other words we are looking for the 
+\emph on
+encoding 
+\emph default
+ 
+\begin_inset Formula $f_{enc}:\mathbb{R}^{D}\rightarrow\mathbb{R}^{d}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $d<D$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\min_{\mathbf{b},U_{d}\{\mathbf{z}_{1},\dots,\mathbf{z}_{N}\}}\frac{1}{N}\sum^{N}_{n=1}||\mathbf{x}_{n}-f_{dec}(\mathbf{z}_{n})||^{2}_{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Optimal reconstruction
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $U$
+\end_inset
+
+ (with the columns 
+\begin_inset Formula $\mathbf{u}_{1},\dots,\mathbf{u}_{D}\in\mathbb{R}^{D}$
+\end_inset
+
+) be an orthonomal basis (spanning the the whole 
+\begin_inset Formula $\mathbb{R}^{D}$
+\end_inset
+
+ with unit lenght basisvectors)
+\begin_inset Formula 
+\[
+\mathbf{u}_{k}'\mathbf{u}_{j}=\begin{cases}
+1 & k=j,\\
+0 & k\neq j.
+\end{cases}
+\]
+
+\end_inset
+
+ Then every vector / observation 
+\begin_inset Formula $\mathbf{x}_{i}\in\mathbb{R}^{D}$
+\end_inset
+
+ can be represented as a linear combination of the basisvectors in 
+\begin_inset Formula $U$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\mathbf{x}_{i}=\sum^{D}_{j=1}a_{j}\mathbf{u}_{j}.\label{eq:newbasis1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We now want to determine 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+.
+ Premultiply 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:newbasis1}
+\end_layout
+
+\end_inset
+
+ by any of the new basisvectors 
+\begin_inset Formula $\mathbf{u}_{k}',$
+\end_inset
+
+ 
+\begin_inset Formula $k\in\{1,\dots,D\}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\mathbf{u}_{k}'\mathbf{x}_{i} & =\mathbf{u}_{k}'\sum^{n}_{j=1}a_{j}\mathbf{u}_{j}=\sum^{n}_{j=1}\mathbf{u}_{k}'a_{j}\mathbf{u}_{j}=\sum^{n}_{j=1}a_{j}\mathbf{u}_{k}'\mathbf{u}_{j}\\
+ & =\underbrace{a_{1}\mathbf{u}_{k}'\mathbf{u}_{1}+\cdots+}_{=0}a_{k}\mathbf{u}_{k}'\mathbf{u}_{k}\underbrace{+\cdots+a_{\ell}\mathbf{u}_{k}'\mathbf{u}_{\ell}}_{=0}\\
+ & =a_{k},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where we have used the pairwise orthogonality of the basis vectors and the unit length of any 
+\begin_inset Formula $\mathbf{u}_{k}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathbf{u}_{k}'\mathbf{u}_{k}=||\mathbf{u}_{k}||^{2}_{2}=1^{2}$
+\end_inset
+
+.
+ Inserting 
+\begin_inset Formula $a_{k}=\mathbf{u}_{k}'\mathbf{x}_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\in\{1,\dots,D\}$
+\end_inset
+
+ into 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:newbasis1}
+\end_layout
+
+\end_inset
+
+ yields
+\begin_inset Formula 
+\[
+\mathbf{x}_{i}=\sum^{d}_{j=1}\left(\mathbf{u}_{j}'\mathbf{x}_{i}\right)\mathbf{u}_{j}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that this only works because of the orthonormal restriction on the basis 
+\begin_inset Formula $U$
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

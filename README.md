@@ -13,4 +13,5 @@ Homework solutions and notes for **Machine Learning A** at the Department of Com
 
 ## Notes
 
-**Coming soon:** Short notes explaining the intuition and mathematics behind the core machine-learning algorithms covered in the assignments.
+**Notewriting still ongoing** Current version here: 
+- [MLA notes (v.0.1.)](./notes/MLA_notes.pdf)
