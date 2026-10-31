@@ -2,6 +2,15 @@
 
 Homework solutions and notes for **Machine Learning A** at the Department of Computer Science (DIKU), University of Copenhagen (Fall 2026).
 
-The home assignments (HAs) cover core machine-learning algorithms, including **k-nearest neighbors, perceptrons, regression, decision trees, random forests, neural networks, PCA, and k-means clustering**.
+## Assignments
 
-**Coming soon:** Short notes explaining the intuition and mathematics behind each algorithm.
+- [HA1: Neural Networks and Backpropagation](./HA1/)
+- [HA2: Homework Assignment 2](./HA2/)
+- [HA3: Homework Assignment 3](./HA3/)
+- [HA5: Traffic Sign Classification](./HA5/)
+- [HA6: Homework Assignment 6](./HA6/)
+- [HA7: PCA, t-SNE and k-Means Clustering](./HA7/)
+
+## Notes
+
+**Coming soon:** Short notes explaining the intuition and mathematics behind the core machine-learning algorithms covered in the assignments.
