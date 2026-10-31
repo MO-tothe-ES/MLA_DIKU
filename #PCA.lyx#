@@ -1,0 +1,469 @@
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children no
+\language danish
+\language_package default
+\inputencoding utf8
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification default
+\crossref_package refstyle
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Principal Component Analysis
+\end_layout
+
+\begin_layout Subsection
+Definitions
+\end_layout
+
+\begin_layout Subsubsection
+Dimensions
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $D$
+\end_inset
+
+ is the dimensionality of the original dataset 
+\begin_inset Formula $X$
+\end_inset
+
+ (sampled from 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+).
+ As an example consider the face database where each picture is 
+\begin_inset Formula $92×122$
+\end_inset
+
+ pixels.
+ Then the dimension 
+\begin_inset Formula $D$
+\end_inset
+
+ of the input space is 
+\begin_inset Formula $D=10304$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $d<D$
+\end_inset
+
+ is the dimensionality of the outputspace of PCA i.e.
+ the dimensionality we have reduced the dataset to using PCA.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $N$
+\end_inset
+
+ is the number of observations in 
+\begin_inset Formula $X$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $X$
+\end_inset
+
+ can then be defined by stacking all 
+\begin_inset Formula $N$
+\end_inset
+
+ observations 
+\begin_inset Formula $\mathbf{x}_{i}'\in\mathbb{R}^{D}$
+\end_inset
+
+ as the rows to obtain 
+\begin_inset Formula $X\in\mathbb{R}^{N\times D}$
+\end_inset
+
+.
+ This is very much like the design matrix in linear regression).
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $U_{d}\in\mathbb{R}^{D\times d}$
+\end_inset
+
+ takes in 
+\begin_inset Formula $d$
+\end_inset
+
+ dimensional enocded data and outputs 
+\begin_inset Formula $D$
+\end_inset
+
+ dimensional reconstructed data (where we add 
+\begin_inset Formula $\mathbf{b}\in\mathbb{R}^{D}$
+\end_inset
+
+ for the final output 
+\begin_inset Formula $f_{dec}(\mathbf{z}_{i})=\mathbf{b}+U_{d}\mathbf{z}_{i}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Subsection
+The objective of PCA
+\end_layout
+
+\begin_layout Standard
+The goal of PCA is to take a dataset 
+\begin_inset Formula $X$
+\end_inset
+
+ sampled from
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ with datapoints 
+\begin_inset Formula $\mathbf{x}_{i}\in\mathbb{R}^{D},$
+\end_inset
+
+ 
+\begin_inset Formula $i=1,\dots,$
+\end_inset
+
+ and linearly map them into 
+\begin_inset Formula $\mathbf{z}_{i}\in\mathbb{R}^{d}$
+\end_inset
+
+ where 
+\begin_inset Formula $d<D$
+\end_inset
+
+ while minimizing the reconstruction error
+\begin_inset Formula 
+\[
+J=\frac{1}{N}\sum^{N}_{n=1}||\mathbf{x}_{n}-f_{dec}(\mathbf{z}_{n})||^{2}_{2},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where
+\begin_inset Formula 
+\[
+f_{dec}(\mathbf{z}_{n})=\mathbf{b}+U_{m}\mathbf{z}_{n},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{z}_{i}\in\mathbb{R}^{d}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\mathbf{b}\in\mathbb{R}^{D}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{d}\in\mathbb{R}^{D\times d}$
+\end_inset
+
+ is the 
+\emph on
+decoding
+\emph default
+ function.
+\end_layout
+
+\begin_layout Standard
+In other words we are looking for the 
+\emph on
+encoding 
+\emph default
+ 
+\begin_inset Formula $f_{enc}:\mathbb{R}^{D}\rightarrow\mathbb{R}^{d}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $d<D$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\min_{\mathbf{b},U_{d}\{\mathbf{z}_{1},\dots,\mathbf{z}_{N}\}}\frac{1}{N}\sum^{N}_{n=1}||\mathbf{x}_{n}-f_{dec}(\mathbf{z}_{n})||^{2}_{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Optimal reconstruction
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $U$
+\end_inset
+
+ (with the columns 
+\begin_inset Formula $\mathbf{u}_{1},\dots,\mathbf{u}_{D}\in\mathbb{R}^{D}$
+\end_inset
+
+) be an orthonomal basis (spanning the the whole 
+\begin_inset Formula $\mathbb{R}^{D}$
+\end_inset
+
+ with unit lenght basisvectors)
+\begin_inset Formula 
+\[
+\mathbf{u}_{k}'\mathbf{u}_{j}=\begin{cases}
+1 & k=j,\\
+0 & k\neq j.
+\end{cases}
+\]
+
+\end_inset
+
+ Then every vector / observation 
+\begin_inset Formula $\mathbf{x}_{i}\in\mathbb{R}^{D}$
+\end_inset
+
+ can be represented as a linear combination of the basisvectors in 
+\begin_inset Formula $U$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\mathbf{x}_{i}=\sum^{D}_{j=1}a_{j}\mathbf{u}_{j}.\label{eq:newbasis1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We now want to determine 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+.
+ Premultiply 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:newbasis1}
+\end_layout
+
+\end_inset
+
+ by any of the new basisvectors 
+\begin_inset Formula $\mathbf{u}_{k}',$
+\end_inset
+
+ 
+\begin_inset Formula $k\in\{1,\dots,D\}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\mathbf{u}_{k}'\mathbf{x}_{i} & =\mathbf{u}_{k}'\sum^{n}_{j=1}a_{j}\mathbf{u}_{j}=\sum^{n}_{j=1}\mathbf{u}_{k}'a_{j}\mathbf{u}_{j}=\sum^{n}_{j=1}a_{j}\mathbf{u}_{k}'\mathbf{u}_{j}\\
+ & =\underbrace{a_{1}\mathbf{u}_{k}'\mathbf{u}_{1}+\cdots+}_{=0}a_{k}\mathbf{u}_{k}'\mathbf{u}_{k}\underbrace{+\cdots+a_{\ell}\mathbf{u}_{k}'\mathbf{u}_{\ell}}_{=0}\\
+ & =a_{k},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where we have used the pairwise orthogonality of the basis vectors and the unit length of any 
+\begin_inset Formula $\mathbf{u}_{k}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathbf{u}_{k}'\mathbf{u}_{k}=||\mathbf{u}_{k}||^{2}_{2}=1^{2}$
+\end_inset
+
+.
+ Inserting 
+\begin_inset Formula $a_{k}=\mathbf{u}_{k}'\mathbf{x}_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\in\{1,\dots,D\}$
+\end_inset
+
+ into 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:newbasis1}
+\end_layout
+
+\end_inset
+
+ yields
+\begin_inset Formula 
+\begin{equation}
+\mathbf{x}_{i}=\sum^{D}_{j=1}\left(\mathbf{u}_{j}'\mathbf{x}_{i}\right)\mathbf{u}_{j}.\label{eq:projection}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that this only works because of the orthonormal restriction on the basis 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ Each term 
+\begin_inset Formula $\left(\mathbf{u}_{j}'\mathbf{x}_{i}\right)\mathbf{u}_{j}$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:projection}
+\end_layout
+
+\end_inset
+
+ is the orthogonal projection of 
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+ onto the direction 
+\begin_inset Formula $\mathbf{u}_{j}$
+\end_inset
+
+ scaled by 
+\begin_inset Formula $\mathbf{u}_{j}'\mathbf{x}_{i}\in\mathbb{R}$
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document
