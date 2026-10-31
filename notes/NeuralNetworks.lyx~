@@ -1,0 +1,385 @@
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children no
+\language danish
+\language_package default
+\inputencoding utf8
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification default
+\crossref_package refstyle
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Section
+s
+\end_layout
+
+\begin_layout Subsection
+The Neuron
+\end_layout
+
+\begin_layout Subsubsection
+Pre-Activation 
+\end_layout
+
+\begin_layout Standard
+The preactivation of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align*}
+a_{i}(\mathbf{x}) & =\sum^{d}_{j=1}w_{ij}x_{j}+w_{i0}\\
+ & =\mathbf{w}_{i}'\mathbf{x}_{+1},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{x}_{+1}\in\mathbb{R}^{d+1}$
+\end_inset
+
+ denotes the argmentet vector 
+\begin_inset Formula 
+\[
+\mathbf{x}_{+1}=\begin{bmatrix}1 & x_{1} & \cdots & x_{d}\end{bmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Activation and output 
+\end_layout
+
+\begin_layout Standard
+Applying a (non-linear) activation function 
+\begin_inset Formula $h_{i}:\mathbb{R}\rightarrow\mathbb{R}$
+\end_inset
+
+ yields the output of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z_{i}(\mathbf{x})=h_{i}(a_{i}(\mathbf{x}))=h_{i}\left(\sum^{d}_{j=1}w_{ij}x_{j}+w_{i0}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That is each neuron 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ has its own weights (and bias) 
+\begin_inset Formula $\mathbf{w}\in\mathbb{R}^{d+1}$
+\end_inset
+
+ and activation function 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+.
+ The latter is usually the same for all neurons except the output-neurons (in the top layer).
+\end_layout
+
+\begin_layout Subsubsection
+Activation functions
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Linear activation function:
+ 
+\series default
+For the network structure to have any reason to exist the activation functions 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+ must be non-linear.
+ If not the neural network 
+\begin_inset Formula $f:\mathbb{R}^{d}\rightarrow\mathbb{R}^{K}$
+\end_inset
+
+ will simply be a linear function of the inputs aswell.
+ 
+\end_layout
+
+\begin_layout Standard
+To see this note that each neuron in the inputlayer would output the following functional form
+\begin_inset Formula 
+\begin{align*}
+h\left(\sum^{d}_{j=1}w_{ij}x_{j}+w_{i0}\right) & =\sum^{d}_{j=1}\underbrace{aw_{ij}}_{\tilde{w}_{ij}}x_{j}+\underbrace{aw_{i0}+b}_{\tilde{w}_{i0}}\\
+ & =\sum^{d}_{j=1}\tilde{w}_{ij}x_{j}+\tilde{w}_{i0},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and since each pre-activation is simply a affine linear function of the previous affine linear functions all later neurons will output something of the form:
+\begin_inset Formula 
+\begin{align*}
+h\left(a\left(\begin{bmatrix}z_{1} & z_{2} & \cdots & z_{K}\end{bmatrix}\right)\right) & =h\left(\sum^{K}_{k=1}w_{k}z_{k}+w_{0}\right)\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}z_{k}+\hat{w}_{0}\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}\left(\sum^{d}_{j=1}\tilde{w}_{kj}x_{j}+\tilde{w}_{j0}\right)+\hat{w}_{0}\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}\sum^{d}_{j=1}\tilde{w}_{kj}x_{j}+\underbrace{\sum^{K}_{k=1}\hat{w}_{k}\tilde{w}_{j0}+\hat{w}_{0}}_{\bar{w}_{0}}\\
+ & =\sum^{K}_{k=1}\sum^{d}_{j=1}\hat{w}_{k}\tilde{w}_{kj}x_{j}+\bar{w}_{0}\\
+ & =\sum^{d}_{j=1}\sum^{K}_{k=1}\hat{w}_{k}\tilde{w}_{kj}x_{j}+\bar{w}_{0}\\
+ & =\sum^{d}_{j=1}x_{j}\sum^{K}_{k=1}\underbrace{\hat{w}_{k}\tilde{w}_{kj}}_{\bar{w}_{j}}+\bar{w}_{0}\\
+ & =\sum^{d}_{j=1}\bar{w}_{j}x_{j}+\bar{w}_{0}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This then also goes for all other layers recieving these outputs (by the exact same argument as above).
+ So in summary:
+ if 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+ is linear for all 
+\begin_inset Formula $i$
+\end_inset
+
+ then there is no purpose to the neural network structure and the simple affine linear model of linear regression fits the model just as well.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Well known activation functions (greatest hits).
+ 
+\series default
+Here i list some of the most common activation functions.
+ Some are more common for outputlayers for example logistic activation and are rarely used in hidden layers.
+\end_layout
+
+\begin_layout Itemize
+Step / Threshold
+\begin_inset Formula 
+\[
+h(a)=\mathbb{I}(a>0),
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in\{0,1\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Hyperbolic tangent
+\begin_inset Formula 
+\[
+h(a)=tanh(a),
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in(-1,1)$
+\end_inset
+
+ and with a visual form much like 
+\emph on
+alternative sigmoid.
+\end_layout
+
+\begin_layout Itemize
+Rectified linear unit (ReLU)
+\begin_inset Formula 
+\[
+h(a)=\max(0,a),
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}[0,\infty)$
+\end_inset
+
+.
+ Note that there the derivative of the loss function wrt.
+ pre-activation weights is uninformative in the regrion 
+\begin_inset Formula $a<0$
+\end_inset
+
+.
+ By that i mean 
+\begin_inset Formula $\partial h_{i}/\partial w_{ij}=0$
+\end_inset
+
+ if 
+\begin_inset Formula $a_{i}(\mathbf{x},\mathbf{w})<0$
+\end_inset
+
+ and so it does not help us adjust weights to decrease loss in these negative regions.
+\end_layout
+
+\begin_layout Itemize
+Fermi / logistic
+\begin_inset Formula 
+\[
+h(a)=\frac{1}{1+\exp\left\{ -a\right\} },
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in(0,1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Alternative sigmoid
+\begin_inset Formula 
+\[
+h(a)=\frac{a}{1+|a|},
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Exponential LU (ELU,
+ 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+)
+\begin_inset Formula 
+\[
+h(a)=\begin{cases}
+a & a\geq0\\
+\alpha(\exp\{a\}-1) & a<0
+\end{cases}
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in(-\alpha,\infty)$
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
