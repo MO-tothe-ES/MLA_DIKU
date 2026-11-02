@@ -14,4 +14,4 @@ Homework solutions and notes for **Machine Learning A** at the Department of Com
 ## Notes
 
 **Notewriting still ongoing** Current version here: 
-- [MLA notes (v.0.1.)](./notes/MLA_notes.pdf)
+- [MLA notes (v.0.2.)](./notes/MLA_notes.pdf)
