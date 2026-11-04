@@ -7,22 +7,135 @@
 \textclass article
 \begin_preamble
 
+% ============================================================
+% Packages
+% ============================================================
 
-\usepackage{a4wide}
+\usepackage[T1]{fontenc}
 \usepackage{amsfonts}
-\usepackage{lipsum}
+\usepackage{mathtools,amssymb}
+\usepackage{amsthm}
 \usepackage{booktabs}
 \usepackage{caption}
-\captionsetup[figure]{justification=centering,singlelinecheck=false}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{mathpazo}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{enumitem}
 
-% For including images
+% ============================================================
+% Assignment details
+% ============================================================
 
-\usepackage{xcolor}% For a colorfull presentation
-\usepackage{listings}% For presenting code 
+% ============================================================
+% Layout and typography
+% ============================================================
 
+\usepackage[
+  left=4cm,
+  right=4cm,
+  top=3cm,
+  bottom=3cm
+]{geometry}
 
+\onehalfspacing
+\raggedbottom
 
-% Definition of a style for code, matter of taste
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+\setlength{\emergencystretch}{2em}
+
+% ============================================================
+% Headings
+% ============================================================
+
+\titleformat{\section}
+  {\large\bfseries}{\thesection}{0.6em}{}
+
+\titleformat{\subsection}
+  {\normalsize\bfseries}{\thesubsection}{0.6em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\itshape}{\thesubsubsection}{0.6em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.4em}
+\titlespacing*{\subsection}{0pt}{1em}{0.25em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.2em}
+
+% ============================================================
+% Lists
+% ============================================================
+
+\setlist{
+  leftmargin=*,
+  itemsep=0.15em,
+  topsep=0.3em,
+  parsep=0pt
+}
+
+% ============================================================
+% Theorems and proofs
+% ============================================================
+
+\newtheorem{theorem}{Theorem}[section]
+
+\AddToHook{env/proof/begin}{
+  \renewcommand{\proofname}{Proof}
+}
+
+% ============================================================
+% Equation, table and figure numbering
+% ============================================================
+
+\numberwithin{equation}{section}
+
+\counterwithout{table}{subsection}
+\counterwithout{table}{section}
+\counterwithout{figure}{subsection}
+\counterwithout{figure}{section}
+
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+
+% ============================================================
+% Figure captions
+% ============================================================
+
+\captionsetup[figure]{
+  justification=centering,
+  singlelinecheck=false
+}
+
+% ============================================================
+% Mathematical notation
+% ============================================================
+
+\newcommand{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\newcommand{\R}{\mathbb{R}}
+
+% ============================================================
+% Optional emphasis for main results
+% ============================================================
+
+\newenvironment{keyresult}
+  {
+    \par\addvspace{0.5em}
+    \noindent\textbf{Key result.}\enspace
+    \ignorespaces
+  }
+  {
+    \par\addvspace{0.5em}
+    \ignorespacesafterend
+  }
+
+% ============================================================
+% Python code formatting
+% ============================================================
+
 \lstdefinestyle{mystyle}{
   language=Python,
   basicstyle=\ttfamily\footnotesize,
@@ -41,7 +154,7 @@
     {*}{{{\color[HTML]{D73A49}*}}}1
     {/}{{{\color[HTML]{D73A49}/}}}1
     {=}{{{\color[HTML]{D73A49}=}}}1
-    {/=}{{{\color[HTML]{D73A49}=}}}1,
+    {/=}{{{\color[HTML]{D73A49}/=}}}2,
   breakatwhitespace=false,
   breaklines=true,
   captionpos=b,
@@ -51,9 +164,63 @@
   showstringspaces=false,
   showtabs=false,
   tabsize=4,
-  frame=single,
+  frame=single
 }
+
 \lstset{style=mystyle}
+
+% ============================================================
+% Page numbers and hyperlinks
+% ============================================================
+
+\pagestyle{plain}
+
+% Avoid option clash if hyperref is already loaded
+\makeatletter
+\@ifpackageloaded{hyperref}{}{\RequirePackage{hyperref}}
+\makeatother
+
+\hypersetup{
+  colorlinks=true,
+  allcolors=blue,
+  pdftitle={\assignmenttitle},
+  pdfauthor={\studentname},
+  pdfsubject={\coursename\space--\space\assignmentnumber}
+}
+
+\urlstyle{same}
+
+% ============================================================
+% Compact automatic title
+% ============================================================
+
+\AtBeginDocument{%
+  \begingroup
+    \setstretch{1}
+    \setlength{\parskip}{0pt}
+    \raggedright
+
+    {\small
+      \coursename\enspace/\enspace\assignmentnumber\par
+    }
+
+    \vspace{0.6em}
+
+    {\LARGE\bfseries
+      \assignmenttitle\par
+    }
+
+    \vspace{0.6em}
+
+    {\small
+      \studentname\enspace(\studentid)
+      \hfill
+      \submissiondate\par
+    }
+
+    \vspace{1.5em}
+  \endgroup
+}
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children no
@@ -223,7 +390,7 @@ One could use the following metric where
 
  are unlabeled samples:
  
-\begin_inset Formula $d(x,x')=\|x-x'\|$
+\begin_inset Formula $d(x,x')=\|x-x'\|_{2}$
 \end_inset
 
 .
@@ -234,6 +401,11 @@ One could use the following metric where
 ,
  
 \begin_inset Formula $d(a,b)=d(b,a)$
+\end_inset
+
+,
+ 
+\begin_inset Formula $d(a,b)\geq0$
 \end_inset
 
  and the triangle inequality.

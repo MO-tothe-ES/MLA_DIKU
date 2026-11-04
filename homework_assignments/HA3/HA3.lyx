@@ -7,16 +7,131 @@
 \textclass article
 \begin_preamble
 
+% ============================================================
+% Packages
+% ============================================================
 
-\usepackage{a4wide}
+\usepackage[T1]{fontenc}
 \usepackage{amsfonts}
-\usepackage{graphicx}% For including images
-\usepackage{xcolor}% For a colorful presentation
-\usepackage{listings}% For presenting code
+\usepackage{mathtools,amssymb}
+\usepackage{amsthm}
 \usepackage{booktabs}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{mathpazo}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{enumitem}
 
+% ============================================================
+% Layout and typography
+% ============================================================
 
-% Definition of a style for code, matter of taste
+\usepackage[
+  left=2.5cm,
+  right=2.5cm,
+  top=3cm,
+  bottom=3cm
+]{geometry}
+
+\onehalfspacing
+\raggedbottom
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+\setlength{\emergencystretch}{2em}
+
+% ============================================================
+% Headings
+% ============================================================
+
+\titleformat{\section}
+  {\large\bfseries}{\thesection}{0.6em}{}
+
+\titleformat{\subsection}
+  {\normalsize\bfseries}{\thesubsection}{0.6em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\itshape}{\thesubsubsection}{0.6em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.4em}
+\titlespacing*{\subsection}{0pt}{1em}{0.25em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.2em}
+
+% ============================================================
+% Lists
+% ============================================================
+
+\setlist{
+  leftmargin=*,
+  itemsep=0.15em,
+  topsep=0.3em,
+  parsep=0pt
+}
+
+% ============================================================
+% Theorems and proofs
+% ============================================================
+
+\newtheorem{theorem}{Theorem}[section]
+
+\AddToHook{env/proof/begin}{
+  \renewcommand{\proofname}{Proof}
+}
+
+% ============================================================
+% Equation, table and figure numbering
+% ============================================================
+
+\numberwithin{equation}{section}
+
+\counterwithout{table}{subsection}
+\counterwithout{table}{section}
+\counterwithout{figure}{subsection}
+\counterwithout{figure}{section}
+
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+
+% ============================================================
+% Figure captions
+% ============================================================
+
+\captionsetup[figure]{
+  justification=centering,
+  singlelinecheck=false
+}
+
+% ============================================================
+% Mathematical notation
+% ============================================================
+
+\newcommand{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\newcommand{\R}{\mathbb{R}}
+
+% ============================================================
+% Optional emphasis for main results
+% ============================================================
+
+\newenvironment{keyresult}
+  {
+    \par\addvspace{0.5em}
+    \noindent\textbf{Key result.}\enspace
+    \ignorespaces
+  }
+  {
+    \par\addvspace{0.5em}
+    \ignorespacesafterend
+  }
+
+% ============================================================
+% Python code formatting
+% ============================================================
+
 \lstdefinestyle{mystyle}{
   language=Python,
   basicstyle=\ttfamily\footnotesize,
@@ -35,7 +150,7 @@
     {*}{{{\color[HTML]{D73A49}*}}}1
     {/}{{{\color[HTML]{D73A49}/}}}1
     {=}{{{\color[HTML]{D73A49}=}}}1
-    {/=}{{{\color[HTML]{D73A49}=}}}1,
+    {/=}{{{\color[HTML]{D73A49}/=}}}2,
   breakatwhitespace=false,
   breaklines=true,
   captionpos=b,
@@ -45,9 +160,27 @@
   showstringspaces=false,
   showtabs=false,
   tabsize=4,
-  frame=single,
+  frame=single
 }
+
 \lstset{style=mystyle}
+
+% ============================================================
+% Page numbers and hyperlinks
+% ============================================================
+
+\pagestyle{plain}
+
+\makeatletter
+\@ifpackageloaded{hyperref}{}{\RequirePackage{hyperref}}
+\makeatother
+
+\hypersetup{
+  colorlinks=true,
+  allcolors=blue
+}
+
+\urlstyle{same}
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children no
@@ -170,14 +303,10 @@ LatexCommand tableofcontents
 \end_inset
 
 
-\begin_inset Newpage newpage
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
-Optimal Classification (16 points)
+Optimal Classification
 \end_layout
 
 \begin_layout Subsection*
@@ -809,11 +938,11 @@ Because this is linear in the probabilities the answer is immediately apparent.
 \end_layout
 
 \begin_layout Section
-Logistic Regression (50 points)
+Logistic Regression
 \end_layout
 
 \begin_layout Subsection
-Cross-entropy error measure (16 points)
+Cross-entropy error measure
 \end_layout
 
 \begin_layout Subsubsection
@@ -931,7 +1060,7 @@ Yielding the wanted result.
 \end_layout
 
 \begin_layout Subsection
-Logistic regression loss gradient (24 points)
+Logistic regression loss gradient
 \end_layout
 
 \begin_layout Subsubsection
@@ -1270,7 +1399,7 @@ Hence,
 \end_layout
 
 \begin_layout Subsection
-Log-odds (10 points)
+Log-odds
 \end_layout
 
 \begin_layout Standard
@@ -1329,11 +1458,11 @@ That is if
 \end_layout
 
 \begin_layout Section
-Sleep Well (34 points)
+Sleep Well
 \end_layout
 
 \begin_layout Subsection
-Data understanding and preprocessing (4 points)
+Data understanding and preprocessing
 \end_layout
 
 \begin_layout Standard
@@ -1523,7 +1652,7 @@ end{table}
 \end_layout
 
 \begin_layout Subsection
-Classification (30 points)
+Classification
 \end_layout
 
 \begin_layout Subsubsection

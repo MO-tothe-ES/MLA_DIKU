@@ -1,0 +1,6989 @@
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+% Assignment details
+\newcommand{\assignmenttitle}{Machine Learning A}
+\newcommand{\assignmentnumber}{version 0.2}
+\newcommand{\coursename}{Theory Notes}
+\newcommand{\studentname}{Casper Moes}
+\newcommand{\studentid}{hwd362}
+\newcommand{\submissiondate}{4. November 2026}
+
+% Layout and typography
+\usepackage[left=3.5cm,right=3.5cm,top=3cm,bottom=3cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools,amssymb}
+\usepackage{amsthm}
+\usepackage{mathpazo} % Palatino text and matching mathematics
+\usepackage{microtype}
+\usepackage{booktabs}
+
+% Theorems and proofs
+\newtheorem{theorem}{Theorem}[section]
+\AddToHook{env/proof/begin}{\renewcommand{\proofname}{Proof}}
+
+% Paragraph spacing
+\usepackage{setspace}
+\onehalfspacing
+\raggedbottom
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+\setlength{\emergencystretch}{2em}
+
+% Headings
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\large\bfseries}{\thesection}{0.6em}{}
+
+\titleformat{\subsection}
+  {\normalsize\bfseries}{\thesubsection}{0.6em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\itshape}{\thesubsubsection}{0.6em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.4em}
+\titlespacing*{\subsection}{0pt}{1em}{0.25em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.2em}
+
+% Lists
+\usepackage{enumitem}
+\setlist{
+  leftmargin=*,
+  itemsep=0.15em,
+  topsep=0.3em,
+  parsep=0pt
+}
+
+% Equation numbering
+\numberwithin{equation}{section}
+
+% Table and figure numbering
+% Independent of sections and subsections
+\counterwithout{table}{subsection}
+\counterwithout{table}{section}
+\counterwithout{figure}{subsection}
+\counterwithout{figure}{section}
+
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+
+% Mathematical notation
+\newcommand{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\newcommand{\R}{\mathbb{R}}
+
+% Optional emphasis for main results
+\newenvironment{keyresult}
+  {\par\addvspace{0.5em}\noindent
+   \textbf{Key result.}\enspace\ignorespaces}
+  {\par\addvspace{0.5em}\ignorespacesafterend}
+
+% Page numbers and hyperlinks
+\pagestyle{plain}
+
+\usepackage{xcolor}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+
+\hypersetup{
+  pdftitle={\assignmenttitle},
+  pdfauthor={\studentname},
+  pdfsubject={\coursename\space--\space\assignmentnumber}
+}
+
+\urlstyle{same}
+
+% Compact automatic title
+\AtBeginDocument{%
+  \begingroup
+    \setstretch{1}
+    \setlength{\parskip}{0pt}
+    \raggedright
+    {\small\coursename\enspace/\enspace\assignmentnumber\par}
+    \vspace{0.6em}
+    {\LARGE\bfseries\assignmenttitle\par}
+    \vspace{0.6em}
+    {\small\studentname\enspace(\studentid)\hfill\submissiondate\par}
+    \vspace{1.5em}
+  \endgroup
+}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children no
+\language danish
+\language_package default
+\inputencoding utf8
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification default
+\crossref_package refstyle
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+tableofcontents
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+newpage
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+vspace{10cm}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+Huge 
+\backslash
+textbf{I | Generalization Bounds}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+addtocontents{toc}{
+\backslash
+protect
+\backslash
+vspace{15pt}}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+addcontentsline{toc}{section}{Generalization Bounds}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+vfill
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\lang american
+Concentration of measure inequalities
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Markow's inequality
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Statement
+\series default
+:
+ For any non-negative stochastic variable 
+\begin_inset Formula $X$
+\end_inset
+
+ and with 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\[
+\mathbb{P}(X\geq\epsilon)\leq\frac{\mathbb{E}[X]}{\epsilon}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Proof
+\series default
+:
+ Define 
+\begin_inset Formula $Y:=1(X\geq\epsilon)$
+\end_inset
+
+ then 
+\begin_inset Formula $Y\leq\frac{X}{\epsilon}$
+\end_inset
+
+ (if 
+\begin_inset Formula $0\leq X<\epsilon$
+\end_inset
+
+ then 
+\begin_inset Formula $Y=0\leq\frac{X}{\epsilon}$
+\end_inset
+
+ and if 
+\begin_inset Formula $X\geq\epsilon\iff\frac{X}{\epsilon}\geq1$
+\end_inset
+
+ then 
+\begin_inset Formula $Y=1\leq\frac{X}{\epsilon}$
+\end_inset
+
+) therefore 
+\begin_inset Formula $\mathbb{P}(X\geq\epsilon)=\mathbb{P}(Y=1)=\mathbb{E}[Y]\leq\mathbb{E}[\frac{X}{\epsilon}]=\frac{\mathbb{E}[X]}{\epsilon}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+This can be rewritten by defining 
+\begin_inset Formula $a=\frac{\epsilon}{\mathbb{E}[X]}$
+\end_inset
+
+ (
+\begin_inset Formula $\mathbb{E}[X]\neq0$
+\end_inset
+
+) and we have 
+\begin_inset Formula 
+\[
+\mathbb{P}(X\geq a\mathbb{E}[X])\leq\frac{1}{a}
+\]
+
+\end_inset
+
+.
+ That is,
+ the probability of an event 
+\begin_inset Formula $a$
+\end_inset
+
+ times away from the stochastic variables mean value is decaying with 
+\begin_inset Formula $1/a$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Chebychew's inequality
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Statement
+\series default
+:
+ 
+\begin_inset Formula 
+\[
+\mathbb{P}(|X-\mathbb{E}[X]|\geq\epsilon)\leq\frac{\mathbb{V}(X)}{\epsilon^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Proof
+\series default
+:
+ For any 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ we have (by Markow's inequality) 
+\begin_inset Formula $\mathbb{P}((X-\mathbb{E}[X])^{2}\geq\epsilon^{2})\leq\frac{\mathbb{E}[(X-\mathbb{E}[X])^{2}]}{\epsilon^{2}}=\frac{\mathbb{V}(X)}{\epsilon^{2}}$
+\end_inset
+
+.
+ Finally we note that 
+\series bold
+
+\begin_inset Formula $|X-\mathbb{E}[X]|\geq\epsilon\iff(X-\mathbb{E}[X])^{2}\geq\epsilon^{2}$
+\end_inset
+
+ 
+\series default
+and thus
+\series bold
+ 
+\series default
+
+\begin_inset Formula $\mathbb{P}(|X-\mathbb{E}[X]|\geq\epsilon)\leq\frac{\mathbb{V}(X)}{\epsilon^{2}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Hoeffding's inequality
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Statement
+\series default
+:
+ Given the independent stochastic variables 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ where there exists 
+\begin_inset Formula $a_{i,}b_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $i\in\{1,\dots,n\}$
+\end_inset
+
+ such that 
+\begin_inset Formula $X_{i}\in[a_{i},b_{i}]$
+\end_inset
+
+.
+ For all 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\sum^{n}_{i=1}X_{i}-\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\geq\epsilon\right)\leq\exp\left\{ -\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}\right\} .
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Proof
+\series default
+:
+ Start by simple rewriting and application of Markow's inequality - which is legal since 
+\begin_inset Formula $S_{X}\equiv\sum^{n}_{i=1}X_{i}$
+\end_inset
+
+ are composed of i.i.d.
+ stochastic variables and thus 
+\begin_inset Formula $S_{X}-\texttt{constant}$
+\end_inset
+
+ itself is a stochastic variable (here 
+\begin_inset Formula $\texttt{constant}=\mathbb{E}\left(\sum^{n}_{i=1}X_{i}\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left(\sum^{n}_{i=1}X_{i}-\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\geq\epsilon\right) & =\mathbb{P}\left(e^{\lambda\left(\sum^{n}_{i=1}X_{i}-\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\right)}\geq e^{\lambda\epsilon}\right)\\
+ & \leq\frac{E\left[e^{\lambda\left(\sum^{n}_{i=1}X_{i}-\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\right)}\right]}{e^{\lambda\epsilon}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+The nominator can be reduced.
+ Firstly we use that the expectation operator is linear so that 
+\begin_inset Formula $\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]=\sum^{n}_{i=1}\mathbb{E}[X_{i}]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}\left[e^{\lambda\left(\sum^{n}_{i=1}X_{i}-\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\right)}\right] & =\mathbb{E}\left[e^{\lambda\left(\sum^{n}_{i=1}X_{i}-\sum^{n}_{i=1}\mathbb{E}[X_{i}]\right)}\right]\\
+ & =\mathbb{E}\left[e^{\lambda\sum^{n}_{i=1}(X_{i}-\mathbb{E}[X_{i}])}\right].
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Now using the properties of the exponential function and Hoeffdings lemma
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}\left[e^{\lambda\sum^{n}_{i=1}X_{i}-\mathbb{E}[X_{i}]}\right] & =\mathbb{E}\left[\prod^{n}_{i=1}e^{\lambda(X_{i}-\mathbb{E}[X_{i}])}\right]\\
+ & \overset{indep.}{=}\prod^{n}_{i=1}E\left[e^{\lambda(X_{i}-\mathbb{E}[X_{i}])}\right]\\
+ & \leq\prod^{n}_{i=1}e^{\lambda^{2}(b_{i}-a_{i})^{2}/8}\\
+ & =e^{\lambda^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Taking stock:
+ so far we have
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\sum^{n}_{i=1}X_{i}-\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\geq\epsilon\right)\leq e^{\lambda^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\lambda\epsilon}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+However we want the tightest probability bound,
+ and therefore we minimize the right hand side expression wrt.
+ 
+\begin_inset Formula $\lambda>0.$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lambda^{*}=\text{arg }\min_{\lambda\in\mathbb{R}_{+}}\enspace e^{\lambda^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\lambda\epsilon}=\text{arg }\min_{\lambda\in\mathbb{R}_{+}}\,\left\{ \frac{\lambda^{2}}{8}\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\lambda\epsilon\right\} ,
+\]
+
+\end_inset
+
+with necessary first order condition
+\begin_inset Formula 
+\[
+0=\frac{\lambda^{*}}{4}\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\epsilon\iff\lambda^{*}=\frac{4\epsilon}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Substituting this into the stock-taking expression yields the theorem statement
+\begin_inset Formula 
+\begin{align*}
+e^{(\lambda^{*})^{2}/8\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\lambda^{*}\epsilon} & =\exp\left\{ \left(\frac{4\epsilon}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}.\right)^{2}\frac{1}{8}\sum^{n}_{i=1}(b_{i}-a_{i})^{2}-\frac{4\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}\right\} \\
+ & =\exp\left\{ \frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}-\frac{4\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}\right\} \\
+ & =\exp\left\{ -\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}\right\} .
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Taken all together we have obtained Hoeffding Inequality:
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\sum^{n}_{i=1}X_{i}-\mathbb{E}\left[\sum^{n}_{i=1}X_{i}\right]\geq\epsilon\right)\leq\exp\left\{ -\frac{2\epsilon^{2}}{\sum^{n}_{i=1}(b_{i}-a_{i})^{2}}\right\} .
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\lang american
+Generalization bounds:
+ Finite and Countably Infinity Hypothesis Classes
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Single hypothesis
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang american
+Setting and risk definitions
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Assume the loss function 
+\begin_inset Formula $\ell(h(X),Y)$
+\end_inset
+
+ is bounded on 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+.
+ This is important for the specific calculations but the general insights are applicable to any loss function bounds 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+True risk
+\series default
+:
+
+\series bold
+ 
+\series default
+The quality of any hypothesis 
+\begin_inset Formula $h$
+\end_inset
+
+ is measured by its (true) risk
+\begin_inset Formula 
+\[
+L(h)\equiv\mathbb{E}_{(X,Y)\sim p}\left[\ell(h(X),Y)\right],
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+where 
+\begin_inset Formula $p$
+\end_inset
+
+ is the 
+\emph on
+unknown
+\emph default
+ distribution over which the world has generated 
+\begin_inset Formula $(X,Y)$
+\end_inset
+
+ - i.e.
+ pairs of features from the input space 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ and outcomes from the label space 
+\begin_inset Formula $\mathcal{Y}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Empirical risk
+\series default
+:
+ Using a validation sample
+\begin_inset Formula 
+\[
+S=\left\{ (X_{1},Y_{1}),\dots,(X_{N},Y_{N})\right\} ,\quad(X_{i},Y_{i})\overset{iid}{\sim}p,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+we calculate the empirical risk defined by
+\begin_inset Formula 
+\[
+\hat{L}(h,S)\equiv\frac{1}{N}\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang american
+Theoretical properties of empirical risk
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Unbiased:
+ 
+\series default
+Since the validation samples are independently and identically distributed from the distribution 
+\begin_inset Formula $p$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}_{S\sim p^{N}}\left[\hat{L}(h,S)\right] & =\mathbb{E}_{S\sim p^{N}}\left[\frac{1}{N}\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n})\right]\\
+ & =\frac{1}{N}\sum^{N}_{n=1}\mathbb{E}_{(X_{n},Y_{n})\sim p}\left[\ell(h(X_{n}),Y_{n})\right]\\
+ & =\frac{1}{N}\sum^{N}_{n=1}\mathbb{E}_{(X_{1},Y_{1})\sim p}\left[\ell(h(X_{1}),Y_{1})\right]\\
+ & =\mathbb{E}_{(X_{1},Y_{1})\sim p}\left[\ell(h(X_{1}),Y_{1})\right]\\
+ & =L(h).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+However the above only holds because 
+\begin_inset Formula $h$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ If not we generally have
+\begin_inset Formula 
+\[
+\mathbb{E}_{S\sim p^{N}}\left[\hat{L}\left(\hat{h}_{S},S\right)\right]\neq\mathbb{E}_{S\sim p^{N}}\left[L\left(\hat{h}_{S}\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+What can be said about the distribution of 
+\begin_inset Formula $\hat{L}(h,S)$
+\end_inset
+
+?
+ 
+\series default
+Formally what is 
+\begin_inset Formula $\delta$
+\end_inset
+
+ here
+\begin_inset Formula 
+\[
+\mathbb{P}\left(L(h)-\hat{L}(h,S)\geq\epsilon\right)\leq\delta.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+I.e.
+ with what tightness can we bound the probability that the true risk 
+\begin_inset Formula $L$
+\end_inset
+
+ is 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ bigger than 
+\begin_inset Formula $\hat{L}$
+\end_inset
+
+.
+ For example we might want a confindence of 
+\begin_inset Formula $\delta=0.05$
+\end_inset
+
+ that is w.p.
+ less than 
+\begin_inset Formula $0.05$
+\end_inset
+
+ the true loss 
+\begin_inset Formula $L$
+\end_inset
+
+ is 
+\begin_inset Formula $\epsilon=f(\delta)$
+\end_inset
+
+ - that depends on 
+\begin_inset Formula $\delta$
+\end_inset
+
+ units bigger than 
+\begin_inset Formula $\hat{L}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Applying Hoeffdings bound yields
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left(L(h)-\hat{L}(h,S)\geq\epsilon\right) & =\mathbb{P}\left(\underbrace{\mathbb{E}\left[\frac{1}{N}\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n})\right]}_{=\mathbb{E}\left[\ell(h(X_{1}),Y_{1})\right]=L(h)}-\frac{1}{N}\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n})\geq\epsilon\right)\\
+ & =\mathbb{P}\left(\mathbb{E}\left[\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n})\right]-\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n})\geq N\epsilon\right)\\
+ & \leq\exp\left\{ -\frac{2(N\epsilon)^{2}}{\sum^{N}_{n=1}(b_{n}-a_{n})^{2}}\right\} \\
+ & =\exp\left\{ -2N\epsilon^{2}\right\} .
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Defining the relation 
+\begin_inset Formula $\delta=\exp\left\{ -2N\epsilon^{2}\right\} $
+\end_inset
+
+ yields 
+\begin_inset Formula $\epsilon=\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left(L(h)\geq\hat{L}(h,S)+\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}\right) & \leq\delta,
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+and taking the complement
+\begin_inset Formula 
+\[
+\mathbb{P}\left(L(h)<\hat{L}(h,S)+\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}\right)=1-\mathbb{P}\left(L(h)\geq\hat{L}(h,S)+\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}\right)\geq1-\delta.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang american
+Sidenote:
+ Understanding 
+\begin_inset Formula $\epsilon=\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Earlier we obtained
+\begin_inset Formula 
+\[
+\mathbb{P}\left(L(h)-\hat{L}(h,S)\geq\epsilon\right)\leq\exp\left\{ -2N\epsilon^{2}\right\} .
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+we can think if this inequality as asking:
+ 
+\emph on
+If you set an error-margin 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ then I tell you how confident I am that an error happens (i.e.
+ 
+\begin_inset Formula $L-\hat{L}\geq\epsilon$
+\end_inset
+
+).
+ 
+\emph default
+If we instead ask the question:
+ 
+\emph on
+I want the probability that an error happens 
+\begin_inset Formula $(i.e.L-\hat{L}\geq\epsilon)$
+\end_inset
+
+ to be 
+\begin_inset Formula $\delta\cdot100\%$
+\end_inset
+
+ how large does the error-margin 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ have to be?
+
+\emph default
+ The latter case is answered by relabeling the right hand side as 
+\begin_inset Formula $\delta=\exp\left\{ -2N\epsilon^{2}\right\} $
+\end_inset
+
+ and then backing out what 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ must be:
+ 
+\begin_inset Formula $\epsilon=\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+The complement flips the question:
+\begin_inset Formula 
+\[
+\mathbb{P}\left(L(h)<\hat{L}(h,S)+\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}\right)\geq1-\delta,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+and asks:
+ The probability that 
+\begin_inset Formula $L$
+\end_inset
+
+ is acceptable (i.e.
+ smaller than 
+\begin_inset Formula $\hat{L}(h,S)+\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}$
+\end_inset
+
+) is at least 
+\begin_inset Formula $1-\delta$
+\end_inset
+
+.
+ Or:
+ I am 
+\begin_inset Formula $(1-\delta)\cdot100\%$
+\end_inset
+
+ certain that 
+\begin_inset Formula $L$
+\end_inset
+
+ is smaller than 
+\begin_inset Formula $\hat{L}(h,S)+\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Finite Hypothesis class
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Unlike before we have now trained 
+\begin_inset Formula $h_{1},\dots,h_{M}$
+\end_inset
+
+ hypotheses as such
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+begin{align*}
+\end_layout
+
+\begin_layout Plain Layout
+h_1 &
+\backslash
+longrightarrow 
+\backslash
+hat{L}(h_1,S)
+\end_layout
+
+\begin_layout Plain Layout
+= 
+\backslash
+frac{1}{N}
+\backslash
+sum_{n=1}^{N}
+\backslash
+ell(h_1(X_n),Y_n)
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+h_2 &
+\backslash
+longrightarrow 
+\backslash
+hat{L}(h_2,S)
+\end_layout
+
+\begin_layout Plain Layout
+= 
+\backslash
+frac{1}{N}
+\backslash
+sum_{n=1}^{N}
+\backslash
+ell(h_2(X_n),Y_n)
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+vdots
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+h_M &
+\backslash
+longrightarrow 
+\backslash
+hat{L}(h_M,S)
+\end_layout
+
+\begin_layout Plain Layout
+= 
+\backslash
+frac{1}{N}
+\backslash
+sum_{n=1}^{N}
+\backslash
+ell(h_M(X_n),Y_n),
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{align*}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+and chosen 
+\begin_inset Formula $\hat{h^{*}_{S}}$
+\end_inset
+
+ with empirical risk minimization 
+\begin_inset Formula 
+\begin{align*}
+\hat{h^{*}_{S}} & =\arg\min_{h\in\mathcal{H}}\hat{L}(h,S)\\
+ & =\arg\min_{h\in\mathcal{H}}\left\{ \frac{1}{N}\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n})\right\} ,
+\end{align*}
+
+\end_inset
+
+where
+\series bold
+ 
+\begin_inset Formula $S$
+\end_inset
+
+
+\series default
+ is a validation sample (i.e.
+ not used for training) with elements 
+\begin_inset Formula $(X_{n},Y_{n})\overset{iid}{\sim}p$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang american
+Hoeffdings bound does not apply anymore!
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+The question is as follows:
+ 
+\emph on
+How bad can we expect our model to perform?
+
+\emph default
+ This is measured in terms of (true) risk
+\begin_inset Formula 
+\[
+\mathbb{E}_{(X,Y)\sim p}\left[\ell\left(\hat{h^{*}_{S}}(X),Y\right)\right],
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+where 
+\begin_inset Formula $p$
+\end_inset
+
+ is the probability distribution of the stochastic vector 
+\begin_inset Formula $(X,Y)$
+\end_inset
+
+.
+ We would ideally just plug and play with Hoeffding's inequality.
+ However this requires that 
+\begin_inset Formula 
+\[
+L\left(\hat{h^{*}_{S}}\right)=\mathbb{E}_{S}\left[\hat{L}\left(\hat{h^{*}_{S}},S\right)\right],
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+since
+\family typewriter
+
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left(L\left(\hat{h^{*}_{S}}\right)-\hat{L}\left(\hat{h^{*}_{S}},S\right)\geq\epsilon\right) & =\mathbb{P}\left(L\left(\hat{h^{*}_{S}}\right)-\frac{1}{N}\sum^{N}_{n=1}\ell\left(\hat{h^{*}_{S}}(X_{n}),Y_{n}\right)\geq\epsilon\right)\\
+ & =\mathbb{P}\left(NL\left(\hat{h^{*}_{S}}\right)-\sum^{N}_{n=1}\ell\left(\hat{h^{*}_{S}}(X_{n}),Y_{n}\right)\geq N\epsilon\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+For Hoeffdings bound to apply we would therefore need that
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang american
+To see this simply look at the inequality
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\mathbb{E}\left[\sum^{N}_{n=1}X_{n}\right]-\sum^{N}_{n=1}X_{n}\geq\epsilon\right)\leq\exp\left\{ -\frac{2\epsilon^{2}}{\sum^{N}_{n=1}(b_{n}-a_{n})^{2}}\right\} ,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang american
+from where we see that the left term needs to be 
+\begin_inset Formula $\mathbb{E}\left[\sum^{N}_{n=1}X_{n}\right]$
+\end_inset
+
+ i.e.
+ the expectation of the right term 
+\begin_inset Formula $\sum^{N}_{n=1}X_{n}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+NL\left(\hat{h^{*}_{S}}\right)=\mathbb{E}_{S\sim p^{N}}\left[\sum^{N}_{n=1}\ell\left(\hat{h^{*}_{S}}(X_{n}),Y_{n}\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+which implies 
+\begin_inset Formula 
+\[
+L\left(\hat{h^{*}_{S}}\right)=\mathbb{E}_{S\sim p^{N}}\left[\frac{1}{N}\sum^{N}_{n=1}\ell\left(\hat{h^{*}_{S}}(X_{n}),Y_{n}\right)\right]=\mathbb{E}_{S\sim p^{N}}\left[\hat{L}\left(\hat{h^{*}_{S}},S\right)\right].
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+This however does not generally hold since
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}_{S\sim p^{N}}\left[\hat{L}\left(\hat{h^{*}_{S}},S\right)\right] & =\mathbb{E}_{S\sim p^{N}}\left[\frac{1}{N}\sum^{N}_{n=1}\ell\left(\hat{h^{*}_{S}}(X_{n}),Y_{n}\right)\right]\\
+ & \neq\mathbb{E}_{(X_{1},Y_{1})\sim p}\left[\frac{1}{N}\sum^{N}_{n=1}\ell\left(\hat{h^{*}_{S}}(X_{1}),Y_{1}\right)\right],
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+since 
+\begin_inset Formula $\hat{h^{*}}_{S}$
+\end_inset
+
+ generally depends on the whole sample 
+\begin_inset Formula $S=\{(X_{1},Y_{1}),\dots,(X_{N},Y_{N})\}$
+\end_inset
+
+.
+ Therefore the stochastic variables 
+\begin_inset Formula $\ell\left(\hat{h^{*}}_{S}\left(X_{n}\right),Y_{n}\right)$
+\end_inset
+
+ are not independent (because 
+\begin_inset Formula $\hat{h^{*}}_{S}$
+\end_inset
+
+ was selected using 
+\begin_inset Formula $S_{-(X_{n},Y_{n})}$
+\end_inset
+
+) and therefore Hoeffding's inequality does not apply.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+The solution
+\series default
+:
+ Therefore we somehow need to break dependence of the hypothesis 
+\begin_inset Formula $\hat{h^{*}}_{S}$
+\end_inset
+
+ on the sample:
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left(L\left(\hat{h^{*}_{S}}\right)-\hat{L}\left(\hat{h^{*}_{S}},S\right)\geq\epsilon\right) & \leq\mathbb{P}\left(L\left(h_{1}\right)-\hat{L}\left(h_{1},S\right)\geq\epsilon\text{ or }\cdots\text{ or }L\left(h_{M}\right)-\hat{L}\left(h_{M},S\right)\geq\epsilon\right)\\
+ & =\mathbb{P}\left(\exists h\in\mathcal{H}:L\left(h\right)-\hat{L}\left(h,S\right)\geq\epsilon\right)\\
+ & \leq\sum^{M}_{j=1}\mathbb{P}\left(L\left(h_{j}\right)-\hat{L}\left(h_{j},S\right)\geq\epsilon\right)\\
+ & =\sum^{M}_{j=1}\mathbb{P}\left(N\underbrace{L\left(h_{j}\right)}_{\equiv\mathbb{E}_{(X,Y)\sim p}\left[\ell\left(h_{j}(X),Y\right)\right]}-\sum^{N}_{n=1}\ell\left(h_{j}(X_{n}),Y_{n}\right)\geq N\epsilon\right)\\
+ & =\sum^{M}_{j=1}\mathbb{P}\left(N\mathbb{E}_{S\sim p^{N}}\left[\frac{1}{N}\sum^{N}_{n=1}\ell\left(h_{j}(X),Y\right)\right]-\sum^{N}_{n=1}\ell\left(h_{j}(X_{n}),Y_{n}\right)\geq N\epsilon\right)\\
+ & \leq M\exp\left\{ -\frac{2(N\epsilon)^{2}}{\sum^{N}_{n=1}(b_{n}-a_{n})^{2}}\right\} \\
+ & =M\exp\left\{ -2N\epsilon^{2}\right\} ,
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+The first inequality holds simply because 
+\begin_inset Formula $\hat{h^{*}_{S}}\in\left\{ h_{1},h_{2},\dots,h_{M}\right\} $
+\end_inset
+
+.
+ The second inequality holds by the union bound:
+\begin_inset Formula 
+\[
+\mathbb{P}\left(A\cup B\right)=P(A)+P(B)-\mathbb{P}\left(A\cap B\right)\leq P(A)+P(B).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+From this we obtain
+\begin_inset Formula 
+\[
+\delta=M\exp\left\{ -2N\epsilon^{2}\right\} \iff\epsilon=\sqrt{\frac{1}{2N}\ln\left(\frac{M}{\delta}\right)},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+and further
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left(L\left(\hat{h^{*}_{S}}\right)\geq\hat{L}\left(\hat{h^{*}_{S}},S\right)+\sqrt{\frac{1}{2N}\ln\left(\frac{M}{\delta}\right)}\right) & \leq\delta\\
+\mathbb{P}\left(L\left(\hat{h^{*}_{S}}\right)<\hat{L}\left(\hat{h^{*}_{S}},S\right)+\sqrt{\frac{1}{2N}\ln\left(\frac{M}{\delta}\right)}\right) & \geq1-\delta.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+This is the result
+\series default
+:
+ From a finite predetermined hypothesis class with cardinality 
+\begin_inset Formula $|\mathcal{H}|=M$
+\end_inset
+
+ using the Empirical Risk Minimizer (ERM) - or any selection over 
+\begin_inset Formula $h$
+\end_inset
+
+!
+ Since:
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\exists h\in\mathcal{H}:L\left(h\right)\geq\hat{L}\left(h,S\right)+\sqrt{\frac{1}{2N}\ln\left(\frac{M}{\delta}\right)}\right)\leq\delta,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+and in particular for the ERM hypothesis 
+\begin_inset Formula $\hat{h^{*}_{S}}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left(L\left(\hat{h^{*}_{S}}\right)\geq\hat{L}\left(\hat{h^{*}_{S}},S\right)+\sqrt{\frac{1}{2N}\ln\left(\frac{M}{\delta}\right)}\right)\leq\delta.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Lower Bound
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+In general there is a lower bound on how well bounding inequalities can work.
+ Concretely we use Hoeffding's inequality,
+ but could this be improved?
+ And how much?
+ To answer the first:
+ yes,
+ it has been improved.
+ For the second question:
+ we can show that there is a limit to how much bounding can happen in general.
+ We call this a lower bound which answers the question:
+ In general what is the lowest upper bound we can impose on an event?
+ or:
+ It tells us that we can never be 
+\emph on
+this
+\emph default
+ certain (i.e.
+ 
+\begin_inset Formula $\delta$
+\end_inset
+
+ cannot be this low) using bounding techniques.
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+In short the lectures construct an example for a specific hypothesis space 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\exists h\in\mathcal{H}:L\left(h\right)\geq\hat{L}\left(h,S\right)+\frac{1}{8}\right)\geq\frac{1}{8}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Approximation and Estimation error
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Approximation error comes from restricting 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ so that the Bayes optimal hypothestical choice is omittet (i.e.
+ the 
+\begin_inset Formula $h$
+\end_inset
+
+ that would generate the lowest 
+\begin_inset Formula $L(h)$
+\end_inset
+
+ is not in 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Estimation defines the variance in selecting the best hypothesis in class 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+:
+ there is an 
+\begin_inset Formula $h^{*}=\arg\min_{h\in\mathcal{H}}L(h)$
+\end_inset
+
+ but using data we are not sure to find it.
+ we most likely find 
+\begin_inset Formula $L(\hat{h})<L(h^{*})$
+\end_inset
+
+.
+ This is the estimation error.
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+newpage
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+vspace{10cm}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+Huge 
+\backslash
+textbf{II | Supervised Learning}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+addtocontents{toc}{
+\backslash
+protect
+\backslash
+vspace{15pt}}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+addcontentsline{toc}{section}{Supervised Learning}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+vfill
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\lang american
+Linear regression
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Linear Algebra prerequisites
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang american
+Singular Value Decomposition
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Statement
+\series default
+:
+ For any real matrix 
+\begin_inset Formula $X\in\mathbb{R}^{N\times d}$
+\end_inset
+
+ we can write
+\begin_inset Formula 
+\[
+X=U\Gamma V',
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+where 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ are semi-orthogonal and 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is a diagonal matrix with non-negative entries.
+ The dimensions of all matrices depend on 
+\begin_inset Formula $r=rank(X)$
+\end_inset
+
+ see proof.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Proof
+\series default
+:
+ Consider the symmetric matrix 
+\begin_inset Formula $B=X'X\in\mathbb{R}^{n\times n}$
+\end_inset
+
+ (which can be shown in one line:
+ 
+\begin_inset Formula $(X'X)'=X'X$
+\end_inset
+
+) that by the spectral theorem 
+\begin_inset Formula $B$
+\end_inset
+
+ has 
+\begin_inset Formula $n$
+\end_inset
+
+ orthonormal eigenvectors 
+\begin_inset Formula $\mathbf{v}_{1},\dots,\mathbf{v}_{n}$
+\end_inset
+
+.
+ Furthermore this implies that the eigenvalues are non-negative:
+\begin_inset Formula 
+\begin{align*}
+\lambda_{i} & =\lambda_{i}\mathbf{v}_{i}'\mathbf{v}_{i}\\
+ & =\mathbf{v}_{i}'\lambda_{i}\mathbf{v}_{i}\\
+ & =\mathbf{v}_{i}'(X'X)\mathbf{v}_{i}\\
+ & =(X\mathbf{v}_{i})'(X\mathbf{v}_{i})\\
+ & =||X\mathbf{v}_{i}||^{2}_{2}\geq0.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Now define the singular values 
+\begin_inset Formula $\sigma_{i}\equiv\sqrt{\lambda_{i}}$
+\end_inset
+
+ and define 
+\begin_inset Formula $\mathbf{u}_{i}\equiv X\mathbf{v}_{i}/\sigma_{i}$
+\end_inset
+
+.
+ The latter can be shown to be orthonormal for the collection 
+\begin_inset Formula $i=1,\dots,r$
+\end_inset
+
+ where 
+\begin_inset Formula $r=rank(X)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+To verify orthonormality,
+ note that for $i,j
+\backslash
+leq r$,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{align*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbf{u}_i'
+\backslash
+mathbf{u}_j
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\backslash
+frac{
+\backslash
+mathbf{v}_i'X'X
+\backslash
+mathbf{v}_j}{
+\backslash
+sigma_i
+\backslash
+sigma_j}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\backslash
+frac{
+\backslash
+lambda_j}{
+\backslash
+sigma_i
+\backslash
+sigma_j}
+\backslash
+mathbf{v}_i'
+\backslash
+mathbf{v}_j
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\backslash
+frac{
+\backslash
+sigma_j}{
+\backslash
+sigma_i}
+\backslash
+delta_{ij}
+\end_layout
+
+\begin_layout Plain Layout
+=
+\backslash
+delta_{ij}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{align*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+We can complete these $r$ vectors to an orthonormal basis of
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+mathbb{R}^N$,
+ forming the orthogonal matrix
+\end_layout
+
+\begin_layout Plain Layout
+$U=[
+\backslash
+mathbf{u}_1,
+\backslash
+dots,
+\backslash
+mathbf{u}_N]$.
+\end_layout
+
+\begin_layout Plain Layout
+Similarly,
+ let $V=[
+\backslash
+mathbf{v}_1,
+\backslash
+dots,
+\backslash
+mathbf{v}_d]$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+By construction,
+ $X
+\backslash
+mathbf{v}_i=
+\backslash
+sigma_i
+\backslash
+mathbf{u}_i$
+\end_layout
+
+\begin_layout Plain Layout
+for $i
+\backslash
+leq r$.
+ For $i>r$,
+ we have $
+\backslash
+lambda_i=0$,
+\end_layout
+
+\begin_layout Plain Layout
+implying $
+\backslash
+|X
+\backslash
+mathbf{v}_i
+\backslash
+|_2^2=0$ and hence
+\end_layout
+
+\begin_layout Plain Layout
+$X
+\backslash
+mathbf{v}_i=0$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Consequently,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+XV=U
+\backslash
+Gamma,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+where $
+\backslash
+Gamma
+\backslash
+in
+\backslash
+mathbb{R}^{N
+\backslash
+times d}$ is rectangular
+\end_layout
+
+\begin_layout Plain Layout
+diagonal with entries $
+\backslash
+sigma_1,
+\backslash
+dots,
+\backslash
+sigma_r>0$
+\end_layout
+
+\begin_layout Plain Layout
+and zeros elsewhere.
+ Since $VV'=I_d$,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+X=U
+\backslash
+Gamma V'.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+This holds regardless of whether $N>d$ or $N<d$.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang american
+The Spectral Theorem
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Statement:
+ 
+\series default
+Any real valued symmetrix matrix 
+\begin_inset Formula $A\in\mathbb{R}^{n\times n}$
+\end_inset
+
+ can be written as
+\begin_inset Formula 
+\[
+A=Q\Lambda Q',
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+where 
+\begin_inset Formula $Q=\begin{bmatrix}\mathbf{v}_{1} & \mathbf{v}_{2} & \cdots & \mathbf{v}_{n}\end{bmatrix}\in\mathbb{R}^{n\times n}$
+\end_inset
+
+ holds 
+\begin_inset Formula $n$
+\end_inset
+
+ orthogonal real-valued eigenvectors and 
+\begin_inset Formula $\Lambda=diag(\lambda_{1},\cdots,\lambda_{n})$
+\end_inset
+
+ holds their respective eigenvalues.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Proof
+\series default
+:
+ Firstly we show that any real valued symmetric (i.e.
+ 
+\begin_inset Formula $A=A'$
+\end_inset
+
+) matrix 
+\begin_inset Formula $A\in\mathbb{R}^{n\times n}$
+\end_inset
+
+ has at least one real-valued eigenvector 
+\begin_inset Formula $\mathbf{v}_{1}$
+\end_inset
+
+.
+ Then we show that 
+\begin_inset Formula $A$
+\end_inset
+
+ preserves the subspace orthogonal to 
+\begin_inset Formula $\mathbf{v}_{1}$
+\end_inset
+
+ that is 
+\begin_inset Formula $\mathbf{v}_{1}'A\mathbf{x}=0$
+\end_inset
+
+ iff 
+\begin_inset Formula $\mathbf{v}_{1}'\mathbf{x}=0$
+\end_inset
+
+ and using this fact we iteratively contruct 
+\begin_inset Formula $n$
+\end_inset
+
+ real-valued orthogonal eigenvectors.
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+We want to maximise the following (subject to the unit circle)
+\begin_inset Formula 
+\[
+\max_{\mathbf{x}'\mathbf{x}=1}\mathbf{x}'A\mathbf{x},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+with the lagrangian
+\begin_inset Formula 
+\[
+\mathcal{L}(\mathbf{x})=\mathbf{x}'A\mathbf{x}-\lambda\left(\mathbf{x}'\mathbf{x}-1\right),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+and its first order conditions
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial\mathcal{L}}{\partial\mathbf{x}}|_{\mathbf{x}=\mathbf{x}^{*}} & =(A+A')\mathbf{x}^{*}-2\lambda\mathbf{x}^{*}=2A\mathbf{x}^{*}-2\lambda\mathbf{x}^{*}=0\\
+A\mathbf{x}^{*} & =\lambda\mathbf{x}^{*},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+where the second equality uses symmetry 
+\begin_inset Formula $A=A'$
+\end_inset
+
+.
+ Thus we have shown that there exists a vector 
+\begin_inset Formula $\mathbf{v}_{1}=\mathbf{x}^{*}$
+\end_inset
+
+ with the associated eigenvalue 
+\begin_inset Formula $\lambda_{1}$
+\end_inset
+
+.
+ From here we continue by finding the next eigenvector.
+ We simply solve the same maximisation problem with the added restriction 
+\begin_inset Formula $\mathbf{v}_{1}'\mathbf{x}=0$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\max_{\mathbf{x}'\mathbf{x}=1,\mathbf{v}_{1}'\mathbf{x}=0}\mathbf{x}'A\mathbf{x},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+with the lagrangian
+\begin_inset Formula 
+\[
+\mathcal{L}(\mathbf{x})=\mathbf{x}'A\mathbf{x}-\lambda\left(\mathbf{x}'\mathbf{x}-1\right)-\mu\left(\mathbf{v}_{1}'\mathbf{x}\right),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+and the first order condition
+\begin_inset Formula 
+\[
+A\mathbf{x}^{*}=\lambda\mathbf{x}^{*}+\mu\mathbf{v}_{1}=\lambda\mathbf{x}^{*},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+where the last inequality (i.e.
+ 
+\begin_inset Formula $\mu=0$
+\end_inset
+
+) follows from symmetry of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang american
+To see this let 
+\begin_inset Formula $\mathbf{v}_{1}'\mathbf{w}=0$
+\end_inset
+
+ then because of symmetry
+\begin_inset Formula 
+\[
+\mathbf{v}_{1}'A\mathbf{w}=\left(A\mathbf{v}_{1}\right)'\mathbf{w}=\left(\lambda\mathbf{v}_{1}\right)'\mathbf{w}=\lambda\mathbf{v}_{1}'\mathbf{w}=0
+\]
+
+\end_inset
+
+ and therefore
+\begin_inset Formula 
+\[
+\underbrace{\mathbf{v}_{1}'A\mathbf{x}^{*}}_{=0}=\lambda\underbrace{\mathbf{v}_{1}'\mathbf{x}^{*}}_{=0}+\mu\underbrace{\mathbf{v}_{1}'\mathbf{v}_{1}}_{=1}\iff\mu=0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Therefore we have found another eigenvector which we name 
+\begin_inset Formula $\mathbf{v}_{2}$
+\end_inset
+
+ and its associated eigenvalue 
+\begin_inset Formula $\lambda_{2}$
+\end_inset
+
+.
+ Keep going like this and find all 
+\begin_inset Formula $n$
+\end_inset
+
+ eigenvectors to obtain
+\begin_inset Formula 
+\[
+A\mathbf{v}_{i}=\lambda_{i}\mathbf{v}_{i},\:i=1,\dots,n,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+which allows us to write
+\begin_inset Formula 
+\[
+AQ=Q\Lambda,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+where 
+\begin_inset Formula $Q=\begin{bmatrix}\mathbf{v}_{1} & \mathbf{v}_{2} & \cdots & \mathbf{v}_{n}\end{bmatrix}\in\mathbb{R}^{n\times n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Lambda=diag(\lambda_{1},\cdots,\lambda_{n})$
+\end_inset
+
+.
+ Now remember that the eigenvectors are constructed iterately where the 
+\begin_inset Formula $j$
+\end_inset
+
+th eigenvector is orthogonal to the preceeding 
+\begin_inset Formula $j-1$
+\end_inset
+
+ eigenvectors.
+\begin_inset Formula 
+\[
+\mathbf{v}_{i}'\mathbf{v}_{j}=\begin{cases}
+1 & \text{if }i=j\\
+0 & \text{if }i\neq j
+\end{cases},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+which can be collected into a matrix 
+\begin_inset Formula $Q=\begin{bmatrix}\mathbf{v}_{1}' & \mathbf{v}_{2}' & \cdots & \mathbf{v}_{n}'\end{bmatrix}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\begin{align*}
+QQ' & =\begin{bmatrix}\mathbf{v}_{1}\\
+\mathbf{v}_{2}\\
+\vdots\\
+\mathbf{v}_{n}
+\end{bmatrix}\begin{bmatrix}\mathbf{v}_{1} & \mathbf{v}_{2} & \cdots & \mathbf{v}_{n}\end{bmatrix}=\begin{bmatrix}1 & 0 & \cdots & 0\\
+0 & 1 & \cdots & 0\\
+\vdots & \vdots & \ddots & \vdots\\
+0 & 0 & \cdots & 1
+\end{bmatrix}=I_{n}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Therefore we have 
+\begin_inset Formula 
+\[
+AQ=Q\Lambda\iff A=Q\Lambda Q'
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+thus completing the proof.
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Overidentified case:
+ 
+\begin_inset Formula $N>rank(X)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Let the design matrix be defined as 
+\begin_inset Formula 
+\[
+X=\begin{bmatrix}\phi(\mathbf{x}_{1})' & 1\\
+\vdots & \vdots\\
+\phi(\mathbf{x}_{n})' & 1
+\end{bmatrix}\in\mathbb{R}^{N\times d+1},
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $\phi(\mathbf{x}_{i})\in\mathbb{R}^{d}$
+\end_inset
+
+ is observation 
+\begin_inset Formula $i=1,\dots,N$
+\end_inset
+
+ which is possibly transformed / constructed from the raw data.
+ That is the raw data for person / observation 
+\begin_inset Formula $i$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+ is used to extract the features 
+\begin_inset Formula $\phi(\mathbf{x}_{i})\in\mathbb{R}^{d}$
+\end_inset
+
+.
+ For example we could have
+\begin_inset Formula 
+\[
+\phi(\begin{bmatrix}age_{i} & height_{i}\end{bmatrix}')=\begin{bmatrix}age_{i} & age^{2}_{i} & height_{i}\end{bmatrix}',
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+so that the dimensionality of the feature space is 
+\begin_inset Formula $d=3$
+\end_inset
+
+ and larger than the underlying raw datasets 
+\begin_inset Formula $2$
+\end_inset
+
+ dimensions.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Problem:
+ 
+\series default
+For 
+\begin_inset Formula $N>d+1$
+\end_inset
+
+ and no linearly dependent columns in 
+\begin_inset Formula $X$
+\end_inset
+
+ then 
+\begin_inset Formula $X'X$
+\end_inset
+
+ has full rank and the following minimisation problem (using the MSE as loss function) has exactely one solution
+\begin_inset Formula 
+\begin{align*}
+\hat{\boldsymbol{\mathbf{w}}}= & \text{arg}\min_{\mathbf{\mathbf{w}}\in\mathbb{R}^{d+1}}\frac{1}{N}\sum^{N}_{i=1}(y_{i}-\mathbf{w}'\tilde{\phi}(\mathbf{x}_{i}))^{2}\\
+= & \text{arg}\min_{\mathbf{\mathbf{w}}\in\mathbb{R}^{d+1}}\frac{1}{N}\left(\mathbf{y}-X\mathbf{w}\right)'\left(\mathbf{y}-X\mathbf{w}\right),
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+where 
+\begin_inset Formula $\tilde{\phi}(\mathbf{x}_{i})=\begin{bmatrix}\phi(\mathbf{x}_{i}) & 1\end{bmatrix}'\in\mathbb{R}^{d+1}$
+\end_inset
+
+ describes the possible transformation of the raw underlying data 
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Solution:
+ 
+\series default
+The first order condition of the problem is
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial L}{\partial\mathbf{w}}=\frac{2}{N}X'(\mathbf{y}-X\mathbf{w}) & =0\\
+\mathbf{w}=(X'X)^{-1}X'\mathbf{y},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+which yields the well known OLS estimator.
+ Here the error is visualized:
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\lang american
+\begin_inset Graphics
+	filename pictures/OLSerror.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang american
+OLS is equivalent with Gaussian MLE
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+Assume $y_i = f_{
+\backslash
+mathbf{w}}(
+\backslash
+mathbf{x}_i) + 
+\backslash
+varepsilon_i$,
+\end_layout
+
+\begin_layout Plain Layout
+where $
+\backslash
+varepsilon_i 
+\backslash
+overset{i.i.d.}{
+\backslash
+sim} 
+\backslash
+mathcal{N}(0,
+\backslash
+sigma^2)$.
+\end_layout
+
+\begin_layout Plain Layout
+Then the likelihood is
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+L(
+\backslash
+mathbf{w})
+\end_layout
+
+\begin_layout Plain Layout
+= 
+\backslash
+prod_{i=1}^{N} p(y_i 
+\backslash
+mid 
+\backslash
+mathbf{x}_i;
+\backslash
+mathbf{w})
+\end_layout
+
+\begin_layout Plain Layout
+= 
+\backslash
+prod_{i=1}^{N} 
+\backslash
+frac{1}{
+\backslash
+sqrt{2
+\backslash
+pi
+\backslash
+sigma^2}}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+exp
+\backslash
+left(-
+\backslash
+frac{(y_i-f_{
+\backslash
+mathbf{w}}(
+\backslash
+mathbf{x}_i))^2}{2
+\backslash
+sigma^2}
+\backslash
+right).
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Taking the negative log-likelihood gives
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+-
+\backslash
+log L(
+\backslash
+mathbf{w})
+\end_layout
+
+\begin_layout Plain Layout
+= 
+\backslash
+frac{N}{2}
+\backslash
+log(2
+\backslash
+pi
+\backslash
+sigma^2)
+\end_layout
+
+\begin_layout Plain Layout
++ 
+\backslash
+frac{1}{2
+\backslash
+sigma^2}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+sum_{i=1}^{N}(y_i-f_{
+\backslash
+mathbf{w}}(
+\backslash
+mathbf{x}_i))^2.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Hence,
+ for fixed $
+\backslash
+sigma^2$,
+ maximum likelihood estimation is equivalent to
+\end_layout
+
+\begin_layout Plain Layout
+minimizing the mean squared error:
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+hat{
+\backslash
+mathbf{w}}_{
+\backslash
+mathrm{MLE}}
+\end_layout
+
+\begin_layout Plain Layout
+= 
+\backslash
+arg
+\backslash
+max_{
+\backslash
+mathbf{w}} L(
+\backslash
+mathbf{w})
+\end_layout
+
+\begin_layout Plain Layout
+= 
+\backslash
+arg
+\backslash
+min_{
+\backslash
+mathbf{w}} 
+\backslash
+frac{1}{N}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+sum_{i=1}^{N}(y_i-f_{
+\backslash
+mathbf{w}}(
+\backslash
+mathbf{x}_i))^2.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Underidentified case:
+ 
+\begin_inset Formula $N<rank(X)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+When 
+\begin_inset Formula $N<rank(X)$
+\end_inset
+
+ the system of equations 
+\begin_inset Formula $\mathbf{w}=(X'X)^{-1}X'\mathbf{y}$
+\end_inset
+
+ has infinitely many solutions.
+ Therefore we need a way to choose a good 
+\begin_inset Formula $\mathbf{w}$
+\end_inset
+
+ amongs the many solutions that satisfy 
+\begin_inset Formula $\mathbf{w}_{i}'\mathbf{x}_{i}=y_{i},\;i=1,\dots,N$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang american
+Minimum-norm solution
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Problem:
+ 
+\series default
+One sensible way to estimate the model is to choose the weighting vector 
+\begin_inset Formula $\mathbf{w}$
+\end_inset
+
+ with the smallest euclidian norm where the model still fits the training data perfectly:
+\begin_inset Formula 
+\[
+\hat{\boldsymbol{\mathbf{w}}}=\text{arg}\min_{\mathbf{\mathbf{w}}\in\mathbb{R}^{d+1}}||\mathbf{w}||^{2}_{2}\text{ s.t. }\forall i:\mathbf{w}_{i}'\mathbf{x}_{i}=y_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Solution:
+ 
+\series default
+We solve the constrained optimization problem using that the linear constraint can be written as 
+\begin_inset Formula $\mathbf{w}_{i}'\mathbf{x}_{i}=y_{i}\iff X\mathbf{w}=\mathbf{y}.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Setting up the lagrangian 
+\begin_inset Formula 
+\begin{align*}
+\mathcal{L}(\mathbf{w},\boldsymbol{\lambda}) & =\mathbf{w}^{\top}w-\sum^{N}_{n=1}\lambda_{n}\left(\mathbf{w}_{n}'\mathbf{x}_{n}-y_{n}\right)\\
+ & \mathbf{=\mathbf{w}^{\top}w-\boldsymbol{\lambda}^{\top}(X\mathbf{w}-\mathbf{y})},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+First-order condition with respect to 
+\begin_inset Formula $\mathbf{w}$
+\end_inset
+
+ gives
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+nabla_{
+\backslash
+mathbf{w}}
+\backslash
+mathcal{L}
+\end_layout
+
+\begin_layout Plain Layout
+=2
+\backslash
+mathbf{w}-X^
+\backslash
+top
+\backslash
+boldsymbol{
+\backslash
+lambda}=0
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+quad
+\backslash
+Longrightarrow
+\backslash
+quad
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbf{w}=
+\backslash
+frac12 X^
+\backslash
+top
+\backslash
+boldsymbol{
+\backslash
+lambda}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Substituting into the constraint yields
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+X
+\backslash
+mathbf{w}=
+\backslash
+mathbf{y}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+quad
+\backslash
+Longrightarrow
+\backslash
+quad
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+frac12 XX^
+\backslash
+top
+\backslash
+boldsymbol{
+\backslash
+lambda}=
+\backslash
+mathbf{y}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+quad
+\backslash
+Longrightarrow
+\backslash
+quad
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+boldsymbol{
+\backslash
+lambda}=2(XX^
+\backslash
+top)^{-1}
+\backslash
+mathbf{y}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Hence,
+ the minimum-norm solution is
+\series bold
+
+\begin_inset Formula 
+\[
+\hat{\mathbf{w}}=\underbrace{X^{\top}(XX^{\top})^{-1}}_{=X^{\dagger}}\mathbf{y}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang american
+Singular Value Decomposition and the Pseudoinverse
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Any matrix $X
+\backslash
+in
+\backslash
+mathbb{R}^{N
+\backslash
+times d}$ admits a singular value decomposition (SVD)
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+X=U
+\backslash
+Gamma V^
+\backslash
+top,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+where,
+ for $r=
+\backslash
+min
+\backslash
+{N,d
+\backslash
+}$,
+ $U
+\backslash
+in
+\backslash
+mathbb{R}^{N
+\backslash
+times r}$
+\end_layout
+
+\begin_layout Plain Layout
+and $V
+\backslash
+in
+\backslash
+mathbb{R}^{d
+\backslash
+times r}$ are semi-orthogonal,
+ and
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+Gamma=
+\backslash
+operatorname{diag}(
+\backslash
+sigma_1,
+\backslash
+ldots,
+\backslash
+sigma_r)$
+\end_layout
+
+\begin_layout Plain Layout
+contains the singular values
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+sigma_1
+\backslash
+geq
+\backslash
+cdots
+\backslash
+geq
+\backslash
+sigma_r
+\backslash
+geq 0$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+paragraph{Ordinary Least Squares ($N
+\backslash
+geq d$).}
+\end_layout
+
+\begin_layout Plain Layout
+Assuming full column rank,
+ the OLS estimator is
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+hat{
+\backslash
+mathbf{w}}_{
+\backslash
+mathrm{OLS}}
+\end_layout
+
+\begin_layout Plain Layout
+&=(X^
+\backslash
+top X)^{-1}X^
+\backslash
+top
+\backslash
+mathbf{y}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&=(V
+\backslash
+Gamma^2V^
+\backslash
+top)^{-1}V
+\backslash
+Gamma U^
+\backslash
+top
+\backslash
+mathbf{y}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&=V
+\backslash
+Gamma^{-1}U^
+\backslash
+top
+\backslash
+mathbf{y}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+paragraph{Minimum-Norm Interpolation ($N
+\backslash
+leq d$).}
+\end_layout
+
+\begin_layout Plain Layout
+Assuming full row rank,
+ the minimum-norm solution satisfying
+\end_layout
+
+\begin_layout Plain Layout
+$X
+\backslash
+mathbf{w}=
+\backslash
+mathbf{y}$ is
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+hat{
+\backslash
+mathbf{w}}_{
+\backslash
+mathrm{MN}}
+\end_layout
+
+\begin_layout Plain Layout
+&=X^
+\backslash
+top(XX^
+\backslash
+top)^{-1}
+\backslash
+mathbf{y}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&=V
+\backslash
+Gamma U^
+\backslash
+top(U
+\backslash
+Gamma^2U^
+\backslash
+top)^{-1}
+\backslash
+mathbf{y}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&=V
+\backslash
+Gamma^{-1}U^
+\backslash
+top
+\backslash
+mathbf{y}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Thus,
+ both estimators can be expressed using the
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Moore-Penrose pseudoinverse}:
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+hat{
+\backslash
+mathbf{w}}=X^
+\backslash
+dagger
+\backslash
+mathbf{y},
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad X^
+\backslash
+dagger=V
+\backslash
+Gamma^
+\backslash
+dagger U^
+\backslash
+top,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+where $
+\backslash
+Gamma^
+\backslash
+dagger$ is diagonal with entries
+\end_layout
+
+\begin_layout Plain Layout
+$1/
+\backslash
+sigma_i$ if $
+\backslash
+sigma_i>0$ and $0$ otherwise.
+\end_layout
+
+\begin_layout Plain Layout
+This also holds for rank-deficient matrices,
+ in which case
+\end_layout
+
+\begin_layout Plain Layout
+the pseudoinverse selects the minimum-norm least-squares solution.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+paragraph{Why use SVD?}
+\end_layout
+
+\begin_layout Plain Layout
+Computing $(X^
+\backslash
+top X)^{-1}$ directly can be numerically unstable
+\end_layout
+
+\begin_layout Plain Layout
+because forming $X^
+\backslash
+top X$ squares the condition number:
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+kappa(X^
+\backslash
+top X)=
+\backslash
+kappa(X)^2.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+SVD avoids this squaring and handles rank deficiency by
+\end_layout
+
+\begin_layout Plain Layout
+inverting only nonzero singular values.
+ However,
+ very small
+\end_layout
+
+\begin_layout Plain Layout
+singular values can still amplify numerical errors,
+ motivating
+\end_layout
+
+\begin_layout Plain Layout
+regularization or truncation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang american
+Ridge regression (Two-norm regularization)
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Problem:
+ 
+\series default
+Add regularisation term 
+\begin_inset Formula $\lambda||\mathbf{w}||^{2}_{2}$
+\end_inset
+
+ with 
+\begin_inset Formula $\lambda>0$
+\end_inset
+
+ and the problem of ridge regression becomes
+\begin_inset Formula 
+\begin{align*}
+\hat{\boldsymbol{\mathbf{w}}} & =\text{arg}\min_{\mathbf{\mathbf{w}}\in\mathbb{R}^{d+1}}\frac{1}{N}\sum^{N}_{i=1}(y_{i}-\mathbf{w}'\boldsymbol{\tilde{\phi}}(\mathbf{x}_{i}))^{2}+\lambda||\mathbf{w}||^{2}_{2}\\
+ & =\text{arg}\min_{\mathbf{\mathbf{w}}\in\mathbb{R}^{d+1}}\frac{1}{N}\left(\mathbf{y}-X\mathbf{w}\right)'\left(\mathbf{y}-X\mathbf{w}\right)+\lambda\mathbf{w}'\mathbf{w},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Solution:
+ 
+\series default
+The first order condition (of the lagrangian) are
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial L}{\partial\mathbf{w}}|_{\mathbf{w}=\hat{\mathbf{w}}} & =\frac{2}{N}\left(X'(\mathbf{y}-X\hat{\mathbf{w}})+\lambda\hat{\mathbf{w}}\right)=0\\
+\hat{\mathbf{w}} & =(X'X+\lambda I_{d+1})X'\mathbf{y}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Note that for 
+\begin_inset Formula $\lambda\rightarrow0$
+\end_inset
+
+ the solution approaches that of OLS and for 
+\begin_inset Formula $\lambda\rightarrow\infty$
+\end_inset
+
+ the solution goes to 0 
+\begin_inset Formula $\hat{\mathbf{w}}\rightarrow\mathbf{0}$
+\end_inset
+
+.
+ Intuitively this is because weight-elements other than 0 are penalised a lot.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Choosing regularization paramter:
+ 
+\series default
+
+\begin_inset Formula $\lambda$
+\end_inset
+
+ can be chosen by cross validation (choosing the 
+\begin_inset Formula $\lambda^{*}$
+\end_inset
+
+ minimzing CV risk).
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang american
+Equivalence theorem
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Ridge regression can be seen as solving
+\begin_inset Formula 
+\[
+\text{arg }\min_{\mathbf{w}\in\mathbb{R}^{d+1}}\frac{1}{N}\sum^{N}_{i=1}(y_{i}-\boldsymbol{\tilde{\phi}}(\mathbf{x}_{i}))^{2}\;\text{s.t. }||\mathbf{w}||_{2}\leq C,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+becuase this is equivalent to the ridge regression problem:
+\begin_inset Formula 
+\[
+\text{arg}\min_{\mathbf{\mathbf{w}}\in\mathbb{R}^{d+1}}\frac{1}{N}\left(\mathbf{y}-X\mathbf{w}\right)'\left(\mathbf{y}-X\mathbf{w}\right)+\lambda\mathbf{w}'\mathbf{w},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+for some 
+\begin_inset Formula $\lambda=f(C)$
+\end_inset
+
+ depending on C.
+ This is visualized here
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\lang american
+\begin_inset Graphics
+	filename pictures/equivalence_thm.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+This intepretation is useful because of what the restricted hypothesis space (where 
+\begin_inset Formula $||\mathbf{w}||_{2}\leq C$
+\end_inset
+
+) tries to implement for the affine linear hypothesis 
+\begin_inset Formula $\boldsymbol{\tilde{\phi}}(\mathbf{x}_{i})$
+\end_inset
+
+).
+ Formally let 
+\begin_inset Formula $\tilde{\phi}:\mathbb{R}^{d_{0}}\rightarrow\mathbb{R}^{d+1}$
+\end_inset
+
+ (where 
+\begin_inset Formula $d_{0}$
+\end_inset
+
+ is the dimensions of the raw underlying data which the featurespace 
+\begin_inset Formula $\mathbb{R}^{d+1}$
+\end_inset
+
+ is created from).
+ be continuous and Lipschits with constant 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ meaning:
+ 
+\begin_inset Formula 
+\[
+||\boldsymbol{\tilde{\phi}}(\mathbf{x}_{1})-\boldsymbol{\tilde{\phi}}(\mathbf{x}_{2})||_{2}\leq\alpha||\mathbf{x}_{1}-\mathbf{x}_{2}||_{2},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+for 
+\begin_inset Formula $\mathbf{x}_{1},\mathbf{x}_{2}\in\mathbb{R}^{d_{0}}$
+\end_inset
+
+.
+ Then the functions 
+\begin_inset Formula $h:\mathbb{R}^{d_{0}}\rightarrow\mathbb{R}^{1}$
+\end_inset
+
+ in 
+\begin_inset Formula 
+\[
+\mathcal{H}_{C}=\left\{ h(\mathbf{x})=\mathbf{w}'\boldsymbol{\tilde{\phi}}(\mathbf{x})\mid\mathbf{w}\in\mathbb{R}^{d+1}\text{ and }||\mathbf{w}||_{2}\leq C\right\} ,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+will be Lipschitz with constant 
+\begin_inset Formula $C\cdot$
+\end_inset
+
+
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ In other words 
+\begin_inset Formula $C$
+\end_inset
+
+ limits how fast the prediction rule / hypothesis 
+\begin_inset Formula $h$
+\end_inset
+
+ can change.
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang american
+Lasso regression (One-norm regularization)
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Much the same as ridge regression but where we add the l1-norm regularization (to reduce the number of active dimensions - i.e.
+ increase number of weights equal to 
+\begin_inset Formula $0$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbf{w}$
+\end_inset
+
+)
+\begin_inset Formula 
+\begin{align*}
+\hat{\boldsymbol{\mathbf{w}}} & =\text{arg}\min_{\mathbf{\mathbf{w}}\in\mathbb{R}^{d+1}}\frac{1}{N}\sum^{N}_{i=1}(y_{i}-\mathbf{w}'\boldsymbol{\tilde{\phi}}(\mathbf{x}_{i}))^{2}+\lambda||\mathbf{w}||_{1}\\
+ & =\text{arg}\min_{\mathbf{\mathbf{w}}\in\mathbb{R}^{d+1}}\frac{1}{N}\left(\mathbf{y}-X\mathbf{w}\right)'\left(\mathbf{y}-X\mathbf{w}\right)+\lambda\sum^{d}_{j=1}|w_{j}|
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+The sparcity effect is visualized here
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\lang american
+\begin_inset Graphics
+	filename pictures/lasso_vs_ridge.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Comment on double descent 
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Sometimes when letting the number of parameters grow 
+\begin_inset Formula $d>>N$
+\end_inset
+
+ - while including a regularization term like 
+\begin_inset Formula $\lambda||\mathbf{w}||^{2}_{2},\;\lambda>0$
+\end_inset
+
+ then at some point testing error can start diminishing rather than keep increasing.
+ This can even result in lower empirical test loss than models with 
+\begin_inset Formula $d<N$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+The name comes from the stylized fact that test loss decreases when adding model dimensions 
+\begin_inset Formula $d$
+\end_inset
+
+ and 
+\begin_inset Formula $d$
+\end_inset
+
+ is low.
+ At some point the model overfits and testing empirical risk increases.
+ And then the magic can enter for 
+\begin_inset Formula $d>>N$
+\end_inset
+
+ where the test loss again decreases!
+\end_layout
+
+\begin_layout Section
+Linear Classification 
+\end_layout
+
+\begin_layout Standard
+The task of linear classification is to predict the correct class 
+\begin_inset Formula $\mathcal{Y}\in\{\mathcal{C}_{1},\dots,\mathcal{C}_{m}\},\:2\leq m$
+\end_inset
+
+ from the input 
+\begin_inset Formula $\mathbf{x}_{i}\in\mathcal{X}$
+\end_inset
+
+.
+ One approach is to learn the discriminant functions 
+\begin_inset Formula $\delta_{k}:\mathcal{X}\rightarrow\mathbb{R}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $k=1,\dots,m$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\hat{y}_{i}=h(\mathbf{x}_{i})=\text{arg}\max_{k\in\{1,\dots,m\}}\delta_{k}(\mathbf{x}_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We specify affine linear discriminant functions
+\begin_inset Formula 
+\[
+\delta(\mathbf{x}_{i})=\mathbf{w}'\boldsymbol{\phi}(\mathbf{\tilde{x}}_{i}),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{x}_{i}=\boldsymbol{\phi}(\mathbf{\tilde{x}}_{i})$
+\end_inset
+
+ is the features always augmentet to hold a 
+\begin_inset Formula $1$
+\end_inset
+
+ (so that the model is affine linear - just like in linear regression) and can also hold many other features created from the raw data 
+\begin_inset Formula $\tilde{\mathbf{x}_{i}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Logistic regression
+\end_layout
+
+\begin_layout Subsubsection
+Binary case
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathcal{Y}\in\{1,-1\}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\theta:\mathbb{R}\rightarrow[0,1]$
+\end_inset
+
+ be the sigmoid function defined by 
+\begin_inset Formula 
+\[
+\theta(s)=\frac{1}{1+\exp\{s\}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/sigmoid.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Deriving the binary sigmoid:
+ 
+\series default
+The sigmoid encodes 
+\begin_inset Formula $\mathbf{w}'\mathbf{x}$
+\end_inset
+
+ as the log ratio of probabilities.
+ i.e.
+ on log scale how relatively probable 
+\begin_inset Formula $Y=1$
+\end_inset
+
+ is compared to 
+\begin_inset Formula $Y=-1$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+\mathbf{w}'\mathbf{x} & =\ln\frac{\mathbb{P}\left(Y=1\mid X=\mathbf{x}\right)}{\mathbb{P}\left(Y=-1\mid X=\mathbf{x}\right)}\\
+\exp\left\{ \mathbf{w}'\mathbf{x}\right\}  & =\frac{\mathbb{P}\left(Y=1\mid X=\mathbf{x}\right)}{1-\mathbb{P}\left(Y=1\mid X=\mathbf{x}\right)}\\
+\left(1-\mathbb{P}\left(Y=1\mid X=\mathbf{x}\right)\right)\exp\left\{ \mathbf{w}'\mathbf{x}\right\}  & =\mathbb{P}\left(Y=1\mid X=\mathbf{x}\right)\\
+\mathbb{P}\left(Y=1\mid X=\mathbf{x}\right) & =\frac{\exp\left\{ \mathbf{w}'\mathbf{x}\right\} }{1+\exp\left\{ \mathbf{w}'\mathbf{x}\right\} }\\
+ & =\frac{1}{1+\exp\left\{ -\mathbf{w}'\mathbf{x}\right\} }\equiv\theta(\mathbf{w}'\mathbf{x}).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Properties of sigmoid in the binary case:
+
+\series default
+ In the binary case we have 
+\begin_inset Formula 
+\[
+\theta(y\mathbf{w}'\mathbf{x})=\begin{cases}
+\theta(\mathbf{w}'\mathbf{x}) & \text{if }y=1\\
+1-\theta(\mathbf{w}'\mathbf{x}) & \text{if }y=-1
+\end{cases}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is easy to show:
+\begin_inset Formula 
+\begin{align*}
+1-\theta(\mathbf{w}'\mathbf{x}) & =\frac{1+\exp\left\{ -\mathbf{w}'\mathbf{x}\right\} }{1+\exp\left\{ -\mathbf{w}'\mathbf{x}\right\} }-\frac{1}{1+\exp\left\{ -\mathbf{w}'\mathbf{x}\right\} }\\
+ & =\frac{\exp\left\{ -\mathbf{w}'\mathbf{x}\right\} }{1+\exp\left\{ -\mathbf{w}'\mathbf{x}\right\} }\\
+ & =\frac{1}{1+\exp\left\{ \mathbf{w}'\mathbf{x}\right\} }\\
+ & =\theta(-\mathbf{w}'\mathbf{x})\\
+ & =\theta(y\mathbf{w}'\mathbf{x}),\;y=-1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Log likelihood optimization:
+ 
+\series default
+Therefore the negative log likelihood function becomes
+\begin_inset Formula 
+\begin{align*}
+-\ln L(\mathbf{w}) & =-\ln\prod^{N}_{n=1}\mathbb{P}\left(Y=y_{n}\mid X=\mathbf{x}_{n};\mathbf{w}\right)\\
+ & =-\sum^{N}_{n=1}\ln\mathbb{P}\left(Y=y_{n}\mid X=\mathbf{x}_{n};\mathbf{w}\right)\\
+ & =-\sum^{N}_{n=1}\ln\frac{1}{1+\exp\{-y_{n}\mathbf{w}'\mathbf{x}_{n}\}}\\
+ & =\sum^{N}_{n=1}\ln[1+\exp\{-y_{n}\mathbf{w}'\mathbf{x}_{n}\}],
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+which when divided by 
+\begin_inset Formula $N$
+\end_inset
+
+ is the objective function of the unconstrained minimisation problem
+\begin_inset Formula 
+\[
+\hat{\mathbf{w}}_{MLE}=\arg\min_{\mathbf{w}\in\mathbb{R}^{d+1}}\underbrace{-\frac{1}{N}\sum^{N}_{n=1}\ln[1+\exp\{-y_{n}\mathbf{w}'\mathbf{x}_{n}\}]}_{Q(\mathbf{w})},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with first order condition
+\begin_inset Formula 
+\begin{align*}
+\nabla_{\mathbf{w}}Q(\mathbf{w}) & =\frac{1}{N}\sum^{N}_{n=1}\frac{1}{1+\exp\{-y_{n}\mathbf{w}'\mathbf{x}_{n}\}}\left(-\exp\{-y_{n}\mathbf{w}'\mathbf{x}_{n}\}\right)\left(-y_{n}\mathbf{x}_{n}\right)\\
+ & =\frac{1}{N}\sum^{N}_{n=1}\frac{y_{n}\mathbf{x}_{n}}{1+\exp\{y_{n}\mathbf{w}'\mathbf{x}_{n}\}}=0,
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+which does not have any closed form solution.
+ However,
+ because the problem is convex this can be solves globally using 
+\emph on
+gradent descent
+\emph default
+.
+ The only caveat is the case where data is perfectly linearly seperable.
+ Then 
+\begin_inset Formula $Q(\mathbf{w})\rightarrow0$
+\end_inset
+
+ as 
+\begin_inset Formula $\mathbf{w}\rightarrow\infty$
+\end_inset
+
+ and the problem has no solution.
+ Instead one can solve the L2-norm regularized problem (just like in linear regression) on the form
+\begin_inset Formula 
+\[
+\hat{\mathbf{w}}_{MLE,L2}=\arg\min_{\mathbf{w}\in\mathbb{R}^{d+1}}Q(\mathbf{w})+\lambda||\mathbf{w}||^{2}_{2},\;\lambda>0,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+which is a stricly convex problem\SpecialChar endofsentence
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Multiple classification
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Defining the probability distribution:
+ 
+\series default
+The only difference is how the probability distribution is defined.
+ The MLE machinery + gradient descent always stays the same.
+ For each category
+\begin_inset Formula 
+\[
+\mathcal{Y}\in\{\mathcal{C}_{1},\dots,\mathcal{C}_{m}\},\:2\leq m
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+we define
+\begin_inset Formula 
+\[
+\mathbb{P}\left(Y=y\mid X=\mathbf{x};\mathbf{w}_{1},\dots,\mathbf{w}_{m}\right)\equiv\frac{\exp\{\delta_{k}(\mathbf{x})\}}{\sum^{m}_{j=1}\exp\{\delta_{j}(\mathbf{x})\}}=\frac{\exp\{\mathbf{w}_{k}'\mathbf{x}\}}{\sum^{n}_{j=1}\exp\{\mathbf{w}_{j}'\mathbf{x}\}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Log likelihood:
+ This 
+\series default
+yields the nogative log likelihood function
+\begin_inset Formula 
+\begin{align*}
+-\ln L(\mathbf{w}_{1},\dots,\mathbf{w}_{m}) & =-\ln\prod^{N}_{n=1}\mathbb{P}\left(Y=y_{n}\mid X=\mathbf{x}_{n};\mathbf{w}_{1},\dots,\mathbf{w}_{m}\right)\\
+ & =-\sum^{N}_{n=1}\ln\mathbb{P}\left(Y=y_{n}\mid X=\mathbf{x}_{n};\mathbf{w}_{1},\dots,\mathbf{w}_{m}\right)\\
+ & =-\sum^{N}_{n=1}\ln\frac{\exp\{\mathbf{w}_{k}'\mathbf{x}_{n}\}}{\sum^{n}_{j=1}\exp\{\mathbf{w}_{j}'\mathbf{x}_{n}\}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Identification:
+ 
+\series default
+Since adding any vector 
+\series bold
+
+\begin_inset Formula $\mathbf{a}\in\mathbb{R}^{d+1}$
+\end_inset
+
+ 
+\series default
+to 
+\begin_inset Formula $\mathbf{w}_{k}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $i=1,\dots,m$
+\end_inset
+
+ does not change the (negative log) likelihood:
+\begin_inset Formula 
+\[
+\frac{\exp\{(\mathbf{w}_{k}+\mathbf{a})'\mathbf{x}_{n}\}}{\sum^{n}_{j=1}\exp\{(\mathbf{w}_{j}+\mathbf{a})'\mathbf{x}_{n}\}}=\frac{\exp\{\mathbf{a}\}\exp\{\mathbf{w}_{k}'\mathbf{x}_{n}\}}{\exp\{\mathbf{a}\}\sum^{n}_{j=1}\exp\{\mathbf{w}_{j}'\mathbf{x}_{n}\}}=\frac{\exp\{\mathbf{w}_{k}'\mathbf{x}_{n}\}}{\sum^{n}_{j=1}\exp\{\mathbf{w}_{j}'\mathbf{x}_{n}\}},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+then we either need to add a regularization term or normalise one of the class-weights.
+ For the latter solution a common choice is 
+\begin_inset Formula $\mathbf{w}_{m}=\mathbf{0}\in\mathbb{R}^{d+1}$
+\end_inset
+
+.
+ The remaining model-weights 
+\begin_inset Formula $\hat{\mathbf{w}}_{1},\dots,\hat{\mathbf{w}}_{m-1}$
+\end_inset
+
+ are solved for using gradient descent.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Optimization:
+ Gradient descent methods
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Gradient descent:
+ 
+\series default
+In short gradient descent iteratively updates the weights using a first order taylor expansion around the current point 
+\begin_inset Formula $\mathbf{w}^{(t)}$
+\end_inset
+
+,
+ where 
+\begin_inset Formula $(t)$
+\end_inset
+
+ indicates the iteration number.
+ The goal is to minimize 
+\begin_inset Formula $Q(\mathbf{w})$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+\mathbf{w}^{(t+1)} & =\mathbf{w}^{(t)}+\mathbf{\Delta_{w}}^{(t)}\\
+ & =\mathbf{w}^{(t)}-\eta\nabla_{\mathbf{w}}Q|_{\mathbf{w}^{(t)}},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with learning rate 
+\begin_inset Formula $\eta>0$
+\end_inset
+
+ determining how large steps are in proportion to the gradient.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/grad_descent_logisticreg.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Often we add a 
+\emph on
+momentum term
+\emph default
+ (in an attempt to improve performance) which intuitively works like a heavy ball.
+ When a heavy ball has gained momentum from accelerating down a steep hill it will roll over local minimums and further down towards the global minimum (hopefully).
+ Formally we have
+\begin_inset Formula 
+\begin{align*}
+\mathbf{w}^{(t+1)} & =\mathbf{w}^{(t)}-\eta\nabla E|_{\mathbf{w}^{(t)}}+\mu\mathbf{\Delta_{w}}^{(t-1)}\\
+ & =\mathbf{w}^{(t)}-\eta\nabla_{\mathbf{w}}Q|_{\mathbf{w}^{(t)}}+\mu\left(\mathbf{w}^{(t)}-\mathbf{w}^{(t-1)}\right),
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with momentum parameter 
+\begin_inset Formula $\mu>0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Stochastic gradient descent:
+ 
+\series default
+Esentially the same algorithm but where the gradient is calculated using one 
+\begin_inset Formula $(\mathbf{x}_{n},y_{n})\in S$
+\end_inset
+
+,
+ where 
+\begin_inset Formula $S$
+\end_inset
+
+ is the training data.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Minibatch gradient descent:
+ 
+\series default
+The same but where the gradient is calculated on a random subset 
+\begin_inset Formula $S'\subset S$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+
+\lang american
+Random Forest
+\end_layout
+
+\begin_layout Subsection
+
+\lang american
+Binary decision trees (definitions)
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+CART trees 
+\series default
+are introduced and used in MLA and are popular binary classification / regression trees.
+ Each 
+\emph on
+inner node
+\emph default
+ in a CART tree evaluates one dimension 
+\begin_inset Formula $d\in\{1,\dots,D\}$
+\end_inset
+
+ of the dataset using a threshold value 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and splits the data into
+\begin_inset Formula 
+\[
+L_{d,\theta}=\left\{ (\mathbf{x},y)\in S\mid x_{d}<\theta\right\} \text{ and }R_{d,\theta}=\left\{ (\mathbf{x},y)\in S\mid x_{d}\geq\theta\right\} ,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+where 
+\begin_inset Formula $x_{d}$
+\end_inset
+
+ is element 
+\begin_inset Formula $d$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+.
+ The subset 
+\begin_inset Formula $L_{d,\theta}$
+\end_inset
+
+ is then sent to the left daughter node and 
+\begin_inset Formula $R_{d,\theta}$
+\end_inset
+
+ to the right.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+The splits are determined by maximising the information gain
+\series default
+ or equivalently minimising the impurity measure 
+\begin_inset Formula $Q$
+\end_inset
+
+ at the dataset at that note 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Formally we would like to choose the dimension 
+\begin_inset Formula $d$
+\end_inset
+
+ as well as the threshold value 
+\begin_inset Formula $\theta$
+\end_inset
+
+ solving
+\begin_inset Formula 
+\begin{align*}
+\text{arg }\max_{d,\theta}Q(S)-\frac{|L_{d,\theta}|}{|S|}Q(L_{d,\theta})-\frac{|R_{d,\theta}|}{|S|}Q(R_{d,\theta})\\
+=\text{arg }\min_{d,\theta}G_{d,\theta}(S)=|L_{d,\theta}|Q(L_{d,\theta})+|R_{d,\theta}|Q(R_{d,\theta}).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+This is however impractical (and maybe even impossible) to solve on a computer and we therefore use some heuristic.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Leaf nodes
+\series default
+ are indexed by 
+\begin_inset Formula $\tau=1,\dots,|T|$
+\end_inset
+
+ and they define 
+\emph on
+regions
+\emph default
+.
+ If 
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+ reaches leaf node 
+\begin_inset Formula $\tau$
+\end_inset
+
+ we have 
+\begin_inset Formula $\mathbf{x}\in\mathcal{R}_{\tau}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang american
+Regression trees
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Trees can not only classify observations 
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+ into categories but also estimate its value (if the label is continuous)
+\begin_inset Formula 
+\[
+\hat{y}_{i}=T(\mathbf{x}_{i})=\sum^{|T|}_{\tau=1}c_{\tau}\mathbb{I}(\mathbf{x}_{i}\in\mathcal{R}_{\tau})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+With squared loss 
+\begin_inset Formula $(\hat{y}-y)^{2}$
+\end_inset
+
+ the constants minimising empirical risk are the respective empirical means of each leafnode 
+\begin_inset Formula $\tau$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+c_{\tau}=\frac{1}{N_{\tau}}\sum_{\mathbf{x}_{n}\in\mathcal{R}_{\tau}}y_{n},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+with 
+\begin_inset Formula $(\mathbf{x}_{n},y)\in S$
+\end_inset
+
+ and 
+\begin_inset Formula $N_{\tau}=|\{(\mathbf{x}_{n},y)\in S\mid\mathbf{x}_{n}\in\mathcal{R}_{\tau}\}|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Classification trees}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For $K$ classes,
+ let $p_{
+\backslash
+tau k}$ be the fraction of training
+\end_layout
+
+\begin_layout Plain Layout
+observations in leaf $
+\backslash
+tau$ with label $k$.
+ The tree predicts the
+\end_layout
+
+\begin_layout Plain Layout
+most frequent class in the leaf,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+T(
+\backslash
+mathbf{x})=
+\backslash
+operatorname*{arg
+\backslash
+,max}_{k
+\backslash
+in
+\backslash
+{1,
+\backslash
+dots,K
+\backslash
+}}p_{
+\backslash
+tau k},
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad 
+\backslash
+mathbf{x}
+\backslash
+in
+\backslash
+mathcal{R}_{
+\backslash
+tau}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+The fractions $p_{
+\backslash
+tau k}$ also give estimated class probabilities.
+\end_layout
+
+\begin_layout Plain Layout
+Common impurity measures are
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+Q_{
+\backslash
+mathrm{error}} &= 1-
+\backslash
+max_k p_{
+\backslash
+tau k},
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+Q_{
+\backslash
+mathrm{entropy}} &= -
+\backslash
+sum_{k=1}^K p_{
+\backslash
+tau k}
+\backslash
+log p_{
+\backslash
+tau k},
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+Q_{
+\backslash
+mathrm{Gini}} &= 
+\backslash
+sum_{k=1}^K p_{
+\backslash
+tau k}(1-p_{
+\backslash
+tau k}),
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+where $0
+\backslash
+log 0=0$.
+ All three are zero when the node is pure.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\lang american
+\begin_inset Graphics
+	filename pictures/impurity_measures_classification.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Growing and pruning}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For each dimension $d$,
+ it is enough to test thresholds halfway
+\end_layout
+
+\begin_layout Plain Layout
+between consecutive distinct values of $x_d$.
+ We split recursively
+\end_layout
+
+\begin_layout Plain Layout
+until the node is pure,
+ too small or has no valid split.
+ For
+\end_layout
+
+\begin_layout Plain Layout
+regression,
+ $Q$ is the mean squared deviation from the node mean.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For a single CART tree,
+ we can prune by choosing a subtree $T$ that
+\end_layout
+
+\begin_layout Plain Layout
+minimises
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+C_{
+\backslash
+alpha}(T)=
+\backslash
+sum_{
+\backslash
+tau=1}^{|T|}N_{
+\backslash
+tau}Q_{
+\backslash
+tau}(T)+
+\backslash
+alpha|T|,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad 
+\backslash
+alpha
+\backslash
+geq 0,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+where $Q_{
+\backslash
+tau}(T)$ is the impurity in leaf $
+\backslash
+tau$.
+ Larger $
+\backslash
+alpha$
+\end_layout
+
+\begin_layout Plain Layout
+penalises more leaves.
+ We choose $
+\backslash
+alpha$ using held-out data.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Ensembles and bagging}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Single trees have high variance,
+ so small changes in the training
+\end_layout
+
+\begin_layout Plain Layout
+data can give very different trees.
+ Bagging trains trees on separate
+\end_layout
+
+\begin_layout Plain Layout
+bootstrap samples and averages their predictions (or votes).
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+If $B$ regression trees have mean-zero errors $
+\backslash
+epsilon_b$ with
+\end_layout
+
+\begin_layout Plain Layout
+variance $v$ and pairwise covariance $c$,
+ then
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbb{E}
+\backslash
+!
+\backslash
+left[
+\backslash
+left(
+\backslash
+frac{1}{B}
+\backslash
+sum_{b=1}^B
+\backslash
+epsilon_b
+\backslash
+right)^2
+\backslash
+right]
+\end_layout
+
+\begin_layout Plain Layout
+=
+\backslash
+frac{v}{B}+
+\backslash
+frac{B-1}{B}c.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Thus averaging helps more when the trees make less correlated errors.
+\end_layout
+
+\begin_layout Plain Layout
+For binary classification,
+ if errors are independent and each tree
+\end_layout
+
+\begin_layout Plain Layout
+errs with probability at most $p_{
+\backslash
+max}<1/2$,
+ Hoeffding bounds the
+\end_layout
+
+\begin_layout Plain Layout
+majority vote error by $
+\backslash
+exp[-2B(1/2-p_{
+\backslash
+max})^2]$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Growing and evaluating a random forest}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For each $b=1,
+\backslash
+dots,B$ we draw a bootstrap sample $S_b$ by sampling
+\end_layout
+
+\begin_layout Plain Layout
+$N$ observations with replacement from $S$.
+ We grow an unpruned tree
+\end_layout
+
+\begin_layout Plain Layout
+$T_b$ on $S_b$.
+ At each node we draw a fresh subset of $m$ distinct
+\end_layout
+
+\begin_layout Plain Layout
+dimensions and find the best split among these.
+ This makes the trees
+\end_layout
+
+\begin_layout Plain Layout
+less correlated.
+ With $m=D$ we recover bagging of trees.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For regression we average the predictions.
+ For classification we
+\end_layout
+
+\begin_layout Plain Layout
+take the most votes,
+ or average the leaf probabilities and take the
+\end_layout
+
+\begin_layout Plain Layout
+most probable class.
+ Formally,
+ these three rules are
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+f_{
+\backslash
+mathrm{RF}}^{
+\backslash
+mathrm{reg}}(
+\backslash
+mathbf{x})
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\backslash
+frac{1}{B}
+\backslash
+sum_{b=1}^{B}T_b(
+\backslash
+mathbf{x}),
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+f_{
+\backslash
+mathrm{RF}}^{
+\backslash
+mathrm{vote}}(
+\backslash
+mathbf{x})
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\backslash
+operatorname*{arg
+\backslash
+,max}_{k}
+\end_layout
+
+\begin_layout Plain Layout
+  
+\backslash
+sum_{b=1}^{B}
+\backslash
+mathbb{I}
+\backslash
+bigl(T_b(
+\backslash
+mathbf{x})=k
+\backslash
+bigr),
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+f_{
+\backslash
+mathrm{RF}}^{
+\backslash
+mathrm{prob}}(
+\backslash
+mathbf{x})
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\backslash
+operatorname*{arg
+\backslash
+,max}_{k}
+\end_layout
+
+\begin_layout Plain Layout
+  
+\backslash
+frac{1}{B}
+\backslash
+sum_{b=1}^{B}p_k^{(b)}(
+\backslash
+mathbf{x}),
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+where $p_k^{(b)}(
+\backslash
+mathbf{x})$ is the fraction of class $k$ in the leaf
+\end_layout
+
+\begin_layout Plain Layout
+of $T_b$ reached by $
+\backslash
+mathbf{x}$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Typical starting values are $m=
+\backslash
+lfloor
+\backslash
+sqrt{D}
+\backslash
+rfloor$ for
+\end_layout
+
+\begin_layout Plain Layout
+classification,
+ $m=
+\backslash
+max
+\backslash
+{1,
+\backslash
+lfloor D/3
+\backslash
+rfloor
+\backslash
+}$ for regression and
+\end_layout
+
+\begin_layout Plain Layout
+$B=100$ trees.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Out-of-bag (OOB) error}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+An observation $i$ is out of bag for tree $b$ if its index was never
+\end_layout
+
+\begin_layout Plain Layout
+drawn for $S_b$.
+ This happens with probability
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+left(1-
+\backslash
+frac{1}{N}
+\backslash
+right)^N
+\backslash
+approx e^{-1}
+\backslash
+approx 0.37.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Let $
+\backslash
+mathcal{B}_i$ be the set of trees for which $i$ is out of bag.
+\end_layout
+
+\begin_layout Plain Layout
+We predict $
+\backslash
+mathbf{x}_i$ using the usual forest rule restricted to
+\end_layout
+
+\begin_layout Plain Layout
+these trees.
+ With $
+\backslash
+mathcal{I}=
+\backslash
+{i:
+\backslash
+mathcal{B}_i
+\backslash
+ne
+\backslash
+varnothing
+\backslash
+}$,
+\end_layout
+
+\begin_layout Plain Layout
+the OOB estimate of generalisation error is
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+widehat{R}_{
+\backslash
+mathrm{OOB}}
+\end_layout
+
+\begin_layout Plain Layout
+=
+\backslash
+frac{1}{|
+\backslash
+mathcal{I}|}
+\backslash
+sum_{i
+\backslash
+in
+\backslash
+mathcal{I}}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+ell
+\backslash
+bigl(y_i,f_{
+\backslash
+mathrm{RF}}(
+\backslash
+{T_b:b
+\backslash
+in
+\backslash
+mathcal{B}_i
+\backslash
+},
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbf{x}_i)
+\backslash
+bigr).
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+We can choose $m$ using OOB error and increase $B$ until it stabilises.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Discussion:
+ CART vs Random Forest}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Single trees are easy to interpret but are unstable and have
+\end_layout
+
+\begin_layout Plain Layout
+piecewise constant predictions.
+ Random forests usually perform well
+\end_layout
+
+\begin_layout Plain Layout
+on tabular data with little tuning,
+ and the trees can be trained in
+\end_layout
+
+\begin_layout Plain Layout
+parallel.
+ The forest is harder to interpret and still uses axis-aligned
+\end_layout
+
+\begin_layout Plain Layout
+splits.
+ Class probabilities may be poorly calibrated.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\lang american
+\begin_inset Graphics
+	filename pictures/descision_boundary_CART_RandomForest.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Neural Networks
+\end_layout
+
+\begin_layout Subsection
+The Neuron
+\end_layout
+
+\begin_layout Standard
+This chapter explains in detail the following picture which illustrates a single neuron with implicit bias.
+ So if one understands the picture the chapter can be skipped.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/neuron.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Pre-Activation 
+\end_layout
+
+\begin_layout Standard
+The preactivation of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align*}
+a_{i}(\mathbf{x}) & =\sum^{d}_{j=1}w_{ij}x_{j}+w_{i0}\\
+ & =\mathbf{w}_{i}'\mathbf{x}_{+1},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{x}_{+1}\in\mathbb{R}^{d+1}$
+\end_inset
+
+ denotes the argmentet vector 
+\begin_inset Formula 
+\[
+\mathbf{x}_{+1}=\begin{bmatrix}1 & x_{1} & \cdots & x_{d}\end{bmatrix}'.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Activation and output 
+\end_layout
+
+\begin_layout Standard
+Applying a (non-linear) activation function 
+\begin_inset Formula $h_{i}:\mathbb{R}\rightarrow\mathbb{R}$
+\end_inset
+
+ yields the output of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z_{i}(\mathbf{x})=h_{i}(a_{i}(\mathbf{x}))=h_{i}\left(\sum^{d}_{j=1}w_{ij}x_{j}+w_{i0}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That is each neuron 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ has its own weights (and bias) 
+\begin_inset Formula $\mathbf{w}\in\mathbb{R}^{d+1}$
+\end_inset
+
+ and activation function 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+.
+ The latter is usually the same for all neurons except the output-neurons (in the top layer).
+\end_layout
+
+\begin_layout Subsubsection
+Activation functions
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Linear activation function:
+ 
+\series default
+For the network structure to have any reason to exist the activation functions 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+ must be non-linear.
+ If not the neural network 
+\begin_inset Formula $f:\mathbb{R}^{d}\rightarrow\mathbb{R}^{K}$
+\end_inset
+
+ will simply be a linear function of the inputs aswell.
+ 
+\end_layout
+
+\begin_layout Standard
+To see this note that each neuron in the inputlayer would output the following functional form
+\begin_inset Formula 
+\begin{align*}
+h\left(\sum^{d}_{j=1}w_{ij}x_{j}+w_{i0}\right) & =\sum^{d}_{j=1}\underbrace{aw_{ij}}_{\tilde{w}_{ij}}x_{j}+\underbrace{aw_{i0}+b}_{\tilde{w}_{i0}}\\
+ & =\sum^{d}_{j=1}\tilde{w}_{ij}x_{j}+\tilde{w}_{i0},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and since each pre-activation is simply a affine linear function of the previous affine linear functions all later neurons will output something of the form:
+\begin_inset Formula 
+\begin{align*}
+h\left(a\left(\begin{bmatrix}z_{1} & z_{2} & \cdots & z_{K}\end{bmatrix}\right)\right) & =h\left(\sum^{K}_{k=1}w_{k}z_{k}+w_{0}\right)\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}z_{k}+\hat{w}_{0}\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}\left(\sum^{d}_{j=1}\tilde{w}_{kj}x_{j}+\tilde{w}_{k0}\right)+\hat{w}_{0}\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}\sum^{d}_{j=1}\tilde{w}_{kj}x_{j}+\underbrace{\sum^{K}_{k=1}\hat{w}_{k}\tilde{w}_{k0}+\hat{w}_{0}}_{\bar{w}_{0}}\\
+ & =\sum^{K}_{k=1}\sum^{d}_{j=1}\hat{w}_{k}\tilde{w}_{kj}x_{j}+\bar{w}_{0}\\
+ & =\sum^{d}_{j=1}\sum^{K}_{k=1}\hat{w}_{k}\tilde{w}_{kj}x_{j}+\bar{w}_{0}\\
+ & =\sum^{d}_{j=1}x_{j}\underbrace{\sum^{K}_{k=1}\left(\hat{w}_{k}\tilde{w}_{kj}\right)}_{\bar{w}_{j}}+\bar{w}_{0}\\
+ & =\sum^{d}_{j=1}\bar{w}_{j}x_{j}+\bar{w}_{0}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This then also goes for all other layers recieving these outputs (by the exact same argument as above).
+ So in summary:
+ if 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+ is linear for all 
+\begin_inset Formula $i$
+\end_inset
+
+ then there is no purpose to the neural network structure and the simple affine linear model of linear regression fits the model just as well.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Well known activation functions (greatest hits).
+ 
+\series default
+Here i list some of the most common activation functions.
+ Some are more common for outputlayers for example logistic activation and are rarely used in hidden layers.
+\end_layout
+
+\begin_layout Itemize
+Step / Threshold
+\begin_inset Formula 
+\[
+h(a)=\mathbb{I}(a>0),
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in\{0,1\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Hyperbolic tangent
+\begin_inset Formula 
+\[
+h(a)=tanh(a),
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in(-1,1)$
+\end_inset
+
+ and with a visual form much like 
+\emph on
+alternative sigmoid.
+\end_layout
+
+\begin_layout Itemize
+Rectified linear unit (ReLU)
+\begin_inset Formula 
+\[
+h(a)=\max(0,a),
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}[0,\infty)$
+\end_inset
+
+.
+ Note that there the derivative of the loss function wrt.
+ pre-activation weights is uninformative in the regrion 
+\begin_inset Formula $a<0$
+\end_inset
+
+.
+ By that i mean 
+\begin_inset Formula $\partial h_{i}/\partial w_{ij}=0$
+\end_inset
+
+ if 
+\begin_inset Formula $a_{i}(\mathbf{x},\mathbf{w})<0$
+\end_inset
+
+ and so it does not help us adjust weights to decrease loss in these negative regions.
+\end_layout
+
+\begin_layout Itemize
+Fermi / logistic
+\begin_inset Formula 
+\[
+h(a)=\frac{1}{1+\exp\left\{ -a\right\} },
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in(0,1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Alternative sigmoid
+\begin_inset Formula 
+\[
+h(a)=\frac{a}{1+|a|},
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Exponential LU (ELU,
+ 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+)
+\begin_inset Formula 
+\[
+h(a)=\begin{cases}
+a & a\geq0\\
+\alpha(\exp\{a\}-1) & a<0
+\end{cases}
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in(-\alpha,\infty)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Here the functions are plottet where for ELU 
+\begin_inset Formula $\alpha=1$
+\end_inset
+
+ is chosen.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/activation_funcitons.png
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Gradient descent
+\end_layout
+
+\begin_layout Standard
+To optimize a neural network with error function 
+\begin_inset Formula $E=\sum^{N}_{n=1}E_{n}$
+\end_inset
+
+ (as with loglikelihood functions) we introduce gradient descent.
+ The bare form of this algorithm is simply
+\begin_inset Formula 
+\begin{align*}
+\mathbf{w}^{(t+1)} & =\mathbf{w}^{(t)}+\mathbf{\Delta_{w}}^{(t)}\\
+ & =\mathbf{w}^{(t)}-\eta\nabla E|_{\mathbf{w}^{(t)}},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with learning rate 
+\begin_inset Formula $\eta>0$
+\end_inset
+
+ determining how large steps are in proportion to the gradient.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/gradient_descent.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Often we add a 
+\emph on
+momentum term
+\emph default
+ (in an attempt to improve performance) which intuitively works like a heavy ball.
+ When a heavy ball has gained momentum from accelerating down a steep hill it will roll over local minimums and further down towards the global minimum (hopefully).
+ Formally we have
+\begin_inset Formula 
+\begin{align*}
+\mathbf{w}^{(t+1)} & =\mathbf{w}^{(t)}-\eta\nabla E|_{\mathbf{w}^{(t)}}+\mu\mathbf{\Delta_{w}}^{(t-1)}\\
+ & =\mathbf{w}^{(t)}-\eta\nabla E|_{\mathbf{w}^{(t)}}+\mu\left(\mathbf{w}^{(t)}-\mathbf{w}^{(t-1)}\right),
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with momentum parameter 
+\begin_inset Formula $\mu>0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The question now really is how to calculate the elements of 
+\begin_inset Formula $\nabla E|_{\mathbf{w}^{(t)}}$
+\end_inset
+
+ given by 
+\begin_inset Formula 
+\[
+\frac{\partial E}{\partial w_{ij}}=\sum^{N}_{n=1}\frac{\partial E_{n}}{\partial w_{ij}},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+.
+ Recall that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ contains all the edges connection the output of neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ to the input of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ which is scaled by 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+.
+ This is answered in the next section.
+\end_layout
+
+\begin_layout Subsection
+Backpropagation 
+\end_layout
+
+\begin_layout Standard
+The goal is to calculate 
+\begin_inset Formula $\frac{\partial E_{n}}{\partial w_{ij}}$
+\end_inset
+
+ for every 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Why not for 
+\begin_inset Formula $(j,i)\neq\mathcal{A}$
+\end_inset
+
+?
+ These weights simply do not exist.
+ The model only has weights symbolizing the strength of the connect from neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ to neuron 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ There is no connection from 
+\begin_inset Formula $i$
+\end_inset
+
+ back to 
+\begin_inset Formula $j$
+\end_inset
+
+ so this 
+\begin_inset Formula $w_{ji}$
+\end_inset
+
+ does not exist.
+\end_layout
+
+\end_inset
+
+ Applying the chain rule to every element of the error function 
+\begin_inset Formula $E=\sum^{N}_{n=1}E_{n}$
+\end_inset
+
+ yields the following.
+ Note that 
+\begin_inset Formula $E_{n}$
+\end_inset
+
+ is a function of 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+ in the network.
+ and that any 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ is a function of 
+\begin_inset Formula $z_{j}$
+\end_inset
+
+ where 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+.
+ Therefore the chain rule yields
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E_{n}}{\partial w_{ij}} & =\frac{\partial E_{n}}{\partial z_{i}}\frac{\partial z_{i}}{\partial a_{i}}\frac{\partial a_{i}}{\partial w_{ij}}\\
+ & =\frac{\partial E_{n}}{\partial z_{i}}h_{i}'(a_{i})\left[\mathbf{z}_{n}\right]_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the last step uses that 
+\begin_inset Formula 
+\[
+z_{i}(\mathbf{z})\equiv h_{i}(a_{i}(\mathbf{z}))\implies\frac{\partial z_{i}}{\partial a_{i}}=h'_{i}(a_{i}),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{z}\in\mathbb{R}^{M}$
+\end_inset
+
+ contains all the inputs from the previous layer to neuron 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ For the last factor we used that
+\begin_inset Formula 
+\[
+a_{i}(\mathbf{z}_{n})=w_{i0}+\sum^{M}_{m=1}w_{im}\left[\mathbf{z}_{n}\right]_{m}\implies\frac{\partial a_{i}}{\partial w_{ij}}=\left[\mathbf{z}_{n}\right]_{j}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore the missing factor to be calculated is 
+\begin_inset Formula $\frac{\partial E_{n}}{\partial z_{i}}$
+\end_inset
+
+ which we will now turn to.
+\end_layout
+
+\begin_layout Subsubsection
+The ouput layer
+\end_layout
+
+\begin_layout Standard
+For the output layer 
+\begin_inset Formula $\frac{\partial E_{n}}{\partial z_{i}}$
+\end_inset
+
+ can be directly calculated.
+ To see this let the loss function be the sum of squared errors 
+\begin_inset Formula 
+\begin{align*}
+E=\frac{1}{2}\sum^{N}_{n=1}||f(\mathbf{x}_{n};\mathbf{w})-\mathbf{y}_{n}||^{2} & =\frac{1}{2}\sum^{N}_{n=1}\left(\sqrt{\sum^{K}_{k=1}\left(\left[f(\mathbf{x}_{n};\mathbf{w})\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}}\right)^{2}\\
+ & =\frac{1}{2}\sum^{N}_{n=1}\sum^{K}_{k=1}\left(\left[f(\mathbf{x}_{n};\mathbf{w})\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}\\
+ & =\frac{1}{2}\sum^{N}_{n=1}\sum^{K}_{k=1}\left(\left[\mathbf{z}_{n}\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for 
+\begin_inset Formula $k\in V_{output}$
+\end_inset
+
+.
+ Therefore we have (for 
+\begin_inset Formula $i\in V_{output}$
+\end_inset
+
+ and 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+)
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E_{n}}{\partial z_{i}} & =\frac{\partial}{\partial z_{i}}\frac{1}{2}\sum^{K}_{k=1}\left(\left[\mathbf{z}_{n}\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}\\
+ & =\left[\mathbf{z}_{n}\right]_{i}-\left[\mathbf{y}_{n}\right]_{i}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $h_{i}(a_{i})=a_{i}\implies h_{i}'(a_{i})=1$
+\end_inset
+
+ where 
+\begin_inset Formula $i\in V_{output}$
+\end_inset
+
+ we thus have 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E}{\partial w_{ij}} & =\sum^{N}_{n=1}\frac{\partial E_{n}}{\partial z_{i}}h_{i}'(a_{i})z_{j}\\
+ & =\sum^{N}_{n=1}\frac{\partial E_{n}}{\partial z_{i}}\left[\mathbf{z}_{n}\right]_{j}\\
+ & =\sum^{N}_{n=1}\left(\left[\mathbf{z}_{n}\right]_{i}-\left[\mathbf{y}_{n}\right]_{i}\right)\left[\mathbf{z}_{n}\right]_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Hidden layers
+\end_layout
+
+\begin_layout Standard
+For hidden layers we apply the apply the chainrule to obtain
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E}{\partial z_{j}} & =\sum_{k\text{ in }(j,k)\in\mathcal{A}}\frac{\partial E}{\partial z_{k}}\frac{\partial z_{k}}{\partial z_{j}}\\
+ & =\sum_{k\text{ in }(j,k)\in\mathcal{A}}\frac{\partial E}{\partial z_{k}}\frac{\partial z_{k}}{\partial a_{k}}\frac{\partial a_{k}}{\partial z_{j}}\\
+ & =\sum_{k\text{ in }(j,k)\in\mathcal{A}}\frac{\partial E}{\partial z_{k}}h_{k}'(a_{k})w_{kj}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The partial derivatives of the layer just before 
+\begin_inset Formula $V_{ouput}$
+\end_inset
+
+ is then calculated by pluging in 
+\begin_inset Formula $\frac{\partial E}{\partial z_{k}}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $k\in V_{output}$
+\end_inset
+
+ and 
+\begin_inset Formula $(j,k)\in\mathcal{A}$
+\end_inset
+
+.
+ Then the third layers uses the second layers calculated 
+\begin_inset Formula $\frac{\partial E}{\partial z_{j}}$
+\end_inset
+
+ and so on.
+ This is sometimes referred to as the backwards pass.
+\end_layout
+
+\begin_layout Section
+Deep Learning
+\end_layout
+
+\begin_layout Subsection
+Convolution / cross-correlation
+\end_layout
+
+\begin_layout Standard
+A convolution is a filtering transformation applied to image-like data.
+ Image-like in the sence that datapoints close to each other in the dataset structure somehow relate to each other - like two pixels are closely related in a picture.
+ 
+\end_layout
+
+\begin_layout Standard
+Formally let 
+\begin_inset Formula $C(i,j)$
+\end_inset
+
+ be the output image from applying a convolution operation (or cross correlation operation) to the pixel in image 
+\begin_inset Formula $I$
+\end_inset
+
+ at location 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+.
+ Additionally 
+\begin_inset Formula $C$
+\end_inset
+
+ takes a kernel matrix 
+\begin_inset Formula $K$
+\end_inset
+
+ as input.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Cross correlation
+\series default
+:
+ It is intuitive and defined as
+\begin_inset Formula 
+\[
+C_{corr}(i,j)=\sum_{m\in\mathcal{M}}\sum_{n\in\mathcal{N}}K(m,n)\cdot I(i+m,j+n),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the kernel for example could be the vertical edge 
+\emph on
+filter kernel
+\emph default
+:
+\begin_inset Formula 
+\[
+K=\begin{bmatrix}-1 & 1\\
+-1 & 1
+\end{bmatrix},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+and thus 
+\begin_inset Formula $\mathcal{M}=\{0,1\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{N}=\{0,1\}.$
+\end_inset
+
+ So basically for each pixel we overlay the filter kernel 
+\begin_inset Formula $K$
+\end_inset
+
+,
+ weigh the surronding pixels accordingly and sum.
+ An example is given here:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/Crosscorrelation_example.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Convolution
+\series default
+:
+ Essentially the same method but where we first flip 
+\begin_inset Formula $K$
+\end_inset
+
+ above 
+\begin_inset Formula $180$
+\end_inset
+
+-degrees,
+ shiftet so the bottom right is at the pixel 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+ and then apply cross correlation.
+ The formula is
+\begin_inset Formula 
+\[
+C_{conv}(i,j)=(I*K)(i,j)=\sum_{m\in\mathcal{M}}\sum_{n\in\mathcal{N}}K(m,n)\cdot I(i-m,j-n).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note the shift dependents on 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+.
+ For example there is no shift for symmetrical convolutions 
+\begin_inset Formula 
+\[
+\mathcal{M}=\mathcal{N}=\{-k,-(k-1),\dots,0,\dots,(k-1),k\}.
+\]
+
+\end_inset
+
+(Remember this is all in comparison with cross-correlation).
+\end_layout
+
+\begin_layout Subsubsection
+Padding
+\end_layout
+
+\begin_layout Standard
+Convolution layers or cross correlation layers reduce the number of pixels.
+ For example a 3 by 3 cross correlation will remove 2 pixels in each dimension thus reducing an image from 
+\begin_inset Formula $(M,N)$
+\end_inset
+
+ to 
+\begin_inset Formula $(M-2,N-2$
+\end_inset
+
+) to avoid this one can add 
+\emph on
+padding 
+\emph default
+around the input image 
+\begin_inset Formula $I$
+\end_inset
+
+ so that it becomes 
+\begin_inset Formula $(M+2,N+2)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The padding values are usually just zeros (zero padding) since the specific values rarely matters in practice.
+ But it could also be some notion of mean values.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/padding.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Equivariance
+\end_layout
+
+\begin_layout Standard
+If the input (for example a traffic sign in a picture) is translated / moved then the output (i.e.
+ the feature space of the neurons in a particular layer) will translate in the same way.
+ This is why convolutional neural networks are particularly relevant for image recognition tasks since it usually does not matter where in the frame a person or item is located.
+\end_layout
+
+\begin_layout Subsection
+Pooling layer
+\end_layout
+
+\begin_layout Standard
+Pooling layers reduce dimensionality by for example looping over all non-intersecting 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ grids on the feature image with a 
+\emph on
+stride 
+\emph default
+of 2.
+ Then applying the 
+\begin_inset Formula $\max\{\cdot\}$
+\end_inset
+
+ operator over those four values as the output.
+ Thus in this example a 4 by 4 feature map is reduces to 2 by 2.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/pooling.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Invariance
+\end_layout
+
+\begin_layout Standard
+Invariance refers to operations that does not change its output when the input is translated / shiftet.
+ Pooling layers can help with invariance which can be understood through an example.
+ Let the kernel detect cat-shapes.
+ Then translating the cat 5 pixels to the right translates the feature map equivaraintly 5 pixels to the right (remember that the feature space is the output of the cross-correlation using the cat-kernel).
+ Applying a max pooling layer will still just indicate 
+\begin_inset Formula $\texttt{True}$
+\end_inset
+
+ there is a cat.
+ Thus the algorithm is 
+\emph on
+invariant
+\emph default
+ to translations of the cat.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/invariance.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Receptive field
+\end_layout
+
+\begin_layout Standard
+Nerons in deeper layers have a greater 
+\emph on
+effective receptive 
+\emph default
+field than its kernel would suggest.
+ This is simply because the feature space the neuron percieves comes from a poolin layer which have condensed larger field.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/receptive_field.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Example:
+ VGG-16 architecture
+\end_layout
+
+\begin_layout Standard
+As a quick recap I will explain the general details of the VGG-16 architecture depicted here.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/example_CNN_architecture.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The input layer is one RGB image - so there is 3 input channels corresponding to red,
+ green and blue respectively.
+ Each input channel is of size 
+\begin_inset Formula $244\times244$
+\end_inset
+
+.
+ The convolutional layer outputs 64 feature maps i.e.
+ there are 64 kernels and biases needing to be trained in this single layer.
+ Between each layer the non-linear ReLU activation function is applied.
+ Each 
+\begin_inset Formula $224\times224$
+\end_inset
+
+ feature-map is then reduced by max pooling to 
+\begin_inset Formula $122\times122$
+\end_inset
+
+ and convolutional layers now take the 64 features and double them and creating 128 feature maps (thus and additional 128 kernels and biases needs training for each layer).
+ 
+\end_layout
+
+\begin_layout Standard
+In the end,
+ we obtain 512 feature maps,
+ each of size 
+\begin_inset Formula $7\times7$
+\end_inset
+
+.
+ These are flattened into a single vector containing 
+\begin_inset Formula $7\cdot7\cdot512=25,088$
+\end_inset
+
+ features,
+ which serves as input to a fully connected layer with 4096 neurons.
+ This is followed by another fully connected layer with 4096 neurons and finally an output layer with 1,000 neurons,
+ corresponding to the 1000 possible classification categories.
+ A softmax activation is applied to the final output to obtain a probability distribution over these categories.
+\end_layout
+
+\begin_layout Subsection
+Tricks-of-the-Trade
+\end_layout
+
+\begin_layout Subsubsection
+Ensemble Methods
+\end_layout
+
+\begin_layout Standard
+Ensemble methods combat overfitting through the 
+\emph on
+cancellation of errors effect
+\emph default
+ and has proven to be very succesfull in the CNN setting.
+ CNN ensembles can be created over the same datasets because of the importance of random initialization on the local minimum obtained.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Reminder:
+ cancellation of errors effect
+\series default
+:
+ When individual ensemble members perform better than random guessing and make independent errors,
+ their errors average out and the combined model outperforms the individual predictors.
+\end_layout
+
+\begin_layout Subsubsection
+Dropout
+\end_layout
+
+\begin_layout Standard
+A heuristic method for avoiding overfitting is 
+\emph on
+dropout
+\emph default
+.
+ It is an ensemble method where each member of the ensemble is a subnetwork where randomly a binary mask 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ has been applied to remove neurons.
+ Then training commences on all the subnetworks individually to create the ensemble.
+ The two right models in the illustration would be two members of the whole ensemble.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/dropout.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Residual Leraning / Shorcuts
+\end_layout
+
+\begin_layout Standard
+Yet another method to combat local minima is shortcuts.
+ Where in each layer the input data directly passes trough as illustrated below.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/shotcuts.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This can drastically smooth the error surface.
+ This example visualizes the error surface (loss vs.
+ parameters) for a network with 56 layers without (a) and with (b) shortcuts.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/smooth_error_surface.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Augmentation og Invariance
+\end_layout
+
+\begin_layout Standard
+Data augmentation refers to applying transformations to the input data that do not change their labels.
+ Let 
+\begin_inset Formula $T=\{𝑇1,…,\}$
+\end_inset
+
+ be a set of transformations.
+ During training,
+ for each
+\end_layout
+
+\begin_layout Standard
+element added to a mini-batch it is decided if and which transformations are applied to it.
+ In this way,
+ we learn invariance with respect to the transformations in 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ If augmentation is always applied,
+ the network hardly see exactly the same input twice.
+ Note that the “new” training examples are not i.i.d.
+ samples!
+\end_layout
+
+\begin_layout Standard
+Examples of transformations for images could be cropping,
+ rotating,
+ flipping,
+ blurring,
+ adding noise,
+ \SpecialChar ldots
+
+\end_layout
+
+\begin_layout Subsubsection
+Batch and Layer Normalization
+\end_layout
+
+\begin_layout Standard
+Batch normalization and layer normalization normalize intermediate neuron activations across different dimensions.
+ This can stabilize gradient propagation,
+ improve the conditioning of the optimization problem,
+ and allow gradient descent to converge more reliably and often faster.
+\end_layout
+
+\begin_layout Itemize
+Batch normalization normalizes 
+\emph on
+each 
+\emph default
+neurons activation over 
+\emph on
+multiple 
+\emph default
+observations (i.e.
+ the batch).
+\end_layout
+
+\begin_layout Itemize
+Layer normalization normalizes neuron activation 
+\emph on
+layer 
+\emph default
+for 
+\emph on
+each 
+\emph default
+observation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+newpage
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+vspace{15cm}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+Huge 
+\backslash
+textbf{III | Unsupervised Learning}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+addtocontents{toc}{
+\backslash
+protect
+\backslash
+vspace{15pt}}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+addcontentsline{toc}{section}{Unsupervised Learning}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+vfill
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Principal Component Analysis
+\end_layout
+
+\begin_layout Subsection
+Definitions
+\end_layout
+
+\begin_layout Subsubsection
+Dimensions
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $D$
+\end_inset
+
+ is the dimensionality of the original dataset 
+\begin_inset Formula $X$
+\end_inset
+
+ (sampled from 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+).
+ As an example consider the face database where each picture is 
+\begin_inset Formula $92×122$
+\end_inset
+
+ pixels.
+ Then the dimension 
+\begin_inset Formula $D$
+\end_inset
+
+ of the input space is 
+\begin_inset Formula $D=10304$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $d<D$
+\end_inset
+
+ is the dimensionality of the outputspace of PCA i.e.
+ the dimensionality we have reduced the dataset to using PCA.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $N$
+\end_inset
+
+ is the number of observations in 
+\begin_inset Formula $X$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $X$
+\end_inset
+
+ can then be defined by stacking all 
+\begin_inset Formula $N$
+\end_inset
+
+ observations 
+\begin_inset Formula $\mathbf{x}_{i}'\in\mathbb{R}^{D}$
+\end_inset
+
+ as the rows to obtain 
+\begin_inset Formula $X\in\mathbb{R}^{N\times D}$
+\end_inset
+
+.
+ This is very much like the design matrix in linear regression).
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $U_{d}\in\mathbb{R}^{D\times d}$
+\end_inset
+
+ takes in 
+\begin_inset Formula $d$
+\end_inset
+
+ dimensional enocded data and outputs 
+\begin_inset Formula $D$
+\end_inset
+
+ dimensional reconstructed data (where we add 
+\begin_inset Formula $\mathbf{b}\in\mathbb{R}^{D}$
+\end_inset
+
+ for the final output 
+\begin_inset Formula $f_{dec}(\mathbf{z}_{i})=\mathbf{b}+U_{d}\mathbf{z}_{i}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Subsection
+The objective of PCA
+\end_layout
+
+\begin_layout Standard
+The goal of PCA is to take a dataset 
+\begin_inset Formula $X$
+\end_inset
+
+ sampled from
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ with datapoints 
+\begin_inset Formula $\mathbf{x}_{i}\in\mathbb{R}^{D},$
+\end_inset
+
+ 
+\begin_inset Formula $i=1,\dots,$
+\end_inset
+
+ and linearly map them into 
+\begin_inset Formula $\mathbf{z}_{i}\in\mathbb{R}^{d}$
+\end_inset
+
+ where 
+\begin_inset Formula $d<D$
+\end_inset
+
+ while minimizing the reconstruction error
+\begin_inset Formula 
+\[
+J=\frac{1}{N}\sum^{N}_{n=1}||\mathbf{x}_{n}-f_{dec}(\mathbf{z}_{n})||^{2}_{2},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where
+\begin_inset Formula 
+\[
+f_{dec}(\mathbf{z}_{n})=\mathbf{b}+U_{m}\mathbf{z}_{n},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{z}_{i}\in\mathbb{R}^{d}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\mathbf{b}\in\mathbb{R}^{D}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{d}\in\mathbb{R}^{D\times d}$
+\end_inset
+
+ is the 
+\emph on
+decoding
+\emph default
+ function.
+\end_layout
+
+\begin_layout Standard
+In other words we are looking for the 
+\emph on
+encoding 
+\emph default
+ 
+\begin_inset Formula $f_{enc}:\mathbb{R}^{D}\rightarrow\mathbb{R}^{d}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $d<D$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\min_{\mathbf{b},U_{d}\{\mathbf{z}_{1},\dots,\mathbf{z}_{N}\}}\frac{1}{N}\sum^{N}_{n=1}||\mathbf{x}_{n}-f_{dec}(\mathbf{z}_{n})||^{2}_{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Optimal reconstruction
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $U$
+\end_inset
+
+ (with the columns 
+\begin_inset Formula $\mathbf{u}_{1},\dots,\mathbf{u}_{D}\in\mathbb{R}^{D}$
+\end_inset
+
+) be an orthonomal basis (spanning the the whole 
+\begin_inset Formula $\mathbb{R}^{D}$
+\end_inset
+
+ with unit lenght basisvectors)
+\begin_inset Formula 
+\[
+\mathbf{u}_{k}'\mathbf{u}_{j}=\begin{cases}
+1 & k=j,\\
+0 & k\neq j.
+\end{cases}
+\]
+
+\end_inset
+
+ Then every vector / observation 
+\begin_inset Formula $\mathbf{x}_{i}\in\mathbb{R}^{D}$
+\end_inset
+
+ can be represented as a linear combination of the basisvectors in 
+\begin_inset Formula $U$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\mathbf{x}_{i}=\sum^{D}_{j=1}a_{j}\mathbf{u}_{j}.\label{eq:newbasis1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We now want to determine 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+.
+ Premultiply 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:newbasis1}
+\end_layout
+
+\end_inset
+
+ by any of the new basisvectors 
+\begin_inset Formula $\mathbf{u}_{k}',$
+\end_inset
+
+ 
+\begin_inset Formula $k\in\{1,\dots,D\}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\mathbf{u}_{k}'\mathbf{x}_{i} & =\mathbf{u}_{k}'\sum^{n}_{j=1}a_{j}\mathbf{u}_{j}=\sum^{n}_{j=1}\mathbf{u}_{k}'a_{j}\mathbf{u}_{j}=\sum^{n}_{j=1}a_{j}\mathbf{u}_{k}'\mathbf{u}_{j}\\
+ & =\underbrace{a_{1}\mathbf{u}_{k}'\mathbf{u}_{1}+\cdots+}_{=0}a_{k}\mathbf{u}_{k}'\mathbf{u}_{k}\underbrace{+\cdots+a_{\ell}\mathbf{u}_{k}'\mathbf{u}_{\ell}}_{=0}\\
+ & =a_{k},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where we have used the pairwise orthogonality of the basis vectors and the unit length of any 
+\begin_inset Formula $\mathbf{u}_{k}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathbf{u}_{k}'\mathbf{u}_{k}=||\mathbf{u}_{k}||^{2}_{2}=1^{2}$
+\end_inset
+
+.
+ Inserting 
+\begin_inset Formula $a_{k}=\mathbf{u}_{k}'\mathbf{x}_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\in\{1,\dots,D\}$
+\end_inset
+
+ into 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:newbasis1}
+\end_layout
+
+\end_inset
+
+ yields
+\begin_inset Formula 
+\[
+\mathbf{x}_{i}=\sum^{d}_{j=1}\left(\mathbf{u}_{j}'\mathbf{x}_{i}\right)\mathbf{u}_{j}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that this only works because of the orthonormal restriction on the basis 
+\begin_inset Formula $U$
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,1317 @@
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children no
+\language danish
+\language_package default
+\inputencoding utf8
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification default
+\crossref_package refstyle
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Neural Networks
+\end_layout
+
+\begin_layout Subsection
+The Neuron
+\end_layout
+
+\begin_layout Standard
+This chapter explains in detail the following picture which illustrates a single neuron with implicit bias.
+ So if one understands the picture the chapter can be skipped.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/neuron.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Pre-Activation 
+\end_layout
+
+\begin_layout Standard
+The preactivation of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align*}
+a_{i}(\mathbf{x}) & =\sum^{d}_{j=1}w_{ij}x_{j}+w_{i0}\\
+ & =\mathbf{w}_{i}'\mathbf{x}_{+1},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{x}_{+1}\in\mathbb{R}^{d+1}$
+\end_inset
+
+ denotes the argmentet vector 
+\begin_inset Formula 
+\[
+\mathbf{x}_{+1}=\begin{bmatrix}1 & x_{1} & \cdots & x_{d}\end{bmatrix}'.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Activation and output 
+\end_layout
+
+\begin_layout Standard
+Applying a (non-linear) activation function 
+\begin_inset Formula $h_{i}:\mathbb{R}\rightarrow\mathbb{R}$
+\end_inset
+
+ yields the output of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z_{i}(\mathbf{x})=h_{i}(a_{i}(\mathbf{x}))=h_{i}\left(\sum^{d}_{j=1}w_{ij}x_{j}+w_{i0}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That is each neuron 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ has its own weights (and bias) 
+\begin_inset Formula $\mathbf{w}\in\mathbb{R}^{d+1}$
+\end_inset
+
+ and activation function 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+.
+ The latter is usually the same for all neurons except the output-neurons (in the top layer).
+\end_layout
+
+\begin_layout Subsubsection
+Activation functions
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Linear activation function:
+ 
+\series default
+For the network structure to have any reason to exist the activation functions 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+ must be non-linear.
+ If not the neural network 
+\begin_inset Formula $f:\mathbb{R}^{d}\rightarrow\mathbb{R}^{K}$
+\end_inset
+
+ will simply be a linear function of the inputs aswell.
+ 
+\end_layout
+
+\begin_layout Standard
+To see this note that each neuron in the inputlayer would output the following functional form
+\begin_inset Formula 
+\begin{align*}
+h\left(\sum^{d}_{j=1}w_{ij}x_{j}+w_{i0}\right) & =\sum^{d}_{j=1}\underbrace{aw_{ij}}_{\tilde{w}_{ij}}x_{j}+\underbrace{aw_{i0}+b}_{\tilde{w}_{i0}}\\
+ & =\sum^{d}_{j=1}\tilde{w}_{ij}x_{j}+\tilde{w}_{i0},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and since each pre-activation is simply a affine linear function of the previous affine linear functions all later neurons will output something of the form:
+\begin_inset Formula 
+\begin{align*}
+h\left(a\left(\begin{bmatrix}z_{1} & z_{2} & \cdots & z_{K}\end{bmatrix}\right)\right) & =h\left(\sum^{K}_{k=1}w_{k}z_{k}+w_{0}\right)\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}z_{k}+\hat{w}_{0}\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}\left(\sum^{d}_{j=1}\tilde{w}_{kj}x_{j}+\tilde{w}_{k0}\right)+\hat{w}_{0}\\
+ & =\sum^{K}_{k=1}\hat{w}_{k}\sum^{d}_{j=1}\tilde{w}_{kj}x_{j}+\underbrace{\sum^{K}_{k=1}\hat{w}_{k}\tilde{w}_{k0}+\hat{w}_{0}}_{\bar{w}_{0}}\\
+ & =\sum^{K}_{k=1}\sum^{d}_{j=1}\hat{w}_{k}\tilde{w}_{kj}x_{j}+\bar{w}_{0}\\
+ & =\sum^{d}_{j=1}\sum^{K}_{k=1}\hat{w}_{k}\tilde{w}_{kj}x_{j}+\bar{w}_{0}\\
+ & =\sum^{d}_{j=1}x_{j}\underbrace{\sum^{K}_{k=1}\left(\hat{w}_{k}\tilde{w}_{kj}\right)}_{\bar{w}_{j}}+\bar{w}_{0}\\
+ & =\sum^{d}_{j=1}\bar{w}_{j}x_{j}+\bar{w}_{0}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This then also goes for all other layers recieving these outputs (by the exact same argument as above).
+ So in summary:
+ if 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+ is linear for all 
+\begin_inset Formula $i$
+\end_inset
+
+ then there is no purpose to the neural network structure and the simple affine linear model of linear regression fits the model just as well.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Well known activation functions (greatest hits).
+ 
+\series default
+Here i list some of the most common activation functions.
+ Some are more common for outputlayers for example logistic activation and are rarely used in hidden layers.
+\end_layout
+
+\begin_layout Itemize
+Step / Threshold
+\begin_inset Formula 
+\[
+h(a)=\mathbb{I}(a>0),
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in\{0,1\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Hyperbolic tangent
+\begin_inset Formula 
+\[
+h(a)=tanh(a),
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in(-1,1)$
+\end_inset
+
+ and with a visual form much like 
+\emph on
+alternative sigmoid.
+\end_layout
+
+\begin_layout Itemize
+Rectified linear unit (ReLU)
+\begin_inset Formula 
+\[
+h(a)=\max(0,a),
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}[0,\infty)$
+\end_inset
+
+.
+ Note that there the derivative of the loss function wrt.
+ pre-activation weights is uninformative in the regrion 
+\begin_inset Formula $a<0$
+\end_inset
+
+.
+ By that i mean 
+\begin_inset Formula $\partial h_{i}/\partial w_{ij}=0$
+\end_inset
+
+ if 
+\begin_inset Formula $a_{i}(\mathbf{x},\mathbf{w})<0$
+\end_inset
+
+ and so it does not help us adjust weights to decrease loss in these negative regions.
+\end_layout
+
+\begin_layout Itemize
+Fermi / logistic
+\begin_inset Formula 
+\[
+h(a)=\frac{1}{1+\exp\left\{ -a\right\} },
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in(0,1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Alternative sigmoid
+\begin_inset Formula 
+\[
+h(a)=\frac{a}{1+|a|},
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Exponential LU (ELU,
+ 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+)
+\begin_inset Formula 
+\[
+h(a)=\begin{cases}
+a & a\geq0\\
+\alpha(\exp\{a\}-1) & a<0
+\end{cases}
+\]
+
+\end_inset
+
+with range 
+\begin_inset Formula $\mathcal{R}\in(-\alpha,\infty)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Here the functions are plottet where for ELU 
+\begin_inset Formula $\alpha=1$
+\end_inset
+
+ is chosen.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/activation_funcitons.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Gradient descent
+\end_layout
+
+\begin_layout Standard
+To optimize a neural network with error function 
+\begin_inset Formula $E=\sum^{N}_{n=1}E_{n}$
+\end_inset
+
+ (as with loglikelihood functions) we introduce gradient descent.
+ The bare form of this algorithm is simply
+\begin_inset Formula 
+\begin{align*}
+\mathbf{w}^{(t+1)} & =\mathbf{w}^{(t)}+\mathbf{\Delta_{w}}^{(t)}\\
+ & =\mathbf{w}^{(t)}-\eta\nabla E|_{\mathbf{w}^{(t)}},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with learning rate 
+\begin_inset Formula $\eta>0$
+\end_inset
+
+ determining how large steps are in proportion to the gradient.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/gradient_descent.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Often we add a 
+\emph on
+momentum term
+\emph default
+ (in an attempt to improve performance) which intuitively works like a heavy ball.
+ When a heavy ball has gained momentum from accelerating down a steep hill it will roll over local minimums and further down towards the global minimum (hopefully).
+ Formally we have
+\begin_inset Formula 
+\begin{align*}
+\mathbf{w}^{(t+1)} & =\mathbf{w}^{(t)}-\eta\nabla E|_{\mathbf{w}^{(t)}}+\mu\mathbf{\Delta_{w}}^{(t-1)}\\
+ & =\mathbf{w}^{(t)}-\eta\nabla E|_{\mathbf{w}^{(t)}}+\mu\left(\mathbf{w}^{(t)}-\mathbf{w}^{(t-1)}\right),
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with momentum parameter 
+\begin_inset Formula $\mu>0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The question now really is how to calculate the elements of 
+\begin_inset Formula $\nabla E|_{\mathbf{w}^{(t)}}$
+\end_inset
+
+ given by 
+\begin_inset Formula 
+\[
+\frac{\partial E}{\partial w_{ij}}=\sum^{N}_{n=1}\frac{\partial E_{n}}{\partial w_{ij}},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+.
+ Recall that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ contains all the edges connection the output of neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ to the input of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ which is scaled by 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+.
+ This is answered in the next section.
+\end_layout
+
+\begin_layout Subsection
+Backpropagation 
+\end_layout
+
+\begin_layout Standard
+The goal is to calculate 
+\begin_inset Formula $\frac{\partial E_{n}}{\partial w_{ij}}$
+\end_inset
+
+ for every 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Why not for 
+\begin_inset Formula $(j,i)\neq\mathcal{A}$
+\end_inset
+
+?
+ These weights simply do not exist.
+ The model only has weights symbolizing the strength of the connect from neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ to neuron 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ There is no connection from 
+\begin_inset Formula $i$
+\end_inset
+
+ back to 
+\begin_inset Formula $j$
+\end_inset
+
+ so this 
+\begin_inset Formula $w_{ji}$
+\end_inset
+
+ does not exist.
+\end_layout
+
+\end_inset
+
+ Applying the chain rule to every element of the error function 
+\begin_inset Formula $E=\sum^{N}_{n=1}E_{n}$
+\end_inset
+
+ yields the following.
+ Note that 
+\begin_inset Formula $E_{n}$
+\end_inset
+
+ is a function of 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+ in the network.
+ and that any 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ is a function of 
+\begin_inset Formula $z_{j}$
+\end_inset
+
+ where 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+.
+ Therefore the chain rule yields
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E_{n}}{\partial w_{ij}} & =\frac{\partial E_{n}}{\partial z_{i}}\frac{\partial z_{i}}{\partial a_{i}}\frac{\partial a_{i}}{\partial w_{ij}}\\
+ & =\frac{\partial E_{n}}{\partial z_{i}}h_{i}'(a_{i})\left[\mathbf{z}_{n}\right]_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the last step uses that 
+\begin_inset Formula 
+\[
+z_{i}(\mathbf{z})\equiv h_{i}(a_{i}(\mathbf{z}))\implies\frac{\partial z_{i}}{\partial a_{i}}=h'_{i}(a_{i}),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{z}\in\mathbb{R}^{M}$
+\end_inset
+
+ contains all the inputs from the previous layer to neuron 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ For the last factor we used that
+\begin_inset Formula 
+\[
+a_{i}(\mathbf{z}_{n})=w_{i0}+\sum^{M}_{m=1}w_{im}\left[\mathbf{z}_{n}\right]_{m}\implies\frac{\partial a_{i}}{\partial w_{ij}}=\left[\mathbf{z}_{n}\right]_{j}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore the missing factor to be calculated is 
+\begin_inset Formula $\frac{\partial E_{n}}{\partial z_{i}}$
+\end_inset
+
+ which we will now turn to.
+\end_layout
+
+\begin_layout Subsubsection
+The ouput layer
+\end_layout
+
+\begin_layout Standard
+For the output layer 
+\begin_inset Formula $\frac{\partial E_{n}}{\partial z_{i}}$
+\end_inset
+
+ can be directly calculated.
+ To see this let the loss function be the sum of squared errors 
+\begin_inset Formula 
+\begin{align*}
+E=\frac{1}{2}\sum^{N}_{n=1}||f(\mathbf{x}_{n};\mathbf{w})-\mathbf{y}_{n}||^{2} & =\frac{1}{2}\sum^{N}_{n=1}\left(\sqrt{\sum^{K}_{k=1}\left(\left[f(\mathbf{x}_{n};\mathbf{w})\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}}\right)^{2}\\
+ & =\frac{1}{2}\sum^{N}_{n=1}\sum^{K}_{k=1}\left(\left[f(\mathbf{x}_{n};\mathbf{w})\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}\\
+ & =\frac{1}{2}\sum^{N}_{n=1}\sum^{K}_{k=1}\left(\left[\mathbf{z}_{n}\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for 
+\begin_inset Formula $k\in V_{output}$
+\end_inset
+
+.
+ Therefore we have (for 
+\begin_inset Formula $i\in V_{output}$
+\end_inset
+
+ and 
+\begin_inset Formula $(j,i)\in\mathcal{A}$
+\end_inset
+
+)
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E_{n}}{\partial z_{i}} & =\frac{\partial}{\partial z_{i}}\frac{1}{2}\sum^{K}_{k=1}\left(\left[\mathbf{z}_{n}\right]_{k}-\left[\mathbf{y}_{n}\right]_{k}\right)^{2}\\
+ & =\left[\mathbf{z}_{n}\right]_{i}-\left[\mathbf{y}_{n}\right]_{i}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $h_{i}(a_{i})=a_{i}\implies h_{i}'(a_{i})=1$
+\end_inset
+
+ where 
+\begin_inset Formula $i\in V_{output}$
+\end_inset
+
+ we thus have 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E}{\partial w_{ij}} & =\sum^{N}_{n=1}\frac{\partial E_{n}}{\partial z_{i}}h_{i}'(a_{i})z_{j}\\
+ & =\sum^{N}_{n=1}\frac{\partial E_{n}}{\partial z_{i}}\left[\mathbf{z}_{n}\right]_{j}\\
+ & =\sum^{N}_{n=1}\left(\left[\mathbf{z}_{n}\right]_{i}-\left[\mathbf{y}_{n}\right]_{i}\right)\left[\mathbf{z}_{n}\right]_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Hidden layers
+\end_layout
+
+\begin_layout Standard
+For hidden layers we apply the apply the chainrule to obtain
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial E}{\partial z_{j}} & =\sum_{k\text{ in }(j,k)\in\mathcal{A}}\frac{\partial E}{\partial z_{k}}\frac{\partial z_{k}}{\partial z_{j}}\\
+ & =\sum_{k\text{ in }(j,k)\in\mathcal{A}}\frac{\partial E}{\partial z_{k}}\frac{\partial z_{k}}{\partial a_{k}}\frac{\partial a_{k}}{\partial z_{j}}\\
+ & =\sum_{k\text{ in }(j,k)\in\mathcal{A}}\frac{\partial E}{\partial z_{k}}h_{k}'(a_{k})w_{kj}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The partial derivatives of the layer just before 
+\begin_inset Formula $V_{ouput}$
+\end_inset
+
+ is then calculated by pluging in 
+\begin_inset Formula $\frac{\partial E}{\partial z_{k}}$
+\end_inset
+
+,
+ 
+\begin_inset Formula $k\in V_{output}$
+\end_inset
+
+ and 
+\begin_inset Formula $(j,k)\in\mathcal{A}$
+\end_inset
+
+.
+ Then the third layers uses the second layers calculated 
+\begin_inset Formula $\frac{\partial E}{\partial z_{j}}$
+\end_inset
+
+ and so on.
+ This is sometimes referred to as the backwards pass.
+\end_layout
+
+\begin_layout Section
+Deep Learning
+\end_layout
+
+\begin_layout Subsection
+Convolution / cross-correlation
+\end_layout
+
+\begin_layout Standard
+A convolution is a filtering transformation applied to image-like data.
+ Image-like in the sence that datapoints close to each other in the dataset structure somehow relate to each other - like two pixels are closely related in a picture.
+ 
+\end_layout
+
+\begin_layout Standard
+Formally let 
+\begin_inset Formula $C(i,j)$
+\end_inset
+
+ be the output image from applying a convolution operation (or cross correlation operation) to the pixel in image 
+\begin_inset Formula $I$
+\end_inset
+
+ at location 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+.
+ Additionally 
+\begin_inset Formula $C$
+\end_inset
+
+ takes a kernel matrix 
+\begin_inset Formula $K$
+\end_inset
+
+ as input.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Cross correlation
+\series default
+:
+ It is intuitive and defined as
+\begin_inset Formula 
+\[
+C_{corr}(i,j)=\sum_{m\in\mathcal{M}}\sum_{n\in\mathcal{N}}K(m,n)\cdot I(i+m,j+n),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the kernel for example could be the vertical edge 
+\emph on
+filter kernel
+\emph default
+:
+\begin_inset Formula 
+\[
+K=\begin{bmatrix}-1 & 1\\
+-1 & 1
+\end{bmatrix},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+and thus 
+\begin_inset Formula $\mathcal{M}=\{0,1\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{N}=\{0,1\}.$
+\end_inset
+
+ So basically for each pixel we overlay the filter kernel 
+\begin_inset Formula $K$
+\end_inset
+
+,
+ weigh the surronding pixels accordingly and sum.
+ An example is given here:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/Crosscorrelation_example.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Convolution
+\series default
+:
+ Essentially the same method but where we first flip 
+\begin_inset Formula $K$
+\end_inset
+
+ above 
+\begin_inset Formula $180$
+\end_inset
+
+-degrees,
+ shiftet so the bottom right is at the pixel 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+ and then apply cross correlation.
+ The formula is
+\begin_inset Formula 
+\[
+C_{conv}(i,j)=(I*K)(i,j)=\sum_{m\in\mathcal{M}}\sum_{n\in\mathcal{N}}K(m,n)\cdot I(i-m,j-n).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note the shift dependents on 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+.
+ For example there is no shift for symmetrical convolutions 
+\begin_inset Formula 
+\[
+\mathcal{M}=\mathcal{N}=\{-k,-(k-1),\dots,0,\dots,(k-1),k\}.
+\]
+
+\end_inset
+
+(Remember this is all in comparison with cross-correlation).
+\end_layout
+
+\begin_layout Subsubsection
+Padding
+\end_layout
+
+\begin_layout Standard
+Convolution layers or cross correlation layers reduce the number of pixels.
+ For example a 3 by 3 cross correlation will remove 2 pixels in each dimension thus reducing an image from 
+\begin_inset Formula $(M,N)$
+\end_inset
+
+ to 
+\begin_inset Formula $(M-2,N-2$
+\end_inset
+
+) to avoid this one can add 
+\emph on
+padding 
+\emph default
+around the input image 
+\begin_inset Formula $I$
+\end_inset
+
+ so that it becomes 
+\begin_inset Formula $(M+2,N+2)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The padding values are usually just zeros (zero padding) since the specific values rarely matters in practice.
+ But it could also be some notion of mean values.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/padding.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Equivariance
+\end_layout
+
+\begin_layout Standard
+If the input (for example a traffic sign in a picture) is translated / moved then the output (i.e.
+ the feature space of the neurons in a particular layer) will translate in the same way.
+ This is why convolutional neural networks are particularly relevant for image recognition tasks since it usually does not matter where in the frame a person or item is located.
+\end_layout
+
+\begin_layout Subsection
+Pooling layer
+\end_layout
+
+\begin_layout Standard
+Pooling layers reduce dimensionality by for example looping over all non-intersecting 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ grids on the feature image with a 
+\emph on
+stride 
+\emph default
+of 2.
+ Then applying the 
+\begin_inset Formula $\max\{\cdot\}$
+\end_inset
+
+ operator over those four values as the output.
+ Thus in this example a 4 by 4 feature map is reduces to 2 by 2.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/pooling.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Invariance
+\end_layout
+
+\begin_layout Standard
+Invariance refers to operations that does not change its output when the input is translated / shiftet.
+ Pooling layers can help with invariance which can be understood through an example.
+ Let the kernel detect cat-shapes.
+ Then translating the cat 5 pixels to the right translates the feature map equivaraintly 5 pixels to the right (remember that the feature space is the output of the cross-correlation using the cat-kernel).
+ Applying a max pooling layer will still just indicate 
+\begin_inset Formula $\texttt{True}$
+\end_inset
+
+ there is a cat.
+ Thus the algorithm is 
+\emph on
+invariant
+\emph default
+ to translations of the cat.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/invariance.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Receptive field
+\end_layout
+
+\begin_layout Standard
+Nerons in deeper layers have a greater 
+\emph on
+effective receptive 
+\emph default
+field than its kernel would suggest.
+ This is simply because the feature space the neuron percieves comes from a poolin layer which have condensed larger field.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/receptive_field.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Example:
+ VGG-16 architecture
+\end_layout
+
+\begin_layout Standard
+As a quick recap I will explain the general details of the VGG-16 architecture depicted here.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/example_CNN_architecture.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The input layer is one RGB image - so there is 3 input channels corresponding to red,
+ green and blue respectively.
+ Each input channel is of size 
+\begin_inset Formula $244\times244$
+\end_inset
+
+.
+ The convolutional layer outputs 64 feature maps i.e.
+ there are 64 kernels and biases needing to be trained in this single layer.
+ Between each layer the non-linear ReLU activation function is applied.
+ Each 
+\begin_inset Formula $224\times224$
+\end_inset
+
+ feature-map is then reduced by max pooling to 
+\begin_inset Formula $122\times122$
+\end_inset
+
+ and convolutional layers now take the 64 features and double them and creating 128 feature maps (thus and additional 128 kernels and biases needs training for each layer).
+ 
+\end_layout
+
+\begin_layout Standard
+In the end,
+ we obtain 512 feature maps,
+ each of size 
+\begin_inset Formula $7\times7$
+\end_inset
+
+.
+ These are flattened into a single vector containing 
+\begin_inset Formula $7\cdot7\cdot512=25,088$
+\end_inset
+
+ features,
+ which serves as input to a fully connected layer with 4096 neurons.
+ This is followed by another fully connected layer with 4096 neurons and finally an output layer with 1,000 neurons,
+ corresponding to the 1000 possible classification categories.
+ A softmax activation is applied to the final output to obtain a probability distribution over these categories.
+\end_layout
+
+\begin_layout Subsection
+Tricks-of-the-Trade
+\end_layout
+
+\begin_layout Subsubsection
+Ensemble Methods
+\end_layout
+
+\begin_layout Standard
+Ensemble methods combat overfitting through the 
+\emph on
+cancellation of errors effect
+\emph default
+ and has proven to be very succesfull in the CNN setting.
+ CNN ensembles can be created over the same datasets because of the importance of random initialization on the local minimum obtained.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Reminder:
+ cancellation of errors effect
+\series default
+:
+ When individual ensemble members perform better than random guessing and make independent errors,
+ their errors average out and the combined model outperforms the individual predictors.
+\end_layout
+
+\begin_layout Subsubsection
+Dropout
+\end_layout
+
+\begin_layout Standard
+A heuristic method for avoiding overfitting is 
+\emph on
+dropout
+\emph default
+.
+ It is an ensemble method where each member of the ensemble is a subnetwork where randomly a binary mask 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ has been applied to remove neurons.
+ Then training commences on all the subnetworks individually to create the ensemble.
+ The two right models in the illustration would be two members of the whole ensemble.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/dropout.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Residual Leraning / Shorcuts
+\end_layout
+
+\begin_layout Standard
+Yet another method to combat local minima is shortcuts.
+ Where in each layer the input data directly passes trough as illustrated below.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/shotcuts.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This can drastically smooth the error surface.
+ This example visualizes the error surface (loss vs.
+ parameters) for a network with 56 layers without (a) and with (b) shortcuts.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/smooth_error_surface.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Augmentation og Invariance
+\end_layout
+
+\begin_layout Standard
+Data augmentation refers to applying transformations to the input data that do not change their labels.
+ Let 
+\begin_inset Formula $T=\{𝑇1,…,\}$
+\end_inset
+
+ be a set of transformations.
+ During training,
+ for each
+\end_layout
+
+\begin_layout Standard
+element added to a mini-batch it is decided if and which transformations are applied to it.
+ In this way,
+ we learn invariance with respect to the transformations in 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ If augmentation is always applied,
+ the network hardly see exactly the same input twice.
+ Note that the “new” training examples are not i.i.d.
+ samples!
+\end_layout
+
+\begin_layout Standard
+Examples of transformations for images could be cropping,
+ rotating,
+ flipping,
+ blurring,
+ adding noise,
+ \SpecialChar ldots
+
+\end_layout
+
+\begin_layout Subsubsection
+Batch and Layer Normalization
+\end_layout
+
+\begin_layout Standard
+Batch normalization and layer normalization normalize intermediate neuron activations across different dimensions.
+ This can stabilize gradient propagation,
+ improve the conditioning of the optimization problem,
+ and allow gradient descent to converge more reliably and often faster.
+\end_layout
+
+\begin_layout Itemize
+Batch normalization normalizes 
+\emph on
+each 
+\emph default
+neurons activation over 
+\emph on
+multiple 
+\emph default
+observations (i.e.
+ the batch).
+\end_layout
+
+\begin_layout Itemize
+Layer normalization normalizes neuron activation 
+\emph on
+layer 
+\emph default
+for 
+\emph on
+each 
+\emph default
+observation.
+\end_layout
+
+\end_body
+\end_document

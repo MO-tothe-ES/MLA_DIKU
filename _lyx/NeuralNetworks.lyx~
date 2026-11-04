@@ -103,6 +103,23 @@ Neural Networks
 The Neuron
 \end_layout
 
+\begin_layout Standard
+This chapter explains in detail the following picture which illustrates a single neuron with implicit bias.
+ So if one understands the picture the chapter can be skipped.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/neuron.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Pre-Activation 
 \end_layout
@@ -132,7 +149,7 @@ where
  denotes the argmentet vector 
 \begin_inset Formula 
 \[
-\mathbf{x}_{+1}=\begin{bmatrix}1 & x_{1} & \cdots & x_{d}\end{bmatrix}.
+\mathbf{x}_{+1}=\begin{bmatrix}1 & x_{1} & \cdots & x_{d}\end{bmatrix}'.
 \]
 
 \end_inset
@@ -381,6 +398,25 @@ with range
 .
 \end_layout
 
+\begin_layout Standard
+Here the functions are plottet where for ELU 
+\begin_inset Formula $\alpha=1$
+\end_inset
+
+ is chosen.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/activation_funcitons.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Gradient descent
 \end_layout
@@ -410,6 +446,17 @@ with learning rate
 
  determining how large steps are in proportion to the gradient.
  
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/gradient_descent.png
+	scale 60
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -730,6 +777,540 @@ The partial derivatives of the layer just before
 
  and so on.
  This is sometimes referred to as the backwards pass.
+\end_layout
+
+\begin_layout Section
+Deep Learning
+\end_layout
+
+\begin_layout Subsection
+Convolution / cross-correlation
+\end_layout
+
+\begin_layout Standard
+A convolution is a filtering transformation applied to image-like data.
+ Image-like in the sence that datapoints close to each other in the dataset structure somehow relate to each other - like two pixels are closely related in a picture.
+ 
+\end_layout
+
+\begin_layout Standard
+Formally let 
+\begin_inset Formula $C(i,j)$
+\end_inset
+
+ be the output image from applying a convolution operation (or cross correlation operation) to the pixel in image 
+\begin_inset Formula $I$
+\end_inset
+
+ at location 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+.
+ Additionally 
+\begin_inset Formula $C$
+\end_inset
+
+ takes a kernel matrix 
+\begin_inset Formula $K$
+\end_inset
+
+ as input.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Cross correlation
+\series default
+:
+ It is intuitive and defined as
+\begin_inset Formula 
+\[
+C_{corr}(i,j)=\sum_{m\in\mathcal{M}}\sum_{n\in\mathcal{N}}K(m,n)\cdot I(i+m,j+n),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the kernel for example could be the vertical edge 
+\emph on
+filter kernel
+\emph default
+:
+\begin_inset Formula 
+\[
+K=\begin{bmatrix}-1 & 1\\
+-1 & 1
+\end{bmatrix},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+and thus 
+\begin_inset Formula $\mathcal{M}=\{0,1\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{N}=\{0,1\}.$
+\end_inset
+
+ So basically for each pixel we overlay the filter kernel 
+\begin_inset Formula $K$
+\end_inset
+
+,
+ weigh the surronding pixels accordingly and sum.
+ An example is given here:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/Crosscorrelation_example.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Convolution
+\series default
+:
+ Essentially the same method but where we first flip 
+\begin_inset Formula $K$
+\end_inset
+
+ above 
+\begin_inset Formula $180$
+\end_inset
+
+-degrees,
+ shiftet so the bottom right is at the pixel 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+ and then apply cross correlation.
+ The formula is
+\begin_inset Formula 
+\[
+C_{conv}(i,j)=(I*K)(i,j)=\sum_{m\in\mathcal{M}}\sum_{n\in\mathcal{N}}K(m,n)\cdot I(i-m,j-n).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note the shift dependents on 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+.
+ For example there is no shift for symmetrical convolutions 
+\begin_inset Formula 
+\[
+\mathcal{M}=\mathcal{N}=\{-k,-(k-1),\dots,0,\dots,(k-1),k\}.
+\]
+
+\end_inset
+
+(Remember this is all in comparison with cross-correlation).
+\end_layout
+
+\begin_layout Subsubsection
+Padding
+\end_layout
+
+\begin_layout Standard
+Convolution layers or cross correlation layers reduce the number of pixels.
+ For example a 3 by 3 cross correlation will remove 2 pixels in each dimension thus reducing an image from 
+\begin_inset Formula $(M,N)$
+\end_inset
+
+ to 
+\begin_inset Formula $(M-2,N-2$
+\end_inset
+
+) to avoid this one can add 
+\emph on
+padding 
+\emph default
+around the input image 
+\begin_inset Formula $I$
+\end_inset
+
+ so that it becomes 
+\begin_inset Formula $(M+2,N+2)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The padding values are usually just zeros (zero padding) since the specific values rarely matters in practice.
+ But it could also be some notion of mean values.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/padding.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Equivariance
+\end_layout
+
+\begin_layout Standard
+If the input (for example a traffic sign in a picture) is translated / moved then the output (i.e.
+ the feature space of the neurons in a particular layer) will translate in the same way.
+ This is why convolutional neural networks are particularly relevant for image recognition tasks since it usually does not matter where in the frame a person or item is located.
+\end_layout
+
+\begin_layout Subsection
+Pooling layer
+\end_layout
+
+\begin_layout Standard
+Pooling layers reduce dimensionality by for example looping over all non-intersecting 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ grids on the feature image with a 
+\emph on
+stride 
+\emph default
+of 2.
+ Then applying the 
+\begin_inset Formula $\max\{\cdot\}$
+\end_inset
+
+ operator over those four values as the output.
+ Thus in this example a 4 by 4 feature map is reduces to 2 by 2.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/pooling.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Invariance
+\end_layout
+
+\begin_layout Standard
+Invariance refers to operations that does not change its output when the input is translated / shiftet.
+ Pooling layers can help with invariance which can be understood through an example.
+ Let the kernel detect cat-shapes.
+ Then translating the cat 5 pixels to the right translates the feature map equivaraintly 5 pixels to the right (remember that the feature space is the output of the cross-correlation using the cat-kernel).
+ Applying a max pooling layer will still just indicate 
+\begin_inset Formula $\texttt{True}$
+\end_inset
+
+ there is a cat.
+ Thus the algorithm is 
+\emph on
+invariant
+\emph default
+ to translations of the cat.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/invariance.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Receptive field
+\end_layout
+
+\begin_layout Standard
+Nerons in deeper layers have a greater 
+\emph on
+effective receptive 
+\emph default
+field than its kernel would suggest.
+ This is simply because the feature space the neuron percieves comes from a poolin layer which have condensed larger field.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/receptive_field.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Example:
+ VGG-16 architecture
+\end_layout
+
+\begin_layout Standard
+As a quick recap I will explain the general details of the VGG-16 architecture depicted here.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/example_CNN_architecture.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The input layer is one RGB image - so there is 3 input channels corresponding to red,
+ green and blue respectively.
+ Each input channel is of size 
+\begin_inset Formula $244\times244$
+\end_inset
+
+.
+ The convolutional layer outputs 64 feature maps i.e.
+ there are 64 kernels and biases needing to be trained in this single layer.
+ Between each layer the non-linear ReLU activation function is applied.
+ Each 
+\begin_inset Formula $224\times224$
+\end_inset
+
+ feature-map is then reduced by max pooling to 
+\begin_inset Formula $122\times122$
+\end_inset
+
+ and convolutional layers now take the 64 features and double them and creating 128 feature maps (thus and additional 128 kernels and biases needs training for each layer).
+ 
+\end_layout
+
+\begin_layout Standard
+In the end,
+ we obtain 512 feature maps,
+ each of size 
+\begin_inset Formula $7\times7$
+\end_inset
+
+.
+ These are flattened into a single vector containing 
+\begin_inset Formula $7\cdot7\cdot512=25,088$
+\end_inset
+
+ features,
+ which serves as input to a fully connected layer with 4096 neurons.
+ This is followed by another fully connected layer with 4096 neurons and finally an output layer with 1,000 neurons,
+ corresponding to the 1000 possible classification categories.
+ A softmax activation is applied to the final output to obtain a probability distribution over these categories.
+\end_layout
+
+\begin_layout Subsection
+Tricks-of-the-Trade
+\end_layout
+
+\begin_layout Subsubsection
+Ensemble Methods
+\end_layout
+
+\begin_layout Standard
+Ensemble methods combat overfitting through the 
+\emph on
+cancellation of errors effect
+\emph default
+ and has proven to be very succesfull in the CNN setting.
+ CNN ensembles can be created over the same datasets because of the importance of random initialization on the local minimum obtained.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Reminder:
+ cancellation of errors effect
+\series default
+:
+ When individual ensemble members perform better than random guessing and make independent errors,
+ their errors average out and the combined model outperforms the individual predictors.
+\end_layout
+
+\begin_layout Subsubsection
+Dropout
+\end_layout
+
+\begin_layout Standard
+A heuristic method for avoiding overfitting is 
+\emph on
+dropout
+\emph default
+.
+ It is an ensemble method where each member of the ensemble is a subnetwork where randomly a binary mask 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ has been applied to remove neurons.
+ Then training commences on all the subnetworks individually to create the ensemble.
+ The two right models in the illustration would be two members of the whole ensemble.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/dropout.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Residual Leraning / Shorcuts
+\end_layout
+
+\begin_layout Standard
+Yet another method to combat local minima is shortcuts.
+ Where in each layer the input data directly passes trough as illustrated below.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/shotcuts.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This can drastically smooth the error surface.
+ This example visualizes the error surface (loss vs.
+ parameters) for a network with 56 layers without (a) and with (b) shortcuts.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pictures/smooth_error_surface.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Augmentation og Invariance
+\end_layout
+
+\begin_layout Standard
+Data augmentation refers to applying transformations to the input data that do not change their labels.
+ Let 
+\begin_inset Formula $T=\{𝑇1,…,\}$
+\end_inset
+
+ be a set of transformations.
+ During training,
+ for each
+\end_layout
+
+\begin_layout Standard
+element added to a mini-batch it is decided if and which transformations are applied to it.
+ In this way,
+ we learn invariance with respect to the transformations in 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ If augmentation is always applied,
+ the network hardly see exactly the same input twice.
+ Note that the “new” training examples are not i.i.d.
+ samples!
+\end_layout
+
+\begin_layout Standard
+Examples of transformations for images could be cropping,
+ rotating,
+ flipping,
+ blurring,
+ adding noise,
+ \SpecialChar ldots
+
+\end_layout
+
+\begin_layout Subsubsection
+Batch and Layer Normalization
+\end_layout
+
+\begin_layout Standard
+Batch normalization and layer normalization normalize intermediate neuron activations across different dimensions.
+ This can stabilize gradient propagation,
+ improve the conditioning of the optimization problem,
+ and allow gradient descent to converge more reliably and often faster.
+\end_layout
+
+\begin_layout Standard
+Batch normalization normalizes 
+\emph on
+each 
+\emph default
+neurons activation over 
+\emph on
+multiple 
+\emph default
+observations (i.e.
+ the batch).
+\end_layout
+
+\begin_layout Standard
+Layer normalization normalizes neuron activation 
+\emph on
+layer 
+\emph default
+for 
+\emph on
+each 
+\emph default
+observation.
 \end_layout
 
 \end_body

@@ -1,0 +1,890 @@
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children no
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification default
+\crossref_package refstyle
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
+\index Index
+\shortcut idx
+\color #008080
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Generalization bounds:
+ Finite and Countably Infinity Hypothesis Classes
+\end_layout
+
+\begin_layout Subsection
+Single hypothesis
+\end_layout
+
+\begin_layout Subsubsection
+Setting and risk definitions
+\end_layout
+
+\begin_layout Standard
+Assume the loss function 
+\begin_inset Formula $\ell(h(X),Y)$
+\end_inset
+
+ is bounded on 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+.
+ This is important for the specific calculations but the general insights are applicable to any loss function bounds 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+True risk
+\series default
+:
+
+\series bold
+ 
+\series default
+The quality of any hypothesis 
+\begin_inset Formula $h$
+\end_inset
+
+ is measured by its (true) risk
+\begin_inset Formula 
+\[
+L(h)\equiv\mathbb{E}_{(X,Y)\sim p}\left[\ell(h(X),Y)\right],
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $p$
+\end_inset
+
+ is the 
+\emph on
+unknown
+\emph default
+ distribution over which the world has generated 
+\begin_inset Formula $(X,Y)$
+\end_inset
+
+ - i.e.
+ pairs of features from the input space 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ and outcomes from the label space 
+\begin_inset Formula $\mathcal{Y}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Empirical risk
+\series default
+:
+ Using a validation sample
+\begin_inset Formula 
+\[
+S=\left\{ (X_{1},Y_{1}),\dots,(X_{N},Y_{N})\right\} ,\quad(X_{i},Y_{i})\overset{iid}{\sim}p,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+we calculate the empirical risk defined by
+\begin_inset Formula 
+\[
+\hat{L}(h,S)\equiv\frac{1}{N}\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Theoretical properties of empirical risk
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Unbiased:
+ 
+\series default
+Since the validation samples are independently and identically distributed from the distribution 
+\begin_inset Formula $p$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}_{S\sim p^{N}}\left[\hat{L}(h,S)\right] & =\mathbb{E}_{S\sim p^{N}}\left[\frac{1}{N}\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n})\right]\\
+ & =\frac{1}{N}\sum^{N}_{n=1}\mathbb{E}_{(X_{n},Y_{n})\sim p}\left[\ell(h(X_{n}),Y_{n})\right]\\
+ & =\frac{1}{N}\sum^{N}_{n=1}\mathbb{E}_{(X_{1},Y_{1})\sim p}\left[\ell(h(X_{1}),Y_{1})\right]\\
+ & =\mathbb{E}_{(X_{1},Y_{1})\sim p}\left[\ell(h(X_{1}),Y_{1})\right]\\
+ & =L(h).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However the above only holds because 
+\begin_inset Formula $h$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ If not we generally have
+\begin_inset Formula 
+\[
+\mathbb{E}_{S\sim p^{N}}\left[\hat{L}\left(\hat{h}_{S},S\right)\right]\neq\mathbb{E}_{S\sim p^{N}}\left[L\left(\hat{h}_{S}\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+What can be said about the distribution of 
+\begin_inset Formula $\hat{L}(h,S)$
+\end_inset
+
+?
+ 
+\series default
+Formally what is 
+\begin_inset Formula $\delta$
+\end_inset
+
+ here
+\begin_inset Formula 
+\[
+\mathbb{P}\left(L(h)-\hat{L}(h,S)\geq\epsilon\right)\leq\delta.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I.e.
+ with what tightness can we bound the probability that the true risk 
+\begin_inset Formula $L$
+\end_inset
+
+ is 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ bigger than 
+\begin_inset Formula $\hat{L}$
+\end_inset
+
+.
+ For example we might want a confindence of 
+\begin_inset Formula $\delta=0.05$
+\end_inset
+
+ that is w.p.
+ less than 
+\begin_inset Formula $0.05$
+\end_inset
+
+ the true loss 
+\begin_inset Formula $L$
+\end_inset
+
+ is 
+\begin_inset Formula $\epsilon=f(\delta)$
+\end_inset
+
+ - that depends on 
+\begin_inset Formula $\delta$
+\end_inset
+
+ units bigger than 
+\begin_inset Formula $\hat{L}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Applying Hoeffdings bound yields
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left(L(h)-\hat{L}(h,S)\geq\epsilon\right) & =\mathbb{P}\left(\underbrace{\mathbb{E}\left[\frac{1}{N}\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n})\right]}_{=\mathbb{E}\left[\ell(h(X_{1}),Y_{1})\right]=L(h)}-\frac{1}{N}\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n})\geq\epsilon\right)\\
+ & =\mathbb{P}\left(\mathbb{E}\left[\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n})\right]-\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n})\geq N\epsilon\right)\\
+ & \leq\exp\left\{ -\frac{2(N\epsilon)^{2}}{\sum^{N}_{n=1}(b_{n}-a_{n})^{2}}\right\} \\
+ & =\exp\left\{ -2N\epsilon^{2}\right\} .
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Defining the relation 
+\begin_inset Formula $\delta=\exp\left\{ -2N\epsilon^{2}\right\} $
+\end_inset
+
+ yields 
+\begin_inset Formula $\epsilon=\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left(L(h)\geq\hat{L}(h,S)+\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}\right) & \leq\delta,
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and taking the complement
+\begin_inset Formula 
+\[
+\mathbb{P}\left(L(h)<\hat{L}(h,S)+\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}\right)=1-\mathbb{P}\left(L(h)\geq\hat{L}(h,S)+\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}\right)\geq1-\delta.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Sidenote:
+ Understanding 
+\begin_inset Formula $\epsilon=\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Earlier we obtained
+\begin_inset Formula 
+\[
+\mathbb{P}\left(L(h)-\hat{L}(h,S)\geq\epsilon\right)\leq\exp\left\{ -2N\epsilon^{2}\right\} .
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+we can think if this inequality as asking:
+ 
+\emph on
+If you set an error-margin 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ then I tell you how confident I am that an error happens (i.e.
+ 
+\begin_inset Formula $L-\hat{L}\geq\epsilon$
+\end_inset
+
+).
+ 
+\emph default
+If we instead ask the question:
+ 
+\emph on
+I want the probability that an error happens 
+\begin_inset Formula $(i.e.L-\hat{L}\geq\epsilon)$
+\end_inset
+
+ to be 
+\begin_inset Formula $\delta\cdot100\%$
+\end_inset
+
+ how large does the error-margin 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ have to be?
+
+\emph default
+ The latter case is answered by relabeling the right hand side as 
+\begin_inset Formula $\delta=\exp\left\{ -2N\epsilon^{2}\right\} $
+\end_inset
+
+ and then backing out what 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ must be:
+ 
+\begin_inset Formula $\epsilon=\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The complement flips the question:
+\begin_inset Formula 
+\[
+\mathbb{P}\left(L(h)<\hat{L}(h,S)+\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}\right)\geq1-\delta,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and asks:
+ The probability that 
+\begin_inset Formula $L$
+\end_inset
+
+ is acceptable (i.e.
+ smaller than 
+\begin_inset Formula $\hat{L}(h,S)+\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}$
+\end_inset
+
+) is at least 
+\begin_inset Formula $1-\delta$
+\end_inset
+
+.
+ Or:
+ I am 
+\begin_inset Formula $(1-\delta)\cdot100\%$
+\end_inset
+
+ certain that 
+\begin_inset Formula $L$
+\end_inset
+
+ is smaller than 
+\begin_inset Formula $\hat{L}(h,S)+\sqrt{\frac{1}{2N}\ln\left(\frac{1}{\delta}\right)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Finite Hypothesis
+\end_layout
+
+\begin_layout Standard
+Unlike before we have now trained 
+\begin_inset Formula $h_{1},\dots,h_{M}$
+\end_inset
+
+ hypotheses and chosen 
+\begin_inset Formula $\hat{h^{*}_{S}}$
+\end_inset
+
+ with empirical risk minimization 
+\begin_inset Formula 
+\begin{align*}
+\hat{h^{*}_{S}} & =\arg\min_{h\in\mathcal{H}}\hat{L}(h,S)\\
+ & =\arg\min_{h\in\mathcal{H}}\left\{ \frac{1}{N}\sum^{N}_{n=1}\ell(h(X_{n}),Y_{n})\right\} ,
+\end{align*}
+
+\end_inset
+
+where
+\series bold
+ 
+\begin_inset Formula $S$
+\end_inset
+
+
+\series default
+ is a validation sample (i.e.
+ not used for training) with elements 
+\begin_inset Formula $(X_{n},Y_{n})\overset{iid}{\sim}p$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Hoeffdings bound does not apply anymore!
+\end_layout
+
+\begin_layout Standard
+The question is as follows:
+ 
+\emph on
+How bad can we expect our model to perform?
+
+\emph default
+ This is measured in terms of (true) risk
+\begin_inset Formula 
+\[
+\mathbb{E}_{(X,Y)\sim p}\left[\ell\left(\hat{h^{*}_{S}}(X),Y\right)\right],
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $p$
+\end_inset
+
+ is the probability distribution of the stochastic vector 
+\begin_inset Formula $(X,Y)$
+\end_inset
+
+.
+ We would ideally just plug and play with Hoeffding's inequality.
+ However this requires that 
+\begin_inset Formula 
+\[
+L\left(\hat{h^{*}_{S}}\right)=\mathbb{E}_{S}\left[\hat{L}\left(\hat{h^{*}_{S}},S\right)\right],
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+since
+\family typewriter
+
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left(L\left(\hat{h^{*}_{S}}\right)-\hat{L}\left(\hat{h^{*}_{S}},S\right)\geq\epsilon\right) & =\mathbb{P}\left(L\left(\hat{h^{*}_{S}}\right)-\frac{1}{N}\sum^{N}_{n=1}\ell\left(\hat{h^{*}_{S}}(X_{n}),Y_{n}\right)\geq\epsilon\right)\\
+ & =\mathbb{P}\left(NL\left(\hat{h^{*}_{S}}\right)-\sum^{N}_{n=1}\ell\left(\hat{h^{*}_{S}}(X_{n}),Y_{n}\right)\geq N\epsilon\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For Hoeffdings bound to apply we would therefore need that
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+To see this simply look at the inequality
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\mathbb{E}\left[\sum^{N}_{n=1}X_{n}\right]-\sum^{N}_{n=1}X_{n}\geq\epsilon\right)\leq\exp\left\{ -\frac{2\epsilon^{2}}{\sum^{N}_{n=1}(b_{n}-a_{n})^{2}}\right\} ,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+from where we see that the left term needs to be 
+\begin_inset Formula $\mathbb{E}\left[\sum^{N}_{n=1}X_{n}\right]$
+\end_inset
+
+ i.e.
+ the expectation of the right term 
+\begin_inset Formula $\sum^{N}_{n=1}X_{n}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+NL\left(\hat{h^{*}_{S}}\right)=\mathbb{E}_{S\sim p^{N}}\left[\sum^{N}_{n=1}\ell\left(\hat{h^{*}_{S}}(X_{n}),Y_{n}\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+which implies 
+\begin_inset Formula 
+\[
+L\left(\hat{h^{*}_{S}}\right)=\mathbb{E}_{S\sim p^{N}}\left[\frac{1}{N}\sum^{N}_{n=1}\ell\left(\hat{h^{*}_{S}}(X_{n}),Y_{n}\right)\right]=\mathbb{E}_{S\sim p^{N}}\left[\hat{L}\left(\hat{h^{*}_{S}},S\right)\right].
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This however does not generally hold since
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}_{S\sim p^{N}}\left[\hat{L}\left(\hat{h^{*}_{S}},S\right)\right] & =\mathbb{E}_{S\sim p^{N}}\left[\frac{1}{N}\sum^{N}_{n=1}\ell\left(\hat{h^{*}_{S}}(X_{n}),Y_{n}\right)\right]\\
+ & \neq\mathbb{E}_{(X_{1},Y_{1})\sim p}\left[\frac{1}{N}\sum^{N}_{n=1}\ell\left(\hat{h^{*}_{S}}(X_{1}),Y_{1}\right)\right],
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+since 
+\begin_inset Formula $\hat{h^{*}}_{S}$
+\end_inset
+
+ generally depends on the whole sample 
+\begin_inset Formula $S=\{(X_{1},Y_{1}),\dots,(X_{N},Y_{N})\}$
+\end_inset
+
+.
+ Therefore the stochastic variables 
+\begin_inset Formula $\ell\left(\hat{h^{*}}_{S}\left(X_{n}\right),Y_{n}\right)$
+\end_inset
+
+ are not independent (because 
+\begin_inset Formula $\hat{h^{*}}_{S}$
+\end_inset
+
+ was selected using 
+\begin_inset Formula $S_{-(X_{n},Y_{n})}$
+\end_inset
+
+) and therefore Hoeffding's inequality does not apply.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+The solution
+\series default
+:
+ Therefore we somehow need to break dependence of the hypothesis 
+\begin_inset Formula $\hat{h^{*}}_{S}$
+\end_inset
+
+ on the sample:
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left(L\left(\hat{h^{*}_{S}}\right)-\hat{L}\left(\hat{h^{*}_{S}},S\right)\geq\epsilon\right) & \leq\mathbb{P}\left(L\left(h_{1}\right)-\hat{L}\left(h_{1},S\right)\geq\epsilon\text{ or }\cdots\text{ or }L\left(h_{M}\right)-\hat{L}\left(h_{M},S\right)\geq\epsilon\right)\\
+ & =\mathbb{P}\left(\exists h\in\mathcal{H}:L\left(h\right)-\hat{L}\left(h,S\right)\geq\epsilon\right)\\
+ & \leq\sum^{M}_{j=1}\mathbb{P}\left(L\left(h_{j}\right)-\hat{L}\left(h_{j},S\right)\geq\epsilon\right)\\
+ & =\sum^{M}_{j=1}\mathbb{P}\left(N\underbrace{L\left(h_{j}\right)}_{\equiv\mathbb{E}_{(X,Y)\sim p}\left[\ell\left(h_{j}(X),Y\right)\right]}-\sum^{N}_{n=1}\ell\left(h_{j}(X_{n}),Y_{n}\right)\geq N\epsilon\right)\\
+ & =\sum^{M}_{j=1}\mathbb{P}\left(N\mathbb{E}_{S\sim p^{N}}\left[\frac{1}{N}\sum^{N}_{n=1}\ell\left(h_{j}(X),Y\right)\right]-\sum^{N}_{n=1}\ell\left(h_{j}(X_{n}),Y_{n}\right)\geq N\epsilon\right)\\
+ & \leq M\exp\left\{ -\frac{2(N\epsilon)^{2}}{\sum^{N}_{n=1}(b_{n}-a_{n})^{2}}\right\} \\
+ & =M\exp\left\{ -2N\epsilon^{2}\right\} ,
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The first inequality holds simply because 
+\begin_inset Formula $\hat{h^{*}_{S}}\in\left\{ h_{1},h_{2},\dots,h_{M}\right\} $
+\end_inset
+
+.
+ The second inequality holds by the union bound:
+\begin_inset Formula 
+\[
+\mathbb{P}\left(A\cup B\right)=P(A)+P(B)-\mathbb{P}\left(A\cap B\right)\leq P(A)+P(B).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From this we obtain
+\begin_inset Formula 
+\[
+\delta=M\exp\left\{ -2N\epsilon^{2}\right\} \iff\epsilon=\sqrt{\frac{1}{2N}\ln\left(\frac{M}{\delta}\right)},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and further
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left(L\left(\hat{h^{*}_{S}}\right)\geq\hat{L}\left(\hat{h^{*}_{S}},S\right)+\sqrt{\frac{1}{2N}\ln\left(\frac{M}{\delta}\right)}\right) & \leq\delta\\
+\mathbb{P}\left(L\left(\hat{h^{*}_{S}}\right)<\hat{L}\left(\hat{h^{*}_{S}},S\right)+\sqrt{\frac{1}{2N}\ln\left(\frac{M}{\delta}\right)}\right) & \geq1-\delta.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+This is the result
+\series default
+:
+ From a finite predetermined hypothesis class with cardinality 
+\begin_inset Formula $|\mathcal{H}|=M$
+\end_inset
+
+ using the Empirical Risk Minimizer (ERM) - or any selection over 
+\begin_inset Formula $h$
+\end_inset
+
+!
+ Since:
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\exists h\in\mathcal{H}:L\left(h\right)\geq\hat{L}\left(h,S\right)+\sqrt{\frac{1}{2N}\ln\left(\frac{M}{\delta}\right)}\right)\leq\delta,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and in particular for the ERM hypothesis 
+\begin_inset Formula $\hat{h^{*}_{S}}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left(L\left(\hat{h^{*}_{S}}\right)\geq\hat{L}\left(\hat{h^{*}_{S}},S\right)+\sqrt{\frac{1}{2N}\ln\left(\frac{M}{\delta}\right)}\right)\leq\delta.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Lower Bound
+\end_layout
+
+\begin_layout Standard
+In general there is a lower bound on how well bounding inequalities can work.
+ Concretely we use Hoeffding's inequality,
+ but could this be improved?
+ And how much?
+ To answer the first:
+ yes,
+ it has been improved.
+ For the second question:
+ we can show that there is a limit to how much bounding can happen in general.
+ We call this a lower bound which answers the question:
+ In general what is the lowest upper bound we can impose on an event?
+ or:
+ It tells us that we can never be 
+\emph on
+this
+\emph default
+ certain (i.e.
+ 
+\begin_inset Formula $\delta$
+\end_inset
+
+ cannot be this low) using bounding techniques.
+\end_layout
+
+\begin_layout Standard
+In short the lectures construct an example for a specific hypothesis space 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\exists h\in\mathcal{H}:L\left(h\right)\geq\hat{L}\left(h,S\right)+\frac{1}{8}\right)\geq\frac{1}{8}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Approximation and Estimation error
+\end_layout
+
+\begin_layout Standard
+Approximation error comes from restricting 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ so that the Bayes optimal hypothestical choice is omittet (i.e.
+ the 
+\begin_inset Formula $h$
+\end_inset
+
+ that would generate the lowest 
+\begin_inset Formula $L(h)$
+\end_inset
+
+ is not in 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Estimation defines the variance in selecting the best hypothesis in class 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+:
+ there is an 
+\begin_inset Formula $h^{*}=\arg\min_{h\in\mathcal{H}}L(h)$
+\end_inset
+
+ but using data we are not sure to find it.
+ we most likely find 
+\begin_inset Formula $L(\hat{h})<L(h^{*})$
+\end_inset
+
+.
+ This is the estimation error.
+\end_layout
+
+\begin_layout Subsection
+Countably Infinite Classes
+\end_layout
+
+\begin_layout Subsection
+Application:
+ Binary Decision Trees
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,1062 @@
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children no
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification default
+\crossref_package refstyle
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
+\index Index
+\shortcut idx
+\color #008080
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Random Forest
+\end_layout
+
+\begin_layout Subsection
+Binary decision trees (definitions)
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+CART trees 
+\series default
+are introduced and used in MLA and are popular binary classification / regression trees.
+ Each 
+\emph on
+inner node
+\emph default
+ in a CART tree evaluates one dimension 
+\begin_inset Formula $d\in\{1,\dots,D\}$
+\end_inset
+
+ of the dataset using a threshold value 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and splits the data into
+\begin_inset Formula 
+\[
+L_{d,\theta}=\left\{ (\mathbf{x},y)\in S\mid x_{d}<\theta\right\} \text{ and }R_{d,\theta}=\left\{ (\mathbf{x},y)\in S\mid x_{d}\geq\theta\right\} ,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $x_{d}$
+\end_inset
+
+ is element 
+\begin_inset Formula $d$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+.
+ The subset 
+\begin_inset Formula $L_{d,\theta}$
+\end_inset
+
+ is then sent to the left daughter node and 
+\begin_inset Formula $R_{d,\theta}$
+\end_inset
+
+ to the right.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+The splits are determined by maximising the information gain
+\series default
+ or equivalently minimising the impurity measure 
+\begin_inset Formula $Q$
+\end_inset
+
+ at the dataset at that note 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Formally we would like to choose the dimension 
+\begin_inset Formula $d$
+\end_inset
+
+ as well as the threshold value 
+\begin_inset Formula $\theta$
+\end_inset
+
+ solving
+\begin_inset Formula 
+\begin{align*}
+\text{arg }\max_{d,\theta}Q(S)-\frac{|L_{d,\theta}|}{|S|}Q(L_{d,\theta})-\frac{|R_{d,\theta}|}{|S|}Q(R_{d,\theta})\\
+=\text{arg }\min_{d,\theta}G_{d,\theta}(S)=|L_{d,\theta}|Q(L_{d,\theta})+|R_{d,\theta}|Q(R_{d,\theta}).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is however impractical (and maybe even impossible) to solve on a computer and we therefore use some heuristic.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Leaf nodes
+\series default
+ are indexed by 
+\begin_inset Formula $\tau=1,\dots,|T|$
+\end_inset
+
+ and they define 
+\emph on
+regions
+\emph default
+.
+ If 
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+ reaches leaf node 
+\begin_inset Formula $\tau$
+\end_inset
+
+ we have 
+\begin_inset Formula $\mathbf{x}\in\mathcal{R}_{\tau}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Regression trees
+\end_layout
+
+\begin_layout Standard
+Trees can not only classify observations 
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+ into categories but also estimate its value (if the label is continuous)
+\begin_inset Formula 
+\[
+\hat{y}_{i}=T(\mathbf{x}_{i})=\sum^{|T|}_{\tau=1}c_{\tau}\mathbb{I}(\mathbf{x}_{i}\in\mathcal{R}_{\tau})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With squared loss 
+\begin_inset Formula $(\hat{y}-y)^{2}$
+\end_inset
+
+ the constants minimising empirical risk are the respective empirical means of each leafnode 
+\begin_inset Formula $\tau$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+c_{\tau}=\frac{1}{N_{\tau}}\sum_{\mathbf{x}_{n}\in\mathcal{R}_{\tau}}y_{n},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with 
+\begin_inset Formula $(\mathbf{x}_{n},y)\in S$
+\end_inset
+
+ and 
+\begin_inset Formula $N_{\tau}=|\{(\mathbf{x}_{n},y)\in S\mid\mathbf{x}_{n}\in\mathcal{R}_{\tau}\}|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Classification trees}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For $K$ classes,
+ let $p_{
+\backslash
+tau k}$ be the fraction of training
+\end_layout
+
+\begin_layout Plain Layout
+observations in leaf $
+\backslash
+tau$ with label $k$.
+ The tree predicts the
+\end_layout
+
+\begin_layout Plain Layout
+most frequent class in the leaf,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+T(
+\backslash
+mathbf{x})=
+\backslash
+operatorname*{arg
+\backslash
+,max}_{k
+\backslash
+in
+\backslash
+{1,
+\backslash
+dots,K
+\backslash
+}}p_{
+\backslash
+tau k},
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad 
+\backslash
+mathbf{x}
+\backslash
+in
+\backslash
+mathcal{R}_{
+\backslash
+tau}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+The fractions $p_{
+\backslash
+tau k}$ also give estimated class probabilities.
+\end_layout
+
+\begin_layout Plain Layout
+Common impurity measures are
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+Q_{
+\backslash
+mathrm{error}} &= 1-
+\backslash
+max_k p_{
+\backslash
+tau k},
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+Q_{
+\backslash
+mathrm{entropy}} &= -
+\backslash
+sum_{k=1}^K p_{
+\backslash
+tau k}
+\backslash
+log p_{
+\backslash
+tau k},
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+Q_{
+\backslash
+mathrm{Gini}} &= 
+\backslash
+sum_{k=1}^K p_{
+\backslash
+tau k}(1-p_{
+\backslash
+tau k}),
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+where $0
+\backslash
+log 0=0$.
+ All three are zero when the node is pure.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Growing and pruning}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For each dimension $d$,
+ it is enough to test thresholds halfway
+\end_layout
+
+\begin_layout Plain Layout
+between consecutive distinct values of $x_d$.
+ We split recursively
+\end_layout
+
+\begin_layout Plain Layout
+until the node is pure,
+ too small or has no valid split.
+ For
+\end_layout
+
+\begin_layout Plain Layout
+regression,
+ $Q$ is the mean squared deviation from the node mean.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For a single CART tree,
+ we can prune by choosing a subtree $T$ that
+\end_layout
+
+\begin_layout Plain Layout
+minimises
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+C_{
+\backslash
+alpha}(T)=
+\backslash
+sum_{
+\backslash
+tau=1}^{|T|}N_{
+\backslash
+tau}Q_{
+\backslash
+tau}(T)+
+\backslash
+alpha|T|,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad 
+\backslash
+alpha
+\backslash
+geq 0,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+where $Q_{
+\backslash
+tau}(T)$ is the impurity in leaf $
+\backslash
+tau$.
+ Larger $
+\backslash
+alpha$
+\end_layout
+
+\begin_layout Plain Layout
+penalises more leaves.
+ We choose $
+\backslash
+alpha$ using held-out data.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Ensembles and bagging}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Single trees have high variance,
+ so small changes in the training
+\end_layout
+
+\begin_layout Plain Layout
+data can give very different trees.
+ Bagging trains trees on separate
+\end_layout
+
+\begin_layout Plain Layout
+bootstrap samples and averages their predictions (or votes).
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+If $B$ regression trees have mean-zero errors $
+\backslash
+epsilon_b$ with
+\end_layout
+
+\begin_layout Plain Layout
+variance $v$ and pairwise covariance $c$,
+ then
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbb{E}
+\backslash
+!
+\backslash
+left[
+\backslash
+left(
+\backslash
+frac{1}{B}
+\backslash
+sum_{b=1}^B
+\backslash
+epsilon_b
+\backslash
+right)^2
+\backslash
+right]
+\end_layout
+
+\begin_layout Plain Layout
+=
+\backslash
+frac{v}{B}+
+\backslash
+frac{B-1}{B}c.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Thus averaging helps more when the trees make less correlated errors.
+\end_layout
+
+\begin_layout Plain Layout
+For binary classification,
+ if errors are independent and each tree
+\end_layout
+
+\begin_layout Plain Layout
+errs with probability at most $p_{
+\backslash
+max}<1/2$,
+ Hoeffding bounds the
+\end_layout
+
+\begin_layout Plain Layout
+majority vote error by $
+\backslash
+exp[-2B(1/2-p_{
+\backslash
+max})^2]$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Growing and evaluating a random forest}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For each $b=1,
+\backslash
+dots,B$ we draw a bootstrap sample $S_b$ by sampling
+\end_layout
+
+\begin_layout Plain Layout
+$N$ observations with replacement from $S$.
+ We grow an unpruned tree
+\end_layout
+
+\begin_layout Plain Layout
+$T_b$ on $S_b$.
+ At each node we draw a fresh subset of $m$ distinct
+\end_layout
+
+\begin_layout Plain Layout
+dimensions and find the best split among these.
+ This makes the trees
+\end_layout
+
+\begin_layout Plain Layout
+less correlated.
+ With $m=D$ we recover bagging of trees.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For regression we average the predictions.
+ For classification we
+\end_layout
+
+\begin_layout Plain Layout
+take the most votes,
+ or average the leaf probabilities and take the
+\end_layout
+
+\begin_layout Plain Layout
+most probable class.
+ Formally,
+ these three rules are
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+f_{
+\backslash
+mathrm{RF}}^{
+\backslash
+mathrm{reg}}(
+\backslash
+mathbf{x})
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\backslash
+frac{1}{B}
+\backslash
+sum_{b=1}^{B}T_b(
+\backslash
+mathbf{x}),
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+f_{
+\backslash
+mathrm{RF}}^{
+\backslash
+mathrm{vote}}(
+\backslash
+mathbf{x})
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\backslash
+operatorname*{arg
+\backslash
+,max}_{k}
+\end_layout
+
+\begin_layout Plain Layout
+  
+\backslash
+sum_{b=1}^{B}
+\backslash
+mathbb{I}
+\backslash
+bigl(T_b(
+\backslash
+mathbf{x})=k
+\backslash
+bigr),
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+f_{
+\backslash
+mathrm{RF}}^{
+\backslash
+mathrm{prob}}(
+\backslash
+mathbf{x})
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\backslash
+operatorname*{arg
+\backslash
+,max}_{k}
+\end_layout
+
+\begin_layout Plain Layout
+  
+\backslash
+frac{1}{B}
+\backslash
+sum_{b=1}^{B}p_k^{(b)}(
+\backslash
+mathbf{x}),
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+where $p_k^{(b)}(
+\backslash
+mathbf{x})$ is the fraction of class $k$ in the leaf
+\end_layout
+
+\begin_layout Plain Layout
+of $T_b$ reached by $
+\backslash
+mathbf{x}$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Typical starting values are $m=
+\backslash
+lfloor
+\backslash
+sqrt{D}
+\backslash
+rfloor$ for
+\end_layout
+
+\begin_layout Plain Layout
+classification,
+ $m=
+\backslash
+max
+\backslash
+{1,
+\backslash
+lfloor D/3
+\backslash
+rfloor
+\backslash
+}$ for regression and
+\end_layout
+
+\begin_layout Plain Layout
+$B=100$ trees.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Out-of-bag (OOB) error}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+An observation $i$ is out of bag for tree $b$ if its index was never
+\end_layout
+
+\begin_layout Plain Layout
+drawn for $S_b$.
+ This happens with probability
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+left(1-
+\backslash
+frac{1}{N}
+\backslash
+right)^N
+\backslash
+approx e^{-1}
+\backslash
+approx 0.37.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Let $
+\backslash
+mathcal{B}_i$ be the set of trees for which $i$ is out of bag.
+\end_layout
+
+\begin_layout Plain Layout
+We predict $
+\backslash
+mathbf{x}_i$ using the usual forest rule restricted to
+\end_layout
+
+\begin_layout Plain Layout
+these trees.
+ With $
+\backslash
+mathcal{I}=
+\backslash
+{i:
+\backslash
+mathcal{B}_i
+\backslash
+ne
+\backslash
+varnothing
+\backslash
+}$,
+\end_layout
+
+\begin_layout Plain Layout
+the OOB estimate of generalisation error is
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+widehat{R}_{
+\backslash
+mathrm{OOB}}
+\end_layout
+
+\begin_layout Plain Layout
+=
+\backslash
+frac{1}{|
+\backslash
+mathcal{I}|}
+\backslash
+sum_{i
+\backslash
+in
+\backslash
+mathcal{I}}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+ell
+\backslash
+bigl(y_i,f_{
+\backslash
+mathrm{RF}}(
+\backslash
+{T_b:b
+\backslash
+in
+\backslash
+mathcal{B}_i
+\backslash
+},
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbf{x}_i)
+\backslash
+bigr).
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+We can choose $m$ using OOB error and increase $B$ until it stabilises.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Pros and cons}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Single trees are easy to interpret but are unstable and have
+\end_layout
+
+\begin_layout Plain Layout
+piecewise constant predictions.
+ Random forests usually perform well
+\end_layout
+
+\begin_layout Plain Layout
+on tabular data with little tuning,
+ and the trees can be trained in
+\end_layout
+
+\begin_layout Plain Layout
+parallel.
+ The forest is harder to interpret and still uses axis-aligned
+\end_layout
+
+\begin_layout Plain Layout
+splits.
+ Class probabilities may be poorly calibrated.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
