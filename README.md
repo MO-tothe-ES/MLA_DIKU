@@ -10,10 +10,10 @@ Theory notes for Machine Learning A, with step-by-step derivations, proofs, and 
 
 ## Assignments
 
-- [HA1: K Nearest Neighbors](./hw_assignments/HA1/)
-- [HA2: Concentration of Measure](./hw_assignments/HA2/)
-- [HA3: Logistic regression](./hw_assignments/HA3/)
-- [HA5: Traffic Sign Classification](./hw_assignments/HA5/)
+- [HA1: K Nearest Neighbors and Linear Regression](./hw_assignments/HA1/)
+- [HA2: Concentration of Measure Inequalities](./hw_assignments/HA2/)
+- [HA3: Logistic regression (Linear Classification)](./hw_assignments/HA3/)
+- [HA5: Traffic Sign Classification with Convolutional Neural Network](./hw_assignments/HA5/)
 - [HA6: Principal Component Analysis](./hw_assignments/HA6/)
 - [HA7: PCA, t-SNE and k-Means Clustering](./hw_assignments/HA7/)
 
