@@ -8,11 +8,11 @@
 \begin_preamble
 % Assignment details
 \newcommand{\assignmenttitle}{Machine Learning A}
-\newcommand{\assignmentnumber}{version 0.2}
+\newcommand{\assignmentnumber}{version 0.4}
 \newcommand{\coursename}{Theory Notes}
 \newcommand{\studentname}{Casper Moes}
 \newcommand{\studentid}{hwd362}
-\newcommand{\submissiondate}{4. November 2026}
+\newcommand{\submissiondate}{5. November 2026}
 
 % Layout and typography
 \usepackage[left=3.5cm,right=3.5cm,top=3cm,bottom=3cm]{geometry}
@@ -385,13 +385,12 @@ This can be rewritten by defining
 ) and we have 
 \begin_inset Formula 
 \[
-\mathbb{P}(X\geq a\mathbb{E}[X])\leq\frac{1}{a}
+\mathbb{P}(X\geq a\mathbb{E}[X])\leq\frac{1}{a}.
 \]
 
 \end_inset
 
-.
- That is,
+That is,
  the probability of an event 
 \begin_inset Formula $a$
 \end_inset
@@ -401,6 +400,43 @@ This can be rewritten by defining
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\lang american
+Another (simpler) proof
+\series default
+:
+ 
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}\left[X\right] & =\mathbb{E}\left[X\mathbb{I}_{(X\geq\epsilon)}+X\mathbb{I}_{(X<\epsilon)}\right]\\
+ & =\mathbb{E}\left[X\mathbb{I}_{(X\geq\epsilon)}\right]+\underbrace{\mathbb{E}\left[X\mathbb{I}_{(X<\epsilon)}\right]}_{\geq0\text{ (X is non negative)}}\\
+ & \geq\mathbb{E}\left[X\mathbb{I}_{(X\geq\epsilon)}\right]\\
+ & =\int^{\infty}_{\epsilon}x\mathbb{P}\left(X=x\right)\,dx\qquad\left(\sum_{x\geq\epsilon}x\mathbb{P}\left(X=x\right)\right)\\
+ & \geq\int^{\infty}_{\epsilon}\epsilon\mathbb{P}\left(X=x\right)\,dx\qquad\left(\sum_{x\geq\epsilon}\epsilon\mathbb{P}\left(X=x\right)\right)\\
+ & =\epsilon\mathbb{P}\left(X\geq\epsilon\right).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang american
+Rearranging yields Markow's inequality
+\begin_inset Formula 
+\[
+\mathbb{P}\left(X\geq\epsilon\right)\geq\frac{\mathbb{E}\left[X\right]}{\epsilon}.
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -419,7 +455,7 @@ Statement
  
 \begin_inset Formula 
 \[
-\mathbb{P}(|X-\mathbb{E}[X]|\geq\epsilon)\leq\frac{\mathbb{V}(X)}{\epsilon^{2}}
+\mathbb{P}(|X-\mathbb{E}[X]|\geq\epsilon)\leq\frac{\mathbb{V}(X)}{\epsilon^{2}}.
 \]
 
 \end_inset
@@ -439,14 +475,21 @@ Proof
 \end_inset
 
  we have (by Markow's inequality) 
-\begin_inset Formula $\mathbb{P}((X-\mathbb{E}[X])^{2}\geq\epsilon^{2})\leq\frac{\mathbb{E}[(X-\mathbb{E}[X])^{2}]}{\epsilon^{2}}=\frac{\mathbb{V}(X)}{\epsilon^{2}}$
+\begin_inset Formula 
+\[
+\mathbb{P}((X-\mathbb{E}[X])^{2}\geq\epsilon^{2})\leq\frac{\mathbb{E}[(X-\mathbb{E}[X])^{2}]}{\epsilon^{2}}=\frac{\mathbb{V}(X)}{\epsilon^{2}}-
+\]
+
 \end_inset
 
-.
- Finally we note that 
+Finally we note that 
 \series bold
 
-\begin_inset Formula $|X-\mathbb{E}[X]|\geq\epsilon\iff(X-\mathbb{E}[X])^{2}\geq\epsilon^{2}$
+\begin_inset Formula 
+\[
+|X-\mathbb{E}[X]|\geq\epsilon\iff(X-\mathbb{E}[X])^{2}\geq\epsilon^{2}
+\]
+
 \end_inset
 
  
@@ -3808,7 +3851,7 @@ The sparcity effect is visualized here
 \lang american
 \begin_inset Graphics
 	filename pictures/lasso_vs_ridge.png
-	scale 70
+	scale 60
 
 \end_inset
 
@@ -5346,7 +5389,7 @@ splits.
 \lang american
 \begin_inset Graphics
 	filename pictures/descision_boundary_CART_RandomForest.png
-	scale 50
+	scale 60
 
 \end_inset
 
@@ -5668,7 +5711,7 @@ Here the functions are plottet where for ELU
 \align center
 \begin_inset Graphics
 	filename pictures/activation_funcitons.png
-	scale 30
+	scale 45
 
 \end_inset
 
@@ -6645,7 +6688,3915 @@ newpage
 \end_layout
 
 \begin_layout Section
-Principal Component Analysis
+Clustering
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{General definitions}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Clustering is the task of grouping unlabeled observations according to
+\end_layout
+
+\begin_layout Plain Layout
+similarity.
+ The idea is that observations in the same cluster should be
+\end_layout
+
+\begin_layout Plain Layout
+similar,
+ while observations in different clusters should be dissimilar.
+\end_layout
+
+\begin_layout Plain Layout
+The first question is therefore what we mean by 
+\backslash
+emph{similar}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For example,
+ the slides group the same collection of footwear in two
+\end_layout
+
+\begin_layout Plain Layout
+ways.
+ Grouping by type gives three clusters,
+ whereas grouping by color
+\end_layout
+
+\begin_layout Plain Layout
+gives four.
+ Both groupings make sense given their respective definitions
+\end_layout
+
+\begin_layout Plain Layout
+of similarity.
+ In a dataset with numerical features,
+ the same issue
+\end_layout
+
+\begin_layout Plain Layout
+arises through the choice and scale of the features.
+ If we multiply one
+\end_layout
+
+\begin_layout Plain Layout
+coordinate by ten,
+ its contribution to squared Euclidean distance
+\end_layout
+
+\begin_layout Plain Layout
+becomes one hundred times as large.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Clustering is a form of 
+\backslash
+emph{unsupervised learning}.
+ We observe
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+mathbf{x}_1,
+\backslash
+dots,
+\backslash
+mathbf{x}_N$ without target labels $y_1,
+\backslash
+dots,y_N$
+\end_layout
+
+\begin_layout Plain Layout
+that tell us how to group them.
+ Clustering can help us explore the
+\end_layout
+
+\begin_layout Plain Layout
+structure of the data,
+ summarize many observations by a few
+\end_layout
+
+\begin_layout Plain Layout
+representatives,
+ or identify observations that lie far from the main
+\end_layout
+
+\begin_layout Plain Layout
+groups.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Mathematical setting}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Let $X=
+\backslash
+{
+\backslash
+mathbf{x}_1,
+\backslash
+dots,
+\backslash
+mathbf{x}_N
+\backslash
+}$ be the dataset.
+ We need
+\end_layout
+
+\begin_layout Plain Layout
+some way of comparing observations,
+ for example a dissimilarity
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+d
+\backslash
+colon X
+\backslash
+times X
+\backslash
+to[0,
+\backslash
+infty)
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+where smaller values mean more similar,
+ or a similarity
+\end_layout
+
+\begin_layout Plain Layout
+$s
+\backslash
+colon X
+\backslash
+times X
+\backslash
+to[0,1]$ where larger values mean more similar.
+\end_layout
+
+\begin_layout Plain Layout
+In the methods below,
+ the observations are vectors
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+mathbf{x}_n
+\backslash
+in
+\backslash
+mathbb{R}^{m}$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+A 
+\backslash
+emph{partition} of $X$ into $k$ clusters
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+{C_1,
+\backslash
+dots,C_k
+\backslash
+}$ satisfies
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+bigcup_{j=1}^{k}C_j=X,
+\backslash
+qquad
+\end_layout
+
+\begin_layout Plain Layout
+C_i
+\backslash
+cap C_j=
+\backslash
+emptyset
+\backslash
+quad
+\backslash
+text{for }i
+\backslash
+neq j,
+\backslash
+qquad
+\end_layout
+
+\begin_layout Plain Layout
+C_j
+\backslash
+neq
+\backslash
+emptyset
+\backslash
+quad
+\backslash
+text{for all }j.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+I.e.
+\backslash
+ every observation belongs to exactly one cluster.
+ The numbers
+\end_layout
+
+\begin_layout Plain Layout
+$1,
+\backslash
+dots,k$ are just names for the clusters.
+ Exchanging the names of
+\end_layout
+
+\begin_layout Plain Layout
+two clusters gives the same partition.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+A distance tells us how to compare two observations.
+ To compare two
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+emph{partitions},
+ we need a criterion for the quality of the whole
+\end_layout
+
+\begin_layout Plain Layout
+grouping.
+ The main approach in this lecture is to define a cost and
+\end_layout
+
+\begin_layout Plain Layout
+look for a partition with small cost.
+ Here $k$ is given to the algorithm,
+\end_layout
+
+\begin_layout Plain Layout
+even if we have to choose it ourselves before running it.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{The 
+\backslash
+texorpdfstring{$k$}{k}-means problem}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{The objective function}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Suppose we have $k$ centers
+\end_layout
+
+\begin_layout Plain Layout
+$C=
+\backslash
+{
+\backslash
+mathbf{c}_1,
+\backslash
+dots,
+\backslash
+mathbf{c}_k
+\backslash
+}
+\backslash
+subset
+\backslash
+mathbb{R}^{m}$.
+\end_layout
+
+\begin_layout Plain Layout
+Each observation is represented by its closest center.
+ The cost of this
+\end_layout
+
+\begin_layout Plain Layout
+representation is
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{equation}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+label{eq:clustering-kmeans-cost}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+phi(X,C)
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+equiv
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+sum_{n=1}^{N}
+\backslash
+min_{j
+\backslash
+in
+\backslash
+{1,
+\backslash
+dots,k
+\backslash
+}}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+lVert
+\backslash
+mathbf{x}_n-
+\backslash
+mathbf{c}_j
+\backslash
+rVert_2^2.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{equation}
+\end_layout
+
+\begin_layout Plain Layout
+For a given point we first find its closest center and then add its
+\end_layout
+
+\begin_layout Plain Layout
+squared distance to that center.
+ Squaring the Euclidean distance
+\end_layout
+
+\begin_layout Plain Layout
+preserves the ordering of the centers for a given point.
+ It changes
+\end_layout
+
+\begin_layout Plain Layout
+how much near and far points contribute to the total cost.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The $k$-means 
+\backslash
+emph{problem} is to find the best possible $k$ centers
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+phi^
+\backslash
+star
+\end_layout
+
+\begin_layout Plain Layout
+=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+min_{
+\backslash
+substack{C
+\backslash
+subset
+\backslash
+mathbb{R}^{m}
+\backslash
+
+\backslash
+ |C|=k}}
+\backslash
+phi(X,C).
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+The centers can be anywhere in $
+\backslash
+mathbb{R}^{m}$,
+ including locations
+\end_layout
+
+\begin_layout Plain Layout
+between observed points.
+ The exact optimization problem is NP-hard
+\end_layout
+
+\begin_layout Plain Layout
+in general.
+ Lloyd's algorithm,
+ which we discuss below,
+ is a way to
+\end_layout
+
+\begin_layout Plain Layout
+search for a low-cost solution.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Sidenote.}
+\end_layout
+
+\begin_layout Plain Layout
+This objective is also a reconstruction error,
+ as in PCA.
+ Here the
+\end_layout
+
+\begin_layout Plain Layout
+encoding of an observation is a cluster index $j$,
+ and its
+\end_layout
+
+\begin_layout Plain Layout
+reconstruction is the corresponding center $
+\backslash
+mathbf{c}_j$.
+ Dividing
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:clustering-kmeans-cost} by $N$ gives the average squared
+\end_layout
+
+\begin_layout Plain Layout
+reconstruction error and leaves the minimizing centers the same.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Special case 
+\backslash
+texorpdfstring{$k=1$}{k=1} and why the mean appears}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+With one center,
+ all observations are in the same cluster.
+ More
+\end_layout
+
+\begin_layout Plain Layout
+generally,
+ let $S$ be any nonempty set of observations and define
+\end_layout
+
+\begin_layout Plain Layout
+its centroid by
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+bar{
+\backslash
+mathbf{x}}_S=
+\backslash
+frac{1}{|S|}
+\backslash
+sum_{
+\backslash
+mathbf{x}
+\backslash
+in S}
+\backslash
+mathbf{x}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Statement.}
+\end_layout
+
+\begin_layout Plain Layout
+The centroid is the unique minimizer of
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+sum_{
+\backslash
+mathbf{x}
+\backslash
+in S}
+\backslash
+lVert
+\backslash
+mathbf{x}-
+\backslash
+mathbf{c}
+\backslash
+rVert_2^2$
+\end_layout
+
+\begin_layout Plain Layout
+over $
+\backslash
+mathbf{c}
+\backslash
+in
+\backslash
+mathbb{R}^{m}$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Proof.}
+\end_layout
+
+\begin_layout Plain Layout
+Write
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+mathbf{x}-
+\backslash
+mathbf{c}
+\end_layout
+
+\begin_layout Plain Layout
+=(
+\backslash
+mathbf{x}-
+\backslash
+bar{
+\backslash
+mathbf{x}}_S)+(
+\backslash
+bar{
+\backslash
+mathbf{x}}_S-
+\backslash
+mathbf{c})$.
+\end_layout
+
+\begin_layout Plain Layout
+Using the inner product to expand the square gives
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{align*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+sum_{
+\backslash
+mathbf{x}
+\backslash
+in S}
+\backslash
+lVert
+\backslash
+mathbf{x}-
+\backslash
+mathbf{c}
+\backslash
+rVert_2^2
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+sum_{
+\backslash
+mathbf{x}
+\backslash
+in S}
+\backslash
+lVert
+\backslash
+mathbf{x}-
+\backslash
+bar{
+\backslash
+mathbf{x}}_S
+\backslash
+rVert_2^2
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+quad
+\end_layout
+
+\begin_layout Plain Layout
++2
+\backslash
+underbrace{
+\backslash
+left(
+\backslash
+sum_{
+\backslash
+mathbf{x}
+\backslash
+in S}
+\end_layout
+
+\begin_layout Plain Layout
+(
+\backslash
+mathbf{x}-
+\backslash
+bar{
+\backslash
+mathbf{x}}_S)
+\backslash
+right)'}_{=
+\backslash
+,
+\backslash
+mathbf{0}'}
+\end_layout
+
+\begin_layout Plain Layout
+(
+\backslash
+bar{
+\backslash
+mathbf{x}}_S-
+\backslash
+mathbf{c})
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+quad + |S|
+\backslash
+lVert
+\backslash
+bar{
+\backslash
+mathbf{x}}_S-
+\backslash
+mathbf{c}
+\backslash
+rVert_2^2
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+sum_{
+\backslash
+mathbf{x}
+\backslash
+in S}
+\backslash
+lVert
+\backslash
+mathbf{x}-
+\backslash
+bar{
+\backslash
+mathbf{x}}_S
+\backslash
+rVert_2^2
+\end_layout
+
+\begin_layout Plain Layout
++ |S|
+\backslash
+lVert
+\backslash
+bar{
+\backslash
+mathbf{x}}_S-
+\backslash
+mathbf{c}
+\backslash
+rVert_2^2.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{align*}
+\end_layout
+
+\begin_layout Plain Layout
+The first term is fixed.
+ The second term is nonnegative and is zero
+\end_layout
+
+\begin_layout Plain Layout
+exactly when $
+\backslash
+mathbf{c}=
+\backslash
+bar{
+\backslash
+mathbf{x}}_S$.
+ Thus the cost of using
+\end_layout
+
+\begin_layout Plain Layout
+any other center is the cost at the mean plus a penalty proportional
+\end_layout
+
+\begin_layout Plain Layout
+to the squared distance from the mean.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Example.}
+\end_layout
+
+\begin_layout Plain Layout
+For the four observations $(-6,0)$,
+ $(0,-1)$,
+ $(2,3)$,
+ and $(5,0)$,
+\end_layout
+
+\begin_layout Plain Layout
+we take the mean separately along each coordinate
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+bar{
+\backslash
+mathbf{x}}
+\end_layout
+
+\begin_layout Plain Layout
+=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+left(
+\backslash
+frac{-6+0+2+5}{4},
+\backslash
+frac{0-1+3+0}{4}
+\backslash
+right)
+\end_layout
+
+\begin_layout Plain Layout
+=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+left(
+\backslash
+frac14,
+\backslash
+frac12
+\backslash
+right).
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+The optimal center lies between the observations.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{The 
+\backslash
+texorpdfstring{$k$}{k}-means algorithm (Lloyd's algorithm)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Alternating between assignments and centers}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The problem has two sets of unknowns.
+ We need to decide which
+\end_layout
+
+\begin_layout Plain Layout
+observations belong together and where to put their centers.
+ Each of
+\end_layout
+
+\begin_layout Plain Layout
+these is easy to optimize once we fix the other.
+ To see this,
+ let
+\end_layout
+
+\begin_layout Plain Layout
+$z_n
+\backslash
+in
+\backslash
+{1,
+\backslash
+dots,k
+\backslash
+}$ be the cluster index of observation $n$ and
+\end_layout
+
+\begin_layout Plain Layout
+write the cost for a given assignment as
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+J(
+\backslash
+mathbf{z},C)
+\end_layout
+
+\begin_layout Plain Layout
+=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+sum_{n=1}^{N}
+\backslash
+lVert
+\backslash
+mathbf{x}_n-
+\backslash
+mathbf{c}_{z_n}
+\backslash
+rVert_2^2.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+For fixed centers,
+ $
+\backslash
+phi(X,C)=
+\backslash
+min_{
+\backslash
+mathbf{z}}J(
+\backslash
+mathbf{z},C)$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{enumerate}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item 
+\backslash
+textbf{Initialize.} Choose $k$ distinct centers
+\end_layout
+
+\begin_layout Plain Layout
+    $
+\backslash
+mathbf{c}_1,
+\backslash
+dots,
+\backslash
+mathbf{c}_k$.
+ For example,
+ choose $k$
+\end_layout
+
+\begin_layout Plain Layout
+    observations at random as the initial centers.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item 
+\backslash
+textbf{Assign points to centers.}
+\end_layout
+
+\begin_layout Plain Layout
+    With the centers fixed,
+ choose for each observation
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+    z_n
+\backslash
+in
+\backslash
+operatorname*{arg
+\backslash
+,min}_{j
+\backslash
+in
+\backslash
+{1,
+\backslash
+dots,k
+\backslash
+}}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+lVert
+\backslash
+mathbf{x}_n-
+\backslash
+mathbf{c}_j
+\backslash
+rVert_2^2.
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+    This minimizes $J$ over the assignments because each summand
+\end_layout
+
+\begin_layout Plain Layout
+    depends on only one $z_n$.
+ The resulting clusters are
+\end_layout
+
+\begin_layout Plain Layout
+    $C_j=
+\backslash
+{
+\backslash
+mathbf{x}_n:z_n=j
+\backslash
+}$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item 
+\backslash
+textbf{Update the centers.}
+\end_layout
+
+\begin_layout Plain Layout
+    With the assignments fixed,
+ the objective separates into $k$
+\end_layout
+
+\begin_layout Plain Layout
+    terms,
+ one for each cluster
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+    J(
+\backslash
+mathbf{z},C)=
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+sum_{j=1}^{k}
+\backslash
+sum_{
+\backslash
+mathbf{x}
+\backslash
+in C_j}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+lVert
+\backslash
+mathbf{x}-
+\backslash
+mathbf{c}_j
+\backslash
+rVert_2^2.
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+    By the result for $k=1$,
+ each nonempty cluster gets the update
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+mathbf{c}_j
+\backslash
+leftarrow
+\backslash
+frac{1}{|C_j|}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+sum_{
+\backslash
+mathbf{x}
+\backslash
+in C_j}
+\backslash
+mathbf{x}.
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item Repeat the assignment and update steps until the assignments
+\end_layout
+
+\begin_layout Plain Layout
+    stop changing.
+ Return the assignments and the final centers.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{enumerate}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Two details matter when spelling out the algorithm.
+ If several
+\end_layout
+
+\begin_layout Plain Layout
+centers are equally close,
+ keep the previous assignment if it is
+\end_layout
+
+\begin_layout Plain Layout
+among the minimizers and otherwise choose the smallest minimizing
+\end_layout
+
+\begin_layout Plain Layout
+index.
+ If a cluster is empty,
+ its mean is undefined.
+ One convention
+\end_layout
+
+\begin_layout Plain Layout
+is to keep its current center for that update,
+ in which case there
+\end_layout
+
+\begin_layout Plain Layout
+can be fewer than $k$ nonempty groups at the end.
+ Implementations can
+\end_layout
+
+\begin_layout Plain Layout
+also reseed empty clusters when $k$ nonempty groups are needed.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Why the algorithm converges}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Statement.}
+\end_layout
+
+\begin_layout Plain Layout
+With the tie and empty-cluster conventions above,
+ Lloyd's algorithm
+\end_layout
+
+\begin_layout Plain Layout
+reaches a fixed assignment after finitely many iterations.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Proof.}
+\end_layout
+
+\begin_layout Plain Layout
+Let $
+\backslash
+mathbf{z}^{(t)}$ and $C^{(t)}$ denote the assignments and centers
+\end_layout
+
+\begin_layout Plain Layout
+after the $t$th update.
+ The next two steps satisfy
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{align*}
+\end_layout
+
+\begin_layout Plain Layout
+J(
+\backslash
+mathbf{z}^{(t)},C^{(t)})
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+geq J(
+\backslash
+mathbf{z}^{(t+1)},C^{(t)})
+\end_layout
+
+\begin_layout Plain Layout
+&&
+\backslash
+text{(assign to closest centers)}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+&
+\backslash
+geq J(
+\backslash
+mathbf{z}^{(t+1)},C^{(t+1)})
+\end_layout
+
+\begin_layout Plain Layout
+&&
+\backslash
+text{(update to the means)}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{align*}
+\end_layout
+
+\begin_layout Plain Layout
+If an observation changes cluster,
+ its new center must be strictly
+\end_layout
+
+\begin_layout Plain Layout
+closer under our tie rule.
+ Thus the first inequality is strict
+\end_layout
+
+\begin_layout Plain Layout
+whenever the assignment changes.
+ After the update,
+ each nonempty
+\end_layout
+
+\begin_layout Plain Layout
+cluster's contribution to the cost is determined by its members
+\end_layout
+
+\begin_layout Plain Layout
+and their mean.
+ Empty clusters contribute zero.
+ There are at most
+\end_layout
+
+\begin_layout Plain Layout
+$k^N$ assignments and hence finitely many possible costs after the
+\end_layout
+
+\begin_layout Plain Layout
+updates.
+ We can therefore have only finitely many strict decreases.
+\end_layout
+
+\begin_layout Plain Layout
+Once the assignments stay the same,
+ the center update also leaves
+\end_layout
+
+\begin_layout Plain Layout
+the centers unchanged.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The convergence result tells us that the algorithm reaches a
+\end_layout
+
+\begin_layout Plain Layout
+clustering that is stable under its two updates.
+ Its cost can still
+\end_layout
+
+\begin_layout Plain Layout
+be far above $
+\backslash
+phi^
+\backslash
+star$.
+ The algorithm is simple,
+ and an iteration
+\end_layout
+
+\begin_layout Plain Layout
+takes $O(Nkm)$ operations with a direct distance calculation.
+ It
+\end_layout
+
+\begin_layout Plain Layout
+often stabilizes quickly in practice.
+ Its result can depend strongly
+\end_layout
+
+\begin_layout Plain Layout
+on the initialization,
+ the choice of $k$,
+ and the presence of
+\end_layout
+
+\begin_layout Plain Layout
+outliers.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{A four-point example with arbitrarily bad cost}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Statement.}
+\end_layout
+
+\begin_layout Plain Layout
+For any $
+\backslash
+alpha>1$,
+ there is a dataset and an initialization for
+\end_layout
+
+\begin_layout Plain Layout
+which the final cost of Lloyd's algorithm is at least
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+alpha
+\backslash
+phi^
+\backslash
+star$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Proof by construction.}
+\end_layout
+
+\begin_layout Plain Layout
+Consider four points on the real line,
+ ordered as
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+p_1
+\backslash
+overset{y}{
+\backslash
+longleftrightarrow}
+\end_layout
+
+\begin_layout Plain Layout
+p_2
+\backslash
+overset{z}{
+\backslash
+longleftrightarrow}
+\end_layout
+
+\begin_layout Plain Layout
+p_3
+\backslash
+overset{x}{
+\backslash
+longleftrightarrow}p_4,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad 0<x<y<z.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Here $x,y,z$ denote gaps between consecutive points.
+ Let $k=3$.
+\end_layout
+
+\begin_layout Plain Layout
+At least two of the four points must share a center.
+ For two points
+\end_layout
+
+\begin_layout Plain Layout
+at distance $a$,
+ the best shared center is their midpoint and the
+\end_layout
+
+\begin_layout Plain Layout
+cost of those two points is
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+2
+\backslash
+left(
+\backslash
+frac{a}{2}
+\backslash
+right)^2=
+\backslash
+frac{a^2}{2}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+The closest pair is $
+\backslash
+{p_3,p_4
+\backslash
+}$,
+ at distance $x$.
+ Any shared pair
+\end_layout
+
+\begin_layout Plain Layout
+therefore costs at least $x^2/2$.
+ Putting one center at $p_1$,
+ one
+\end_layout
+
+\begin_layout Plain Layout
+at $p_2$,
+ and one at the midpoint of $p_3$ and $p_4$ attains that
+\end_layout
+
+\begin_layout Plain Layout
+lower bound.
+ Thus $
+\backslash
+phi^
+\backslash
+star=x^2/2$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Now initialize the centers at $p_1,p_3,p_4$.
+ The point $p_2$ joins
+\end_layout
+
+\begin_layout Plain Layout
+$p_1$ since $y<z$,
+ and each of the other points goes to its own
+\end_layout
+
+\begin_layout Plain Layout
+center.
+ The update moves the first center to $(p_1+p_2)/2$.
+\end_layout
+
+\begin_layout Plain Layout
+Both $p_1$ and $p_2$ are now $y/2$ away from that center and farther
+\end_layout
+
+\begin_layout Plain Layout
+away from the other centers.
+ The next assignment is therefore the
+\end_layout
+
+\begin_layout Plain Layout
+same.
+ The final cost and its ratio to the optimum are
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+phi=
+\backslash
+frac{y^2}{2},
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+frac{
+\backslash
+phi}{
+\backslash
+phi^
+\backslash
+star}=
+\backslash
+left(
+\backslash
+frac{y}{x}
+\backslash
+right)^2.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+We can make the ratio as large as we like by choosing $y/x$ large
+\end_layout
+
+\begin_layout Plain Layout
+and taking $z>y$.
+ For example,
+ gaps $(y,z,x)=(10,11,1)$ give
+\end_layout
+
+\begin_layout Plain Layout
+cost $50$ compared with the optimal cost $1/2$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Class exercise with three rows and three columns}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+To put numbers on the figure,
+ take the nine points with horizontal
+\end_layout
+
+\begin_layout Plain Layout
+coordinates in $
+\backslash
+{-4,0,4
+\backslash
+}$ and vertical coordinates in $
+\backslash
+{-1,0,1
+\backslash
+}$.
+\end_layout
+
+\begin_layout Plain Layout
+The vertical gaps are smaller,
+ so the three columns are a natural
+\end_layout
+
+\begin_layout Plain Layout
+choice of clusters.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+If the initial centers are the three points in the middle column,
+\end_layout
+
+\begin_layout Plain Layout
+each observation is closest to the center on its own row.
+ The
+\end_layout
+
+\begin_layout Plain Layout
+horizontal distance to the three centers is the same,
+ and the
+\end_layout
+
+\begin_layout Plain Layout
+center on its own row has zero vertical distance.
+ The mean of each
+\end_layout
+
+\begin_layout Plain Layout
+row is already its middle point.
+ Thus the row partition is a fixed
+\end_layout
+
+\begin_layout Plain Layout
+point with cost
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+phi_{
+\backslash
+mathrm{rows}}=3(4^2+0^2+4^2)=96.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+If the initial centers are the three points in the middle row,
+\end_layout
+
+\begin_layout Plain Layout
+each observation goes to its own column.
+ The means are again
+\end_layout
+
+\begin_layout Plain Layout
+unchanged,
+ and the cost is
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+phi_{
+\backslash
+mathrm{columns}}=3(1^2+0^2+1^2)=6.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+In this numerical example the column partition is optimal.
+ Any
+\end_layout
+
+\begin_layout Plain Layout
+cluster containing points from two different columns must contain
+\end_layout
+
+\begin_layout Plain Layout
+a pair with horizontal separation at least $4$.
+ Those two points
+\end_layout
+
+\begin_layout Plain Layout
+alone cost at least $4^2/2=8$ when they share a center.
+ So an
+\end_layout
+
+\begin_layout Plain Layout
+optimal clustering keeps the three columns separate.
+ With three
+\end_layout
+
+\begin_layout Plain Layout
+centers available,
+ it uses one center for each column.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Choosing the initial centers}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+One way to deal with sensitivity to initialization is to run Lloyd's
+\end_layout
+
+\begin_layout Plain Layout
+algorithm several times and keep the result with the smallest
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+phi$.
+ Another way is to make the initialization depend on where
+\end_layout
+
+\begin_layout Plain Layout
+we have already placed centers.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Let $B$ be the set of centers chosen so far and define
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+D(
+\backslash
+mathbf{x},B)
+\backslash
+equiv
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+min_{
+\backslash
+mathbf{c}
+\backslash
+in B}
+\backslash
+lVert
+\backslash
+mathbf{x}-
+\backslash
+mathbf{c}
+\backslash
+rVert_2.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Farthest traversal chooses the next center at a point maximizing
+\end_layout
+
+\begin_layout Plain Layout
+$D(
+\backslash
+mathbf{x},B)$.
+ The $k$-means++ method uses these distances to
+\end_layout
+
+\begin_layout Plain Layout
+give points different sampling probabilities.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{
+\backslash
+texorpdfstring{$k$}{k}-means++}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{enumerate}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item Choose $
+\backslash
+mathbf{c}_1$ uniformly at random from $X$.
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item For $i=2,
+\backslash
+dots,k$,
+ let
+\end_layout
+
+\begin_layout Plain Layout
+    $B_{i-1}=
+\backslash
+{
+\backslash
+mathbf{c}_1,
+\backslash
+dots,
+\backslash
+mathbf{c}_{i-1}
+\backslash
+}$ and sample the
+\end_layout
+
+\begin_layout Plain Layout
+    next center according to
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+mathbb{P}(
+\backslash
+mathbf{c}_i=
+\backslash
+mathbf{x}
+\backslash
+mid B_{i-1})
+\end_layout
+
+\begin_layout Plain Layout
+    =
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+frac{D(
+\backslash
+mathbf{x},B_{i-1})^2}
+\end_layout
+
+\begin_layout Plain Layout
+    {
+\backslash
+sum_{
+\backslash
+mathbf{y}
+\backslash
+in X}D(
+\backslash
+mathbf{y},B_{i-1})^2}.
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item Run Lloyd's algorithm with the resulting $k$ centers.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{enumerate}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The denominator is the current $k$-means cost with the centers
+\end_layout
+
+\begin_layout Plain Layout
+chosen so far.
+ The numerator is the contribution of $
+\backslash
+mathbf{x}$
+\end_layout
+
+\begin_layout Plain Layout
+to that cost.
+ Thus a point with twice the distance to its nearest
+\end_layout
+
+\begin_layout Plain Layout
+center has four times the sampling weight.
+ A point that is already
+\end_layout
+
+\begin_layout Plain Layout
+a center has weight zero.
+ After adding a center we recompute the
+\end_layout
+
+\begin_layout Plain Layout
+distances,
+ so points near the new center get less weight in the
+\end_layout
+
+\begin_layout Plain Layout
+next draw.
+ This is why the sampling is called 
+\backslash
+emph{adaptive}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Worked example of 
+\backslash
+texorpdfstring{$k$}{k}-means++}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Consider $X=
+\backslash
+{(5,0),(0,1),(0,-1),(-5,0)
+\backslash
+}$ and let $k=3$.
+\end_layout
+
+\begin_layout Plain Layout
+Each point has probability $1/4$ of being the first center.
+\end_layout
+
+\begin_layout Plain Layout
+Suppose that $
+\backslash
+mathbf{c}_1=(5,0)$ is chosen.
+ The squared distances
+\end_layout
+
+\begin_layout Plain Layout
+to this center are
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{array}{c|rrrr}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbf{x} & (5,0) & (0,1) & (0,-1) & (-5,0)
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\end_layout
+
+\begin_layout Plain Layout
+D(
+\backslash
+mathbf{x},
+\backslash
+{
+\backslash
+mathbf{c}_1
+\backslash
+})^2 & 0 & 26 & 26 & 100
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{array}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+because,
+ for example,
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+lVert(0,1)-(5,0)
+\backslash
+rVert_2^2=5^2+1^2=26$.
+\end_layout
+
+\begin_layout Plain Layout
+The weights sum to $152$.
+ The probabilities of choosing
+\end_layout
+
+\begin_layout Plain Layout
+$(0,1)$,
+ $(0,-1)$,
+ and $(-5,0)$ as the second center are
+\end_layout
+
+\begin_layout Plain Layout
+$26/152$,
+ $26/152$,
+ and $100/152$,
+ respectively.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Now suppose $
+\backslash
+mathbf{c}_2=(0,1)$.
+ The two remaining points have
+\end_layout
+
+\begin_layout Plain Layout
+squared distances to their nearest selected center given by
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{align*}
+\end_layout
+
+\begin_layout Plain Layout
+D
+\backslash
+big((0,-1),
+\backslash
+{
+\backslash
+mathbf{c}_1,
+\backslash
+mathbf{c}_2
+\backslash
+}
+\backslash
+big)^2
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\backslash
+min
+\backslash
+{26,4
+\backslash
+}=4,
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+D
+\backslash
+big((-5,0),
+\backslash
+{
+\backslash
+mathbf{c}_1,
+\backslash
+mathbf{c}_2
+\backslash
+}
+\backslash
+big)^2
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\backslash
+min
+\backslash
+{100,26
+\backslash
+}=26.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{align*}
+\end_layout
+
+\begin_layout Plain Layout
+Hence the probabilities for the third center are $4/30$ for
+\end_layout
+
+\begin_layout Plain Layout
+$(0,-1)$ and $26/30$ for $(-5,0)$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Suppose $
+\backslash
+mathbf{c}_3=(-5,0)$ is chosen.
+ In the first Lloyd assignment,
+\end_layout
+
+\begin_layout Plain Layout
+$(0,-1)$ joins $(0,1)$ because its squared distance to that center
+\end_layout
+
+\begin_layout Plain Layout
+is $4$,
+ compared with $26$ to each of the other centers.
+\end_layout
+
+\begin_layout Plain Layout
+The two outer points are singleton clusters.
+ The center update
+\end_layout
+
+\begin_layout Plain Layout
+moves the middle center to
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+frac{(0,1)+(0,-1)}{2}=(0,0).
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+The next assignment stays the same.
+ The singleton clusters cost
+\end_layout
+
+\begin_layout Plain Layout
+zero and each of the two middle points costs $1$,
+ so the final
+\end_layout
+
+\begin_layout Plain Layout
+cost is $2$.
+ This also happens to be optimal,
+ since the closest
+\end_layout
+
+\begin_layout Plain Layout
+pair is at distance $2$ and at least one pair must share a center.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Guarantee in expectation}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Statement (Arthur and Vassilvitskii,
+ 2007).}
+\end_layout
+
+\begin_layout Plain Layout
+The expected cost of the centers selected by $k$-means++ satisfies
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbb{E}
+\backslash
+!
+\backslash
+left[
+\backslash
+phi(X,C_{
+\backslash
+mathrm{seed}})
+\backslash
+right]
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+leq 8(
+\backslash
+ln k+2)
+\backslash
+phi^
+\backslash
+star.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+The expectation is over the random choice of seeds for a fixed
+\end_layout
+
+\begin_layout Plain Layout
+dataset.
+ Individual runs can produce different costs.
+ Since each
+\end_layout
+
+\begin_layout Plain Layout
+Lloyd iteration can only decrease the cost,
+ the same upper bound
+\end_layout
+
+\begin_layout Plain Layout
+holds for the expected final cost.
+ Thus $k$-means++ gives an
+\end_layout
+
+\begin_layout Plain Layout
+$O(
+\backslash
+log k)$ approximation in expectation for $k
+\backslash
+geq 2$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Choosing the number of clusters}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Let $
+\backslash
+phi_k^
+\backslash
+star$ be the smallest possible cost with $k$ centers.
+\end_layout
+
+\begin_layout Plain Layout
+Adding an extra center leaves the old centers available and can
+\end_layout
+
+\begin_layout Plain Layout
+only reduce a point's distance to its nearest center.
+ Therefore
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+phi_{k+1}^
+\backslash
+star
+\backslash
+leq
+\backslash
+phi_k^
+\backslash
+star.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+In particular,
+ with one center per observation the cost is zero.
+\end_layout
+
+\begin_layout Plain Layout
+So minimizing the cost over $k$ alone will favor using as many
+\end_layout
+
+\begin_layout Plain Layout
+centers as we allow,
+ even if the goal was to summarize the data.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The 
+\backslash
+emph{elbow method} fits clusterings for several values of $k$
+\end_layout
+
+\begin_layout Plain Layout
+and plots the resulting cost against $k$.
+ The plot is sometimes
+\end_layout
+
+\begin_layout Plain Layout
+called a scree plot.
+ Look for a bend where the cost goes from falling
+\end_layout
+
+\begin_layout Plain Layout
+sharply to falling more slowly.
+ In the slide example,
+ the drop from
+\end_layout
+
+\begin_layout Plain Layout
+$k=2$ to $k=3$ is much larger than the later drops.
+ This suggests
+\end_layout
+
+\begin_layout Plain Layout
+that three centers capture much of the structure and that extra
+\end_layout
+
+\begin_layout Plain Layout
+centers give smaller improvements.
+ When constructing the plot from
+\end_layout
+
+\begin_layout Plain Layout
+Lloyd runs,
+ using several initializations per $k$ helps reduce the
+\end_layout
+
+\begin_layout Plain Layout
+effect of one poor run on the curve.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The elbow is a heuristic.
+ Some datasets give a gradual curve with
+\end_layout
+
+\begin_layout Plain Layout
+several plausible choices.
+ Domain knowledge may suggest how many
+\end_layout
+
+\begin_layout Plain Layout
+groups to expect,
+ and the intended use may call for broader or
+\end_layout
+
+\begin_layout Plain Layout
+more detailed groups.
+ For example,
+ a three-cluster summary can
+\end_layout
+
+\begin_layout Plain Layout
+capture the major groups even if a more detailed analysis would
+\end_layout
+
+\begin_layout Plain Layout
+split one of them further.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Beyond 
+\backslash
+texorpdfstring{$k$}{k}-means}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{
+\backslash
+texorpdfstring{$k$}{k}-medoids and the choice of representative}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Suppose the observations represent people.
+ The centroid describes
+\end_layout
+
+\begin_layout Plain Layout
+an average feature vector,
+ which may correspond to no actual person.
+\end_layout
+
+\begin_layout Plain Layout
+If we want an observed person to represent each group,
+ we can
+\end_layout
+
+\begin_layout Plain Layout
+restrict the centers to observations in $X$.
+ These centers are
+\end_layout
+
+\begin_layout Plain Layout
+called 
+\backslash
+emph{medoids}.
+ With the squared Euclidean cost used in the
+\end_layout
+
+\begin_layout Plain Layout
+slides,
+ the problem becomes
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+min_{
+\backslash
+substack{C
+\backslash
+subset X
+\backslash
+
+\backslash
+ |C|=k}}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+sum_{
+\backslash
+mathbf{x}
+\backslash
+in X}
+\backslash
+min_{
+\backslash
+mathbf{c}
+\backslash
+in C}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+lVert
+\backslash
+mathbf{x}-
+\backslash
+mathbf{c}
+\backslash
+rVert_2^2.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Relative to $k$-means,
+ we have changed the set of feasible centers.
+\end_layout
+
+\begin_layout Plain Layout
+For example,
+ with the one-dimensional cluster $S=
+\backslash
+{0,2
+\backslash
+}$,
+ the
+\end_layout
+
+\begin_layout Plain Layout
+centroid is $1$ with cost $2$.
+ The feasible medoids are $0$ and
+\end_layout
+
+\begin_layout Plain Layout
+$2$,
+ each with cost $4$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For squared Euclidean distance and a fixed cluster,
+ the centroid
+\end_layout
+
+\begin_layout Plain Layout
+identity gives an easy way to understand the medoid.
+ Among the
+\end_layout
+
+\begin_layout Plain Layout
+points in the cluster,
+ choose one closest to the centroid.
+ This
+\end_layout
+
+\begin_layout Plain Layout
+minimizes
+\end_layout
+
+\begin_layout Plain Layout
+$|S|
+\backslash
+lVert
+\backslash
+bar{
+\backslash
+mathbf{x}}_S-
+\backslash
+mathbf{c}
+\backslash
+rVert_2^2$,
+\end_layout
+
+\begin_layout Plain Layout
+which is the only part of the within-cluster cost that depends on
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+mathbf{c}$.
+ More generally,
+ $k$-medoids can be formulated using
+\end_layout
+
+\begin_layout Plain Layout
+a pairwise dissimilarity between observations.
+ We can then compare
+\end_layout
+
+\begin_layout Plain Layout
+candidate representatives directly,
+ even when taking an average
+\end_layout
+
+\begin_layout Plain Layout
+of the observations has no clear meaning.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+One exact solution is to evaluate all $
+\backslash
+binom{N}{k}$ possible
+\end_layout
+
+\begin_layout Plain Layout
+sets of medoids and take the set with lowest cost.
+ This is polynomial
+\end_layout
+
+\begin_layout Plain Layout
+in $N$ for fixed $k$,
+ but the optimization problem is NP-hard when
+\end_layout
+
+\begin_layout Plain Layout
+$k$ is part of the input.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Outliers and why we might prefer the median}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+An outlier is an observation that deviates substantially from
+\end_layout
+
+\begin_layout Plain Layout
+the rest of the data.
+ It might be a measurement error,
+ a recording
+\end_layout
+
+\begin_layout Plain Layout
+error,
+ or a valid but rare event.
+ In $k$-means,
+ an observation at
+\end_layout
+
+\begin_layout Plain Layout
+distance $r$ from its closest center contributes $r^2$ to the cost.
+\end_layout
+
+\begin_layout Plain Layout
+This can pull a centroid toward the outlier.
+ It can also make it
+\end_layout
+
+\begin_layout Plain Layout
+worth spending a whole center on that one observation.
+ In the
+\end_layout
+
+\begin_layout Plain Layout
+slide with three dense groups and two isolated points,
+ a solution
+\end_layout
+
+\begin_layout Plain Layout
+with $k=3$ can consequently devote a center to an isolated point
+\end_layout
+
+\begin_layout Plain Layout
+and leave two dense groups sharing one center.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The difference between the mean and median is easy to see in one
+\end_layout
+
+\begin_layout Plain Layout
+dimension.
+ The sample $(0,1,2)$ has mean and median both equal to
+\end_layout
+
+\begin_layout Plain Layout
+$1$.
+ Adding $101$ gives
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+text{mean}=
+\backslash
+frac{0+1+2+101}{4}=26,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+text{median}=
+\backslash
+frac{1+2}{2}=
+\backslash
+frac{3}{2}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+The mean responds to how far away $101$ is.
+ The median depends on
+\end_layout
+
+\begin_layout Plain Layout
+the positions of the observations in the sorted sample,
+ so making
+\end_layout
+
+\begin_layout Plain Layout
+the largest observation even larger leaves the median unchanged.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Why the median minimizes absolute deviations}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Let $x_{(1)}
+\backslash
+leq
+\backslash
+cdots
+\backslash
+leq x_{(n)}$ be the sorted observations
+\end_layout
+
+\begin_layout Plain Layout
+of a nonempty one-dimensional sample.
+ The sample median is
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+operatorname{median}(S)=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{cases}
+\end_layout
+
+\begin_layout Plain Layout
+x_{((n+1)/2)},
+ & n
+\backslash
+text{ odd},
+\backslash
+
+\backslash
+[3pt]
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+dfrac{x_{(n/2)}+x_{(n/2+1)}}{2},
+ & n
+\backslash
+text{ even}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{cases}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Statement.}
+\end_layout
+
+\begin_layout Plain Layout
+The median minimizes $
+\backslash
+sum_{i=1}^{n}|x_i-c|$ over $c
+\backslash
+in
+\backslash
+mathbb{R}$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Proof.}
+\end_layout
+
+\begin_layout Plain Layout
+Pair the smallest observation with the largest,
+ the second
+\end_layout
+
+\begin_layout Plain Layout
+smallest with the second largest,
+ and so on.
+ For any pair
+\end_layout
+
+\begin_layout Plain Layout
+$a
+\backslash
+leq b$,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+|a-c|+|b-c|
+\backslash
+geq b-a,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+with equality whenever $c
+\backslash
+in[a,b]$.
+ Thus we minimize a pair's
+\end_layout
+
+\begin_layout Plain Layout
+contribution by placing $c$ between its two members.
+ If $n$ is even,
+\end_layout
+
+\begin_layout Plain Layout
+the pair intervals are nested,
+ with the narrowest interval given by
+\end_layout
+
+\begin_layout Plain Layout
+$[x_{(n/2)},x_{(n/2+1)}]$.
+ Every point in this interval minimizes
+\end_layout
+
+\begin_layout Plain Layout
+the sum.
+ Taking its midpoint gives the usual sample median.
+ If $n$
+\end_layout
+
+\begin_layout Plain Layout
+is odd,
+ the unpaired middle observation adds the term
+\end_layout
+
+\begin_layout Plain Layout
+$|x_{((n+1)/2)}-c|$.
+ Choosing $c=x_{((n+1)/2)}$ makes this term
+\end_layout
+
+\begin_layout Plain Layout
+zero and also minimizes all the paired terms.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For vectors,
+ the $
+\backslash
+ell_1$ norm is the sum of absolute differences
+\end_layout
+
+\begin_layout Plain Layout
+along the coordinates.
+ Thus the within-cluster cost separates as
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+sum_{
+\backslash
+mathbf{x}
+\backslash
+in S}
+\backslash
+lVert
+\backslash
+mathbf{x}-
+\backslash
+mathbf{c}
+\backslash
+rVert_1
+\end_layout
+
+\begin_layout Plain Layout
+=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+sum_{
+\backslash
+ell=1}^{m}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+sum_{
+\backslash
+mathbf{x}
+\backslash
+in S}|x_
+\backslash
+ell-c_
+\backslash
+ell|.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Each $c_
+\backslash
+ell$ can be chosen independently as the median of the
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+ell$th coordinates.
+ This is the 
+\backslash
+emph{coordinate-wise median}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{The 
+\backslash
+texorpdfstring{$k$}{k}-medians problem and algorithm}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The $k$-medians objective uses the $
+\backslash
+ell_1$ distance
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+phi_{
+\backslash
+mathrm{median}}(X,C)
+\end_layout
+
+\begin_layout Plain Layout
+=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+sum_{
+\backslash
+mathbf{x}
+\backslash
+in X}
+\backslash
+min_{
+\backslash
+mathbf{c}
+\backslash
+in C}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+lVert
+\backslash
+mathbf{x}-
+\backslash
+mathbf{c}
+\backslash
+rVert_1,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+min_{
+\backslash
+substack{C
+\backslash
+subset
+\backslash
+mathbb{R}^{m}
+\backslash
+
+\backslash
+ |C|=k}}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+phi_{
+\backslash
+mathrm{median}}(X,C).
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+The corresponding algorithm alternates between two steps.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{enumerate}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item 
+\backslash
+textbf{Assign.} Give each observation the index of its
+\end_layout
+
+\begin_layout Plain Layout
+    closest center under $
+\backslash
+ell_1$ distance.
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item 
+\backslash
+textbf{Update.} Set the center of each nonempty cluster
+\end_layout
+
+\begin_layout Plain Layout
+    to its coordinate-wise median.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{enumerate}
+\end_layout
+
+\begin_layout Plain Layout
+The two steps minimize the same objective over assignments and
+\end_layout
+
+\begin_layout Plain Layout
+centers,
+ respectively.
+ The assignment step uses $
+\backslash
+ell_1$ because
+\end_layout
+
+\begin_layout Plain Layout
+that is the distance in the objective.
+ The update uses medians
+\end_layout
+
+\begin_layout Plain Layout
+because they minimize the resulting sum of absolute deviations.
+\end_layout
+
+\begin_layout Plain Layout
+A distant point's contribution grows linearly with its
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+ell_1$ distance.
+ Outliers can still affect the assignments or
+\end_layout
+
+\begin_layout Plain Layout
+attract a center.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Flat versus hierarchical clustering}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Flat or partitional clustering.}
+\end_layout
+
+\begin_layout Plain Layout
+The output is a single partition.
+ For example,
+ $k$-means,
+\end_layout
+
+\begin_layout Plain Layout
+$k$-medoids,
+ and $k$-medians each return a grouping at the selected
+\end_layout
+
+\begin_layout Plain Layout
+value of $k$.
+ The slides also list spectral clustering as a
+\end_layout
+
+\begin_layout Plain Layout
+partitional approach.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textbf{Hierarchical clustering.}
+\end_layout
+
+\begin_layout Plain Layout
+The output is a nested collection of groups,
+ which can be represented
+\end_layout
+
+\begin_layout Plain Layout
+as a tree called a 
+\backslash
+emph{dendrogram}.
+ A cut through the tree gives
+\end_layout
+
+\begin_layout Plain Layout
+a flat partition at a chosen level of detail.
+ There are two ways
+\end_layout
+
+\begin_layout Plain Layout
+to build the hierarchy.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{itemize}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item 
+\backslash
+textbf{Agglomerative.} Start with each observation in
+\end_layout
+
+\begin_layout Plain Layout
+    its own cluster and repeatedly merge clusters.
+ We need a rule
+\end_layout
+
+\begin_layout Plain Layout
+    for comparing whole clusters to decide which ones to merge.
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item 
+\backslash
+textbf{Divisive.} Start with all observations in one
+\end_layout
+
+\begin_layout Plain Layout
+    cluster and repeatedly split clusters into smaller groups.
+\end_layout
+
+\begin_layout Plain Layout
+    We need a rule for deciding where to split.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{itemize}
+\end_layout
+
+\begin_layout Plain Layout
+For example,
+ a dataset might have an upper group and a lower group,
+\end_layout
+
+\begin_layout Plain Layout
+with two subgroups inside the lower group.
+ A hierarchy can record
+\end_layout
+
+\begin_layout Plain Layout
+both the coarse partition into two groups and the finer partition
+\end_layout
+
+\begin_layout Plain Layout
+into three.
+ The difference is which level of the hierarchy we use.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Conceptual issues}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Similarity depends on the question}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+There is often no ground-truth partition available to settle which
+\end_layout
+
+\begin_layout Plain Layout
+clustering is correct.
+ A collection of points can have a few
+\end_layout
+
+\begin_layout Plain Layout
+recognizable groups at a broad scale and several subgroups at a
+\end_layout
+
+\begin_layout Plain Layout
+finer scale.
+ The footwear example shows a different source of
+\end_layout
+
+\begin_layout Plain Layout
+ambiguity.
+ Changing the feature we care about,
+ from type to
+\end_layout
+
+\begin_layout Plain Layout
+color,
+ changes the grouping even at the same scale.
+ A clustering
+\end_layout
+
+\begin_layout Plain Layout
+can therefore be interpreted in terms of the features,
+ distance,
+\end_layout
+
+\begin_layout Plain Layout
+and objective that produced it.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Cluster membership is transitive}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+For a partition,
+ let $
+\backslash
+mathbf{u}
+\backslash
+sim
+\backslash
+mathbf{v}$ mean that
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+mathbf{u}$ and $
+\backslash
+mathbf{v}$ are in the same cluster.
+ This is an
+\end_layout
+
+\begin_layout Plain Layout
+equivalence relation.
+ It is reflexive because every point shares
+\end_layout
+
+\begin_layout Plain Layout
+a cluster with itself.
+ It is symmetric because sharing a cluster
+\end_layout
+
+\begin_layout Plain Layout
+works in both directions.
+ It is transitive because
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbf{u}
+\backslash
+sim
+\backslash
+mathbf{v}
+\backslash
+quad
+\backslash
+text{and}
+\backslash
+quad
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbf{v}
+\backslash
+sim
+\backslash
+mathbf{w}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+quad
+\backslash
+Longrightarrow
+\backslash
+quad
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbf{u}
+\backslash
+sim
+\backslash
+mathbf{w}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+A relation defined by pairwise similarity can fail transitivity.
+\end_layout
+
+\begin_layout Plain Layout
+For example,
+ on the real line define two points to be similar if
+\end_layout
+
+\begin_layout Plain Layout
+they are at distance at most $1$.
+ Then $0$ is similar to $1$ and
+\end_layout
+
+\begin_layout Plain Layout
+$1$ is similar to $2$,
+ but $0$ and $2$ are at distance $2$.
+\end_layout
+
+\begin_layout Plain Layout
+A partition has to resolve this conflict.
+ If it puts both nearby
+\end_layout
+
+\begin_layout Plain Layout
+pairs in the same cluster,
+ it must also put $0$ and $2$ together.
+\end_layout
+
+\begin_layout Plain Layout
+If it separates the endpoints,
+ it must separate at least one of
+\end_layout
+
+\begin_layout Plain Layout
+the nearby pairs.
+ The clustering objective or merge rule determines
+\end_layout
+
+\begin_layout Plain Layout
+how such conflicts are resolved.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Principal Component Analysis (Linear Dimentionality Reduction)
 \end_layout
 
 \begin_layout Subsection
@@ -6983,6 +10934,1110 @@ Note that this only works because of the orthonormal restriction on the basis
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Section
+Stochastic Neighborhood Embedding (non-linear Dimensionality Reduction)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{The task of dimensionality reduction}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Recall from PCA that we have $N$ observations $
+\backslash
+mathbf{x}_{i}
+\backslash
+in
+\backslash
+mathbb{R}^{D}$ and would like to represent each observation using $d<D$ numbers.
+ Here I write $X$ for the dataset and $Y$ for its embedding.
+ Formally we want
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+X=
+\backslash
+{
+\backslash
+mathbf{x}_{1},
+\backslash
+dots,
+\backslash
+mathbf{x}_{N}
+\backslash
+}
+\backslash
+subset
+\backslash
+mathbb{R}^{D}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad
+\backslash
+longrightarrow
+\backslash
+qquad
+\end_layout
+
+\begin_layout Plain Layout
+Y=
+\backslash
+{
+\backslash
+mathbf{y}_{1},
+\backslash
+dots,
+\backslash
+mathbf{y}_{N}
+\backslash
+}
+\backslash
+subset
+\backslash
+mathbb{R}^{d},
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+where $
+\backslash
+mathbf{y}_{i}$ is the new position of observation $
+\backslash
+mathbf{x}_{i}$.
+ The number of observations is still $N$.
+ It is the number of coordinates per observation that we are reducing.
+ For visualization we usually choose $d=2$ or $d=3$ so that we can plot the points.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Recall also the previous section on clustering.
+ There are two slightly different things we might want to do.
+ We can reduce the data first and then apply a clustering algorithm to the reduced features.
+ Or we can cluster the original data and use a low-dimensional plot to see where the cluster members end up.
+ In either case the question is what structure we want the embedding to preserve.
+ For example,
+ keeping nearby observations together is a different objective from minimizing reconstruction error (as we did in PCA).
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Why might a linear projection be a problem?}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+PCA works well if the data lie close to a low-dimensional plane (or the higher-dimensional equivalent of a plane).
+ But what if the data lie on a curved surface?
+ Consider the Swiss roll on slides~7--8.
+ Imagine a sheet of paper rolled up in 3D.
+ We need three coordinates to write down the position of a point on the roll,
+ but if we unroll the paper we only need two coordinates to locate that same point.
+ I.e.
+ the 
+\backslash
+emph{ambient dimension} is $D=3$ and the 
+\backslash
+emph{intrinsic dimension} is $d=2$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Now imagine projecting the roll onto a plane.
+ Points on different layers of the roll can end up on top of each other,
+ even if we would have to walk a long way along the paper to get from one to the other.
+ This is the issue with using a single linear projection.
+ What we would like to do in this example is something more like unrolling the paper.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The 
+\backslash
+emph{manifold assumption} is that the data lie on (or close to) a low-dimensional surface inside $
+\backslash
+mathbb{R}^{D}$.
+ A $d$-dimensional manifold locally looks like $
+\backslash
+mathbb{R}^{d}$.
+ By locally I mean that if we zoom in on a small patch of the Swiss roll it looks like a piece of a plane,
+ even though the whole thing is curved.
+ Manifold learning tries to recover or approximate this underlying structure.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Another example from the slides is ethanol.
+ The molecule has 9 atoms and we can describe one configuration using $D=9
+\backslash
+cdot3=27$ coordinates.
+ However,
+ much of the variation in the configurations can be described by two rotation angles.
+ Each angle wraps around,
+ which gives the approximate torus (doughnut shape) on slide~10.
+ So there can be a big difference between how many numbers we use to record the data and how many numbers we need to describe the main ways it varies.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{Symmetric Stochastic Neighbor Embedding (SNE)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The idea of SNE is to turn distances into probabilities.
+ Start at $
+\backslash
+mathbf{x}_{i}$ and imagine choosing another observation as its neighbor at random.
+ Nearby observations should be more likely to be chosen.
+ Then do something similar for the points in the plot and move them around until the two sets of probabilities agree as well as possible.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Affinities in the original data $X$}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Formally let $p_{j
+\backslash
+mid i}$ be the probability of choosing $
+\backslash
+mathbf{x}_{j}$ as a neighbor when starting from $
+\backslash
+mathbf{x}_{i}$.
+ For $j
+\backslash
+neq i$ define
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+p_{j
+\backslash
+mid i}
+\end_layout
+
+\begin_layout Plain Layout
+=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+frac{
+\backslash
+exp
+\backslash
+left
+\backslash
+{-
+\backslash
+|
+\backslash
+mathbf{x}_{i}-
+\backslash
+mathbf{x}_{j}
+\backslash
+|_{2}^{2}/(2
+\backslash
+sigma_{i}^{2})
+\backslash
+right
+\backslash
+}}
+\end_layout
+
+\begin_layout Plain Layout
+{
+\backslash
+displaystyle
+\backslash
+sum_{k
+\backslash
+neq i}
+\end_layout
+
+\begin_layout Plain Layout
+ 
+\backslash
+exp
+\backslash
+left
+\backslash
+{-
+\backslash
+|
+\backslash
+mathbf{x}_{i}-
+\backslash
+mathbf{x}_{k}
+\backslash
+|_{2}^{2}/(2
+\backslash
+sigma_{i}^{2})
+\backslash
+right
+\backslash
+}},
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad p_{i
+\backslash
+mid i}=0.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+The denominator just makes the probabilities sum to 1 for each starting point $i$.
+ The role of $
+\backslash
+sigma_{i}$ is to decide how quickly the weight falls as we move away from $
+\backslash
+mathbf{x}_{i}$.
+ If $
+\backslash
+sigma_{i}$ is very small then almost all the probability goes to the closest point (or points if there is a tie).
+ If $
+\backslash
+sigma_{i}$ is very large then all other observations are about equally likely to be chosen.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Why do we call it 
+\backslash
+emph{symmetric} SNE?
+ Notice that $p_{j
+\backslash
+mid i}$ and $p_{i
+\backslash
+mid j}$ can differ even though the distance is the same in both directions.
+ For example,
+ $
+\backslash
+mathbf{x}_{j}$ might be one of the closest points to $
+\backslash
+mathbf{x}_{i}$,
+ while $
+\backslash
+mathbf{x}_{j}$ itself has lots of even closer neighbors.
+ To get one symmetric affinity for the pair we use
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+p_{ij}=
+\backslash
+frac{p_{j
+\backslash
+mid i}+p_{i
+\backslash
+mid j}}{2N}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Thus $p_{ij}=p_{ji}$ and $
+\backslash
+sum_{i,j}p_{ij}=1$.
+ We write $P=(p_{ij})$ for this probability distribution over pairs.
+ Once we have calculated $P$,
+ it contains everything we need from $X$ for the optimization.
+ So we could also start with a matrix of pairwise dissimilarities if that is how the data are given.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{How do we choose $
+\backslash
+sigma_{i}$?}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The idea is to choose approximately how many neighbors each point should pay attention to.
+ This is called the 
+\backslash
+emph{perplexity}.
+ Let $P_{i}$ denote the distribution with probabilities $p_{j
+\backslash
+mid i}$.
+ Then
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+H(P_{i})=-
+\backslash
+sum_{j
+\backslash
+neq i}p_{j
+\backslash
+mid i}
+\backslash
+log_{2}(p_{j
+\backslash
+mid i}),
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+operatorname{perp}(P_{i})=2^{H(P_{i})}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+To see what this means,
+ imagine that 8 neighbors each get probability $1/8$ and the rest get zero.
+ Then $H(P_{i})=
+\backslash
+log_{2}(8)=3$ and the perplexity is $2^{3}=8$.
+ In general the probabilities are unequal,
+ so we can think of perplexity as an 
+\backslash
+emph{effective} number of neighbors.
+ For example a perplexity of 30 still gives different weights to different neighbors.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+We choose one target perplexity (say 30) and then find a separate $
+\backslash
+sigma_{i}$ for each observation.
+ Increasing $
+\backslash
+sigma_{i}$ spreads the probabilities out and increases the perplexity,
+ so we can find the right value by binary search.
+ Intuitively,
+ if $
+\backslash
+mathbf{x}_{i}$ is in a dense region we only need to look a short distance to find about 30 neighbors.
+ In a sparse region we need to look further.
+ Thus for a fixed perplexity the bandwidth will typically be smaller in dense regions and larger in sparse regions.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Affinities in the embedding $Y$ and the objective}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Now let $
+\backslash
+ell_{ij}=
+\backslash
+|
+\backslash
+mathbf{y}_{i}-
+\backslash
+mathbf{y}_{j}
+\backslash
+|_{2}$ be the distance between the two observations in the embedding.
+ Symmetric SNE uses the Gaussian-like weight $
+\backslash
+exp
+\backslash
+{-
+\backslash
+ell_{ij}^{2}
+\backslash
+}$ and normalizes it over all distinct pairs
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+q_{ij}
+\end_layout
+
+\begin_layout Plain Layout
+=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+frac{
+\backslash
+exp
+\backslash
+{-
+\backslash
+ell_{ij}^{2}
+\backslash
+}}
+\end_layout
+
+\begin_layout Plain Layout
+{
+\backslash
+displaystyle
+\backslash
+sum_{k=1}^{N}
+\backslash
+sum_{l
+\backslash
+neq k}
+\backslash
+exp
+\backslash
+{-
+\backslash
+ell_{kl}^{2}
+\backslash
+}},
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad i
+\backslash
+neq j,
+\backslash
+qquad q_{ii}=0.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Write $Q(Y)=(q_{ij})$.
+ The important difference here is that $P$ is already known from the original data,
+ while $Q(Y)$ changes every time we move the points $
+\backslash
+mathbf{y}_{i}$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+How do we decide whether the points are in the right places?
+ We measure the mismatch between $P$ and $Q(Y)$ using the KL divergence
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+C(Y)=
+\backslash
+operatorname{KL}(P
+\backslash
+|Q(Y))
+\end_layout
+
+\begin_layout Plain Layout
+=
+\backslash
+sum_{i=1}^{N}
+\backslash
+sum_{j
+\backslash
+neq i}
+\end_layout
+
+\begin_layout Plain Layout
+p_{ij}
+\backslash
+log
+\backslash
+left(
+\backslash
+frac{p_{ij}}{q_{ij}}
+\backslash
+right),
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+min_{
+\backslash
+mathbf{y}_{1},
+\backslash
+dots,
+\backslash
+mathbf{y}_{N}
+\backslash
+in
+\backslash
+mathbb{R}^{d}} C(Y).
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+If two points are close in $X$ (large $p_{ij}$) but end up far apart in $Y$ (small $q_{ij}$),
+ we pay a large penalty.
+ A pair with small $p_{ij}$ gets less weight in the sum.
+ This is why the objective puts so much emphasis on keeping the original neighbors together.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The gradient also has a nice interpretation.
+ In symmetric SNE it is
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+nabla_{
+\backslash
+mathbf{y}_{i}}C
+\end_layout
+
+\begin_layout Plain Layout
+=
+\end_layout
+
+\begin_layout Plain Layout
+4
+\backslash
+sum_{j
+\backslash
+neq i}(p_{ij}-q_{ij})(
+\backslash
+mathbf{y}_{i}-
+\backslash
+mathbf{y}_{j}).
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Remember that gradient descent moves in the 
+\backslash
+emph{negative} gradient direction.
+ So if $p_{ij}>q_{ij}$ the pair contributes a pull towards each other,
+ and if $p_{ij}<q_{ij}$ it contributes a push apart.
+ The actual movement of $
+\backslash
+mathbf{y}_{i}$ is the sum of these contributions from all the other points.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Basically we compute $P$ once,
+ start the $
+\backslash
+mathbf{y}_{i}$ at small random coordinates and then alternate between calculating $Q(Y)$ and taking a gradient step.
+ We can add momentum just like in the neural network section (remember the heavy ball).
+ Here we are updating the coordinates themselves.
+ This is why the method is called 
+\backslash
+emph{non-parametric}.
+ PCA gives us a fitted projection that can be applied directly to a new observation,
+ whereas the SNE procedure above gives us coordinates for the observations we fitted it to.
+ The objective is non-convex,
+ so different starting positions can give different results.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{t-SNE}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{The crowding problem}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Why change symmetric SNE?
+ Imagine a point at the origin in 2D with neighbors at $(1,0)$,
+ $(-1,0)$,
+ $(0,1)$ and $(0,-1)$.
+ All four neighbors are distance 1 from the origin,
+ and they have room to be separated from each other.
+ Now try to arrange them on a line.
+ There are only two positions at distance 1 from the origin!
+ So we have to put some neighbors on top of each other or change some of the distances.
+ This is the 
+\backslash
+emph{crowding problem}.
+ There are fewer directions to spread out in when we go down in dimension.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+With the Gaussian weights in $Y$,
+ affinities fall very quickly as we move points apart.
+ So even pairs that are only moderately similar can end up competing for space close together in the embedding.
+ The idea of t-SNE is to give such points more room by using a weight that falls more slowly with distance.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{What changes in t-SNE?}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+We calculate the same $P$ from the original data and minimize the same KL divergence.
+ The change is how we calculate $Q(Y)$.
+ The new weights are
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+q_{ij}
+\end_layout
+
+\begin_layout Plain Layout
+=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+frac{(1+
+\backslash
+ell_{ij}^{2})^{-1}}
+\end_layout
+
+\begin_layout Plain Layout
+{
+\backslash
+displaystyle
+\backslash
+sum_{k=1}^{N}
+\backslash
+sum_{l
+\backslash
+neq k}(1+
+\backslash
+ell_{kl}^{2})^{-1}},
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+qquad i
+\backslash
+neq j,
+\backslash
+qquad q_{ii}=0.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+The weight $(1+
+\backslash
+ell_{ij}^{2})^{-1}$ comes from the Student $t$-distribution with one degree of freedom (also called the Cauchy distribution).
+ Hence the name 
+\backslash
+emph{t-distributed Stochastic Neighbor Embedding}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+What does the heavier tail actually do?
+ At distance $
+\backslash
+ell_{ij}=3$ the old weight is $e^{-9}
+\backslash
+approx0.00012$ and the new weight is $1/(1+9)=0.1$ (both before normalization).
+ I.e.
+ the new weight can still be appreciable at distances where the Gaussian weight is already very close to zero.
+ This lets the embedding put moderately similar points further apart while still assigning them some affinity.
+ Close neighbors can stay close and different groups get more room to spread out.
+ The optimization is again gradient descent with momentum,
+ with the gradient now calculated using the new $Q(Y)$.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{What do the plots in the slides show?}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{MNIST}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Each observation is a $28
+\backslash
+times28$ grayscale picture of a handwritten digit,
+ so $D=784$ and $N=70{,}000$.
+ In the example on slides~27 and~35--36,
+ PCA first reduces the data from 784 to 50 dimensions.
+ Then SNE or t-SNE takes those 50 coordinates down to 2 (with perplexity 50 in this example).
+ So PCA and t-SNE can actually be used in the same pipeline.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The symmetric SNE plot already shows some structure,
+ but several of the digit groups run into each other.
+ In the t-SNE plot the groups are easier to tell apart.
+ Note that the digit labels are used to color and annotate the plot afterwards.
+ The embedding itself is unsupervised.
+ Each dot is an image,
+ which is easier to see on slide~40 where some of the digits are drawn at their positions in the embedding.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{Gaussian mixture,
+ Swiss roll and spiral}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{itemize}
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item 
+\backslash
+textbf{Gaussian mixture (slide~37).} The data come from four Gaussian distributions with the same covariance matrix.
+ The PCA plot already shows the four groups and the t-SNE plot separates them more clearly in this example.
+ The gaps in the t-SNE plot describe the layout of the embedding.
+ To compare how far apart the Gaussians actually are we would go back to the original data.
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item 
+\backslash
+textbf{Swiss roll (slide~38).} The PCA projection still looks like a roll viewed from the side.
+ The t-SNE plot keeps many of the nearby colors together but breaks the roll into separate pieces.
+ So even when t-SNE does a good job with local neighbors,
+ it can change how the whole surface is connected.
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+item 
+\backslash
+textbf{Spiral (slide~39).} The PCA projection still shows the oscillations of the two spirals and makes them cross in the plot.
+ t-SNE lays them out as two nearly parallel curves.
+ The interesting thing here is which points stay next to each other along each curve.
+ The shape itself changes quite a lot.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{itemize}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsubsection{The home assignment example}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The original data on slide~41 look like two linked rings in 3D.
+ The two PCA plots on slide~43 show how the projection changes when we normalize the input.
+ In the t-SNE plots the two rings are visually separated for both perplexities.
+ At perplexity 30 the rings look rougher and broken up in places,
+ while at perplexity 400 they look much smoother.
+ This is a good example of what changing the perplexity does.
+ With 400 the affinities around each point are spread over a much larger neighborhood,
+ so the algorithm is trying to preserve similarities over a broader part of the data.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+subsection{How to read a t-SNE plot}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+The first thing I would look at is which observations end up near each other.
+ The axes can be rotated or translated without changing any of the pairwise distances,
+ so the axis values themselves have no particular meaning.
+ The sizes of groups and the gaps between them can also change with the perplexity and the optimization.
+ For example a large empty gap might come from the way t-SNE arranged the points in 2D.
+ The Swiss roll is a nice reminder of this since we know it started out as one continuous sheet.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Recall that clustering gives us a group assignment for each point,
+ while t-SNE gives us a position for each point.
+ To use them together as on slide~45 we can run e.g.
+ $k$-means on $X$,
+ fit a 2D t-SNE embedding and then color each $
+\backslash
+mathbf{y}_{i}$ by the cluster assigned to $
+\backslash
+mathbf{x}_{i}$.
+ This lets us see how the cluster assignments line up with the neighborhoods in the plot.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+One practical detail is that the exact method works with all pairs of observations.
+ So for a fixed output dimension the work per iteration grows like $N^{2}$.
+ The MNIST example uses an approximate implementation,
+ which makes it possible to use the method on a dataset of that size.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
